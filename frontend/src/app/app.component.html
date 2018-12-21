@@ -1,0 +1,62 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<header>
+  <!--Menu de navegacion inicial -->
+    <nav class="navbar navbar-default" *ngIf="token">
+        <div class="container-fluid">
+          <!--icono que aparece cuando la vista es movil-->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="glyphicon glyphicon-menu-hamburger"></span>
+   
+            </button>
+            <a class="navbar-brand">DOOY</a>
+          </div>
+          <!--Barra de elementos -->
+          <div class="collapse navbar-collapse" id="collapse-1">
+            <!--Lista de elementos del menu-->
+            <ul class="nav navbar-nav">
+              <li [routerLinkActive]="['active']">
+                <a [routerLink]="['inicio']">
+                  <span class="glyphicon glyphicon-home"></span>
+                  Inicio
+                </a>
+              </li>
+              <!--Menu de Catalogos-->
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Personal<span class="caret"></span></a>
+                  <!--Elementos del submenu-->
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a>Oficinas</a>
+                    </li>
+                    <li>
+                        <a>Empleados</a>
+                    </li>
+                    <li>
+                      <a>Organizacion</a>
+                    </li>
+                  </ul>
+              </li>
+            </ul>
+            <!--Lista de elementos del menu del login-->
+            <ul class="nav navbar-nav navbar-right" *ngIf="identity">
+                <li>
+                  <a>
+                    <span class="glyphicon glyphicon-user"></span>
+                    {{identity.name}}
+                  </a>
+                </li>
+                <li>
+                  <a [routerLink]="['logout/1']">
+                    <span class="glyphicon glyphicon-log-out"></span>
+                    Salir
+                  </a>
+                </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+</header>
+
+<router-outlet></router-outlet>

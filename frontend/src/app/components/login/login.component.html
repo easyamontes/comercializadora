@@ -1,0 +1,25 @@
+<div class="container-fluid">
+        <div class="col-md-offset-4 col-md-4">
+            <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="form-bo">
+                    <h1>{{title}}</h1>
+                    <!--Mensaje de error-->
+                    <div class="alert alert-danger" *ngIf="status=='error'">
+                            Correo o contraseña no validos
+                    </div>
+                    <!--Campo email-->
+                    <p>
+                        <label for="email">Email</label>
+                        <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" required>
+                        <span *ngIf="!email.valid && email.touched" class="alert-danger">El campo email es obligatorio</span>
+                    </p>
+                    <!--Campo pass-->
+                    <p>
+                        <label for="password">Password</label>
+                        <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="form-control" required>
+                        <span *ngIf="!password.valid && password.touched" class="alert-danger">El campo password es obligatorio</span>
+                    </p>
+            
+                    <input type="submit" value="Login" class="btn btn-primary" [disabled]="!loginForm.form.valid">
+            </form>
+    </div>
+</div>
