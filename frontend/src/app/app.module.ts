@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 //conponentes
 import { LoginComponent } from './components/login/login.component';
 import { DefaultComponent } from './components/default/default.component';
+import { PuestoViewComponent } from './components/puesto/puesto-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DefaultComponent,
-    LoginComponent
+    LoginComponent,
+    PuestoViewComponent
   ],
   imports: [
     BrowserModule,

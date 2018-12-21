@@ -28,13 +28,17 @@
                   <!--Elementos del submenu-->
                   <ul class="dropdown-menu">
                     <li>
-                      <a>Oficinas</a>
+                      <a>
+                        Oficinas
+                      </a>
                     </li>
                     <li>
                         <a>Empleados</a>
                     </li>
                     <li>
-                      <a>Organizacion</a>
+                      <a [routerLink]="['puestos']">
+                        Organizacion
+                      </a>
                     </li>
                   </ul>
               </li>
@@ -59,4 +63,6 @@
       </nav>
 </header>
 
-<router-outlet></router-outlet>
+<div style="margin-right: 1%; margin-left: 1%">
+    <router-outlet></router-outlet>
+</div>
