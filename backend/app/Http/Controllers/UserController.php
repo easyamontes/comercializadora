@@ -99,4 +99,13 @@ class UserController extends Controller
 
     }
 
-}
+    //comprobando valides del tokken
+    public function logged(Request $request){
+        $data = array(
+            'message' => 'Wllcome Back',
+            'code' => 200,
+            'status' => 'logged'
+        );
+        return response()->json($data,200);
+    }
+}// END CLASS

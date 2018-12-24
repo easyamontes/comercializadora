@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="token == null">
         <div class="col-md-offset-4 col-md-4">
             <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="form-bo">
                     <h1>{{title}}</h1>
