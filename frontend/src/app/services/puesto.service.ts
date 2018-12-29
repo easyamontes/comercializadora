@@ -22,4 +22,30 @@ getPuestos(token): Observable<any>{
     return this._http.get(this.url+'puestos',{headers:headers});
 }
 
+/**Funcion para crear un nuevo puesto */
+storePuesto(token, puesto:Puesto):Observable<any>{
+    let json = JSON.stringify(puesto);
+    let params = "json="+json;
+    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+                                   .set('Authorization', token);
+
+    return this._http.post(this.url+'puestos',params,{headers:headers});
+}
+
+/**Funcion para encontrar un puesto */
+getPuesto(token, id): Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+                                   .set('Authorization', token);
+    return this._http.get(this.url+'puestos/'+id ,{headers:headers});
+}
+
+/**Funcion para editar un puesto */
+updatePuesto(token, puesto:Puesto, id): Observable<any>{
+    let json = JSON.stringify(puesto);
+    let params = "json=" + json;
+    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+                                   .set('Authorization', token);
+    return this._http.put(this.url+'puestos/'+id ,params ,{headers:headers});
+}
+
 }

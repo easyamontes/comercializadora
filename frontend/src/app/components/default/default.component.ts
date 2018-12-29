@@ -21,15 +21,9 @@ export class DefaultComponent implements OnInit{
     ){
         this.title = 'Bienvenido a DOOY';
         this.token = _UserService.getToken();
-        this.isLoged();
     }
     ngOnInit(){
 
     }
-    /** Valida que el usuario este logueado en caso de error es dirigido a inicio */
-    isLoged(){
-        if(this.token == null){
-            this._router.navigate(['']);
-        }
-    }
+    
 }

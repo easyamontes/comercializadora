@@ -28,26 +28,7 @@ export class LoginComponent implements OnInit{
     }
     
     ngOnInit(){
-
-        // comprobando la valides del token en el servicio
-        this.token = this._UserService.getToken();
-        if(this.token != null){
-            this._UserService.isLogged(this.token).subscribe(
-              response =>{
-                this.status = response.code;
-                if(this.status == 400){
-                    this._router.navigate(['logout/1']);
-                }else{
-                  this._router.navigate(['inicio']);
-                }
-              },error =>{
-                console.log(<any>error);
-              }
-            );
-
-        }
         this.logout();
-        
     }
 
     //iniciando siecion
@@ -101,8 +82,8 @@ export class LoginComponent implements OnInit{
                 localStorage.removeItem('identity');
                 this.identity = null;
                 this.token = null;
-                //redireccionando al inicio
-                this._router.navigate(['']);
+                //redireccionando al login
+                this._router.navigate(['login']);
             }
         });
     }

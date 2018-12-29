@@ -17,6 +17,7 @@ class PuestoController extends Controller
     //creando el listado de los puestos existentes
     public function index(Request $request){
         $puesto = Puesto::all()->load('user');
+        $nop = $puesto->count();
         return response()->json(array(
             'puestos' => $puesto,
             'status' => 'success'
@@ -54,7 +55,7 @@ class PuestoController extends Controller
             'code' => 200,
             'status' => 'success'
         );
-        return response()->json($data,400);
+        return response()->json($data,200);
     }
 
     public function update ($id, Request $request){
@@ -66,7 +67,7 @@ class PuestoController extends Controller
         //validando datos de la peticion
         $validate = \Validator::make($params_array,[
             'puesto' => 'required|min:4',
-            "nivel" => 'required|unique:puesto',
+            "nivel" => 'required|unique:puesto,id,'.$params->id,
             "descripcion" => 'required',
         ]);
         if ($validate->fails()) {
@@ -85,7 +86,7 @@ class PuestoController extends Controller
             'code' => 200,
             'status' => 'success'
         );
-        return response()->json($data,400);
+        return response()->json($data,200);
     }
     
     public function destroy($id, Request $request){
@@ -96,6 +97,22 @@ class PuestoController extends Controller
             'status' => 'success',
             'code' => 200
         );
+    }
+
+    public function show($id, Request $request){
+        $puesto = Puesto::find($id);
+        if(is_object($puesto)){
+            $puesto = Puesto::find($id)->load('user');
+            return response()->json(array(
+                'puesto' => $puesto,
+                'status' => 'success'
+            ),200);
+        }else{
+            return response()->json(array(
+                'message' => 'No se encuentra el registro',
+                'status' => 'error'
+            ),400);
+        }
     }
 
 }//End Class

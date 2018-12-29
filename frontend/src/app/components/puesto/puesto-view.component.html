@@ -1,21 +1,22 @@
 <h4>{{title}}</h4>
-
-<table class="table table-hover table-striped" id="tbpuestos">
-    <tr>
-        <th>Puesto</th>
-        <th>Nivel</th>
-        <th>Descripcion</th>
-        <th>
-            <a class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>Nuevo</a>
-        </th>
-    </tr>
-    <tr *ngFor="let puesto of puestos">
-        <td>{{puesto.puesto}}</td>
-        <td>{{puesto.nivel}}</td>
-        <td>{{puesto.descripcion}}</td>
-        <td>
-                <a class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span></a>
-                <a class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
-        </td>
-    </tr>
-</table>
+<div class="panel panel-default">
+    <table class="table table-hover table-striped table-bordered" id="tbpuestos">
+        <tr>
+            <th>Puesto</th>
+            <th>Nivel</th>
+            <th>Descripcion</th>
+            <th>
+                <a class="btn btn-success" [routerLink]="['/nuevo-puesto']"><span class="glyphicon glyphicon-plus"></span>Nuevo</a>
+            </th>
+        </tr>
+        <tr *ngFor="let puesto of puestos">
+            <td>{{puesto.puesto}}</td>
+            <td>{{puesto.nivel}}</td>
+            <td>{{puesto.descripcion}}</td>
+            <td>
+                    <a class="btn btn-warning" [routerLink]="['/puesto',puesto.id]"><span class="glyphicon glyphicon-edit"></span></a>
+                    <a class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+            </td>
+        </tr>
+    </table>
+</div>

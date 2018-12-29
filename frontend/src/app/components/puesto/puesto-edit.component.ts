@@ -19,7 +19,7 @@ export class PuestoEditComponent implements OnInit{
     public user: User;
     public status: string;
     public token;
-    public puestos: Array<Puesto>;
+    public puestoe: Puesto;
 
     constructor(
         private _UserService: UserService,
@@ -27,12 +27,44 @@ export class PuestoEditComponent implements OnInit{
         private _route: ActivatedRoute,
         private _router: Router
     ){
-        this.title = 'Puesto';
         this.token = _UserService.getToken();
     }
 
     ngOnInit(){
+        this._route.params.subscribe(
+            params =>{
+                let id= +params['id'];
+                this.getPuesto(id);
+            }
+        );
+    }
 
+    //obteniendo registro buscado
+    getPuesto(id){
+        this._PuestoService.getPuesto(this.token, id).subscribe(
+            response=>{
+                if(response.status == 'success'){
+                    this.puestoe = response.puesto;
+                    this.title = 'Editar Puesto: '+ this.puestoe.puesto;
+                }else{
+                    this._router.navigate(['puestos']);
+                }
+            },error=>{
+                console.log(<any>error);
+            }
+        );
+    }
+
+    onSubmit(form){
+        this._PuestoService.updatePuesto(this.token,this.puestoe,this.puestoe.id).subscribe(
+            response=>{
+                if(response.status){
+                    this._router.navigate(['puestos']);
+                }
+            },error=>{
+                console.log(<any>error);
+            }
+        );
     }
 
 
