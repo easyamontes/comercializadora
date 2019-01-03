@@ -2,8 +2,9 @@
 
 <div class="alert alert-danger" *ngIf="status_puesto != 'success' && status_puesto"> {{status_puesto.error.nivel}} </div>
 <div class="alert alert-danger" *ngIf="status_puesto == 'success' && status_puesto"> Registro Guardado correctamente </div>
+<div class="loader" *ngIf="puestoe == null"></div>
 
-<form #puestoNew="ngForm" (ngSubmit)="onSubmit(puestoNew)" class="col-md-5"> 
+<form *ngIf="puestoe != null" #puestoNew="ngForm" (ngSubmit)="onSubmit(puestoNew)" class="col-md-5"> 
     <div class="form-group">
         <p>
             <label for="puesto">Nombre</label>

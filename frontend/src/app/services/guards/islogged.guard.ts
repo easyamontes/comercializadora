@@ -19,14 +19,14 @@ export class IsLoggedGuard implements CanActivate{
         let currentime = new Date().getTime()/1000;
         if(this.identity != null){
             if(+currentime > +this.identity.exp){
-                this._router.navigate(['login']);
+                this._router.navigate(['logout/1']);
                 return false;
             }else{
                 return true;
             }
 
         }else{
-            this._router.navigate(['login']);
+            this._router.navigate(['logout/1']);
             return false;
         }
     }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { User } from 'src/app/models/user';
-import { UserService } from '../../services/user.service';
-import { PuestoService } from '../../services/puesto.service';
+import { UserService } from '../../../services/user.service';
+import { PuestoService } from '../services/puesto.service';
 import { Puesto } from 'src/app/models/puesto';
 
 @Component({
@@ -44,6 +44,20 @@ export class PuestoViewComponent implements OnInit{
                 console.log(<any>error);
             });
     }
+
+    deltetePuesto(id){
+        if(confirm('Seguro que desea eliminar este registro?')){
+            this._PuestoService.deltePuesto(this.token,id).subscribe(
+                response=>{
+                    this.getPuestos();
+                },error=>{
+                    console.log(<any>error);
+                }
+            )
+        }
+    }
+
+
 
 
 }//END Class

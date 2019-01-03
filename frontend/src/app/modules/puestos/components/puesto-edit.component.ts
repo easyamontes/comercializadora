@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { User } from 'src/app/models/user';
-import { UserService } from '../../services/user.service';
-import { PuestoService } from '../../services/puesto.service';
+import { UserService } from '../../../services/user.service';
+import { PuestoService } from '../services/puesto.service';
 import { Puesto } from 'src/app/models/puesto';
 
 @Component({

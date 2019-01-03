@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { User } from 'src/app/models/user';
-import { UserService } from '../../services/user.service';
-import { PuestoService } from '../../services/puesto.service';
-import { Puesto } from '../../models/puesto';
-import { elementStyleProp } from '@angular/core/src/render3';
+import { UserService } from '../../../services/user.service';
+import { PuestoService } from '../services/puesto.service';
+import { Puesto } from '../../../models/puesto';
+
 
 @Component({
     selector: 'puesto-store',
@@ -34,6 +34,7 @@ export class PuestoStoreComponent implements OnInit{
 
     ngOnInit(){
         this.puestoe = new Puesto(1,'',0,'');
+        console.log('se n os estan mamando');
     }
 
     onSubmit(form){
