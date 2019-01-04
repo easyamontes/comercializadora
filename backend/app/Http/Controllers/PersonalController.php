@@ -17,7 +17,7 @@ class PersonalController extends Controller
     public function index(Request $request){
         $personal = Personal::all()->load('user');
         return response()->json(array(
-            'puestos' => $personal,
+            'personal' => $personal,
             'status' => 'success'
         ),200);
     }
@@ -29,7 +29,7 @@ class PersonalController extends Controller
         $params = json_decode($json);
         $params_array = json_decode($json, true);
         $user = $json = $request->input('userid',null);
-        $personal = new Puesto();
+        $personal = new Personal();
          
         //asignando informacion al objeto puesto
         $personal->nombre = $params->nombre;
@@ -46,10 +46,59 @@ class PersonalController extends Controller
         //metiendo a la base de datos
         $personal->save();
         $data = array(
-            'puesto' => $personal,
+            'personal' => $personal,
             'code' => 200,
             'status' => 'success'
         );
         return response()->json($data,200);
     }
-}
+
+    public function update ($id, Request $request){
+        $json = $request->input('json',null);
+        $params = json_decode($json);
+        $params_array = json_decode($json, true); 
+        $personal = new Personal();
+
+        //limienado array
+        unset($params_array['id']);
+        unset($params_array['user_id']);
+        unset($params_array['created_at']);
+        unset($params_array['user']);
+    
+        //Actualizando el registro
+        $personal = Personal::where('id',$id)->update($params_array);
+        $data = array(
+            'personal' => $params,
+            'code' => 200,
+            'status' => 'success'
+        );
+        return response()->json($data,200);
+    }
+
+    public function destroy($id, Request $request){
+        $personal = Personal::find($id);
+        $personal->delete();
+        $data = array(
+            'personal' => $personal,
+            'status' => 'success',
+            'code' => 200
+        );
+    }
+
+    public function show($id, Request $request){
+        $personal = Personal::find($id);
+        if(is_object($personal)){
+            $personal = Puesto::find($id)->load('user');
+            return response()->json(array(
+                'personal' => $personal,
+                'status' => 'success'
+            ),200);
+        }else{
+            return response()->json(array(
+                'message' => 'No se encuentra el registro',
+                'status' => 'error'
+            ),400);
+        }
+    }
+
+}//End Class

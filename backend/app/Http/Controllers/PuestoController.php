@@ -93,7 +93,7 @@ class PuestoController extends Controller
         $puesto = Puesto::find($id);
         $puesto->delete();
         $data = array(
-            'car' => $puesto,
+            'puesto' => $puesto,
             'status' => 'success',
             'code' => 200
         );

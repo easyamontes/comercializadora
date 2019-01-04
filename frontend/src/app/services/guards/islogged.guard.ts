@@ -14,6 +14,7 @@ export class IsLoggedGuard implements CanActivate{
     ){}
     
     canActivate(){
+  
         // comprobando la valides del token en el servicio
         this.identity = this._UserService.getIdentity();
         let currentime = new Date().getTime()/1000;
@@ -29,6 +30,11 @@ export class IsLoggedGuard implements CanActivate{
             this._router.navigate(['logout/1']);
             return false;
         }
+    }
+
+    canActivateChild(){
+        console.log('entre desde el hijo');
+        return this.canActivate();
     }
 
 }//End Calss 

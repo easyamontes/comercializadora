@@ -9,6 +9,7 @@ import { IsLoggedGuard } from './services/guards/islogged.guard';
 import { UserService } from './services/user.service';
 //importando modulos
 import { PuestosModule } from './modules/puestos/puestos.module';
+import { PersonalModule } from './modules/personal/personal.module';
 //conponentes
 import { LoginComponent } from './components/login/login.component';
 import { DefaultComponent } from './components/default/default.component';
@@ -27,7 +28,8 @@ import { DefaultComponent } from './components/default/default.component';
     HttpClientModule,
     FormsModule,
     routin,
-    PuestosModule
+    PuestosModule,
+    PersonalModule
   ],
   providers: [
     appRoutingProviders,

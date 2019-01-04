@@ -11,7 +11,7 @@ import { PuestoMainComponent } from './components/puesto-main.component';
 
 const puestosRoutes: Routes = [
     {
-        path: 'puestos', component:PuestoMainComponent ,
+        path: 'puestos', component:PuestoMainComponent ,canActivateChild:[IsLoggedGuard],
                                                          children:[
                                                             { path:'list', component: PuestoViewComponent}, 
                                                             { path:'nuevo', component: PuestoStoreComponent},
