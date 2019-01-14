@@ -60,11 +60,13 @@ export class UserService{
         }
         return this.token;
     }
-    /**Funcion para comprovar la valides del tokken*/
-    isLogged(token): Observable<any>{
+    /**Funcion para Encontrar Usuario Registrado*/
+    getUser(token,$mail): Observable<any>{
+        let json = JSON.stringify($mail);
+        let params = 'json='+json;
         let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
                                        .set('Authorization', token);
-        return this._http.get(this.url+'logged',{headers:headers});
+        return this._http.post(this.url+'show',params,{headers:headers});
     }
 
 }

@@ -4,6 +4,7 @@ export class Personal{
         public nombre: string,
         public apellidop: string,
         public apellidom: string,
+        public email: string,
         public calle: string,
         public noint: string,
         public noext: string,

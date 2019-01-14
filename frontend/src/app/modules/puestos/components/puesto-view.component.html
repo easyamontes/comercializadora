@@ -1,28 +1,21 @@
-<h4>{{title}}</h4>
 <div class="loader" *ngIf="puestos == null"></div>
 
-<div class=" panel panel-default" *ngIf="puestos != null">
-    <table class="table table-hover table-striped table-bordered table-condensed" id="tbpuestos">
-        <thead>
-            <tr>
-                <th>Puesto</th>
-                <th>Nivel</th>
-                <th>Descripcion</th>
-                <th>
-                    <a class="btn btn-success btn-sm" [routerLink]="['../nuevo']"><span class="glyphicon glyphicon-plus"></span>Nuevo</a>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let puesto of puestos">
-                <td>{{puesto.puesto}}</td>
-                <td>{{puesto.nivel}}</td>
-                <td>{{puesto.descripcion}}</td>
-                <td>
-                        <a class="btn btn-warning btn-sm" [routerLink]="['../edit',puesto.id]" style="margin: 1px"><span class="glyphicon glyphicon-edit"></span></a>
-                        <a class="btn btn-danger btn-sm" (click)="deltetePuesto(puesto.id)" style="margin: 1px" ><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div class="panel panel-default" *ngIf="puestos != null">
+    <div class="panel-heading">
+        <div class="row">
+            <h3 class="panel-title col-md-10 col-xs-10">{{title}}</h3>
+            <a class="btn btn-success btn-xs pull-right col-md-1 col-xs-1"  [routerLink]="['../nuevo']" style="margin-right: 5px"><span class="glyphicon glyphicon-plus"></span></a>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="list-group">
+            <div class="row" *ngFor="let puesto of puestos">
+                <a [routerLink]="['../edit',puesto.id]" class="list-group-item col-md-11 col-xs-1">
+                    <h4 class="list-group-item-heading">{{puesto.puesto}}</h4>
+                    <p class="list-group-item-text">{{puesto.descripcion}}</p>
+                </a>
+                <a class="list-group-item col-md-1 col-xs-1" (click)="deltetePuesto(puesto.id)"> <span class="glyphicon glyphicon-trash" ></span> </a>
+            </div>
+        </div>
+    </div>
 </div>

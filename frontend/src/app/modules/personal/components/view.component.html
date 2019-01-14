@@ -1,23 +1,31 @@
-<h4>{{title}}</h4>
 
-<div class="pnael panel-default">
-    <table class="table table-hover table-striped table-bordered table-condensed">
+<div class="loader" *ngIf="personal == null"></div>
+<div class="panel panel-default" *ngIf="personal != null">
+    <div class="panel-heading">
+        <div class="row clearfix">
+            <h3 class="panel-title col-md-10 col-xs-10">{{title}}</h3>
+            <a class="btn btn-success btn-xs pull-right col-md-1 col-xs-1"  [routerLink]="['../nuevo']" style="margin-right: 5px"><span class="glyphicon glyphicon-plus"></span></a>
+        </div>
+    </div>
+    <table class="table">
         <thead>
             <tr>
-                <th>Nombre</th>
-                <th>Direccion</th>
-                <th>
-                    <a class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span>Nuevo</a>
-                </th>
+                <th class="col-md-11">Nombre</th>
+                <th>acciones</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor='let perosna of personal'>
-                <td> {{perosna.nombre}} {{perosna.apellidop}} {{perosna.apellidom}} </td>
-                <td> {{perosna.calle}} {{perosna.noext}} {{perosna.noint}} {{perosna.colonia}} {{perosna.cp}} {{perosna.estado}} {{perosna.ciudad}} </td>
+            <tr *ngFor="let persona of personal" >
                 <td>
-                        <a class="btn btn-warning btn-sm" style="margin: 1px"><span class="glyphicon glyphicon-edit"></span></a>
-                        <a class="btn btn-danger btn-sm"  style="margin: 1px"><span class="glyphicon glyphicon-trash"></span></a>
+                    <a class="btn-default"  [routerLink]="['../edit',persona.id]" >
+                        <h4>{{persona.nombre}} {{persona.apellidop}} {{persona.apellidom}}</h4>
+                        <h5 >{{persona.calle}} {{persona.noint}} {{persona.noext}}</h5>
+                    </a>
+                </td>
+                <td class="justify-content-center">
+                    <a class="btn btn-default" (click)="deletePersona()">
+                        <span class="glyphicon glyphicon-trash" ></span>
+                    </a>
                 </td>
             </tr>
         </tbody>

@@ -41,6 +41,10 @@ export class PersonalViewComponent implements OnInit{
         
     }
 
-    
+    deletePersona(){
+        if(confirm('Eliminar esta madre?')){
+            console.log('ya se armo');
+        }
+    }
 
 }//End Class

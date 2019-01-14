@@ -108,4 +108,28 @@ class UserController extends Controller
         );
         return response()->json($data,200);
     }
+
+    //retornando informacion del usuario
+    public function verUser(Request $request){
+        $json = $request->input('json',null);
+        $params = json_decode($json);
+        $email = $params->email;
+        $isset_user = User::where('email','=',$email)->count();
+        if($isset_user == 1){
+            $user = User::where(
+                array(
+                    'email' => $email
+                ))->first();
+            return response()->json(array(
+                'user' => $user,
+                'status' => 'success'
+            ),200);
+        }else{
+            return response()->json(array(
+                'message' => 'No se encuentra el registro',
+                'status' => 'error'
+            ),400);
+        }
+    }
+
 }// END CLASS

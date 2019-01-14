@@ -29,7 +29,7 @@ export class PuestoStoreComponent implements OnInit{
         private _router: Router
     ){
         this.title = 'Nuevo Puesto';
-        this.token = _UserService.getToken();
+        this.token = this._UserService.getToken();
     }
 
     ngOnInit(){

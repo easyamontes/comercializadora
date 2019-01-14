@@ -36,6 +36,9 @@ class PersonalController extends Controller
         $personal->apellidop = $params->apellidop;
         $personal->apellidom = $params->apellidom;
         $personal->user_id = $user;
+        $personal->puesto_id = 0;
+        $personal->email = $params->email;
+        $personal->calle = $params->calle;
         $personal->noint = $params->noint;
         $personal->noext = $params->noext;
         $personal->colonia = $params->colonia;
@@ -43,6 +46,16 @@ class PersonalController extends Controller
         $personal->ciudad = $params->ciudad;
         $personal->cp = $params->cp;
         $personal->status = $params->status;
+        $personal->descripcion = $params->descripcion;
+
+        //validando datos 
+        $validate = \Validator::make($params_array,[
+            "email" => 'required|unique:personal'
+        ]);
+        if ($validate->fails()) {
+            return response()->json($validate->errors(),400);
+        }
+
         //metiendo a la base de datos
         $personal->save();
         $data = array(
@@ -58,6 +71,14 @@ class PersonalController extends Controller
         $params = json_decode($json);
         $params_array = json_decode($json, true); 
         $personal = new Personal();
+
+        //validando datos de la peticion
+        $validate = \Validator::make($params_array,[
+            "email" => 'required|unique:personal,id,'.$params->id,
+        ]);
+        if ($validate->fails()) {
+            return response()->json($validate->errors(),400);
+        }
 
         //limienado array
         unset($params_array['id']);
@@ -88,7 +109,7 @@ class PersonalController extends Controller
     public function show($id, Request $request){
         $personal = Personal::find($id);
         if(is_object($personal)){
-            $personal = Puesto::find($id)->load('user');
+            $personal = Personal::find($id)->load('user');
             return response()->json(array(
                 'personal' => $personal,
                 'status' => 'success'

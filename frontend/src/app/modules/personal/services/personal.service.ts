@@ -31,4 +31,18 @@ export class PersonalService{
         return this._http.post(this.url+'personal',params,{headers:headers});
     }
 
+    getPersona(token, id): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+                                    .set('Authorization', token);
+        return this._http.get(this.url+'personal/'+id ,{headers:headers});
+    }
+
+    updatePersona(token,persona:Personal,id){
+        let json = JSON.stringify(persona);
+        let params = "json=" + json;
+        let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+                                    .set('Authorization', token);
+        return this._http.put(this.url+'personal/'+id ,params ,{headers:headers});
+    }
+
 }//end class

@@ -25,7 +25,6 @@ export class IsLoggedGuard implements CanActivate{
             }else{
                 return true;
             }
-
         }else{
             this._router.navigate(['logout/1']);
             return false;
@@ -33,7 +32,6 @@ export class IsLoggedGuard implements CanActivate{
     }
 
     canActivateChild(){
-        console.log('entre desde el hijo');
         return this.canActivate();
     }
 
