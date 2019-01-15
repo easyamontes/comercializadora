@@ -14,9 +14,12 @@ class CreatePuestoTable extends Migration
     public function up()
     {
         Schema::create('puesto', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->char('puesto',255);
+            $table->string('puesto');
             $table->integer('nivel');
             $table->string('descripcion');
             $table->timestamps();

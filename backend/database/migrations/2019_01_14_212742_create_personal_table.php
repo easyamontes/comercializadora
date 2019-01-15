@@ -14,22 +14,25 @@ class CreatePersonalTable extends Migration
     public function up()
     {
         Schema::create('personal', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('puesto_id');
-            $table->char('nombre',255);
-            $table->char('apellidop',255);
-            $table->char('apellidom',255);
-            $table->char('email',255);
-            $table->char('calle',255);
-            $table->char('noint',255);
-            $table->char('noext',255);
-            $table->char('colonia',255);
-            $table->char('estado',255);
-            $table->char('ciudad',255);
-            $table->char('cp',255);
+            $table->string('nombre');
+            $table->string('apellidop');
+            $table->string('apellidom');
+            $table->string('email');
+            $table->string('calle');
+            $table->string('noint');
+            $table->string('noext');
+            $table->string('colonia');
+            $table->string('estado');
+            $table->string('ciudad');
+            $table->string('cp');
             $table->string('descripcion');
-            $table->char('status',255);
+            $table->string('status');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('puesto_id')->references('id')->on('puesto');

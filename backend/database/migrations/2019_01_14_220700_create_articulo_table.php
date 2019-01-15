@@ -14,13 +14,16 @@ class CreateArticuloTable extends Migration
     public function up()
     {
         Schema::create('articulo', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->char('nombre',255);
-            $table->char('marca',255);
-            $table->char('modelo',255);
+            $table->string('nombre');
+            $table->string('marca');
+            $table->string('modelo');
             $table->string('descripcion');
-            $table->char('status',255);
+            $table->string('status');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
         });

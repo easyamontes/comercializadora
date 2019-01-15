@@ -14,19 +14,22 @@ class CreateOficinaTable extends Migration
     public function up()
     {
         Schema::create('oficina', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('personal_id');
-            $table->char('nombre',255);
-            $table->char('encargado',255);
+            $table->string('nombre');
+            $table->string('encargado');
             $table->string('descripcion');
-            $table->char('calle',255);
-            $table->char('noint',255);
-            $table->char('noext',255);
-            $table->char('colonia',255);
-            $table->char('estado',255);
-            $table->char('ciudad',255);
-            $table->char('cp',255);
+            $table->string('calle');
+            $table->string('noint');
+            $table->string('noext');
+            $table->string('colonia');
+            $table->string('estado');
+            $table->string('ciudad');
+            $table->string('cp');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('personal_id')->references('id')->on('personal');
