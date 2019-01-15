@@ -23,3 +23,4 @@ Route::post('/api/show','UserController@verUser')->middleware('islogged');
 //Rutas para el control de acciones en puestos
 Route::resource('/api/puestos','PuestoController');
 Route::resource('/api/personal','PersonalController');
+Route::resource('/api/oficinas','OficinaController');
