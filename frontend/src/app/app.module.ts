@@ -14,6 +14,7 @@ import { OficinasModule } from './modules/oficinas/oficinas.module';
 //conponentes
 import { LoginComponent } from './components/login/login.component';
 import { DefaultComponent } from './components/default/default.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -31,7 +32,8 @@ import { DefaultComponent } from './components/default/default.component';
     routin,
     PuestosModule,
     PersonalModule,
-    OficinasModule
+    OficinasModule,
+    BrowserAnimationsModule
   ],
   providers: [
     appRoutingProviders,
