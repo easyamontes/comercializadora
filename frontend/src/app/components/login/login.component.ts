@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from '../../services/user.service';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
     selector: 'login',
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit{
         this.title = 'Iniciar sesion '
         this.user  = new User(1,'','ROLE_USER','','','');
     }
-    
+
     ngOnInit(){
         this.logout();
     }
@@ -37,7 +38,7 @@ export class LoginComponent implements OnInit{
         //Invocando datos del usuario desde el servidor
         this._UserService.signup(this.user).subscribe(
             response =>{
-                
+
                 if(response.status!='error'){
 
                     //Invocando token  del usuario desde el servidor
@@ -65,7 +66,7 @@ export class LoginComponent implements OnInit{
             }, error =>{
 
                 console.log(<any>error);
-                
+
             }
         );
 
@@ -73,7 +74,7 @@ export class LoginComponent implements OnInit{
 
     //cerrando secion
     logout(){
-        //recogiendo parametros desde URL 
+        //recogiendo parametros desde URL
         this._route.params.subscribe(params =>{
             let logout = +params['sure'];
             if(logout == 1){

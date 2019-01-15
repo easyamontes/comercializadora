@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
     selector: 'default',
@@ -25,5 +26,5 @@ export class DefaultComponent implements OnInit{
     ngOnInit(){
 
     }
-    
+
 }
