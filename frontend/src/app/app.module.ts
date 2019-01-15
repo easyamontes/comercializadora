@@ -15,7 +15,7 @@ import { OficinasModule } from './modules/oficinas/oficinas.module';
 import { LoginComponent } from './components/login/login.component';
 import { DefaultComponent } from './components/default/default.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MatIconModule } from '@angular/material';
 
 
 @NgModule({
@@ -33,7 +33,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PuestosModule,
     PersonalModule,
     OficinasModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatIconModule
   ],
   providers: [
     appRoutingProviders,
