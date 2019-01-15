@@ -1,5 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 /* Estilo */
+
+/**Botones de las tablas*/
+.botabl {
+  display:flex;
+  justify-content: left
+     }
+/**Titulos de las Tablas*/
+.titabla {
+  background:black;
+  color:#FFFFFF
+}
+
+/**Espiner loader*/
 .loader {
     position: absolute;
     left: 50%;

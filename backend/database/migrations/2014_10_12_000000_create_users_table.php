@@ -18,10 +18,10 @@ class CreateUsersTable extends Migration
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
             $table->increments('id');
+            $table->string('email')->unique();
+            $table->string('role');
             $table->string('name');
             $table->string('surname');
-            $table->string('role');
-            $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

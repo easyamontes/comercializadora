@@ -10,6 +10,7 @@ import { UserService } from './services/user.service';
 //importando modulos
 import { PuestosModule } from './modules/puestos/puestos.module';
 import { PersonalModule } from './modules/personal/personal.module';
+import { OficinasModule } from './modules/oficinas/oficinas.module';
 //conponentes
 import { LoginComponent } from './components/login/login.component';
 import { DefaultComponent } from './components/default/default.component';
@@ -29,7 +30,8 @@ import { DefaultComponent } from './components/default/default.component';
     FormsModule,
     routin,
     PuestosModule,
-    PersonalModule
+    PersonalModule,
+    OficinasModule
   ],
   providers: [
     appRoutingProviders,

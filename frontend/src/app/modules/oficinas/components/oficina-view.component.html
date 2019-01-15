@@ -1,0 +1,19 @@
+<div class="panel panel-default" *ngIf="oficinas == null">
+    <div class="panel-heading">
+        <div class="row">
+            <h3 class="panel-title col-md-10 col-xs-10">{{title}}</h3>
+            <a class="btn btn-success btn-xs pull-right col-md-1 col-xs-1"  [routerLink]="['../nuevo']" style="margin-right: 5px"><span class="glyphicon glyphicon-plus"></span></a>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="list-group">
+            <div class="row" *ngFor="let oficina of oficinas">
+                <a [routerLink]="['../edit',oficina.id]" class="list-group-item col-md-11 col-xs-1">
+                  <h4 class="list-group-item-heading">{{oficina.oficina}}</h4>
+                    <!--  <p class="list-group-item-text">{{puesto.descripcion}}</p>-->
+                </a>
+                <a class="list-group-item col-md-1 col-xs-1" (click)="delteteOficina(puesto.id)"> <span class="glyphicon glyphicon-trash" ></span> </a>
+            </div>
+        </div>
+    </div>
+</div>

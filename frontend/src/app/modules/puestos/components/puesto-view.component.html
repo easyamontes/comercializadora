@@ -1,21 +1,39 @@
-<div class="loader" *ngIf="puestos == null"></div>
-
-<div class="panel panel-default" *ngIf="puestos != null">
-    <div class="panel-heading">
-        <div class="row">
-            <h3 class="panel-title col-md-10 col-xs-10">{{title}}</h3>
-            <a class="btn btn-success btn-xs pull-right col-md-1 col-xs-1"  [routerLink]="['../nuevo']" style="margin-right: 5px"><span class="glyphicon glyphicon-plus"></span></a>
-        </div>
-    </div>
-    <div class="panel-body">
-        <div class="list-group">
-            <div class="row" *ngFor="let puesto of puestos">
-                <a [routerLink]="['../edit',puesto.id]" class="list-group-item col-md-11 col-xs-1">
-                    <h4 class="list-group-item-heading">{{puesto.puesto}}</h4>
-                    <p class="list-group-item-text">{{puesto.descripcion}}</p>
-                </a>
-                <a class="list-group-item col-md-1 col-xs-1" (click)="deltetePuesto(puesto.id)"> <span class="glyphicon glyphicon-trash" ></span> </a>
+<div class="panel panel-default" botabl titabla *ngIf="puestos != null">
+        <div class="panel-heading">
+            <div class="row">
+                <h3 class="panel-title col-md-10 col-xs-10">{{title}}</h3>
+                <a class="btn btn-success btn-xs pull-right col-md-1 col-xs-1"  [routerLink]="['../nuevo']"
+                style="margin-right: 5px"><span class="glyphicon glyphicon-plus"></span></a>
             </div>
         </div>
+        <table class="table table-striped">
+           <thead class ="titabla">
+              <tr>
+              <th>Puesto</th>
+              <th>Descripcion</th>
+              <th>Editar</th>
+              <th>Eliminar</th>
+              </tr>
+           </thead>
+         <tbody>
+           <tr *ngFor="let puesto of puestos">
+              <td class="col-md-4">
+                 <h5>{{puesto.puesto}}</h5>
+              </td>
+              <td class="col-md-6">
+                <h5>{{puesto.descripcion}}</h5>
+              </td>
+           <td class="col-md-1">
+               <a class="btn-lg botabl" [routerLink]="['../edit',puesto.id]" >
+               <span class="glyphicon glyphicon-pencil"></span>
+               </a>
+          </td>
+            <td class="col-md-1">
+               <a class="btn-lg botabl"(click)="deltetePuesto(puesto.id)">
+                <span class="glyphicon glyphicon-trash" ></span>
+               </a>
+            </td>
+           </tr>
+        </tbody>
+      </table>
     </div>
-</div>

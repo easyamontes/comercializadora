@@ -1,0 +1,23 @@
+<h2>{{title}}</h2>
+<div class="alert alert-danger" *ngIf="status_oficina == 'success' && status_oficina"> Registro Guardado correctamente </div>
+<form *ngIf="ofi != null" #oficinaNew="ngForm" (ngSubmit)="onSubmit(oficinaNew)" class="col-md-5">
+    <div class="form-group">
+        <p>
+            <label for="oficina">Oficina</label>
+            <input type="text" name="oficina" #nombre="ngModel" [(ngModel)]="ofi.nombre" class="form-control" required>
+            <span *ngIf="!nombre.valid && nombre.touched" class="alert-danger">Campo obligatorio</span>
+        </p>
+        <p>
+            <label for="encargado">Encargado</label>
+            <input type="text" name="encargadoofi" #encargado="ngModel" [(ngModel)]="ofi.encargado" class="form-control" required>
+            <span *ngIf="!encargado.valid && encargado.touched" class="alert-danger">Campo obligatorio</span>
+        </p>
+         <p>
+       <label for="descripcion">Descripcion</label>
+          <textarea name="descripcionofi" #descripcion="ngModel"[(ngModel)]="ofi.descripcion"class="form-control" required ></textarea>
+          <span *ngIf="!descripcion.valid && descripcion.touched" class="alert-danger">Campo obligatorio</span>
+        </p>
+
+     <input type="submit" value="Guardar" class="btn btn-success" [disabled]="!oficinaNew.form.valid">
+    </div>
+</form>

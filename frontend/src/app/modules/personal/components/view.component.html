@@ -1,33 +1,37 @@
-
-<div class="loader" *ngIf="personal == null"></div>
-<div class="panel panel-default" *ngIf="personal != null">
-    <div class="panel-heading">
-        <div class="row clearfix">
-            <h3 class="panel-title col-md-10 col-xs-10">{{title}}</h3>
-            <a class="btn btn-success btn-xs pull-right col-md-1 col-xs-1"  [routerLink]="['../nuevo']" style="margin-right: 5px"><span class="glyphicon glyphicon-plus"></span></a>
+<div class="panel panel-default" botabl titabla *ngIf="personal != null">
+        <div class="panel-heading">
+            <div class="row clearfix">
+                <h3 class="panel-title col-md-10 col-xs-10">{{title}}</h3>
+                <a class="btn btn-success btn-xs pull-right col-md-1 col-xs-1"  [routerLink]="['../nuevo']" style="margin-right: 5px"><span class="glyphicon glyphicon-plus"></span></a>
+            </div>
         </div>
+        <table class="table table-striped">
+            <thead class ="titabla">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Direccion</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let persona of personal" >
+                    <td class="col-md-5">
+                      <h5>{{persona.nombre}} {{persona.apellidop}} {{persona.apellidom}}</h5>
+                    </td>
+                    <td class="col-md-5"><h5 >{{persona.calle}} {{persona.noint}} {{persona.noext}}</h5></td>
+                    <td class="col-md-1">
+                       <a class="btn-lg botabl" [routerLink]="['../edit',persona.id]" >
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                    </td>
+                    <td class="col-md-1">
+                      <a class="btn-lg botabl" (click)="deletePersona()">
+                      <span class="glyphicon glyphicon-trash" ></span>
+                      </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th class="col-md-11">Nombre</th>
-                <th>acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let persona of personal" >
-                <td>
-                    <a class="btn-default"  [routerLink]="['../edit',persona.id]" >
-                        <h4>{{persona.nombre}} {{persona.apellidop}} {{persona.apellidom}}</h4>
-                        <h5 >{{persona.calle}} {{persona.noint}} {{persona.noext}}</h5>
-                    </a>
-                </td>
-                <td class="justify-content-center">
-                    <a class="btn btn-default" (click)="deletePersona()">
-                        <span class="glyphicon glyphicon-trash" ></span>
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+    
