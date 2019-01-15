@@ -9,10 +9,10 @@
         <div class="list-group">
             <div class="row" *ngFor="let oficina of oficinas">
                 <a [routerLink]="['../edit',oficina.id]" class="list-group-item col-md-11 col-xs-1">
-                  <h4 class="list-group-item-heading">{{oficina.oficina}}</h4>
+                  <h4 class="list-group-item-heading">{{oficina.nombre}}</h4>
                     <!--  <p class="list-group-item-text">{{puesto.descripcion}}</p>-->
                 </a>
-                <a class="list-group-item col-md-1 col-xs-1" (click)="delteteOficina(puesto.id)"> <span class="glyphicon glyphicon-trash" ></span> </a>
+                <a class="list-group-item col-md-1 col-xs-1" (click)="delteteOficina(oficina.id)"> <span class="glyphicon glyphicon-trash" ></span> </a>
             </div>
         </div>
     </div>
