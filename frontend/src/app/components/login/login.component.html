@@ -1,8 +1,4 @@
-<head>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-		<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 
-</head>
 
   <div class="limiter">
     <div class="container-login100" >
@@ -10,7 +6,7 @@
 
                   <form class="login100-form" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="form-bo">
                   	        <span class="login100-form-title">
-						        Iniciar Sesion
+						        Iniciar Sesión
 					            </span>
 
                           <!--Mensaje de error-->
@@ -19,26 +15,32 @@
                           </div>
                           <!--Campo email-->
                           <div class="wrap-input100">
-                              <span class="label-input100">Email</span>
-                              <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="input100" required placeholder="Ingresar correo">
+							  <span class="label-input100">Email</span>
+							        <div class="inputWithIcon">
+										 <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="input100" required placeholder="Correo">
+										 <i class="material-icons">mail</i>
+							        </div>
                               <span *ngIf="!email.valid && email.touched" class="focus-input100"></span>
                           </div>
                           <!--Campo pass-->
                           <div class="wrap-input100">
-                              <span class="label-input100">Password</span>
-                              <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="input100" required placeholder="Ingresar Contraseña">
-                              <span *ngIf="!password.valid && password.touched" class="focus-input100"></span>
-                          </div>    <br>
-                             
-                          <div class="botones">
-                               <div class="separar">
+												
+							  <span class="label-input100">Password</span>
+							       <div class="inputWithIcon">
+								       <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="input100" required placeholder="Contraseña" >	
+							           <i class="material-icons">lock</i>
+							        </div>
+							  <span *ngIf="!password.valid && password.touched" class="focus-input100"></span>
+						 </div>    
+							  <br>
+					      
+						     <div class="botones">
+                                   <div class="separar">
                           		    <button  class="boton" type="submit" value="Login"  [disabled]="!loginForm.form.valid">login</button>
-                          	   </div> 
-                          </div>
-                          <br>
+                          	       </div> 
+                             </div>
+                                    <br>
 
-                               
-                          
                   </form>
 
       </div>

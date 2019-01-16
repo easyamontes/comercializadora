@@ -1,14 +1,18 @@
-<fieldset class="clearfix" *ngIf=" user != null && user.id == 0">
+<div class="principal">
+<fieldset class="clearfix principal" *ngIf=" user != null && user.id == 0">
     <span *ngIf="status == 'success'" class="alert alert-success">El suuario ya se armo</span>
     <legend>Informacion usiario</legend>
     <div class="col-md-12">
         <label for="email">Email</label>
         <input type="text" name="email" #email="ngModel" [(ngModel)]="persona.email" class="form-control" required>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-9">
         <label for="password">password</label>
         <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="form-control" required>
-    </div>
+    </div> <br>
+    <div class="col-md-2">
     <label for="registrar">Confirmar</label>
     <a class="btn btn-primary" name="registrar" (click)="makeUser()">Registrar</a>
+    </div>
 </fieldset>
+</div>

@@ -11,8 +11,9 @@
   background:black;
   color:#FFFFFF
 }
+/*margen en todas las pantallas*/
 .principal{
-  margin-right: 1%; 
+  margin-right: 2%; 
   margin-left: 1%;
 }
 
