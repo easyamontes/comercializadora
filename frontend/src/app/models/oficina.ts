@@ -1,7 +1,5 @@
-export class Oficina
-{
-  constructor
-  (
+export class Oficina{
+  constructor(
     public id: number,
     public nombre: string,
     public encargado: string,
