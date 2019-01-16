@@ -1,0 +1,36 @@
+<div class="panel panel-default principal">
+    <div class=" panel-heading">
+        <div class="row clearfix">
+                <h3 class="panel-title col-md-10 col-xs-10">{{title}}</h3>
+                <a class="btn btn-success btn-xs pull-right col-md-1 col-xs-1" style="margin-right: 5px"><span class="glyphicon glyphicon-plus"></span></a>
+        </div>
+    </div>
+    <table class="table table-striped" *ngIf="articulos != null">
+        <thead class="titabla">
+            <tr>
+                <th>Codigo</th>
+                <th>Articulo</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let articulo of articulos">
+                <td>{{articulo.codigo}}</td>
+                <td>{{articulo.nombre}}</td>
+                <td>{{articulo.marca}}</td>
+                <td>{{articulo.modelo}}</td>
+                <td>
+                    <a class="btn-lg botabl" >
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                </td>
+                <a class="btn-lg botabl">
+                    <span class="glyphicon glyphicon-trash" ></span>
+                </a>
+            </tr>
+        </tbody>
+    </table>
+</div>
