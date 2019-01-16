@@ -11,6 +11,7 @@ import { UserService } from './services/user.service';
 import { PuestosModule } from './modules/puestos/puestos.module';
 import { PersonalModule } from './modules/personal/personal.module';
 import { OficinasModule } from './modules/oficinas/oficinas.module';
+import {ArticulosModule} from './modules/articulo/articulos.module'
 //conponentes
 import { LoginComponent } from './components/login/login.component';
 import { DefaultComponent } from './components/default/default.component';
@@ -33,6 +34,7 @@ import { MatIconModule } from '@angular/material';
     PuestosModule,
     PersonalModule,
     OficinasModule,
+    ArticulosModule,
     BrowserAnimationsModule,
     MatIconModule
   ],

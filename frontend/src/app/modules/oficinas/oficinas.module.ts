@@ -8,7 +8,6 @@ import {OficinaMainComponent} from './components/oficina-main.component';
 import {OficinaViewComponent} from './components/oficina-view.component';
 import {OficinaEditComponent} from './components/oficina-edit.component';
 import {OficinaStoreComponent} from './components/oficina-store.component';
-//import {OficinaRegisterComponent} from './components/register.component';
 
 //declaracion modulo
 @NgModule({
@@ -16,8 +15,7 @@ declarations:[
   OficinaMainComponent,
   OficinaViewComponent,
   OficinaEditComponent,
-  OficinaStoreComponent//,
-//  OficinaRegisterComponent
+  OficinaStoreComponent
 ],
 imports:[
    CommonModule,
@@ -30,7 +28,6 @@ imports:[
     OficinaViewComponent,
     OficinaEditComponent,
     OficinaStoreComponent,
-    //OficinasRegisterComponent
   ],
   providers:[]
 })

@@ -24,3 +24,4 @@ Route::post('/api/show','UserController@verUser')->middleware('islogged');
 Route::resource('/api/puestos','PuestoController');
 Route::resource('/api/personal','PersonalController');
 Route::resource('/api/oficinas','OficinaController');
+Route::resource('/api/articulos','ArticuloController');
