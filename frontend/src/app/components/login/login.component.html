@@ -1,24 +1,85 @@
-<div class="container-fluid" style = margin-top:10% *ngIf="token == null">
-        <div class="col-md-offset-4 col-md-4">
-            <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="form-bo">
-                    <h1>{{title}}</h1>
-                    <!--Mensaje de error-->
-                    <div class="alert alert-danger" *ngIf="status=='error'">
-                            Correo o contraseña no validos
-                    </div>
-                    <!--Campo email-->
-                    <p>
-                        <label for="email">Email</label>
-                        <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" required>
-                        <span *ngIf="!email.valid && email.touched" class="alert-danger">El campo email es obligatorio</span>
-                    </p>
-                    <!--Campo pass-->
-                    <p>
-                        <label for="password">Password</label>
-                        <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="form-control" required>
-                        <span *ngIf="!password.valid && password.touched" class="alert-danger">El campo password es obligatorio</span>
-                    </p>
-                    <input type="submit" value="Login" class="btn-lg btn-primary" [disabled]="!loginForm.form.valid">
-            </form>
+<head>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+		<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+
+</head>
+
+  <div class="limiter">
+    <div class="container-login100" >
+      <div class="wrap-login100" *ngIf="token == null"> <br>
+
+                  <form class="login100-form" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="form-bo">
+                  	        <span class="login100-form-title">
+						        Iniciar Sesion
+					            </span>
+
+                          <!--Mensaje de error-->
+                          <div class="alert alert-danger" *ngIf="status=='error'">
+                                  Correo o contraseña no validos
+                          </div>
+                          <!--Campo email-->
+                          <div class="wrap-input100">
+                              <span class="label-input100">Email</span>
+                              <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="input100" required placeholder="Ingresar correo">
+                              <span *ngIf="!email.valid && email.touched" class="focus-input100"></span>
+                          </div>
+                          <!--Campo pass-->
+                          <div class="wrap-input100">
+                              <span class="label-input100">Password</span>
+                              <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="input100" required placeholder="Ingresar Contraseña">
+                              <span *ngIf="!password.valid && password.touched" class="focus-input100"></span>
+                          </div>    <br>
+                             
+                          <div class="botones">
+                               <div class="separar">
+                          		    <button  class="boton" type="submit" value="Login"  [disabled]="!loginForm.form.valid">login</button>
+                          	   </div> 
+                          </div>
+                          <br>
+
+                               
+                          
+                  </form>
+
+      </div>
     </div>
-</div>
+
+    </div>
+
+<!--
+<body>
+
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+				<form class="login100-form validate-form">
+					<span class="login100-form-title p-b-49">
+						Login
+					</span>
+
+		
+	
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn">
+								Login
+							</button>
+						</div>
+					</div>
+
+					
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="dropDownSelect1"></div>
+
+
+
+
+	-->

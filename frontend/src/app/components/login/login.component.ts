@@ -7,6 +7,7 @@ import {MatIconModule} from '@angular/material/icon';
 @Component({
     selector: 'login',
     templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css'],
     providers: [UserService]
 })
 
