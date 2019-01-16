@@ -5,12 +5,16 @@ import { HttpClientModule } from '@angular/common/http';
 //componentes
 import {ArticulosMainComponent} from './components/main.component';
 import {ArticulosRoutingModule} from './articulos-routing.module';
+import {ArticuloViewComponent} from './components/view.component';
+import {ArticuloStoreComponent} from './components/store.component';
 
 
 //declaracion modulo
 @NgModule({
     declarations:[
-        ArticulosMainComponent
+        ArticulosMainComponent,
+        ArticuloViewComponent,
+        ArticuloStoreComponent
     ],
     imports:[
         ArticulosRoutingModule,
@@ -19,7 +23,9 @@ import {ArticulosRoutingModule} from './articulos-routing.module';
         HttpClientModule
       ],
       exports:[
-        ArticulosMainComponent
+        ArticulosMainComponent,
+        ArticuloViewComponent,
+        ArticuloStoreComponent
       ],
       providers:[]
     })
