@@ -83,18 +83,17 @@
                     </div>
                 </div>
             </fieldset>
-               
         </div>
-             <div class="row form-group">
+             <div class="row ">
                 <div class="col-md-3 col-xs-3">
-                    <input type="submit" value="Guardar" class="btn btn-success col-md-12" style="margin: 1px"  [disabled]="!personalEdit.form.valid">
+                    <input type="submit" value="Guardar" class="btn btn-success col-md-12"  [disabled]="!personalEdit.form.valid">
                 </div>
                 <div class="col-md-3 col-xs-3">
-                    <a type="submit" class="btn btn-danger col-md-12" style="margin: 1px" (click)="CancelEdit()">Cancelar</a>
+                    <a type="submit" class="btn btn-danger col-md-12" (click)="CancelEdit()">Cancelar</a>
                 </div>
             </div>
    </div>
-    <div class="row">
+    <div class="row container-fluid">
         <personal-register [persona]="persona" class="col-md-6" *ngIf="persona.id >= 1||persona != null"></personal-register>
     </div>
 

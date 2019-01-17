@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Helpers\JwtAuth;
+use App\Oficina;
 
 class OficinaController extends Controller
 {
@@ -15,7 +17,7 @@ class OficinaController extends Controller
     public function index(Request $request){
         $oficina = Oficina::all()->load('user');
         return response()->json(array(
-            'oficina' => $oficina,
+            'oficinas' => $oficina,
             'status' => 'success'
         ),200);
      }
