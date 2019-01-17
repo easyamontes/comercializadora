@@ -25,7 +25,7 @@ export class ArticuloStoreComponent implements OnInit{
         private _router: Router
     ){
         this.title='Nuevo Articulo';
-        this.token=this._UserService.getToken();
+        this.token=_UserService.getToken();
     }
 
     ngOnInit(){
@@ -33,6 +33,7 @@ export class ArticuloStoreComponent implements OnInit{
     }
 
     onSubmit(form){
+        console.log(this.token);
         this._ArticuloService.storeArticulo(this.token,this.articuloe).subscribe(
             response=>{
                 this.articuloe = response.articulo;

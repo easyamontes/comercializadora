@@ -1,11 +1,57 @@
 <div class="principal">
-    <form action="">
-        <fieldset>
-            <legend>{{title}}</legend>
-            <div class="row col-md-6 offset-3">
-                    <label for="codigo">Codigo</label>
-                    <input type="text" name="codigo" #codigo="ngModel" [(ngModel)]="articuloe.codigo" class="form-control" required>
+    <form #articuloEdit="ngForm" (ngSubmit)="onSubmit(articuloEdit)">
+        <div class="container-fluid">
+            <div class="row col-md-6 col-md-offset-3">
+                <fieldset>
+                    <legend>{{title}}</legend>
+                    <div class="row form-group">
+                        <div class="col-md-12 col-xs-12">
+                            <label for="codigo">Codigo</label>
+                            <input type="text" name="codigo" #codigo="ngModel" [(ngModel)]="articuloe.codigo" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12 col-xs-12">
+                            <label for="articulo">Articulo</label>
+                            <input type="text" name="arname" #nombre="ngModel" [(ngModel)]="articuloe.nombre" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-6 col-xs-6">
+                            <label for="marca">Marca</label>
+                            <input type="text" name="marca" #marca="ngModel" [(ngModel)]="articuloe.marca" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                            <label for="modelo">Modelo</label>
+                            <input type="text" name="modelo" #modelo="ngModel" [(ngModel)]="articuloe.modelo" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12 col-xs-12">
+                            <label for="status">Satus</label>
+                            <select class="form-control" name="status" #status="ngModel" [(ngModel)]="articuloe.status" required>
+                                <option value="ACTIVO">ACTIVO</option>
+                                <option value="INACTIVO">INACTIVO</option>
+                                <option value="BAJA">BAJA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                            <div class="col-md-12 col-xs-12">
+                                <label for="descripcion">Notas</label>
+                                <textarea type="text" name="descripcion" #descripcion="ngModel" [(ngModel)]="articuloe.descripcion" class="form-control" required></textarea>
+                            </div>
+                        </div>
+                </fieldset>
+                <div class="row form-group">
+                    <div class="col-md-3 col-xs-3">
+                        <input type="submit" value="Guardar" class="btn btn-success col-md-12" style="margin: 1px"  [disabled]="!articuloEdit.form.valid">
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                        <a type="submit" class="btn btn-danger col-md-12" style="margin: 1px" (click)="cancelEdit()">Cancelar</a>
+                    </div>
+                </div>
             </div>
-        </fieldset>
+        </div>
     </form>
 </div>

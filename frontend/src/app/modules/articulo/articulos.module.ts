@@ -7,6 +7,7 @@ import {ArticulosMainComponent} from './components/main.component';
 import {ArticulosRoutingModule} from './articulos-routing.module';
 import {ArticuloViewComponent} from './components/view.component';
 import {ArticuloStoreComponent} from './components/store.component';
+import {ArticuloEditComponent} from './components/edit.component';
 
 
 //declaracion modulo
@@ -14,7 +15,8 @@ import {ArticuloStoreComponent} from './components/store.component';
     declarations:[
         ArticulosMainComponent,
         ArticuloViewComponent,
-        ArticuloStoreComponent
+        ArticuloStoreComponent,
+        ArticuloEditComponent
     ],
     imports:[
         ArticulosRoutingModule,
@@ -25,7 +27,8 @@ import {ArticuloStoreComponent} from './components/store.component';
       exports:[
         ArticulosMainComponent,
         ArticuloViewComponent,
-        ArticuloStoreComponent
+        ArticuloStoreComponent,
+        ArticuloEditComponent
       ],
       providers:[]
     })

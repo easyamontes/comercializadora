@@ -27,7 +27,7 @@ export class ArticuloService{
         let json = JSON.stringify(articulo);
         let params = "json="+json;
         let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-                                    .set('Authorization', token);
+                                     .set('Authorization', token);
 
         return this._http.post(this.url+'articulos',params,{headers:headers});
     }

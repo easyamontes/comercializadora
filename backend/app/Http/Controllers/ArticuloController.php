@@ -31,7 +31,7 @@ class ArticuloController extends Controller
         $user = $json = $request->input('userid',null);
         $articulo = new Articulo();
         //asignando informacion al objeto puesto
-        $articulo->user_id = $params->$user;
+        $articulo->user_id = $user;
         $articulo->nombre = $params->nombre;
         $articulo->marca = $params->marca;
         $articulo->modelo = $params->modelo;

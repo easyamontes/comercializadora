@@ -23,7 +23,7 @@ export class ArticuloViewComponent implements OnInit{
         private _ArticuloService:ArticuloService
     ){
         this.title = "Articulos";
-        this.token = this._UserService.getToken;
+        this.token = this._UserService.getToken();
     }
 
     ngOnInit(){
@@ -38,6 +38,16 @@ export class ArticuloViewComponent implements OnInit{
                 console.log(<any>error);
             }
         );
+    }
+
+    deleteRecord(id){
+        if(confirm('Eliminar Registro')){
+            this._ArticuloService.delteArticulo(this.token,id).subscribe(
+                response=>{
+                    this.getArticulos();
+                }
+            );
+        }
     }
 
 }//EndClass
