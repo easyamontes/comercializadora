@@ -113,9 +113,13 @@ class OficinaController extends Controller
           {
             $oficina = Oficina::find($id)->load('user');
             return response()->json(array(
-              'message' =>'no se encuentra registro',
-              'status' =>'error'
-            ),400);
-          }
+              'oficina'=> $oficina,
+              'status' =>'success'
+            ),200);
+          }else{ return response()->json(array(
+            'message' => 'No se encuentra el registro',
+            'status' => 'error'
+        ),400);
+               }
       }
 }//End Class

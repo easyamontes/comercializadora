@@ -33,6 +33,7 @@ import { Oficina} from 'src/app/models/oficina';
 
      ngOnInit(){
           this.ofi = new Oficina ( 0,'','','','','','','','','','');
+          this.title ='Nueva Oficina';
            console.log('ingresado');
      }//end ngOnInit
 

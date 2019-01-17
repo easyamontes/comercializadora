@@ -1,54 +1,75 @@
-<h2>{{title}}</h2>
+<div class="principal">
+               
 <div class="alert alert-danger" *ngIf="status_oficina == 'success' && status_oficina"> Registro Guardado correctamente </div>
-<form *ngIf="ofi != null" #oficinaNew="ngForm" (ngSubmit)="onSubmit(oficinaNew)" class="col-md-5">
-    <div class="form-group">
-        <p>
-            <label for="oficina">Oficina</label>
-            <input type="text" name="oficina" #nombre="ngModel" [(ngModel)]="ofi.nombre" class="form-control" required>
-            <span *ngIf="!nombre.valid && nombre.touched" class="alert-danger">Campo obligatorio</span>
-        </p>
-        <p>
-            <label for="encargado">Encargado</label>
-            <input type="text" name="encargadoofi" #encargado="ngModel" [(ngModel)]="ofi.encargado" class="form-control" required>
-            <span *ngIf="!encargado.valid && encargado.touched" class="alert-danger">Campo obligatorio</span>
-        </p>
-         <p>
-       <label for="descripcion">Descripcion</label>
-          <textarea name="descripcionofi" #descripcion="ngModel"[(ngModel)]="ofi.descripcion"class="form-control" required ></textarea>
-          <span *ngIf="!descripcion.valid && descripcion.touched" class="alert-danger">Campo obligatorio</span>
-        </p>
-            <p>
-                <label for="calle">Calle</label>
-                <input type="text" name="calleofi" #calle="ngModel" [(ngModel)]="ofi.calle" class="form-control" required>
-                <span *ngIf="!calle.valid && calle.touched" class="alert-danger">Campo obligatorio</span>
-            </p>
-            
-                 <p>
-                    <label for="noint">No Interior</label>
-                    <input type="text" name="nointofi" #noint="ngModel" [(ngModel)]="ofi.noint" class="form-control" required>
-                    <span *ngIf="!noint.valid && noint.touched" class="alert-danger">Campo obligatorio</span>
-                </p>
-                <p>
-                        <label for="noext">No Exterior</label>
-                        <input type="text" name="noextofi" #noext="ngModel" [(ngModel)]="ofi.noext" class="form-control" required>
-                        <span *ngIf="!noext.valid && noext.touched" class="alert-danger">Campo obligatorio</span>
-                    </p>
-                    <p>
-                            <label for="colonia">colonia</label>
-                            <input type="text" name="coloniaofi" #colonia="ngModel" [(ngModel)]="ofi.colonia" class="form-control" required>
-                            <span *ngIf="!colonia.valid && colonia.touched" class="alert-danger">Campo obligatorio</span>
-                        </p>
-                           <p>
-                                <label for="estado">Estado</label>
-                                <input type="text" name="estadoofi" #estado="ngModel" [(ngModel)]="ofi.estado" class="form-control" required>
-                                <span *ngIf="!estado.valid && estado.touched" class="alert-danger">Campo obligatorio</span>
-                            </p>
-                            <p>
+   
+    <form *ngIf="ofi != null" #oficinaNew="ngForm" (ngSubmit)="onSubmit(oficinaNew)">
+        <div class="container-fluid">
+            <div class="col-md-6 col-md-offset-3">
+                <fieldset>
+                    <legend>{{title}}</legend>
+                <div class="row">
+                            <div class="col-md-6 col-xs-12"> 
+                                    <label for="oficina">Oficina</label>
+                                    <input type="text" name="oficina" #nombre="ngModel" [(ngModel)]="ofi.nombre" class="form-control" required>
+                                    <span *ngIf="!nombre.valid && nombre.touched" class="alert-danger">Campo obligatorio</span>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <label for="encargado">Encargado</label>
+                                <input type="text" name="encargadoofi" #encargado="ngModel" [(ngModel)]="ofi.encargado" class="form-control" required>
+                                <span *ngIf="!encargado.valid && encargado.touched" class="alert-danger">Campo obligatorio</span>
+                            </div>
+                 </div>   
+                <div class="row">
+                            <div class="col-md-6 col-xs-12">
+                                    <label for="calle">Calle</label>
+                                    <input type="text" name="calleofi" #calle="ngModel" [(ngModel)]="ofi.calle" class="form-control" required>
+                                    <span *ngIf="!calle.valid && calle.touched" class="alert-danger">Campo obligatorio</span>
+                            </div>
+                            <div class="col-md-3 col-xs-12">
+                                <label for="noint">No Interior</label>
+                                <input type="text" name="nointofi" #noint="ngModel" [(ngModel)]="ofi.noint" class="form-control" required>
+                                <span *ngIf="!noint.valid && noint.touched" class="alert-danger">Campo obligatorio</span>
+                            </div>
+                            <div class="col-md-3 col-xs-12">
+                                <label for="noext">No Exterior</label>
+                                <input type="text" name="noextofi" #noext="ngModel" [(ngModel)]="ofi.noext" class="form-control">
+                                <span *ngIf="!noext.valid && noext.touched" class="alert-danger">Campo obligatorio</span>
+
+                            </div>
+                </div>
+
+                <div class="row">
+                            <div class="col-md-6 col-xs-12">
+                                    <label for="colonia">colonia</label>
+                                    <input type="text" name="coloniaofi" #colonia="ngModel" [(ngModel)]="ofi.colonia" class="form-control" required>
+                                    <span *ngIf="!colonia.valid && colonia.touched" class="alert-danger">Campo obligatorio</span>
+                            </div>
+                            <div class="col-md-3 col-xs-12">
+                                    <label for="estado">Estado</label>
+                                    <input type="text" name="estadoofi" #estado="ngModel" [(ngModel)]="ofi.estado" class="form-control" required>
+                                    <span *ngIf="!estado.valid && estado.touched" class="alert-danger">Campo obligatorio</span>
+                            </div>
+                            <div class="col-md-3 col-xs-12">
                                     <label for="ciudad">Ciudad</label>
                                     <input type="text" name="ciudadofi" #ciudad="ngModel" [(ngModel)]="ofi.ciudad" class="form-control" required>
                                     <span *ngIf="!ciudad.valid && ciudad.touched" class="alert-danger">Campo obligatorio</span>
-                                </p>  
-
-     <input type="submit" value="Guardar" class="btn btn-success" [disabled]="!oficinaNew.form.valid">
-    </div>
-</form>
+                            </div>
+                </div>
+                <div class="row">
+                           <div class="col-md-12 col-xs-12">
+                                <label for="descripcion">Descripcion</label>
+                                <textarea name="descripcionofi" #descripcion="ngModel"[(ngModel)]="ofi.descripcion"class="form-control" ></textarea>
+                                <span *ngIf="!descripcion.valid && descripcion.touched" class="alert-danger">Campo obligatorio</span>
+                            </div>
+                </div>
+                <div class="row"> <br>
+                       <div class="col-md-1">
+                            <input type="submit" value="Guardar" class="btn btn-success" [disabled]="!oficinaNew.form.valid">
+                        </div>
+                            
+                </div>
+            </fieldset>
+            </div>                 
+        </div>
+    </form>
+</div>

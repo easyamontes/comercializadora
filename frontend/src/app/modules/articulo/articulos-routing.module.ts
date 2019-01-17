@@ -5,16 +5,17 @@ import {IsLoggedGuard} from '../../services/guards/islogged.guard';
 import {ArticulosMainComponent} from './components/main.component';
 import {ArticuloViewComponent} from './components/view.component';
 import {ArticuloStoreComponent} from './components/store.component';
+import {ArticuloEditComponent} from './components/edit.component'
 
 
-const articulosRoutes: Routes =
-[
+const articulosRoutes: Routes =[
     {
-        path:'articulos', component:ArticulosMainComponent,
+        path:'articulos', component:ArticulosMainComponent, canActivateChild:[IsLoggedGuard],
                                                          children:[
                                                             {path:'',redirectTo:'list', pathMatch:'full'},
                                                             {path:'list',component:ArticuloViewComponent},
-                                                            {path:'nuevo',component:ArticuloStoreComponent}
+                                                            {path:'nuevo',component:ArticuloStoreComponent},
+                                                            {path:'edit/:id',component:ArticuloEditComponent}
                                                          ]
     }
 ]

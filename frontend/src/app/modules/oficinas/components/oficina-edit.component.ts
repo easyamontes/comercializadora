@@ -31,18 +31,18 @@ export class OficinaEditComponent implements OnInit
       ngOnInit(){
           this._route.params.subscribe(
               params =>{
-                  let id= +params['id'];
+                  let id = +params['id'];
                   this.getOficina(id);
               }
           );
       }
-
+       //buscar una oficina
       getOficina(id){
           this._OficinaService.getOficina(this.token, id).subscribe(
               response=>{
                   if(response.status == 'success'){
-                      this.ofi = response.nombre;
-                      this.title = 'Editar Oficina: '+ this.ofi.nombre;
+                      this.ofi = response.oficina;
+                      this.title = 'Editar Oficina:';
                   }else{
                       this._router.navigate(['oficinas']);
                   }
