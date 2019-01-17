@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {GLOBAL} from '../../../services/global';
-import {Articulo} from '../../../models/articulo';
 
 @Injectable()
 export class ArticuloService{
@@ -23,7 +22,7 @@ export class ArticuloService{
         return this._http.get(this.url+'articulos',{headers:headers});
     }
       /**Funcion para crear un nuevo puesto */
-    storeArticulo(token, articulo:Articulo):Observable<any>{
+    storeArticulo(token, articulo:any):Observable<any>{
         let json = JSON.stringify(articulo);
         let params = "json="+json;
         let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
@@ -40,7 +39,7 @@ export class ArticuloService{
     }
 
     /**Funcion para editar un puesto */
-    updateArticulo(token, articulo:Articulo, id): Observable<any>{
+    updateArticulo(token, articulo:any, id): Observable<any>{
         let json = JSON.stringify(articulo);
         let params = "json=" + json;
         let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')

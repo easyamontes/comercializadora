@@ -16,7 +16,6 @@ import {ArticulosModule} from './modules/articulo/articulos.module'
 import { LoginComponent } from './components/login/login.component';
 import { DefaultComponent } from './components/default/default.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatIconModule } from '@angular/material';
 
 
 @NgModule({
@@ -35,8 +34,7 @@ import { MatIconModule } from '@angular/material';
     PersonalModule,
     OficinasModule,
     ArticulosModule,
-    BrowserAnimationsModule,
-    MatIconModule
+    BrowserAnimationsModule
   ],
   providers: [
     appRoutingProviders,
