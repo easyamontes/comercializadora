@@ -45,4 +45,10 @@ export class PersonalService{
         return this._http.put(this.url+'personal/'+id ,params ,{headers:headers});
     }
 
+    deltePersona(token,id): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+               .set('Authorization', token);
+       return this._http.delete(this.url+'personal/'+id,{headers:headers});
+     }
+
 }//end class

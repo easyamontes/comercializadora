@@ -37,13 +37,17 @@ export class PersonalViewComponent implements OnInit{
             },error=>{
                 console.log(<any>error);
             });
-
-        
     }
 
-    deletePersona(){
-        if(confirm('Eliminar esta madre?')){
-            console.log('ya se armo');
+    deletePersona(id){
+        if(confirm('Eliminar este registro?')){
+            this._PersonalService.deltePersona(this.token,id).subscribe(
+                response=>{
+                    this.getPersonal();
+                },error=>{
+                    console.log(<any>error);
+                }
+            );
         }
     }
 
