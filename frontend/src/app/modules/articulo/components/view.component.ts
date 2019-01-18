@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Articulo } from './../../../models/articulo'
 import { UserService } from '../../../services/user.service';
 import { ArticuloService } from './../services/articulo.serice';
+declare var $: any;
 
 @Component({
     selector: 'articulo-view',
@@ -27,6 +28,10 @@ export class ArticuloViewComponent implements OnInit{
     }
 
     ngOnInit(){
+        //declaracion select component
+        $(document).ready(function(){
+            $('select').formSelect();
+          });//end     
         this.getArticulos();
     }
 
