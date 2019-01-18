@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { User } from 'src/app/models/user';
+import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
-import { OficinaService } from './../services/oficina.service';
+import {GeneralCallService} from '../../../services/generalCall.service';
 import { Oficina} from 'src/app/models/oficina';
 
 @Component({
@@ -10,26 +9,23 @@ import { Oficina} from 'src/app/models/oficina';
       templateUrl: './oficina-view.component.html',
       providers:[
         UserService,
-        OficinaService,
-
+        GeneralCallService
       ]
 })
 
    export class OficinaViewComponent implements OnInit{
       public title: string;
-      public user: User;
       public status: string;
       public token;
       public oficinas: Array <Oficina>;
 
       constructor (
         private _UserService: UserService,
-        private _OficinaService: OficinaService,
-        private _route: ActivatedRoute,
+        private _GeneralCallService: GeneralCallService,
         private _router: Router
       ){
         this.title = 'Oficinas';
-        this.token = _UserService.getToken();
+        this.token = this._UserService.getToken();
       }
 
      ngOnInit(){
@@ -37,7 +33,7 @@ import { Oficina} from 'src/app/models/oficina';
         }
 
       getOficinas(){
-       this._OficinaService.getOficinas(this.token).subscribe(
+       this._GeneralCallService.getRecords(this.token,'oficinas').subscribe(
             response =>{
                this.oficinas = response.oficinas;
              },error=>{
@@ -47,7 +43,7 @@ import { Oficina} from 'src/app/models/oficina';
 
      delteteOficina(id){
           if (confirm('seguro que desea eliminar esta oficina')){
-            this._OficinaService.delteOficina(this.token,id).subscribe(
+            this._GeneralCallService.delteRcord(this.token,'oficinas',id).subscribe(
               response=>{
                 this.getOficinas();
               },error=>{

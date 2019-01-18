@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import {GLOBAL} from '../../../services/global';
+import {GLOBAL} from './global';
 
 @Injectable()
-export class ArticuloService{
+export class GeneralCallService{
     public url: string;
     public token: any;
     public idnetity: any;
@@ -16,40 +16,40 @@ export class ArticuloService{
     }
 
     /**Funcon para traer los articulos */
-    getArticulos(token):Observable<any>{
+    getRecords(token,page:string):Observable<any>{
         let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
         .set('Authorization', token);
-        return this._http.get(this.url+'articulos',{headers:headers});
+        return this._http.get(this.url+page,{headers:headers});
     }
       /**Funcion para crear un nuevo puesto */
-    storeArticulo(token, articulo:any):Observable<any>{
-        let json = JSON.stringify(articulo);
+    storeRecord(token, page:string, elemento:any):Observable<any>{
+        let json = JSON.stringify(elemento);
         let params = "json="+json;
         let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
                                      .set('Authorization', token);
 
-        return this._http.post(this.url+'articulos',params,{headers:headers});
+        return this._http.post(this.url+page,params,{headers:headers});
     }
 
     /**Funcion para encontrar un puesto */
-    getArticulo(token, id): Observable<any>{
+    getRecrod(token, page:string, id): Observable<any>{
         let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
                                     .set('Authorization', token);
-        return this._http.get(this.url+'articulos/'+id ,{headers:headers});
+        return this._http.get(this.url+page+'/'+id ,{headers:headers});
     }
 
     /**Funcion para editar un puesto */
-    updateArticulo(token, articulo:any, id): Observable<any>{
-        let json = JSON.stringify(articulo);
+    updateRecord(token,page:string, elemento:any, id): Observable<any>{
+        let json = JSON.stringify(elemento);
         let params = "json=" + json;
         let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
                                     .set('Authorization', token);
-        return this._http.put(this.url+'articulos/'+id ,params ,{headers:headers});
+        return this._http.put(this.url+page+'/'+id ,params ,{headers:headers});
     }
 
-    delteArticulo(token,id): Observable<any>{
+    delteRcord(token,page:string,id): Observable<any>{
         let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
                                     .set('Authorization', token);
-        return this._http.delete(this.url+'articulos/'+id,{headers:headers});
+        return this._http.delete(this.url+page+'/'+id,{headers:headers});
     }
 }

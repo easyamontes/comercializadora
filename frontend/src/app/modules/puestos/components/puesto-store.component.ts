@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { User } from 'src/app/models/user';
+import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
-import { PuestoService } from '../services/puesto.service';
+import {GeneralCallService} from '../../../services/generalCall.service';
 import { Puesto } from '../../../models/puesto';
 
 
@@ -11,21 +10,19 @@ import { Puesto } from '../../../models/puesto';
     templateUrl: './puesto-edit.component.html',
     providers: [
         UserService,
-        PuestoService
+        GeneralCallService
     ]
 })
 
 export class PuestoStoreComponent implements OnInit{
     public title: string;
-    public user: User;
     public status_puesto: any;
     public token: any;
     public puestoe: Puesto;
 
     constructor(
         private _UserService: UserService,
-        private _PuestoService: PuestoService,
-        private _route: ActivatedRoute,
+        private _GeneralCallService: GeneralCallService,
         private _router: Router
     ){
         this.title = 'Nuevo Puesto';
@@ -34,11 +31,10 @@ export class PuestoStoreComponent implements OnInit{
 
     ngOnInit(){
         this.puestoe = new Puesto(1,'',0,'');
-        console.log('se n os estan mamando');
     }
 
     onSubmit(form){
-        this._PuestoService.storePuesto(this.token,this.puestoe).subscribe(
+        this._GeneralCallService.storeRecord(this.token,'puestos',this.puestoe).subscribe(
             response =>{
                 this.puestoe = response.puesto;
                 this.status_puesto = response.status;

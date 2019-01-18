@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from '../../../services/user.service';
-import { OficinaService } from './../services/oficina.service';
+import {GeneralCallService} from '../../../services/generalCall.service';
 import { Oficina} from 'src/app/models/oficina';
 
 @Component({
@@ -10,7 +10,7 @@ import { Oficina} from 'src/app/models/oficina';
     templateUrl: './oficina-edit.component.html',
     providers: [
         UserService,
-        OficinaService,
+        GeneralCallService
     ]
 })
 export class OficinaEditComponent implements OnInit
@@ -22,11 +22,11 @@ export class OficinaEditComponent implements OnInit
      public ofi: Oficina;
      constructor (
            private _UserService: UserService,
-           private _OficinaService: OficinaService,
+           private _GeneralCallService: GeneralCallService,
            private _route: ActivatedRoute,
            private _router: Router
       ){
-        this.token = _UserService.getToken();
+        this.token = this._UserService.getToken();
       }
       ngOnInit(){
           this._route.params.subscribe(
@@ -38,7 +38,7 @@ export class OficinaEditComponent implements OnInit
       }
        //buscar una oficina
       getOficina(id){
-          this._OficinaService.getOficina(this.token, id).subscribe(
+          this._GeneralCallService.getRecrod(this.token,'oficinas',id).subscribe(
               response=>{
                   if(response.status == 'success'){
                       this.ofi = response.oficina;
@@ -53,7 +53,7 @@ export class OficinaEditComponent implements OnInit
       }
 
       onSubmit(form){
-          this._OficinaService.updateOficina(this.token,this.ofi,this.ofi.id).subscribe(
+          this._GeneralCallService.updateRecord(this.token,'oficinas',this.ofi,this.ofi.id).subscribe(
               response=>{
                   this._router.navigate(['oficinas']);
               },error=>{

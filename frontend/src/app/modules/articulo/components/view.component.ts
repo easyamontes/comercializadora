@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Articulo } from './../../../models/articulo'
 import { UserService } from '../../../services/user.service';
-import { ArticuloService } from './../services/articulo.serice';
+import {GeneralCallService} from '../../../services/generalCall.service';
 declare var $: any;
 
 @Component({
@@ -9,7 +9,7 @@ declare var $: any;
     templateUrl: './view.component.html',
     providers:[
         UserService,
-        ArticuloService
+        GeneralCallService
     ]
 })
 
@@ -21,7 +21,7 @@ export class ArticuloViewComponent implements OnInit{
 
     constructor(
         private _UserService: UserService,
-        private _ArticuloService:ArticuloService
+        private _GeneralCallService:GeneralCallService
     ){
         this.title = "Articulos";
         this.token = this._UserService.getToken();
@@ -36,7 +36,8 @@ export class ArticuloViewComponent implements OnInit{
     }
 
     getArticulos(){
-        this._ArticuloService.getArticulos(this.token).subscribe(
+
+        this._GeneralCallService.getRecords(this.token,'articulos').subscribe(
             response=>{
                 this.articulos = response.articulo;
             },error=>{
@@ -47,7 +48,7 @@ export class ArticuloViewComponent implements OnInit{
 
     deleteRecord(id){
         if(confirm('Eliminar Registro')){
-            this._ArticuloService.delteArticulo(this.token,id).subscribe(
+            this._GeneralCallService.delteRcord(this.token,'articulos',id).subscribe(
                 response=>{
                     this.getArticulos();
                 }

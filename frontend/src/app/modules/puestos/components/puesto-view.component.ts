@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from '../../../services/user.service';
-import { PuestoService } from '../services/puesto.service';
+import {GeneralCallService} from '../../../services/generalCall.service';
 import { Puesto } from 'src/app/models/puesto';
 
 @Component({
@@ -10,7 +9,7 @@ import { Puesto } from 'src/app/models/puesto';
     templateUrl: './puesto-view.component.html',
     providers: [
         UserService,
-        PuestoService, 
+        GeneralCallService, 
     ]
 })
 
@@ -23,12 +22,10 @@ export class PuestoViewComponent implements OnInit{
 
     constructor(
         private _UserService: UserService,
-        private _PuestoService: PuestoService,
-        private _route: ActivatedRoute,
-        private _router: Router
+        private _GeneralCallService: GeneralCallService
     ){
         this.title = 'Organizacion';
-        this.token = _UserService.getToken();
+        this.token = this._UserService.getToken();
     }
 
     ngOnInit(){
@@ -37,7 +34,7 @@ export class PuestoViewComponent implements OnInit{
 
     //llamado el lisrado de los puertos
     getPuestos(){
-        this._PuestoService.getPuestos(this.token).subscribe(
+        this._GeneralCallService.getRecords(this.token,'puestos').subscribe(
             response =>{
                 this.puestos = response.puestos;
             },error =>{
@@ -47,7 +44,7 @@ export class PuestoViewComponent implements OnInit{
 
     deltetePuesto(id){
         if(confirm('Seguro que desea eliminar este registro?')){
-            this._PuestoService.deltePuesto(this.token,id).subscribe(
+            this._GeneralCallService.delteRcord(this.token,'puestos',id).subscribe(
                 response=>{
                     this.getPuestos();
                 },error=>{
