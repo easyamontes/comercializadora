@@ -31,7 +31,10 @@ export class ArticuloViewComponent implements OnInit{
         //declaracion select component
         $(document).ready(function(){
             $('select').formSelect();
-          });//end     
+          });//end    
+          $(document).ready(function(){
+            $('.tooltipped').tooltip();
+          }); 
         this.getArticulos();
     }
 

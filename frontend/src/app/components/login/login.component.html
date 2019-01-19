@@ -1,87 +1,44 @@
-
-
-  <div class="limiter">
+<div class="limiter">
     <div class="container-login100" >
       <div class="wrap-login100" *ngIf="token == null"> <br>
 
-                  <form class="login100-form" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="form-bo">
-                  	        <span class="login100-form-title">
-						        Iniciar Sesión
-					            </span>
+            <form class="login100-form" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="form-bo">
+					<span class="login100-form-title">
+						Iniciar Sesión
+					</span><br>
+					<!--Mensaje de error-->
+					<div class="alert alert-danger" *ngIf="status=='error'">
+						Correo o contraseña no validos
+					</div>
+					<!--Campo email-->
+					<div class="wrap-input100">
+						<div class="input-field">
+							<i class="material-icons prefix">email</i>
+							<input type="text"  name="email" #email="ngModel" [(ngModel)]="user.email" required placeholder="Correo">
+							<span *ngIf="!email.valid && email.touched"></span>
+						</div>
+					</div>
+					<!--Campo pass-->
+					<div class="wrap-input100">
+					    <div class="input-field">
+							<i class="material-icons prefix">lock</i>
+							<input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="input100" required placeholder="Contraseña" >	
+							<span *ngIf="!password.valid && password.touched" class="focus-input100"></span>
+						</div>
+						
+					</div>    
+						<br>
+							
+						<div class="botones">
+							<div class="separar">
+								<button  class="boton" type="submit" value="Login"  [disabled]="!loginForm.form.valid">login</button>
+							</div> 
+						</div>
+						<br>
 
-                          <!--Mensaje de error-->
-                          <div class="alert alert-danger" *ngIf="status=='error'">
-                                  Correo o contraseña no validos
-                          </div>
-                          <!--Campo email-->
-                          <div class="wrap-input100">
-							  <span class="label-input100">Email</span>
-							        <div class="inputWithIcon">
-										 <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="input100" required placeholder="Correo">
-										 <i class="material-icons">mail</i>
-							        </div>
-                              <span *ngIf="!email.valid && email.touched" class="focus-input100"></span>
-                          </div>
-                          <!--Campo pass-->
-                          <div class="wrap-input100">
-												
-							  <span class="label-input100">Password</span>
-							       <div class="inputWithIcon">
-								       <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="input100" required placeholder="Contraseña" >	
-							           <i class="material-icons">lock</i>
-							        </div>
-							  <span *ngIf="!password.valid && password.touched" class="focus-input100"></span>
-						 </div>    
-							  <br>
-					      
-						     <div class="botones">
-                                   <div class="separar">
-                          		    <button  class="boton" type="submit" value="Login"  [disabled]="!loginForm.form.valid">login</button>
-                          	       </div> 
-                             </div>
-                                    <br>
-
-                  </form>
+            </form>
 
       </div>
     </div>
 
-    </div>
-
-<!--
-<body>
-
-	<div class="limiter">
-		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
-			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-				<form class="login100-form validate-form">
-					<span class="login100-form-title p-b-49">
-						Login
-					</span>
-
-		
-	
-					<div class="container-login100-form-btn">
-						<div class="wrap-login100-form-btn">
-							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn">
-								Login
-							</button>
-						</div>
-					</div>
-
-					
-
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-
-
-	<div id="dropDownSelect1"></div>
-
-
-
-
-	-->
+</div>

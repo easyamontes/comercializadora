@@ -1,76 +1,59 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <header>
   <!--Menu de navegacion inicial -->
-    <nav class="navbar navbar-default" *ngIf="token">
-        <div class="container-fluid">
-          <!--icono que aparece cuando la vista es movil-->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="glyphicon glyphicon-menu-hamburger"></span>
-   
-            </button>
-            <a class="navbar-brand">DOOY</a>
-          </div>
-          <!--Barra de elementos -->
-          <div class="collapse navbar-collapse" id="collapse-1">
-            <!--Lista de elementos del menu-->
-            <ul class="nav navbar-nav">
-              <li [routerLinkActive]="['active']">
-                <a [routerLink]="['inicio']">
-                  <span class="glyphicon glyphicon-home"></span>
-                  Inicio
-                </a>
-              </li>
-              <!--Menu de Catalogos-->
-              <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Catalogos<span class="caret"></span></a>
-                  <!--Elementos del submenu-->
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a [routerLink]="['articulos']">
-                        Articulos
-                      </a>
-                    </li>
-                    <li>
-                      <a [routerLink]="['oficinas']">
-                        Oficinas
-                      </a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['personal']">
-                          Empleados
-                        </a>
-                    </li>
-                    <li>
-                      <a [routerLink]="['puestos']">
-                        Organizacion
-                      </a>
-                    </li>
+
+    <nav class="nav-wrapper" *ngIf="token">
+        <ul id="dropdown1" class="dropdown-content">
+            <li> <a [routerLink]="['articulos']"> Articulos</a></li>
+            <li> <a [routerLink]="['oficinas']"> Oficinas</a></li>
+            <li> <a [routerLink]="['personal']">Empleados</a></li>
+            <li> <a [routerLink]="['puestos']">Organizacion</a></li>
+         </ul>
+       <!--barra superior-->
+              <div class="nav-wrapper">
+                  <a href="#!" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                  <ul class="left hide-on-med-and-down">
+                      <li><a class="">DOOY</a></li>
+                      <li [routerLinkActive]="['active']"><a [routerLink]="['inicio']">
+                            <span class="glyphicon glyphicon-home"></span>
+                            Inicio</a>
+                      </li>
+                  <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Catalogo<i class="material-icons right">arrow_drop_down</i></a></li>
                   </ul>
-              </li>
-            </ul>
-            <!--Lista de elementos del menu del login-->
-            <ul class="nav navbar-nav navbar-right" *ngIf="identity">
-                <li>
-                  <a>
-                    <span class="glyphicon glyphicon-user"></span>
-                    {{identity.name}}
-                  </a>
-                </li>
-                <li>
-                   <a href="">Registro</a>     
-                </li>
-                <li>
-                    <a [routerLink]="['logout/1']">
-                      <span class="glyphicon glyphicon-log-out"></span>
-                      Salir
-                    </a>
-                </li>
-            </ul>
-          </div>
-        </div>
-    </nav>
+                  <ul class="right hide-on-med-and-down" *ngIf="identity">
+                      <li>
+                        <a>
+                          <span class="glyphicon glyphicon-user"></span>
+                          {{identity.name}}
+                        </a>
+                      </li>
+                      <li>
+                         <a href="">Registro</a>     
+                      </li>
+                      <li>
+                          <a [routerLink]="['logout/1']">
+                            <span class="glyphicon glyphicon-log-out"></span>
+                            Salir
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+        
+      </nav>
+      <!--barra mobil-->
+        <ul id="dropdown2" class="dropdown-content">
+          <li> <a [routerLink]="['articulos']"> Articulos</a></li>
+          <li> <a [routerLink]="['oficinas']"> Oficinas</a></li>
+          <li> <a [routerLink]="['personal']">Empleados</a></li>
+          <li> <a [routerLink]="['puestos']">Organizacion</a></li>
+       </ul>
+       <ul class="sidenav" id="mobile-demo">
+          <li [routerLinkActive]="['active']"><a [routerLink]="['inicio']">
+              <span class="glyphicon glyphicon-home"></span>
+              Inicio</a>
+        </li>
+            <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Catalogo</a></li>
+      </ul>  
 </header>
 
 <div >

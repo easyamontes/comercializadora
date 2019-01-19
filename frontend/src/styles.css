@@ -3,19 +3,20 @@
 /**Botones de las tablas*/
 .botabl {
   display:flex;
-  justify-content: left
+  justify-content: left;
+  font-style: normal;
      }
 /**Titulos de las Tablas*/
 .titabla {
   background:black;
-  color:#FFFFFF
+  color:#FFFFFF;
+  font-family: Arial, Helvetica, sans-serif;
 }
 /*margen en todas las pantallas*/
 .principal{
   margin-right: 2%; 
   margin-left: 1%;
 }
-
 /**Espiner loader*/
 .loader {
     position: absolute;
