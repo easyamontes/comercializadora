@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Personal } from '../../../models/personal';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
-import { PersonalService } from '../services/personal.service';
+import {GeneralCallService} from '../../../services/generalCall.service';
 
 @Component({
     selector: 'personal-store',
     templateUrl: './edit.component.html',
     providers:[
         UserService,
-        PersonalService
+        GeneralCallService
     ]
 })
 
@@ -21,7 +21,7 @@ export class PersonalStoreComponent implements OnInit{
 
     constructor(
         private _UserService: UserService,
-        private _PersonalService :PersonalService,
+        private GeneralCallService :GeneralCallService,
         private _router: Router
     ){
         this.title = 'Alta de personal';
@@ -33,7 +33,7 @@ export class PersonalStoreComponent implements OnInit{
     }
 
     onSubmit(form){
-        this._PersonalService.storePersonal(this.token,this.persona).subscribe(
+        this.GeneralCallService.storeRecord(this.token,'personal',this.persona).subscribe(
             response=>{
                 this.persona = response.personal;
                 this.status = response.status;

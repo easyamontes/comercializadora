@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from '../../../services/user.service';
-import { PuestoService } from '../services/puesto.service';
+import {GeneralCallService} from '../../../services/generalCall.service';
 import { Puesto } from 'src/app/models/puesto';
 
 @Component({
@@ -10,7 +10,7 @@ import { Puesto } from 'src/app/models/puesto';
     templateUrl: './puesto-edit.component.html',
     providers: [
         UserService,
-        PuestoService, 
+        GeneralCallService
     ]
 })
 
@@ -23,7 +23,7 @@ export class PuestoEditComponent implements OnInit{
 
     constructor(
         private _UserService: UserService,
-        private _PuestoService: PuestoService,
+        private _GeneralCallService: GeneralCallService,
         private _route: ActivatedRoute,
         private _router: Router
     ){
@@ -41,7 +41,7 @@ export class PuestoEditComponent implements OnInit{
 
     //obteniendo registro buscado
     getPuesto(id){
-        this._PuestoService.getPuesto(this.token, id).subscribe(
+        this._GeneralCallService.getRecrod(this.token,'puestos', id).subscribe(
             response=>{
                 if(response.status == 'success'){
                     this.puestoe = response.puesto;
@@ -56,7 +56,7 @@ export class PuestoEditComponent implements OnInit{
     }
 
     onSubmit(form){
-        this._PuestoService.updatePuesto(this.token,this.puestoe,this.puestoe.id).subscribe(
+        this._GeneralCallService.updateRecord(this.token,'puestos',this.puestoe,this.puestoe.id).subscribe(
             response=>{
                 if(response.status){
                     this._router.navigate(['puestos']);

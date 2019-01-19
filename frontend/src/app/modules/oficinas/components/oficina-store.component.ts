@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { User } from 'src/app/models/user';
+import { Router} from '@angular/router';
 import { UserService } from '../../../services/user.service';
-import { OficinaService } from './../services/oficina.service';
+import {GeneralCallService} from '../../../services/generalCall.service';
 import { Oficina} from 'src/app/models/oficina';
 
 @Component ({
@@ -10,25 +9,23 @@ import { Oficina} from 'src/app/models/oficina';
    templateUrl: './oficina-edit.component.html',
    providers: [
       UserService,
-      OficinaService
+      GeneralCallService
    ]
 })
 
  export class OficinaStoreComponent implements OnInit{
            public title: string;
-           public user: User;
            public status_oficina: any;
            public token: any;
            public ofi: Oficina;
 
    constructor (
      private _UserService: UserService,
-     private _OficinaService: OficinaService,
-     private _route: ActivatedRoute,
+     private _GeneralCallService: GeneralCallService,
      private _router: Router
          ){
            this.title ='Nueva Oficina';
-           this.token = _UserService.getToken();
+           this.token = this._UserService.getToken();
          }
 
      ngOnInit(){
@@ -38,7 +35,7 @@ import { Oficina} from 'src/app/models/oficina';
      }//end ngOnInit
 
      onSubmit(form){
-        this._OficinaService.storeOficina(this.token,this.ofi).subscribe(
+        this._GeneralCallService.storeRecord(this.token,'oficinas',this.ofi).subscribe(
           response =>{
           this.ofi = response.oficina;
           this.status_oficina = response.status;

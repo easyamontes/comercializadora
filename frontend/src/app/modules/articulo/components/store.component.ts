@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Articulo } from '../../../models/articulo';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
-import { ArticuloService } from './../services/articulo.serice';
+import {GeneralCallService} from '../../../services/generalCall.service';
 
 @Component({
     selector: 'articulo-store',
     templateUrl: './edit.component.html',
     providers:[
         UserService,
-        ArticuloService
+        GeneralCallService
     ]
 })
 
@@ -21,11 +21,11 @@ export class ArticuloStoreComponent implements OnInit{
 
     constructor(
         private _UserService: UserService,
-        private _ArticuloService: ArticuloService,
+        private _GeneralCallService: GeneralCallService,
         private _router: Router
     ){
         this.title='Nuevo Articulo';
-        this.token=_UserService.getToken();
+        this.token=this._UserService.getToken();
     }
 
     ngOnInit(){
@@ -34,7 +34,7 @@ export class ArticuloStoreComponent implements OnInit{
 
     onSubmit(form){
         console.log(this.token);
-        this._ArticuloService.storeArticulo(this.token,this.articuloe).subscribe(
+        this._GeneralCallService.storeRecord(this.token,'articulos',this.articuloe).subscribe(
             response=>{
                 this.articuloe = response.articulo;
                 this.status = response.status;

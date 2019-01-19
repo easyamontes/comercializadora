@@ -3,14 +3,14 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Personal } from './../../../models/personal';
 import { User } from './../../../models/user';
 import { UserService } from '../../../services/user.service';
-import { PersonalService } from './../services/personal.service';
+import { GeneralCallService } from '../../../services/generalCall.service';
 
 @Component({
     selector: 'personal-register',
     templateUrl: './register.component.html',
     providers:[
         UserService,
-        PersonalService
+        GeneralCallService
     ]
 })
 
@@ -26,7 +26,7 @@ export class PersonalRegisterComponent implements OnInit{
 
     constructor(
         private _UserService: UserService,
-        private _PersonalService :PersonalService,
+        private _GeneralCallService :GeneralCallService,
         private _route: ActivatedRoute,
         private _router: Router
     ){

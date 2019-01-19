@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
 import { Articulo } from './../../../models/articulo'
 import { UserService } from '../../../services/user.service';
-import { ArticuloService } from './../services/articulo.serice';
+import {GeneralCallService} from '../../../services/generalCall.service';
 
 @Component({
     selector: 'articulo-edit',
     templateUrl: './edit.component.html',
     providers:[
         UserService,
-        ArticuloService
+        GeneralCallService
     ]
 })
 
@@ -21,7 +21,7 @@ export class ArticuloEditComponent implements OnInit{
 
     constructor(
     private _UserService: UserService,
-    private _ArticuloService :ArticuloService,
+    private _GeneralCallService :GeneralCallService,
     private _route: ActivatedRoute,
     private _router: Router
     ){
@@ -39,7 +39,7 @@ export class ArticuloEditComponent implements OnInit{
     }
 
     getArticulo(id){
-        this._ArticuloService.getArticulo(this.token,id).subscribe(
+        this._GeneralCallService.getRecrod(this.token,'articulos',id).subscribe(
             response=>{
                 if(response.status == 'success'){
                     this.articuloe = response.articulo;
@@ -53,7 +53,7 @@ export class ArticuloEditComponent implements OnInit{
     }
 
     onSubmit(form){
-        this._ArticuloService.updateArticulo(this.token,this.articuloe,this.articuloe.id).subscribe(
+        this._GeneralCallService.updateRecord(this.token,'articulos',this.articuloe,this.articuloe.id).subscribe(
             response=>{
                 this._router.navigate(['articulos']);
             },error=>{
