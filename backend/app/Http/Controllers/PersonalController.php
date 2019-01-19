@@ -36,7 +36,7 @@ class PersonalController extends Controller
         $personal->apellidop = $params->apellidop;
         $personal->apellidom = $params->apellidom;
         $personal->user_id = $user;
-        $personal->puesto_id = 0;
+        $personal->puesto_id = 1;
         $personal->email = $params->email;
         $personal->calle = $params->calle;
         $personal->noint = $params->noint;
