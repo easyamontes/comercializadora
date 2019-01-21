@@ -5,42 +5,36 @@
                 <fieldset>
                     <legend>{{title}}</legend>
                     <div class="row form-group">
-                        <div class="col-md-12 col-xs-12">
-                            <label for="codigo">Codigo</label>
-                            <input type="text" name="codigo" #codigo="ngModel" [(ngModel)]="articuloe.codigo" class="form-control" required>
-                        </div>
+                        <mat-form-field class="col-md-12 col-xs-12">
+                            <input type="text" matInput name="codigo" #codigo="ngModel" [(ngModel)]="articuloe.codigo" placeholder="Codigo" required>
+                        </mat-form-field>
                     </div>
                     <div class="row form-group">
-                        <div class="col-md-12 col-xs-12">
-                            <label for="articulo">Articulo</label>
-                            <input type="text" name="arname" #nombre="ngModel" [(ngModel)]="articuloe.nombre" class="form-control" required>
-                        </div>
+                        <mat-form-field class="col-md-12 col-xs-12">
+                            <input type="text" matInput name="arname" #nombre="ngModel" [(ngModel)]="articuloe.nombre" placeholder="Articulo" required>
+                        </mat-form-field>
                     </div>
                     <div class="row form-group">
-                        <div class="col-md-6 col-xs-6">
-                            <label for="marca">Marca</label>
-                            <input type="text" name="marca" #marca="ngModel" [(ngModel)]="articuloe.marca" class="form-control" required>
-                        </div>
-                        <div class="col-md-6 col-xs-6">
-                            <label for="modelo">Modelo</label>
-                            <input type="text" name="modelo" #modelo="ngModel" [(ngModel)]="articuloe.modelo" class="form-control" required>
-                        </div>
+                        <mat-form-field class="col-md-6 col-xs-6">
+                            <input type="text" matInput name="marca" #marca="ngModel" [(ngModel)]="articuloe.marca" placeholder="Marca" required>
+                        </mat-form-field>
+                        <mat-form-field class="col-md-6 col-xs-6">
+                            <input type="text" matInput name="modelo" #modelo="ngModel" [(ngModel)]="articuloe.modelo" placeholder="Modelo" required>
+                        </mat-form-field>
                     </div>
                     <div class="row form-group">
-                        <div class="col-md-12 col-xs-12">
-                            <label for="status">Satus</label>
-                            <select class="form-control" name="status" #status="ngModel" [(ngModel)]="articuloe.status" >
-                                <option value="ACTIVO">ACTIVO</option>
-                                <option value="INACTIVO">INACTIVO</option>
-                                <option value="BAJA">BAJA</option>
-                            </select>
-                        </div>
+                        <mat-form-field class="col-md-12 col-xs-12">
+                            <mat-select placeholder="Status"  name="status" #status="ngModel" [(ngModel)]="articuloe.status" >
+                                <mat-option value="ACTIVO">ACTIVO</mat-option>
+                                <mat-option value="INACTIVO">INACTIVO</mat-option>
+                                <mat-option value="BAJA">BAJA</mat-option>
+                            </mat-select>
+                        </mat-form-field>
                     </div>
                     <div class="row form-group">
-                            <div class="col-md-12 col-xs-12">
-                                <label for="descripcion">Notas</label>
-                                <textarea type="text" name="descripcion" #descripcion="ngModel" [(ngModel)]="articuloe.descripcion" class="form-control" required></textarea>
-                            </div>
+                            <mat-form-field class="col-md-12 col-xs-12">
+                                <textarea type="text" matInput name="descripcion" #descripcion="ngModel" [(ngModel)]="articuloe.descripcion" placeholder="Notas" required></textarea>
+                            </mat-form-field>
                         </div>
                 </fieldset>
                 <div class="row form-group">
