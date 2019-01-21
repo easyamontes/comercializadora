@@ -11,7 +11,8 @@ import { UserService } from './services/user.service';
 import { PuestosModule } from './modules/puestos/puestos.module';
 import { PersonalModule } from './modules/personal/personal.module';
 import { OficinasModule } from './modules/oficinas/oficinas.module';
-import {ArticulosModule} from './modules/articulo/articulos.module'
+import {ArticulosModule} from './modules/articulo/articulos.module';
+import {MaterialModule} from './module-materilize';
 //conponentes
 import { LoginComponent } from './components/login/login.component';
 import { DefaultComponent } from './components/default/default.component';
@@ -34,7 +35,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PersonalModule,
     OficinasModule,
     ArticulosModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [
     appRoutingProviders,
