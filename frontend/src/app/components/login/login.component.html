@@ -1,8 +1,9 @@
+
 <div class="limiter">
     <div class="container-login100" >
       <div class="wrap-login100" *ngIf="token == null"> <br>
 
-            <form class="login100-form" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="form-bo">
+            <form class="login100-form" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
 					<span class="login100-form-title">
 						Iniciar Sesión
 					</span><br>
@@ -12,19 +13,19 @@
 					</div>
 					<!--Campo email-->
 					<div class="wrap-input100">
-						<div class="input-field">
-							<i class="material-icons prefix">email</i>
-							<input type="text"  name="email" #email="ngModel" [(ngModel)]="user.email" required placeholder="Correo">
+					<mat-form-field class="wrap-input100" >
+							<span matPrefix> <mat-icon matSuffix>email</mat-icon></span>
+							<input type="text" name="email" #email="ngModel" [(ngModel)]="user.email"  matInput placeholder="Email" required>
 							<span *ngIf="!email.valid && email.touched"></span>
-						</div>
-					</div>
+					</mat-form-field>
+				    </div>
 					<!--Campo pass-->
 					<div class="wrap-input100">
-					    <div class="input-field">
-							<i class="material-icons prefix">lock</i>
-							<input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="input100" required placeholder="Contraseña" >	
-							<span *ngIf="!password.valid && password.touched" class="focus-input100"></span>
-						</div>
+						<mat-form-field class="wrap-input100" >  
+							<span matPrefix> <mat-icon matSuffix>https</mat-icon></span>
+							<input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" matInput required placeholder="Contraseña" >	
+							<span *ngIf="!password.valid && password.touched"></span>
+						</mat-form-field>
 						
 					</div>    
 						<br>
