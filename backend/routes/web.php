@@ -26,3 +26,4 @@ Route::resource('/api/puestos','PuestoController');
 Route::resource('/api/personal','PersonalController');
 Route::resource('/api/oficinas','OficinaController');
 Route::resource('/api/articulos','ArticuloController');
+Route::resource('/api/bancos','BancoController');
