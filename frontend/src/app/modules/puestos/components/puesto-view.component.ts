@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UserService } from '../../../services/user.service';
 import {GeneralCallService} from '../../../services/generalCall.service';
 import { Puesto } from 'src/app/models/puesto';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 
 @Component({
     selector: 'puestos',
     templateUrl: './puesto-view.component.html',
     providers: [
         UserService,
-        GeneralCallService, 
+        GeneralCallService
     ]
 })
 
@@ -19,6 +20,11 @@ export class PuestoViewComponent implements OnInit{
     public status: string;
     public token;
     public puestos: Array<Puesto>;
+    public displayedColumns: string[] = ['puesto','descripcion','editar','eliminar'];
+    public dataSource: MatTableDataSource<Puesto>;
+
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort: MatSort;
 
     constructor(
         private _UserService: UserService,
@@ -37,9 +43,20 @@ export class PuestoViewComponent implements OnInit{
         this._GeneralCallService.getRecords(this.token,'puestos').subscribe(
             response =>{
                 this.puestos = response.puestos;
+                this.dataSource = new MatTableDataSource(response.puestos);
+                this.dataSource.paginator = this.paginator;
+                this.dataSource.sort = this.sort;
             },error =>{
                 console.log(<any>error);
             });
+    }
+
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+    
+        if (this.dataSource.paginator) {
+          this.dataSource.paginator.firstPage();
+        }
     }
 
     deltetePuesto(id){

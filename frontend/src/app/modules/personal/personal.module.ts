@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PersonalRoutingModule } from './personal-routing.module';
+import {MaterialModule} from '../../module-materilize';
 // componentes
 import { PersonalMainComponent } from './components/main.component';
 import { PersonalViewComponent } from './components/view.component';
@@ -23,7 +24,8 @@ imports: [
     CommonModule,
     FormsModule,
     HttpClientModule,
-    PersonalRoutingModule
+    PersonalRoutingModule,
+    MaterialModule
 ],
 exports: [
     PersonalMainComponent,

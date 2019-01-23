@@ -10,7 +10,8 @@ import { Oficina} from 'src/app/models/oficina';
    templateUrl: './oficina-edit.component.html',
    providers: [
       UserService,
-      GeneralCallService
+      GeneralCallService,
+      GeneralListService
    ]
 })
 
@@ -60,4 +61,9 @@ import { Oficina} from 'src/app/models/oficina';
           });
     }//end onSubmit
 
- }//end class OficinaStoreComponent
+    botonCancelar(){
+      this.ofi = null;
+      this._router.navigate(['oficinas']);
+                 }
+
+}//end class OficinaStoreComponent

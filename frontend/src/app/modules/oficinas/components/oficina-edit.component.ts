@@ -61,5 +61,9 @@ export class OficinaEditComponent implements OnInit
               }
           );
       }
+      botonCancelar(){
+           this.ofi = null;
+           this._router.navigate(['oficinas']);
+     }
 
 }//end class

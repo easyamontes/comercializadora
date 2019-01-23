@@ -15,7 +15,7 @@
 					<div class="wrap-input100">
 					<mat-form-field class="wrap-input100" >
 							<span matPrefix> <mat-icon matSuffix>email</mat-icon></span>
-							<input type="text" name="email" #email="ngModel" [(ngModel)]="user.email"  matInput placeholder="Email" required>
+							<input type="text" matInput name="email" #email="ngModel" [(ngModel)]="user.email"  matInput placeholder="Email" required>
 							<span *ngIf="!email.valid && email.touched"></span>
 					</mat-form-field>
 				    </div>
@@ -23,7 +23,7 @@
 					<div class="wrap-input100">
 						<mat-form-field class="wrap-input100" >  
 							<span matPrefix> <mat-icon matSuffix>https</mat-icon></span>
-							<input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" matInput required placeholder="Contraseña" >	
+							<input type="password" matInput name="password" #password="ngModel" [(ngModel)]="user.password" matInput required placeholder="Contraseña" >	
 							<span *ngIf="!password.valid && password.touched"></span>
 						</mat-form-field>
 						

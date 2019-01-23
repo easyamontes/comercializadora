@@ -1,6 +1,5 @@
 <div class="principal">
 <h2>{{title}}</h2>
-<div class="loader" *ngIf="persona == null"></div>
 <form #personalEdit="ngForm" (ngSubmit)="onSubmit(personalEdit)" *ngIf="persona != null">
     <div class="container-fluid">
         <div class="row">
@@ -9,38 +8,32 @@
                 <legend>Datos personales</legend>
                 
                 <div class="row form-group">
-                    <div class="col-md-6">
-                        <label for="nombre">Nombre(s)</label>
-                        <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="persona.nombre" class="form-control" required>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="apellidop">Apellido paterno</label>
-                        <input type="text" name="apellidop" #apellidop="ngModel" [(ngModel)]="persona.apellidop" class="form-control" required>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="apellidom">Apellido Materno</label>
-                        <input type="text" name="apellidom" #apellidom="ngModel" [(ngModel)]="persona.apellidom" class="form-control" required>
-                    </div>
+                    <mat-form-field class="col-md-6 col-xs-12">
+                        <input type="text" matInput name="nombre" #nombre="ngModel" [(ngModel)]="persona.nombre" placeholder="Nombre"  required>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-3 col-xs-12">
+                        <input type="text" matInput name="apellidop" #apellidop="ngModel" [(ngModel)]="persona.apellidop" placeholder="Apellido Paterno" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-3 col-xs-12">
+                        <input type="text" matInput name="apellidom" #apellidom="ngModel" [(ngModel)]="persona.apellidom" placeholder="Apellido Materno" required>
+                    </mat-form-field>
                 </div>
                 <div class="row form-group">
-                    <div class="col-md-8 col-xs-12">
-                            <label for="email">Email</label>
-                            <input type="email" name="email" #email="ngModel" [(ngModel)]="persona.email" class="form-control" required>
-                    </div>
-                    <div class="col-md-4 col-xs-12">
-                        <label for="status">status</label>
-                        <select class="form-control" name="status" #status="ngModel" [(ngModel)]="persona.status" required>
-                            <option value="ACTIVO">ACTIVO</option>
-                            <option value="INACTIVO">INACTIVO</option>
-                            <option value="BAJA">BAJA</option>
-                        </select>
-                    </div>
+                    <mat-form-field class="col-md-8 col-xs-12">
+                        <input type="email" matInput name="email" #email="ngModel" [(ngModel)]="persona.email" placeholder="Email" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-4 col-xs-12">
+                        <mat-select name="status" #status="ngModel" [(ngModel)]="persona.status" placeholder = "Status" required>
+                            <mat-option value="ACTIVO">ACTIVO</mat-option>
+                            <mat-option value="INACTIVO">INACTIVO</mat-option>
+                            <mat-option value="BAJA">BAJA</mat-option>
+                        </mat-select>
+                    </mat-form-field>
                 </div>
                 <div class="row form-group">
-                    <div class="col-md-12 col-xs-12">
-                        <label for="descripcion">Notas</label>
-                        <textarea type="text" name="descripcion" #descripcion="ngModel" [(ngModel)]="persona.descripcion" class="form-control" required></textarea>
-                    </div>
+                    <mat-form-field class="col-md-12 col-xs-12">
+                        <textarea type="text" matInput name="descripcion" #descripcion="ngModel" [(ngModel)]="persona.descripcion" placeholder="Descripcion" required></textarea>
+                    </mat-form-field>
                 </div>
                 <br>
            
@@ -49,38 +42,31 @@
             <fieldset class="form-group col-md-6">
                 <legend>Domicilio</legend>
                 <div class="row form-group">
-                    <div class="col-md-8 col-xs-12">
-                        <label for="calle">Calle</label>
-                        <input type="text" name="calle" #calle="ngModel" [(ngModel)]="persona.calle" class="form-control" required>
-                    </div>
-                    <div class="col-md-2 col-xs-6">
-                        <label for="noint">No.Int</label>
-                        <input type="text" name="noint" #noint="ngModel" [(ngModel)]="persona.noint" class="form-control" required>
-                    </div>
-                    <div class="col-md-2 col-xs-6">
-                        <label for="noext">No.Ext</label>
-                        <input type="text" name="noext" #noext="ngModel" [(ngModel)]="persona.noext" class="form-control">
-                    </div>
+                    <mat-form-field class="col-md-8 col-xs-12">
+                        <input type="text" matInput name="calle" #calle="ngModel" [(ngModel)]="persona.calle"  placeholder="Calle" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-2 col-xs-6">
+                        <input type="text" matInput name="noint" #noint="ngModel" [(ngModel)]="persona.noint" placeholder="No Int" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-2 col-xs-6">
+                        <input type="text" matInput name="noext" #noext="ngModel" [(ngModel)]="persona.noext" placeholder="No Ext" >
+                    </mat-form-field>
                 </div>
                 <div class="row form-group">
-                    <div class="col-md-6 col-xs-12">
-                            <label for="ciudad">Ciudad</label>
-                            <input type="text" name="ciudad" #ciudad="ngModel" [(ngModel)]="persona.ciudad" class="form-control" required>
-                    </div>
-                    <div class="col-md-6 col-xs-12">
-                            <label for="estado">Estado</label>
-                            <input type="text" name="estado" #estado="ngModel" [(ngModel)]="persona.estado" class="form-control" required>
-                    </div>
+                    <mat-form-field class="col-md-6 col-xs-12">
+                        <input type="text"  matInput name="ciudad" #ciudad="ngModel" [(ngModel)]="persona.ciudad" placeholder="Ciudad" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-6 col-xs-12">
+                        <input type="text" matInput name="estado" #estado="ngModel" [(ngModel)]="persona.estado" placeholder="Estado" required>
+                    </mat-form-field>
                 </div>
                 <div class="row form-group">
-                    <div class="col-md-7 col-xs-12">
-                            <label for="colonia">Colonia</label>
-                            <input type="text" name="colonia" #colonia="ngModel" [(ngModel)]="persona.colonia" class="form-control" required>
-                    </div>
-                    <div class="col-md-5 col-xs-12">
-                            <label for="cp">C.P</label>
-                            <input type="text" name="cp" #cp="ngModel" [(ngModel)]="persona.cp" class="form-control" required>
-                    </div>
+                    <mat-form-field class="col-md-7 col-xs-12">
+                        <input type="text" matInput name="colonia" #colonia="ngModel" [(ngModel)]="persona.colonia" placeholder="Colonia" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-5 col-xs-12">
+                        <input type="text" matInput name="cp" #cp="ngModel" [(ngModel)]="persona.cp" placeholder="C.P." required>
+                    </mat-form-field>
                 </div>
             </fieldset>
         </div>
