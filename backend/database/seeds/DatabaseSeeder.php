@@ -11,6 +11,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        //Creando el Usuario
+        DB::table('users')->insert([
+            'name' => 'Admin',
+            'name' => 'root',
+            'role' => 'ROLE_ADMIN',
+            'email' => 'Admin@easyload.mx',
+            'password' => hash('sha256','EasyLoad_1121'),
+        ]);
     }
 }
