@@ -1,29 +1,38 @@
-<h1>{{title}}</h1>
-
+<div class="principal">
+<h3>{{title}}</h3>
 <div class="alert alert-danger" *ngIf="status_puesto != 'success' && status_puesto"> {{status_puesto.error.nivel}} </div>
 <div class="alert alert-danger" *ngIf="status_puesto == 'success' && status_puesto"> Registro Guardado correctamente </div>
-<div class="loader" *ngIf="puestoe == null"></div>
+<form *ngIf="puestoe != null" #puestoNew="ngForm" (ngSubmit)="onSubmit(puestoNew)"> 
+    <div class="container-fluid">
+        <div class="row col-md-6 col-md-offset-3">
+            <fieldset>
+                <legend>{{title}}</legend>
+                <div class="row form-group">
+                    <mat-form-field class="col-md-12 col-xs-12">
+                        <input type="text" matInput name="puesto" #puesto="ngModel" [(ngModel)]="puestoe.puesto" placeholder="Puesto" required>  
+                    </mat-form-field>
+                </div>
+                <div class="row form-group">
+                    <mat-form-field class="col-md-12 col-xs-12">
+                       <mat-select placeholder = "Nivel" name="nivel" #nivel="ngModel" [(ngModel)]="puestoe.nivel" required>
+                            <mat-option value="1">1</mat-option>
+                            <mat-option value="2">2</mat-option>
+                       </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="row form-group">
+                <mat-form-field class="col-md-12 col-xs-12">
+                        <textarea type="text" matInput name="descripcion" #descripcion="ngModel" [(ngModel)]="puestoe.descripcion" placeholder="Descripcion" required></textarea>
+                </mat-form-field> 
+                </div>
+            </fieldset> 
+              <div class="row form-group">
+                  <div class="col-md-5 col-xs-3">
+                        <input type="submit" value="Guardar" class="btn btn-success col-md-10" [disabled]="!puestoNew.form.valid">
+                  </div>
 
-<form *ngIf="puestoe != null" #puestoNew="ngForm" (ngSubmit)="onSubmit(puestoNew)" class="col-md-5"> 
-    <div class="form-group">
-        <p>
-            <label for="puesto">Nombre</label>
-            <input type="text" name="puesto" #puesto="ngModel" [(ngModel)]="puestoe.puesto" class="form-control" required>
-            <span *ngIf="!puesto.valid && puesto.touched" class="alert-danger">Campo obligatorio</span>
-        </p>
-        <p>
-            <label for="nivel">Nivel</label>
-            <select class="form-control" name="nivel" #nivel="ngModel" [(ngModel)]="puestoe.nivel" required>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-            </select>
-            <span *ngIf="!nivel.valid && nivel.touched" class="alert-danger">Campo obligatorio</span>    
-        </p>
-        <p>
-            <label for="descripcion">Descripcion</label>
-            <textarea type="text" name="descripcion" #descripcion="ngModel" [(ngModel)]="puestoe.descripcion" class="form-control" required></textarea>
-            <span *ngIf="!descripcion.valid && descripcion.touched" class="alert-danger">Campo obligatorio</span>
-        </p>
-        <input type="submit" value="Guardar" class="btn btn-success" [disabled]="!puestoNew.form.valid">
-    </div>
+             </div>
+        </div>
+     </div>
 </form>
+</div>

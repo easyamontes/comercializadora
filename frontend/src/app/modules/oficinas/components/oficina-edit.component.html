@@ -1,4 +1,4 @@
-<div class="principal">
+<div class="principal" *ngIf = "ofi != null">
                
 <div class="alert alert-danger" *ngIf="status_oficina == 'success' && status_oficina"> Registro Guardado correctamente </div>
    
@@ -8,65 +8,50 @@
                 <fieldset>
                     <legend>{{title}}</legend>
                 <div class="row">
-                            <div class="col-md-6 col-xs-12"> 
-                                    <label for="oficina">Oficina</label>
-                                    <input type="text" name="oficina" #nombre="ngModel" [(ngModel)]="ofi.nombre" class="form-control" required>
-                                    <span *ngIf="!nombre.valid && nombre.touched" class="alert-danger">Campo obligatorio</span>
-                            </div>
-                            <div class="col-md-6 col-xs-12">
-                                <label for="encargado">Encargado</label>
-                                <input type="text" name="encargadoofi" #encargado="ngModel" [(ngModel)]="ofi.encargado" class="form-control" required>
-                                <span *ngIf="!encargado.valid && encargado.touched" class="alert-danger">Campo obligatorio</span>
-                            </div>
+                            <mat-form-field class="col-md-6 col-xs-12"> 
+                              <input type="text"  matInput name="oficina" #nombre="ngModel" [(ngModel)]="ofi.nombre" placeholder="Oficina" required>
+                            </mat-form-field>
+                            <mat-form-field class="col-md-6 col-xs-12">
+                                 <mat-select  name="encargadoofi" #encargado="ngModel" [(ngModel)]="ofi.encargado" placeholder= "Encargado" required>
+                                        
+                                 </mat-select>
+                            </mat-form-field>
                  </div>   
                 <div class="row">
-                            <div class="col-md-6 col-xs-12">
-                                    <label for="calle">Calle</label>
-                                    <input type="text" name="calleofi" #calle="ngModel" [(ngModel)]="ofi.calle" class="form-control" required>
-                                    <span *ngIf="!calle.valid && calle.touched" class="alert-danger">Campo obligatorio</span>
-                            </div>
-                            <div class="col-md-3 col-xs-12">
-                                <label for="noint">No Interior</label>
-                                <input type="text" name="nointofi" #noint="ngModel" [(ngModel)]="ofi.noint" class="form-control" required>
-                                <span *ngIf="!noint.valid && noint.touched" class="alert-danger">Campo obligatorio</span>
-                            </div>
-                            <div class="col-md-3 col-xs-12">
-                                <label for="noext">No Exterior</label>
-                                <input type="text" name="noextofi" #noext="ngModel" [(ngModel)]="ofi.noext" class="form-control">
-                                <span *ngIf="!noext.valid && noext.touched" class="alert-danger">Campo obligatorio</span>
-
-                            </div>
+                            <mat-form-field class="col-md-6 col-xs-12">
+                                 <input type="text" matInput name="calleofi" #calle="ngModel" [(ngModel)]="ofi.calle"placeholder ="Calle" required>
+                            </mat-form-field>
+                            <mat-form-field class="col-md-3 col-xs-12">
+                               <input type="text" matInput name="nointofi" #noint="ngModel" [(ngModel)]="ofi.noint" placeholder="No Int" required>
+                            </mat-form-field>
+                            <mat-form-field class="col-md-3 col-xs-12">
+                                 <input type="text" matInput name="noextofi" #noext="ngModel" [(ngModel)]="ofi.noext" placeholder="No Ext">
+                            </mat-form-field>
                 </div>
 
                 <div class="row">
-                            <div class="col-md-6 col-xs-12">
-                                    <label for="colonia">colonia</label>
-                                    <input type="text" name="coloniaofi" #colonia="ngModel" [(ngModel)]="ofi.colonia" class="form-control" required>
-                                    <span *ngIf="!colonia.valid && colonia.touched" class="alert-danger">Campo obligatorio</span>
-                            </div>
-                            <div class="col-md-3 col-xs-12">
-                                    <label for="estado">Estado</label>
-                                    <input type="text" name="estadoofi" #estado="ngModel" [(ngModel)]="ofi.estado" class="form-control" required>
-                                    <span *ngIf="!estado.valid && estado.touched" class="alert-danger">Campo obligatorio</span>
-                            </div>
-                            <div class="col-md-3 col-xs-12">
-                                    <label for="ciudad">Ciudad</label>
-                                    <input type="text" name="ciudadofi" #ciudad="ngModel" [(ngModel)]="ofi.ciudad" class="form-control" required>
-                                    <span *ngIf="!ciudad.valid && ciudad.touched" class="alert-danger">Campo obligatorio</span>
-                            </div>
+                            <mat-form-field class="col-md-6 col-xs-12">
+                                <input type="text" matInput name="coloniaofi" #colonia="ngModel" [(ngModel)]="ofi.colonia" placeholder="Colonia" required>
+                            </mat-form-field>
+                            <mat-form-field class="col-md-3 col-xs-12">
+                                <input type="text" matInput name="estadoofi" #estado="ngModel" [(ngModel)]="ofi.estado" placeholder="Estado" required>
+                            </mat-form-field>
+                            <mat-form-field class="col-md-3 col-xs-12">
+                                <input type="text" matInput name="ciudadofi" #ciudad="ngModel" [(ngModel)]="ofi.ciudad" placeholder="Ciudad" required>
+                            </mat-form-field>
                 </div>
                 <div class="row">
-                           <div class="col-md-12 col-xs-12">
-                                <label for="descripcion">Descripcion</label>
-                                <textarea name="descripcionofi" #descripcion="ngModel"[(ngModel)]="ofi.descripcion"class="form-control" ></textarea>
-                                <span *ngIf="!descripcion.valid && descripcion.touched" class="alert-danger">Campo obligatorio</span>
-                            </div>
+                           <mat-form-field class="col-md-12 col-xs-12">
+                                <textarea matInput name="descripcionofi" #descripcion="ngModel"[(ngModel)]="ofi.descripcion" placeholder="Descripcion" ></textarea>
+                           </mat-form-field>
                 </div>
-                <div class="row"> <br>
-                       <div class="col-md-1">
-                            <input type="submit" value="Guardar" class="btn btn-success" [disabled]="!oficinaNew.form.valid">
+                <div class="row form-group"> <br>
+                       <div class="col-md-3 col-xs-3">
+                            <input type="submit" value="Guardar" class="btn btn-success col-md-12" [disabled]="!oficinaNew.form.valid">
                         </div>
-                            
+                        <div class="col-md-3 col-xs-3">
+                            <a type="submit" class="btn btn-danger col-md-12" style="margin: 1px" (click)="botonCancelar()">Cancelar</a>
+                        </div>
                 </div>
             </fieldset>
             </div>                 

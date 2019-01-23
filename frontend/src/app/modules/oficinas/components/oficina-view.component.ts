@@ -22,7 +22,7 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
       public token;
       public oficinas: Array <Oficina>;
       public selectList: Array<any>;
-      public displayedColumns: string[] = ['nombre'];
+      public displayedColumns: string[] = ['nombre','encargado','descripcion','editar','eliminar'];
       public dataSource: MatTableDataSource<Oficina>;
       
       @ViewChild(MatPaginator) paginator: MatPaginator;

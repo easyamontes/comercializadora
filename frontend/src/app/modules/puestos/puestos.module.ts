@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {MaterialModule} from '../../module-materilize';
 //Componentes
 import { PuestosRoutingModule } from './puestos-routing.module';
 import { PuestoViewComponent } from './components/puesto-view.component';
@@ -21,7 +22,8 @@ import { PuestoMainComponent } from './components/puesto-main.component';
         CommonModule,
         FormsModule,
         HttpClientModule,
-        PuestosRoutingModule
+        PuestosRoutingModule,
+        MaterialModule
     ],
     exports: [
         PuestoViewComponent,

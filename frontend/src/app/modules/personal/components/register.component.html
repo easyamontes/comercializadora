@@ -4,18 +4,16 @@
     <div >
     <legend>Informacion usuario</legend>
         <div class="row form-group">
-                <div class="col-md-12">
-                <label for="email">Email</label>
-                <input type="text" name="email" #email="ngModel" [(ngModel)]="persona.email" class="form-control" required>
-                </div>
+                <mat-form-field class="col-md-12">
+                    <input type="text" matInput name="email" #email="ngModel" [(ngModel)]="persona.email" placeholder="Email" required>
+                </mat-form-field>
         </div>
         <div class="row form-group">
-                <div class="col-md-7 col-xs-12">
-                    <label for="password">password</label>
-                    <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="form-control" required>
-                </div>
+                <mat-form-field class="col-md-7 col-xs-12">
+                    <input type="password" matInput name="password" #password="ngModel" [(ngModel)]="user.password" placeholder="Password" required>
+                </mat-form-field>
                 <div class="col-md-5 col-xs-12">
-                    <a class="btn btn-primary" name="registrar" style="margin: 23px" (click)="makeUser()">Registrar</a>
+                    <a class="btn btn-primary" name="registrar" style="margin: 5px" (click)="makeUser()">Registrar</a>
                 </div>
         </div>
     </div>
