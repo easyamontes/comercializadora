@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {MaterialModule} from '../../module-materilize';
 //componentes
 import {OficinasRoutingModule } from './oficinas-routing.module';
 import {OficinaMainComponent} from './components/oficina-main.component';
@@ -15,13 +16,15 @@ declarations:[
   OficinaMainComponent,
   OficinaViewComponent,
   OficinaEditComponent,
-  OficinaStoreComponent
+  OficinaStoreComponent,
 ],
 imports:[
    CommonModule,
    FormsModule,
    HttpClientModule,
-   OficinasRoutingModule
+   OficinasRoutingModule,
+   MaterialModule
+
   ],
   exports:[
     OficinaMainComponent,
