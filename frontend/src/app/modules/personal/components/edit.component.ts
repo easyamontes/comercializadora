@@ -4,12 +4,13 @@ import { Personal } from './../../../models/personal';
 import { UserService } from '../../../services/user.service';
 import { GeneralCallService } from '../../../services/generalCall.service';
 
+
 @Component({
     selector: 'personal-edit',
     templateUrl: './edit.component.html',
     providers:[
         UserService,
-        GeneralCallService
+        GeneralCallService,
     ]
 })
 

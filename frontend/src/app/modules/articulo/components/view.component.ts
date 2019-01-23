@@ -18,7 +18,7 @@ export class ArticuloViewComponent implements OnInit{
     public status: string;
     public token: any;
     public articulos: Array<Articulo>;
-    public displayedColumns: string[] = ['codigo', 'nombre', 'marca', 'modelo','id'];
+    public displayedColumns: string[] = ['codigo', 'nombre', 'marca', 'modelo','id','eliminar'];
     public dataSource: MatTableDataSource<Articulo>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;

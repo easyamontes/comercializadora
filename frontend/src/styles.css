@@ -1,7 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
+/*titulo de las tablas*/
+   .thm {
+     background:black;
+     color: #FFFFFF;
+   }
+  
 /**Botones de las tablas*/
+.botonpri{
+  background-color: #52BE80;
+}
 .botabl {
   display:flex;
   justify-content: left;
@@ -59,3 +67,4 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+

@@ -3,6 +3,7 @@ import { Personal } from './../../../models/personal'
 import { UserService } from '../../../services/user.service';
 import {GeneralCallService} from '../../../services/generalCall.service';
 
+
 @Component({
     selector: 'personal-view',
     templateUrl: './view.component.html',
@@ -20,10 +21,10 @@ export class PersonalViewComponent implements OnInit{
 
     constructor(
         private _UserService: UserService,
-        private GeneralCallService :GeneralCallService
+        private _GeneralCallService : GeneralCallService
     ){
         this.title = 'Personal';
-        this.token = _UserService.getToken();
+        this.token = this._UserService.getToken();
     }
 
     ngOnInit(){
@@ -31,7 +32,7 @@ export class PersonalViewComponent implements OnInit{
     }
 
     getPersonal(){
-        this.GeneralCallService.getRecords(this.token,'personal').subscribe(
+        this._GeneralCallService.getRecords(this.token,'personal').subscribe(
             response=>{
                 this.personal = response.personal;
             },error=>{
@@ -41,7 +42,7 @@ export class PersonalViewComponent implements OnInit{
 
     deletePersona(id){
         if(confirm('Eliminar este registro?')){
-            this.GeneralCallService.delteRcord(this.token,'personal',id).subscribe(
+            this._GeneralCallService.delteRcord(this.token,'personal',id).subscribe(
                 response=>{
                     this.getPersonal();
                 },error=>{

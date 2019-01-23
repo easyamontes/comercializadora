@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import {GeneralCallService} from '../../../services/generalCall.service';
+import {GeneralListService} from '../../../services/generalList.service';
 import { Oficina} from 'src/app/models/oficina';
 
 @Component ({
@@ -18,10 +19,11 @@ import { Oficina} from 'src/app/models/oficina';
            public status_oficina: any;
            public token: any;
            public ofi: Oficina;
-
+           public selectList: Array<any>;
    constructor (
      private _UserService: UserService,
      private _GeneralCallService: GeneralCallService,
+     private _GeneralListService: GeneralListService,
      private _router: Router
          ){
            this.title ='Nueva Oficina';
@@ -31,8 +33,16 @@ import { Oficina} from 'src/app/models/oficina';
      ngOnInit(){
           this.ofi = new Oficina ( 0,'','','','','','','','','','');
           this.title ='Nueva Oficina';
-           console.log('ingresado');
+          this.gerOptions();
      }//end ngOnInit
+
+     gerOptions(){
+      this._GeneralListService.getListEmpleado(this.token,'lpersonal').subscribe(
+         response=>{
+             this.selectList = response.personall;
+         }
+     );
+     }
 
      onSubmit(form){
         this._GeneralCallService.storeRecord(this.token,'oficinas',this.ofi).subscribe(
