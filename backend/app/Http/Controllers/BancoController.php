@@ -24,7 +24,7 @@ class BancoController extends Controller
      }//end function index
 
      //function para poder guadar los datos en la base
-     public function store(Request $request)
+     public function store( Request $request)
      {
          $json = $request->input('json',null);
          $params = json_decode($json);
@@ -79,7 +79,7 @@ class BancoController extends Controller
      //eliminar registro
        public function destroy($id, Request $request)
        {
-           $banco = Banco::dind($id);
+           $banco = Banco::find($id);
            $banco -> delete();
            $data = array (
                'banco' => $banco,
