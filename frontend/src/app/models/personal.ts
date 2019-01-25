@@ -1,6 +1,7 @@
 export class Personal{
     constructor(
         public id: number,
+        public puesto_id: number,
         public nombre: string,
         public apellidop: string,
         public apellidom: string,

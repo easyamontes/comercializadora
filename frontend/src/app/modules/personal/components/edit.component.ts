@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Personal } from './../../../models/personal';
 import { UserService } from '../../../services/user.service';
 import { GeneralCallService } from '../../../services/generalCall.service';
+import {GeneralListService} from '../../../services/generalList.service';
 
 
 @Component({
@@ -11,6 +12,7 @@ import { GeneralCallService } from '../../../services/generalCall.service';
     providers:[
         UserService,
         GeneralCallService,
+        GeneralListService,
     ]
 })
 
@@ -19,10 +21,12 @@ export class PersonalEditComponent implements OnInit{
     public status: string;
     public token: any;
     public persona: Personal;
+    public selectList: any;
 
     constructor(
         private _UserService: UserService,
         private _GeneralCallService :GeneralCallService,
+        private _GeneralListService: GeneralListService,
         private _route: ActivatedRoute,
         private _router: Router
     ){
@@ -38,6 +42,7 @@ export class PersonalEditComponent implements OnInit{
                 this.getPersona(id);
             }
         );
+        this.getOptions();
     }
     /** busca una persona en la base de datos */
     getPersona(id){
@@ -55,6 +60,14 @@ export class PersonalEditComponent implements OnInit{
         );
     }
 
+    /**funcion para traer la lista de valores */
+    getOptions(){
+        this._GeneralListService.getListEmpleado(this.token,'lpuesto').subscribe(
+           response=>{
+               this.selectList = response.puestol;
+           }
+       );
+       }
     /** Funcion para guardar el formulario de personal */
     onSubmit(form){
         this._GeneralCallService.updateRecord(this.token,'personal',this.persona,this.persona.id).subscribe(

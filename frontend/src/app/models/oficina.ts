@@ -1,6 +1,7 @@
 export class Oficina{
   constructor(
     public id: number,
+    public personal_id: number,
     public nombre: string,
     public encargado: string,
     public descripcion: string,

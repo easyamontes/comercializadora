@@ -20,6 +20,7 @@ Route::post('/api/register','UserController@register');
 Route::post('/api/login','UserController@login');
 Route::post('/api/show','UserController@verUser')->middleware('islogged');
 Route::get('/api/lpersonal','ListaController@empleadosList')->middleware('islogged');
+Route::get('/api/lpuesto','ListaController@puestosList')->middleware('islogged');
 
 //Rutas para el control de acciones en puestos
 Route::resource('/api/puestos','PuestoController');
