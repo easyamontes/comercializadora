@@ -32,6 +32,14 @@
                 </div>
                 <div class="row form-group">
                     <mat-form-field class="col-md-12 col-xs-12">
+                        <mat-select name="puesto"  #puesto="ngModel" [(ngModel)]="persona.puesto_id" placeholder= "Puesto" required>
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let item of selectList" [value]="item.id">{{item.puesto}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="row form-group">
+                    <mat-form-field class="col-md-12 col-xs-12">
                         <textarea type="text" matInput name="descripcion" #descripcion="ngModel" [(ngModel)]="persona.descripcion" placeholder="Descripcion" required></textarea>
                     </mat-form-field>
                 </div>

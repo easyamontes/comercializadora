@@ -20,4 +20,14 @@ class ListaController extends Controller
         );
         return $data;
     }
+
+    public function puestosList( Request $request ){
+        $personal = DB::table('puesto')->select('id','puesto')->get();
+        $data = array(
+            'puestol' => $personal,
+            'code' => 200,
+            'status' => 'success'
+        );
+        return $data;
+    }
 }

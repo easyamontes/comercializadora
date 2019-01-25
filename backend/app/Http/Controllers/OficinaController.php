@@ -31,7 +31,7 @@ class OficinaController extends Controller
         $oficina = new Oficina();
         //asignando informacion al objeto puesto
         $oficina->user_id = $user;
-        $oficina->personal_id = 0;
+        $oficina->personal_id = $params->personal_id;
         $oficina->nombre = $params->nombre;
         $oficina->encargado = $params->encargado;
         $oficina->descripcion = $params->descripcion;

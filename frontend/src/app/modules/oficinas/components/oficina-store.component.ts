@@ -16,11 +16,13 @@ import { Oficina} from 'src/app/models/oficina';
 })
 
  export class OficinaStoreComponent implements OnInit{
-           public title: string;
-           public status_oficina: any;
-           public token: any;
-           public ofi: Oficina;
-           public selectList: Array<any>;
+    public title: string;
+    public status_oficina: any;
+    public token: any;
+    public ofi: Oficina;
+    public selectList: Array<any>;
+
+
    constructor (
      private _UserService: UserService,
      private _GeneralCallService: GeneralCallService,
@@ -32,18 +34,22 @@ import { Oficina} from 'src/app/models/oficina';
          }
 
      ngOnInit(){
-          this.ofi = new Oficina ( 0,'','','','','','','','','','');
+          this.ofi = new Oficina ( 0,0,'','','','','','','','','','');
           this.title ='Nueva Oficina';
-          this.gerOptions();
+          this.getOptions();
      }//end ngOnInit
 
-     gerOptions(){
+     getOptions(){
       this._GeneralListService.getListEmpleado(this.token,'lpersonal').subscribe(
          response=>{
              this.selectList = response.personall;
          }
      );
      }
+
+     setEncargado(id){
+      this.ofi.encargado=this.selectList.find(x=>x.id == id).nombre;
+      }
 
      onSubmit(form){
         this._GeneralCallService.storeRecord(this.token,'oficinas',this.ofi).subscribe(
@@ -64,6 +70,6 @@ import { Oficina} from 'src/app/models/oficina';
     botonCancelar(){
       this.ofi = null;
       this._router.navigate(['oficinas']);
-                 }
+    }
 
 }//end class OficinaStoreComponent

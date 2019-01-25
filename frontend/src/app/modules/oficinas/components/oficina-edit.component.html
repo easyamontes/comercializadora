@@ -8,50 +8,51 @@
                 <fieldset>
                     <legend>{{title}}</legend>
                 <div class="row">
-                            <mat-form-field class="col-md-6 col-xs-12"> 
-                              <input type="text"  matInput name="oficina" #nombre="ngModel" [(ngModel)]="ofi.nombre" placeholder="Oficina" required>
-                            </mat-form-field>
-                            <mat-form-field class="col-md-6 col-xs-12">
-                                 <mat-select  name="encargadoofi" #encargado="ngModel" [(ngModel)]="ofi.encargado" placeholder= "Encargado" required>
-                                        
-                                 </mat-select>
-                            </mat-form-field>
+                    <mat-form-field class="col-md-6 col-xs-12"> 
+                        <input type="text"  matInput name="oficina" #nombre="ngModel" [(ngModel)]="ofi.nombre"  placeholder="Oficina" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-6 col-xs-12">
+                        <mat-select  name="encargadoofi" [(ngModel)]="ofi.personal_id" #encargado="ngModel" (ngModelChange)="setEncargado($event)" placeholder= "Encargado" required>
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let item of selectList" [value]="item.id">{{item.nombre}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
                  </div>   
                 <div class="row">
-                            <mat-form-field class="col-md-6 col-xs-12">
-                                 <input type="text" matInput name="calleofi" #calle="ngModel" [(ngModel)]="ofi.calle"placeholder ="Calle" required>
-                            </mat-form-field>
-                            <mat-form-field class="col-md-3 col-xs-12">
-                               <input type="text" matInput name="nointofi" #noint="ngModel" [(ngModel)]="ofi.noint" placeholder="No Int" required>
-                            </mat-form-field>
-                            <mat-form-field class="col-md-3 col-xs-12">
-                                 <input type="text" matInput name="noextofi" #noext="ngModel" [(ngModel)]="ofi.noext" placeholder="No Ext">
-                            </mat-form-field>
+                    <mat-form-field class="col-md-6 col-xs-12">
+                            <input type="text" matInput name="calleofi" #calle="ngModel" [(ngModel)]="ofi.calle"placeholder ="Calle" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-3 col-xs-12">
+                        <input type="text" matInput name="nointofi" #noint="ngModel" [(ngModel)]="ofi.noint" placeholder="No Int" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-3 col-xs-12">
+                            <input type="text" matInput name="noextofi" #noext="ngModel" [(ngModel)]="ofi.noext" placeholder="No Ext">
+                    </mat-form-field>
                 </div>
 
                 <div class="row">
-                            <mat-form-field class="col-md-6 col-xs-12">
-                                <input type="text" matInput name="coloniaofi" #colonia="ngModel" [(ngModel)]="ofi.colonia" placeholder="Colonia" required>
-                            </mat-form-field>
-                            <mat-form-field class="col-md-3 col-xs-12">
-                                <input type="text" matInput name="estadoofi" #estado="ngModel" [(ngModel)]="ofi.estado" placeholder="Estado" required>
-                            </mat-form-field>
-                            <mat-form-field class="col-md-3 col-xs-12">
-                                <input type="text" matInput name="ciudadofi" #ciudad="ngModel" [(ngModel)]="ofi.ciudad" placeholder="Ciudad" required>
-                            </mat-form-field>
+                    <mat-form-field class="col-md-6 col-xs-12">
+                        <input type="text" matInput name="coloniaofi" #colonia="ngModel" [(ngModel)]="ofi.colonia" placeholder="Colonia" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-3 col-xs-12">
+                        <input type="text" matInput name="estadoofi" #estado="ngModel" [(ngModel)]="ofi.estado" placeholder="Estado" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-3 col-xs-12">
+                        <input type="text" matInput name="ciudadofi" #ciudad="ngModel" [(ngModel)]="ofi.ciudad" placeholder="Ciudad" required>
+                    </mat-form-field>
                 </div>
                 <div class="row">
-                           <mat-form-field class="col-md-12 col-xs-12">
-                                <textarea matInput name="descripcionofi" #descripcion="ngModel"[(ngModel)]="ofi.descripcion" placeholder="Descripcion" ></textarea>
-                           </mat-form-field>
+                    <mat-form-field class="col-md-12 col-xs-12">
+                        <textarea matInput name="descripcionofi" #descripcion="ngModel"[(ngModel)]="ofi.descripcion" placeholder="Descripcion" ></textarea>
+                    </mat-form-field>
                 </div>
                 <div class="row form-group"> <br>
-                       <div class="col-md-3 col-xs-3">
-                            <input type="submit" value="Guardar" class="btn btn-success col-md-12" [disabled]="!oficinaNew.form.valid">
-                        </div>
-                        <div class="col-md-3 col-xs-3">
-                            <a type="submit" class="btn btn-danger col-md-12" style="margin: 1px" (click)="botonCancelar()">Cancelar</a>
-                        </div>
+                    <div class="col-md-3 col-xs-3">
+                        <input type="submit" value="Guardar" class="btn btn-success col-md-12" [disabled]="!oficinaNew.form.valid">
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                        <a type="submit" class="btn btn-danger col-md-12" style="margin: 1px" (click)="botonCancelar()">Cancelar</a>
+                    </div>
                 </div>
             </fieldset>
             </div>                 

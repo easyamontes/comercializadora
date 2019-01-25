@@ -3,6 +3,7 @@ import { Router, ActivatedRoute} from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from '../../../services/user.service';
 import {GeneralCallService} from '../../../services/generalCall.service';
+import {GeneralListService} from '../../../services/generalList.service';
 import { Oficina} from 'src/app/models/oficina';
 
 @Component({
@@ -10,7 +11,8 @@ import { Oficina} from 'src/app/models/oficina';
     templateUrl: './oficina-edit.component.html',
     providers: [
         UserService,
-        GeneralCallService
+        GeneralCallService,
+        GeneralListService
     ]
 })
 export class OficinaEditComponent implements OnInit
@@ -20,9 +22,13 @@ export class OficinaEditComponent implements OnInit
      public status: string;
      public token;
      public ofi: Oficina;
+     public selectList: Array<any>;
+
+
      constructor (
            private _UserService: UserService,
            private _GeneralCallService: GeneralCallService,
+           private _GeneralListService: GeneralListService,
            private _route: ActivatedRoute,
            private _router: Router
       ){
@@ -35,6 +41,7 @@ export class OficinaEditComponent implements OnInit
                   this.getOficina(id);
               }
           );
+          this.getOptions();
       }
        //buscar una oficina
       getOficina(id){
@@ -52,6 +59,19 @@ export class OficinaEditComponent implements OnInit
           );
       }
 
+      getOptions(){
+        this._GeneralListService.getListEmpleado(this.token,'lpersonal').subscribe(
+           response=>{
+               this.selectList = response.personall;
+           }
+       );
+       }
+
+       setEncargado(id){
+        this.ofi.encargado=this.selectList.find(x=>x.id == id).nombre;
+       }
+
+
       onSubmit(form){
           this._GeneralCallService.updateRecord(this.token,'oficinas',this.ofi,this.ofi.id).subscribe(
               response=>{
@@ -61,6 +81,7 @@ export class OficinaEditComponent implements OnInit
               }
           );
       }
+
       botonCancelar(){
            this.ofi = null;
            this._router.navigate(['oficinas']);
