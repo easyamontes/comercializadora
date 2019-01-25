@@ -5,7 +5,7 @@ import {IsLoggedGuard} from '../../services/guards/islogged.guard';
 import {ArticulosMainComponent} from './components/main.component';
 import {ArticuloViewComponent} from './components/view.component';
 import {ArticuloStoreComponent} from './components/store.component';
-import {ArticuloEditComponent} from './components/edit.component'
+import {ArticuloEditComponent} from './components/edit.component';
 
 
 const articulosRoutes: Routes =[

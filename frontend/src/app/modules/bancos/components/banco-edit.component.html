@@ -1,0 +1,37 @@
+<div class="principal"  *ngIf="bancovar != null"> 
+        <form *ngIf="bancovar != null" #bancoNew="ngForm" (ngSubmit)="onSubmit(bancoNew)">
+                <div class="container-fluid">
+                        <div class="col-md-6 col-md-offset-3">
+                             <fieldset>
+                                <legend>{{title}}</legend>
+                                <div class="row">
+                                    <mat-form-field class="col-md-6 col-xs-12"> 
+                                        <input type="text"  matInput name="nombre" #nombre="ngModel" [(ngModel)]="bancovar.nombre" placeholder="Nombre Banco" required>
+                                    </mat-form-field>
+                                    <mat-form-field class="col-md-6 col-xs-12"> 
+                                        <input type="text"  matInput name="alias" #alias="ngModel" [(ngModel)]="bancovar.alias" placeholder="Alias Banco" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="row">
+                                    <mat-form-field class="col-md-6 col-xs-12"> 
+                                        <input type="text"  matInput name="moneda" #nombre="ngModel" [(ngModel)]="bancovar.moneda" placeholder="Moneda" required>
+                                    </mat-form-field>
+                                    <mat-form-field class="col-md-3 col-xs-12"> 
+                                        <input type="text"  matInput name="cuentaban" #cuentabancaria="ngModel" [(ngModel)]="bancovar.cuentabancaria" placeholder="cuenta bancaria" required>
+                                    </mat-form-field>
+                                    <mat-form-field class="col-md-3 col-xs-12"> 
+                                        <input type="text"  matInput name="cuentacla" #cuentaclabe="ngModel" [(ngModel)]="bancovar.cuentaclabe" placeholder="cuenta clabe" required>
+                                    </mat-form-field>
+                                </div>
+                            
+        
+                             </fieldset>
+        
+        
+        
+                        </div>
+        
+        
+                    </div>
+        </form>
+</div>

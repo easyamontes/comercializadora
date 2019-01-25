@@ -8,10 +8,10 @@ use App\Banco;
 
 class BancoController extends Controller
 {
-  public function __construct()
-     {
-       $this->middeleware('islogged');  
-     }
+    public function __construct()
+    {
+        $this->middleware('islogged');
+    }
 
      //lista de bancos en el sistema
      public function index (Request $request)
