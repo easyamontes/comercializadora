@@ -9,4 +9,4 @@ export class Articulo{
         public status:string
     ){}
 
-}//EndClass
+}//End Class
