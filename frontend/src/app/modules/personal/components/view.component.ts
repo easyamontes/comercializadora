@@ -39,7 +39,7 @@ export class PersonalViewComponent implements OnInit{
 
     ngOnInit(){
         this.getPersonal();
-    }
+        }
 
     getPersonal(){
         this._GeneralCallService.getRecords(this.token,'personal').subscribe(

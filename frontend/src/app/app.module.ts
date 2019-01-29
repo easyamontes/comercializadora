@@ -14,6 +14,7 @@ import { OficinasModule } from './modules/oficinas/oficinas.module';
 import {ArticulosModule} from './modules/articulo/articulos.module';
 import {MaterialModule} from './module-materilize';
 import {BancosModules} from './modules/bancos/bancos.modules';
+import {ProveedoresModule} from './modules/proveedores/proveedores.module';
 //conponentes
 import { LoginComponent } from './components/login/login.component';
 import { DefaultComponent } from './components/default/default.component';
@@ -38,7 +39,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ArticulosModule,
     BrowserAnimationsModule,
     MaterialModule,
-    BancosModules
+    BancosModules,
+    ProveedoresModule
   ],
   providers: [
     appRoutingProviders,
