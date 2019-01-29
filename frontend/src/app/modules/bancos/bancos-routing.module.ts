@@ -5,6 +5,8 @@ import {IsLoggedGuard} from '../../services/guards/islogged.guard';
 import {BancosMainComponent} from './components/banco-main.component';
 import {BancosViewComponent} from './components/banco-view.component';
 import {BancoEditComponent} from  './components/banco-edit.component';
+import {BancoStoreComponent} from  './components/banco-store.component';
+
 
 const bancosRoutes: Routes =[
     {
@@ -13,8 +15,9 @@ const bancosRoutes: Routes =[
                                                     {path:'',redirectTo:'list',
                                                     pathMatch:'full'},
                                                     {path:'list',component:BancosViewComponent},
-                                                    {path:'edit',component:BancoEditComponent},
-                                               ]
+                                                    {path:'nuevo',component:BancoStoreComponent},
+                                                    {path:'edit/:id',component:BancoEditComponent},
+                                                ]
     }
 ]
 

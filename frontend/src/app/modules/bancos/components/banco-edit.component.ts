@@ -64,7 +64,7 @@ import {Banco} from './../../../models/banco';
             );
         }
 
-        cancelEdit(){
+        CancelEdit(){
             this.bancovar = null;
             this._router.navigate(['bancos']);
         }

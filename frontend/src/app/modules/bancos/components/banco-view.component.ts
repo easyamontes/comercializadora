@@ -3,6 +3,7 @@ import { Banco} from './../../../models/banco';
 import { UserService } from '../../../services/user.service';
 import {GeneralCallService} from '../../../services/generalCall.service';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'banco-view',
@@ -26,7 +27,8 @@ export class BancosViewComponent implements OnInit{
 
    constructor(
        private _UserService: UserService,
-       private _GeneralCallService:GeneralCallService
+       private _GeneralCallService:GeneralCallService,
+       private _router: Router
    ){
     this.title = "Bancos";
     this.token = this._UserService.getToken();
@@ -35,12 +37,12 @@ export class BancosViewComponent implements OnInit{
     ngOnInit(){
         this.getBancos();
     }
-
-    getBancos(){
+        //lamado del listado de bancos despues del token va como se declaro en wep.php
+        getBancos(){
         this._GeneralCallService.getRecords(this.token,'bancos').subscribe(
-            response=>{
-                this.bancos = response.banco;
-                this.dataSource = new MatTableDataSource(response.banco);
+            response =>{
+                this.bancos = response.bancos;
+                this.dataSource = new MatTableDataSource(response.bancos);
                 this.dataSource.paginator = this.paginator;
                 this.dataSource.sort = this.sort;
             },error=>{
@@ -54,6 +56,17 @@ export class BancosViewComponent implements OnInit{
     
         if (this.dataSource.paginator) {
           this.dataSource.paginator.firstPage();
+        }
+    }
+    delBanco(id){
+        if(confirm('Seguro que desea eliminar este banco?')){
+            this._GeneralCallService.delteRcord(this.token,'bancos',id).subscribe(
+                response=>{
+                    this.getBancos();
+                },error=>{
+                    console.log(<any>error);
+                }
+            )
         }
     }
 

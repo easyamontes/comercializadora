@@ -31,14 +31,14 @@ export class GeneralCallService{
         return this._http.post(this.url+page,params,{headers:headers});
     }
 
-    /**Funcion para encontrar un puesto */
+    /**Funcion para encontrar un registro */
     getRecrod(token, page:string, id): Observable<any>{
         let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
                                     .set('Authorization', token);
         return this._http.get(this.url+page+'/'+id ,{headers:headers});
     }
 
-    /**Funcion para editar un puesto */
+    /**Funcion para editar un registro */
     updateRecord(token,page:string, elemento:any, id): Observable<any>{
         let json = JSON.stringify(elemento);
         let params = "json=" + json;
@@ -46,7 +46,7 @@ export class GeneralCallService{
                                     .set('Authorization', token);
         return this._http.put(this.url+page+'/'+id ,params ,{headers:headers});
     }
-
+      //funcion para eliminar un registro
     delteRcord(token,page:string,id): Observable<any>{
         let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
                                     .set('Authorization', token);
