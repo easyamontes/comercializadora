@@ -4,7 +4,7 @@ import {IsLoggedGuard} from '../../services/guards/islogged.guard';
 //component
 const premiosRoutes: Routes= [
        {
-
+          
 
        }
     ]

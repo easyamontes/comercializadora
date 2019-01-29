@@ -1,0 +1,50 @@
+<div class="principal">
+    <form #proveedorEdit="ngForm" (submit)="onSubmit(proveedorEdit)">
+        <div class="container-fluid">
+            <div class="row col-md-6">
+                <legend>{{title}}</legend>
+                <div class="row form-group">
+                    <mat-form-field class="col-md-12 col-xs-12">
+                        <input  type="text" matInput name="nombre" #nombre="ngModel" [(ngModel)]="proveedor.nombre" placeholder="Nombre" required>
+                    </mat-form-field>
+                </div>
+                <div class="row form-group">
+                    <mat-form-field class="col-md-12 col-xs-12">
+                        <input  type="text" matInput name="razon_social	" #razon_social	="ngModel" [(ngModel)]="proveedor.razon_social" placeholder="Razon Social" required>
+                    </mat-form-field>
+                </div>
+                <legend>Direccion</legend>
+                <div class="row form-group">
+                    <mat-form-field class="col-md-7 col-xs-6">
+                            <input  type="text" matInput name="calle" #calle="ngModel" [(ngModel)]="proveedor.calle" placeholder="Calle" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-3 col-xs-3">
+                        <input  type="text" matInput name="noext" #noext="ngModel" [(ngModel)]="proveedor.noext" placeholder="No Ext" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-2 col-xs-3">
+                        <input  type="text" matInput name="noint" #noint="ngModel" [(ngModel)]="proveedor.noint" placeholder="No Int">
+                    </mat-form-field>
+                </div>
+                <div class="row form-group">
+                    <mat-form-field class="col-md-7 col-xs-7">
+                        <input  type="text" matInput name="colonia" #colonia="ngModel" [(ngModel)]="proveedor.colonia" placeholder="Colonia" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-5 col-xs-5">
+                        <input  type="text" matInput name="cp" #cp="ngModel" [(ngModel)]="proveedor.cp" placeholder="C.P" required>
+                    </mat-form-field>
+                </div>
+                <div class="row form-group">
+                    <mat-form-field class="col-md-6 col-xs-6">
+                        <input  type="text" matInput name="estado" #estado="ngModel" [(ngModel)]="proveedor.estado" placeholder="Estado" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-6 col-xs-6">
+                        <input  type="text" matInput name="ciudad" #ciudad="ngModel" [(ngModel)]="proveedor.ciudad" placeholder="Ciudad" required>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row col-md-6">
+
+            </div>
+        </div>
+    </form>
+</div>
