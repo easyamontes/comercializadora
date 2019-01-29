@@ -28,3 +28,4 @@ Route::resource('/api/personal','PersonalController');
 Route::resource('/api/oficinas','OficinaController');
 Route::resource('/api/articulos','ArticuloController');
 Route::resource('/api/bancos','BancoController');
+Route::resource('/api/premios','PremioController');
