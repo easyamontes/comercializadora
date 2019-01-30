@@ -8,6 +8,7 @@ class Premio extends Model
 {
     //
     protected $table  = 'premio';
+    protected $fillable = ['oficina_id'];
 
     //relacion con usuario
     public function user(){

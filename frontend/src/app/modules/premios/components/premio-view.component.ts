@@ -19,7 +19,7 @@ export class PremiosViewComponent implements OnInit {
     public status: string;
     public token: any;
     public premios:Array<Premio>;
-    public displayedColumns: string[] = [];
+    public displayedColumns: string[] = ['nombre','editar','eliminar'];
     public dataSource:MatTableDataSource<Premio>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;

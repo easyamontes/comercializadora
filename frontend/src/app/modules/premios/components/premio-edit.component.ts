@@ -22,7 +22,7 @@ export class PremioEditComponent implements OnInit
         public title:string;
         public user: User;
         public status: string;
-        public token;
+        public token: any;
         public premi: Premio;
         public selectList: Array<any>;
      
@@ -40,16 +40,16 @@ export class PremioEditComponent implements OnInit
             this._route.params.subscribe(
             params =>{
                 let id = +params['id'];
-                this.getPermiso(id);
+                this.getPremio(id);
                    }
             );
        }//end ngOnInit
-    //buscar permiso
-    getPermiso (id){
-               this._GeneralCallService.getRecrod(this.token,'permisos',id).subscribe(
+    //buscar premios
+    getPremio (id){
+               this._GeneralCallService.getRecrod(this.token,'premios',id).subscribe(
                         response =>{
                             if (response.status== 'success'){
-                                this.premi = response.permiso;
+                                this.premi = response.premio;
                                 this.title = 'Editar Premio:';
                             }else {
                                 this._router.navigate(['premios']);
@@ -58,7 +58,7 @@ export class PremioEditComponent implements OnInit
                             console.log(<any>error);
                         }
                    );
-             }//end getpermiso
+             }//end getpremio
     
              onSubmit(form){
                 this._GeneralCallService.updateRecord(this.token,'premios',this.premi,this.premi.id).subscribe(

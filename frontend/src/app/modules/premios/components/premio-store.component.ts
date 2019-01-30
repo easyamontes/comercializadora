@@ -20,7 +20,7 @@ export class PremioStoreComponent implements OnInit {
     public title: string;
     public status_premio: any;
     public token: any;
-    public prem: Premio;
+    public premi: Premio;
     public selectList: Array<any>;
 
 
@@ -31,36 +31,33 @@ export class PremioStoreComponent implements OnInit {
         private _router: Router
     )
     {
-        this.title ='Premio';
+        this.title ='Ingresar Premio';
         this.token = this._UserService.getToken();
     }
 
   ngOnInit(){
-      this.prem = new Premio( 0,'','','','','');
+      this.premi = new Premio( 0,'','','','','');
 
     }
 
-    onSubmit(from)
-    {
+      onSubmit(form){
         console.log(this.token);
-        this._GeneralCallService.storeRecord(this.token,'premios',this.prem).subscribe(
-            response =>{
-                this.prem = response.premio;
+         this._GeneralCallService.storeRecord(this.token,'premios',this.premi).subscribe(
+            response=>{
+                this.premi = response.premio;
                 this.status_premio = response.status;
                 if(this.status_premio == 'success'){
                     this._router.navigate(['premios']);
-                }else{
-                    this.status_premio = 'Response Error'
                 }
-
-            },error =>{
+            },error=>{
                 console.log(<any>error);
-                this.status_premio = <any>error;
-            });
-    }//end onSubmit
+            }
+        );
+    }
 
-    cancelar(){
-        this.prem = null;
+
+    cancelEdit(){
+        this.premi = null;
         this._router.navigate (['premios']);
     }
 

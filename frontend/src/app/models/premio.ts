@@ -7,4 +7,5 @@ export class Premio{
         public periodo: string,
         public descripcion: string,
    ){}
+   
 }//End Class

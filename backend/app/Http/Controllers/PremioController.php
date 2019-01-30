@@ -13,7 +13,7 @@ class PremioController extends Controller
     }
      //lista de premios en el sistema
      public function index (Request $request)
-     {  //= premio(nombre del http que se creo para banco)
+     {  //= premio(nombre del http que se creo para premio)
         $premio = Premio::all()->load('user');
         return response()->json(array(
             'premio' => $premio,
@@ -28,7 +28,7 @@ class PremioController extends Controller
         $params = json_decode($json);
         $params_array = json_decode($json,true);
         $user = $json = $request->input('userid',null);
-        $banco = new Premio();
+        $premio = new Premio();
         //asignando informacion al objeto
         $premio->user_id = $user;
         $premio->nombre = $params->nombre;
