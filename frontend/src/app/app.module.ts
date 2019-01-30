@@ -12,6 +12,7 @@ import { PuestosModule } from './modules/puestos/puestos.module';
 import { PersonalModule } from './modules/personal/personal.module';
 import { OficinasModule } from './modules/oficinas/oficinas.module';
 import {ArticulosModule} from './modules/articulo/articulos.module';
+import {PremiosModule} from './modules/premios/premios.module';
 import {MaterialModule} from './module-materilize';
 import {BancosModules} from './modules/bancos/bancos.modules';
 import {ProveedoresModule} from './modules/proveedores/proveedores.module';
@@ -36,6 +37,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PuestosModule,
     PersonalModule,
     OficinasModule,
+    PremiosModule,
     ArticulosModule,
     BrowserAnimationsModule,
     MaterialModule,

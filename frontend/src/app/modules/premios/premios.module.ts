@@ -6,9 +6,18 @@ import {MaterialModule} from '../../module-materilize';
 
 //componentes
 import {PremiosRoutingModule} from './premios-routing.module';
+import {PremiosMainComponent} from './components/premio-main.component';
+import {PremiosViewComponent} from './components/premio-view.component';
+import {PremioEditComponent} from './components/premio-edit.component';
+import {PremioStoreComponent} from './components/premio-store.component';
+
  @NgModule({
 
      declarations:[
+        PremiosViewComponent,
+        PremiosMainComponent,
+        PremioStoreComponent,
+        PremioEditComponent
          
      ],
      imports:[
@@ -20,6 +29,10 @@ import {PremiosRoutingModule} from './premios-routing.module';
 
      ],
      exports:[
+        PremiosMainComponent,
+        PremiosViewComponent,
+        PremioStoreComponent,
+        PremioEditComponent
 
      ],
      providers:[]

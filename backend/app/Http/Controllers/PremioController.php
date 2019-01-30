@@ -16,7 +16,7 @@ class PremioController extends Controller
      {  //= premio(nombre del http que se creo para banco)
         $premio = Premio::all()->load('user');
         return response()->json(array(
-            'bancos' => $premio,
+            'premio' => $premio,
             'status' => 'success'
         ),200);
      }//end function index
