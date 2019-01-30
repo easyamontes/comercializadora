@@ -1,7 +1,8 @@
 export class Contacto{
     constructor(
-        public personal_id: string,
-        public proveedor_id: string,
+        public id: number,
+        public personal_id: number,
+        public proveedor_id: number,
         public nombre:string,
         public tipo: string,
         public numero: number

@@ -9,12 +9,14 @@ import {ProveedoresRoutingModule} from './proveedores-routing.module';
 import {ProveedoresMainComponent} from './components/main.component';
 import {ProveedorViewComponent} from './components/view.component';
 import {ProveedorStoreComponent} from './components/store.component';
+import {ProveedorEditComponent} from './components/edit.component';
 
 @NgModule({
     declarations:[
         ProveedoresMainComponent,
         ProveedorViewComponent,
-        ProveedorStoreComponent
+        ProveedorStoreComponent,
+        ProveedorEditComponent
     ],
     imports:[
         ProveedoresRoutingModule,
@@ -23,12 +25,13 @@ import {ProveedorStoreComponent} from './components/store.component';
         HttpClientModule,
         MaterialModule
       ],
-      exports:[],
-      providers:[
+      exports:[
         ProveedoresMainComponent,
         ProveedorViewComponent,
-        ProveedorStoreComponent
-      ]
+        ProveedorStoreComponent,
+        ProveedorEditComponent
+      ],
+      providers:[]
 })
 
 export class ProveedoresModule{}

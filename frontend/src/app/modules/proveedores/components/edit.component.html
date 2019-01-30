@@ -1,6 +1,7 @@
 <div class="principal">
-    <form #proveedorEdit="ngForm" (submit)="onSubmit(proveedorEdit)">
-        <div class="container-fluid">
+    <div class="container-fluid" *ngIf="proveedor">
+        <!--Formulario de introduccuin de datos-->
+        <form #proveedorEdit="ngForm" (submit)="onSubmit(proveedorEdit)">
             <div class="row col-md-6">
                 <legend>{{title}}</legend>
                 <div class="row form-group">
@@ -41,10 +42,41 @@
                         <input  type="text" matInput name="ciudad" #ciudad="ngModel" [(ngModel)]="proveedor.ciudad" placeholder="Ciudad" required>
                     </mat-form-field>
                 </div>
+                <div class="row form-group"> <br>
+                    <div class="col-md-3 col-xs-3">
+                        <input type="submit" value="Guardar" class="btn btn-success col-md-12" [disabled]="!proveedorEdit.form.valid">
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                        <a type="submit" class="btn btn-danger col-md-12" style="margin: 1px" (click)="cancelEdit()">Cancelar</a>
+                    </div>
+                </div>
             </div>
-            <div class="row col-md-6">
-
+        </form>
+        <!--Listado de Contactos-->
+        <div class="row col-md-6 pull-right">
+            <legend>Contactos</legend>
+            <div class="row form-group">
+                <!--Comienza la lista de contactos-->
+                <mat-list>
+                    <mat-list-item *ngFor="let contacto of contactos; let i = index">
+                        <mat-form-field class="col-md-2 col-xs-2">
+                            <input  type="text" matInput  #ctipo="ngModel" [(ngModel)]="contacto.tipo" placeholder="Tipo" required>
+                        </mat-form-field>
+                        <mat-form-field class="col-md-6 col-xs-6">
+                            <input  type="text" matInput  #cnombre="ngModel" [(ngModel)]="contacto.nombre" placeholder="Nombre" required>
+                        </mat-form-field>
+                        <mat-form-field class="col-md-4 col-xs-4">
+                            <input  type="text" matInput  #cnumero="ngModel" [(ngModel)]="contacto.numero" placeholder="Numero" required>
+                        </mat-form-field>
+                        <button mat-icon-button color="warn" (click)="deleteContacto(i)">
+                            <mat-icon aria-label="Eliminar">delete</mat-icon>
+                        </button>
+                    </mat-list-item>
+                    <mat-list-item>
+                            <button mat-stroked-button color="primary" (click)="addContacto()"><i class="material-icons">add</i> Crear Nuevo contacto</button>
+                    </mat-list-item>
+                </mat-list>
             </div>
         </div>
-    </form>
+    </div>
 </div>

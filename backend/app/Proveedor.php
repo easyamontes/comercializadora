@@ -13,7 +13,7 @@ class Proveedor extends Model
     public function user(){
         return $this->belongsto('App\User','user_id');
     }
-    public function proveedor(){
-        return $this->belongsto('App\Contacto','proveedor_id');
+    public function contactos(){
+        return $this->hasMany('App\Contacto','proveedor_id');
     }
 }

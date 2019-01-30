@@ -6,7 +6,8 @@ import {
   MatSelectModule,
   MatTableModule,
   MatPaginatorModule,
-  MatIconModule
+  MatIconModule,
+  MatListModule
 
 } from '@angular/material';
 import { NgModule } from '@angular/core';
@@ -20,7 +21,8 @@ import { NgModule } from '@angular/core';
     MatFormFieldModule,
     MatTableModule,
     MatPaginatorModule,
-    MatIconModule
+    MatIconModule,
+    MatListModule
   ],
   exports: [
     MatButtonModule,
@@ -30,7 +32,8 @@ import { NgModule } from '@angular/core';
     MatSelectModule,
     MatTableModule,
     MatPaginatorModule,
-    MatIconModule
+    MatIconModule,
+    MatListModule
   ],
 })
 export class MaterialModule { }

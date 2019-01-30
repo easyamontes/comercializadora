@@ -59,7 +59,7 @@ export class ProveedorViewComponent implements OnInit{
 
     deleteRecord(id){
         if(confirm('Eliminar Registro')){
-            this._GeneralCallService.delteRcord(this.token,'articulos',id).subscribe(
+            this._GeneralCallService.delteRcord(this.token,'proveedores',id).subscribe(
                 response=>{
                     this.getProveedores();
                 }

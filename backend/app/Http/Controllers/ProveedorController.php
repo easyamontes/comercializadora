@@ -72,21 +72,22 @@ class ProveedorController extends Controller
 
         //validando datos de la peticion
         $validate = \Validator::make($params_array,[
-            "razon_social" => 'required|unique:proveedor',
+            "razon_social" => 'required|unique:proveedor,id,'.$params->id,
         ]);
         if ($validate->fails()) {
             return response()->json($validate->errors(),400);
         }
-        //limienado array
+        //elimienado array
         unset($params_array['id']);
         unset($params_array['user_id']);
         unset($params_array['created_at']);
         unset($params_array['user']);
+        unset($params_array['contactos']);
     
         //Actualizando el registro
         $proveedor = Proveedor::where('id',$id)->update($params_array);
         $data = array(
-            '$proveedor' => $params,
+            'proveedor' => $params,
             'code' => 200,
             'status' => 'success'
         );
@@ -106,7 +107,7 @@ class ProveedorController extends Controller
     public function show($id, Request $request){
         $proveedor = Proveedor::find($id);
         if(is_object($proveedor)){
-            $proveedor = Proveedor::find($id)->load('user');
+            $proveedor = Proveedor::find($id)->load('user')->load('contactos');
             return response()->json(array(
                 'proveedor' => $proveedor,
                 'status' => 'success'
