@@ -60,5 +60,4 @@ export class PremioStoreComponent implements OnInit {
         this.premi = null;
         this._router.navigate (['premios']);
     }
-
 }//end class
