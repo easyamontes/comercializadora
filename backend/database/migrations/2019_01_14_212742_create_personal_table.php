@@ -20,6 +20,7 @@ class CreatePersonalTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('puesto_id');
+            $table->unsignedInteger('personal_id')->nullable();
             $table->string('nombre');
             $table->string('apellidop');
             $table->string('apellidom');
@@ -36,6 +37,7 @@ class CreatePersonalTable extends Migration
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('puesto_id')->references('id')->on('puesto');
+            $table->foreign('personal_id')->references('id')->on('personal');
         });
     }
 

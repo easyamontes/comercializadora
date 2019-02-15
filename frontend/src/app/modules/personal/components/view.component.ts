@@ -3,7 +3,8 @@ import { Personal } from './../../../models/personal'
 import { UserService } from '../../../services/user.service';
 import {GeneralCallService} from '../../../services/generalCall.service';
 import {GeneralListService} from '../../../services/generalList.service';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatPaginator, MatSort, MatTableDataSource, MatDialog} from '@angular/material';
+import { PersonalRegisterComponent } from './register.component';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class PersonalViewComponent implements OnInit{
     public token: any;
     public personal: Array<Personal>;
     public selectList: Array<any>;
-    public displayedColumns: string[] = ['nombre','direccion','editar','eliminar'];
+    public displayedColumns: string[] = ['nombre','editar','eliminar','usuario'];
     public dataSource: MatTableDataSource<Personal>;
 
    
@@ -31,7 +32,8 @@ export class PersonalViewComponent implements OnInit{
 
     constructor(
         private _UserService: UserService,
-        private _GeneralCallService : GeneralCallService
+        private _GeneralCallService : GeneralCallService,
+        public _MatDialog: MatDialog
     ){
         this.title = 'Personal';
         this.token = this._UserService.getToken();
@@ -39,7 +41,18 @@ export class PersonalViewComponent implements OnInit{
 
     ngOnInit(){
         this.getPersonal();
-        }
+    }
+
+
+    /** Funcion para abrir cuadro de dialogo para el registro */
+    openDialog(data:Personal): void{
+        const dialogRef =this._MatDialog.open(PersonalRegisterComponent,{
+            data: {persona:data}
+        });
+        dialogRef.disableClose=true;
+        dialogRef.afterClosed().subscribe(result => {
+        });
+    }
 
     getPersonal(){
         this._GeneralCallService.getRecords(this.token,'personal').subscribe(

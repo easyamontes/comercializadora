@@ -15,7 +15,16 @@ class PersonalController extends Controller
     }
     /** Funcion para regresar un listado de empleados */
     public function index(Request $request){
-        $personal = Personal::all()->load('user');
+        $json = $request->input('json',null);
+        $per = $json = $request->input('per',null);
+        /* ------------> Funcion para generar el arbol genialogico
+        $personal = Personal::with('allChildrenAccounts')->find($per);
+        $personal->allChildrenAccounts; 
+        $personal->allChildrenAccounts->first()->allChildrenAccounts;
+        */
+        
+        $personal = Personal::all()->load('usuario');        
+
         return response()->json(array(
             'personal' => $personal,
             'status' => 'success'
@@ -29,6 +38,7 @@ class PersonalController extends Controller
         $params = json_decode($json);
         $params_array = json_decode($json, true);
         $user = $json = $request->input('userid',null);
+        $per = $json = $request->input('per',null);
         $personal = new Personal();
          
         //asignando informacion al objeto puesto
@@ -36,6 +46,7 @@ class PersonalController extends Controller
         $personal->apellidop = $params->apellidop;
         $personal->apellidom = $params->apellidom;
         $personal->user_id = $user;
+        $personal->personal_id = $per;
         $personal->puesto_id = $params->puesto_id;
         $personal->email = $params->email;
         $personal->calle = $params->calle;
@@ -52,6 +63,7 @@ class PersonalController extends Controller
         $validate = \Validator::make($params_array,[
             "email" => 'required|unique:personal'
         ]);
+
         if ($validate->fails()) {
             return response()->json($validate->errors(),400);
         }

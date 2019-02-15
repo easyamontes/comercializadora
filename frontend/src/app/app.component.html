@@ -42,11 +42,6 @@
                         </a>
                       </li>
                       <li>
-                          <a [routerLink]="['personal']">
-                            Empleados
-                          </a>
-                      </li>
-                      <li>
                         <a [routerLink]="['puestos']">
                           Organizacion
                         </a>
@@ -63,6 +58,11 @@
                       </li>
                     </ul>
                 </li>
+                <li>
+                  <a [routerLink]="['personal']">
+                    Mi equipo
+                  </a>
+              </li>
               </ul>
               <!--Lista de elementos del menu del login-->
               <ul class="nav navbar-nav navbar-right" *ngIf="identity">
@@ -71,9 +71,6 @@
                       <span class="glyphicon glyphicon-user"></span>
                       {{identity.name}}
                     </a>
-                  </li>
-                  <li>
-                     <a href="">Registro</a>     
                   </li>
                   <li>
                       <a [routerLink]="['logout/1']">

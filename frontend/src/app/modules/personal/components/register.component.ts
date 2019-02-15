@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Personal } from './../../../models/personal';
 import { User } from './../../../models/user';
 import { UserService } from '../../../services/user.service';
 import { GeneralCallService } from '../../../services/generalCall.service';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 
 @Component({
     selector: 'personal-register',
@@ -18,33 +18,29 @@ export class PersonalRegisterComponent implements OnInit{
     public title:string;
     public status: string;
     public token: any;
-    // obteneiendo objeto persona del componente edit component
-    @Input() persona: Personal;
-    
     public user: User;
     public email: any;
+    public persona: Personal;
 
     constructor(
         private _UserService: UserService,
-        private _GeneralCallService :GeneralCallService,
-        private _route: ActivatedRoute,
-        private _router: Router
+        private _MatSnackBar: MatSnackBar,
+        public _MatDialogRef: MatDialogRef<PersonalRegisterComponent>,
+        @Inject(MAT_DIALOG_DATA) public data
     ){
+        this.persona = this.data.persona;
         this.title = 'Editando';
         this.token = _UserService.getToken();
-        this.user = new User(0,'','','','','');
+        this.user = new User(0,this.persona.id,0,'',this.persona.email,'',this.persona.nombre,this.persona.apellidop,'');
     }
-    /** Buscando usuario al entrar al componente */
+
     ngOnInit(){
-        let pas = '{"email":"'+this.persona.email+'"}';
-        this.email = JSON.parse(pas);
-        this._UserService.getUser(this.token,this.email).subscribe(
-            response=>{
-                this.user = response.user;
-            },error=>{
-                console.log("error")
-            });
     }
+
+    closeDialog() {
+        this._MatDialogRef.close();
+    }
+
     /**Creando usuario */
     makeUser(){
         this.user.email = this.persona.email;
@@ -52,11 +48,15 @@ export class PersonalRegisterComponent implements OnInit{
         this.user.surname = this.persona.apellidop
         this._UserService.register(this.user).subscribe(
             response =>{
-                this.status = response.status;
+                this._MatSnackBar.open(this.status = response.message,'ok',{
+                    duration: 2000
+                });
+                if(response.code == 200){
+                    this.closeDialog();
+                }
             },error=>{
-                console.log(<any>error);
+                let reserror = <any>error;
+                console.log(reserror);
             });
     }
-    
-
 }

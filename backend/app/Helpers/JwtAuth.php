@@ -28,13 +28,15 @@ class JwtAuth{
             $signup = true;
         }
         if($signup){
-            
+            //Buscando la persona realcionada al usuario
+            $per = DB::table('personal')->select('id')->where('id','=',$user->personal_id)->get();
             //Generando el token y debolverlo
             $token = array(
                 'status' => 'success',
                 'sub' => $user->id,
                 'email' => $user->email,
                 'name' => $user->name,
+                'per' => $per[0]->id,
                 'iat' => time(),
                 'exp' => time() + (1 * 24 * 60 * 60)
             );

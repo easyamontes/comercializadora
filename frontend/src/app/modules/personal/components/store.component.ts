@@ -33,7 +33,7 @@ export class PersonalStoreComponent implements OnInit{
     }
 
     ngOnInit(){
-        this.persona = new Personal(0,0,'','','','','','','','','','','','','');
+        this.persona = new Personal(0,0,0,'','','','','','','','','','','','','');
         this.getOptions();
     }
 

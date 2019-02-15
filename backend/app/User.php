@@ -27,4 +27,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function puesto(){
+        return $this->belongsto('App\Personal','puesto_id');
+    }
+
+    public function persona(){
+        return $this->belongsto('App\User','personal_id');
+    }
+    
 }//End class

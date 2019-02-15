@@ -1,21 +1,33 @@
 <div class=" container-fluid principal">
-<fieldset class="form-group" *ngIf=" user != null && user.id == 0">
-    <span *ngIf="status == 'success'" class="alert alert-success">El suuario ya se armo</span>
-    <div >
-    <legend>Informacion usuario</legend>
-        <div class="row form-group">
-                <mat-form-field class="col-md-12">
-                    <input type="text" matInput name="email" #email="ngModel" [(ngModel)]="persona.email" placeholder="Email" required>
-                </mat-form-field>
-        </div>
-        <div class="row form-group">
-                <mat-form-field class="col-md-7 col-xs-12">
-                    <input type="password" matInput name="password" #password="ngModel" [(ngModel)]="user.password" placeholder="Password" required>
-                </mat-form-field>
-                <div class="col-md-5 col-xs-12">
-                    <a class="btn btn-primary" name="registrar" style="margin: 5px" (click)="makeUser()">Registrar</a>
+    <form #userEdit="ngForm"  (ngSubmit)="makeUser()">
+        <fieldset class="form-group" *ngIf=" user != null && user.id == 0">
+            <span *ngIf="status == 'success'" class="alert alert-success">El suuario ya se armo</span>
+            <div>
+                <legend>Informacion usuario</legend>
+                <div class="row form-group">
+                    <mat-form-field class="col-md-12">
+                        <input type="text" matInput name="username" #username="ngModel" [(ngModel)]="user.username" placeholder="username" required>
+                    </mat-form-field>
                 </div>
-        </div>
-    </div>
-   </fieldset>
+                <div class="row form-group">
+                        <mat-form-field class="col-md-12">
+                            <input type="text" matInput name="email" #email="ngModel" [(ngModel)]="persona.email" placeholder="Email" required>
+                        </mat-form-field>
+                </div>
+                <div class="row form-group">
+                        <mat-form-field class="col-md-12 col-xs-12">
+                            <input type="password" matInput name="password" #password="ngModel" [(ngModel)]="user.password" placeholder="Password" required>
+                        </mat-form-field>
+                </div>
+                <div class= "row form-group">
+                    <div class="col-md-5 col-xs-5">
+                        <input type="submit" value="registrar" class="btn btn-primary" name="registrar"  [disabled]="!userEdit.form.valid">
+                    </div>
+                    <div class="col-md-5 col-xs-5">
+                        <a class="btn btn-danger" name="cancelar"  (click)="closeDialog()">cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
 </div>

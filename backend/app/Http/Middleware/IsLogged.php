@@ -22,6 +22,7 @@ class IsLogged
         if($checkToken){
             $user = $jwtAuth->checkToken($hash,true);
             $request->request->add(['userid' => $user->sub]);
+            $request->request->add(['per' => $user->per]);
             return $next($request);
         }else{
             $data = array(

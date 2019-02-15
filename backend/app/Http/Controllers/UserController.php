@@ -22,12 +22,16 @@ class UserController extends Controller
         $surname = (!is_null($json) && isset($params->surname)) ? $params->surname : null;
         $role = 'ROLE_USER';
         $password = (!is_null($json) && isset($params->password)) ? $params->password : null;
+        $username = $params->username;
+        $personal_id = $params->personal_id;
 
         //comprobando existencia de datos basicos
         if(!is_null($email) && !is_null($password) && !is_null($name)){
             // Creando usuario
             $user = new User();
+            $user->personal_id = $personal_id;
             $user->email = $email;
+            $user->username = $username;
             $user->name = $name;
             $user->surname = $surname;
             $user->role = $role;
@@ -36,8 +40,10 @@ class UserController extends Controller
             $user->password = $pwd;
 
             //comprobando exisencia en la bace de datos
-            $isset_user = User::where('email','=',$email)->count();
+            $exUsername = User::where('username','=',$username)->count();
+            $exMail = User::where('email','=',$email)->count();
         
+            $isset_user = $exUsername + $exMail;
 
             if($isset_user == 0 ){
                 //Guardando usuario en la base de datos
