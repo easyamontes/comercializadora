@@ -1,89 +1,72 @@
-<header>
-    <!--Menu de navegacion inicial -->
-      <nav class="navbar navbar-default" *ngIf="token">
-          <div class="container-fluid">
-            <!--icono que aparece cuando la vista es movil-->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="glyphicon glyphicon-menu-hamburger"></span>
-     
-              </button>
-              <a class="navbar-brand">DOOY</a>
-            </div>
-            <!--Barra de elementos -->
-            <div class="collapse navbar-collapse" id="collapse-1">
-              <!--Lista de elementos del menu-->
-              <ul class="nav navbar-nav">
-                <li [routerLinkActive]="['active']">
-                  <a [routerLink]="['inicio']">
-                    <span class="glyphicon glyphicon-home"></span>
-                    Inicio
-                  </a>
-                </li>
-                <!--Menu de Catalogos-->
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Catalogos<span class="caret"></span></a>
-                    <!--Elementos del submenu-->
-                    <ul class="dropdown-menu">
-                      <li>
-                        <a [routerLink]="['articulos']">
-                          Articulos
-                        </a>
-                      </li>
-                      <li>
-                         <a [routerLink] ="['bancos']">
-                           Bancos
-                         </a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['oficinas']">
-                          Oficinas
-                        </a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['puestos']">
-                          Organizacion
-                        </a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['proveedores']">
-                          Proveerores
-                        </a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['premios']">
-                          Premios
-                        </a>
-                      </li>
-                    </ul>
-                </li>
-                <li>
-                  <a [routerLink]="['personal']">
-                    Mi equipo
-                  </a>
-              </li>
-              </ul>
-              <!--Lista de elementos del menu del login-->
-              <ul class="nav navbar-nav navbar-right" *ngIf="identity">
-                  <li>
-                    <a>
-                      <span class="glyphicon glyphicon-user"></span>
-                      {{identity.name}}
-                    </a>
-                  </li>
-                  <li>
-                      <a [routerLink]="['logout/1']">
-                        <span class="glyphicon glyphicon-log-out"></span>
-                        Salir
-                      </a>
-                  </li>
-              </ul>
-            </div>
-          </div>
-      </nav>
-  </header>
-  
-  <div >
-      <router-outlet></router-outlet>
-  </div>
+<div class="menu-container" [class.is-mobile]="mobileQuery.matches" >
+  <!--Menu Superior-->
+  <mat-toolbar
+  *ngIf="identity"
+  color="primary"
+  class="toolbar">
+    <!---->
+    <h1 class="app-name">Dooy</h1>
+    <button mat-button [matMenuTriggerFor]="mCat">Catalogos<mat-icon>arrow_drop_down</mat-icon></button>
+    <mat-menu #mCat="matMenu">
+      <button mat-menu-item [routerLink] ="['bancos']">Bancos</button>
+      <button mat-menu-item [routerLink]="['oficinas']">Oficinas</button>
+      <button mat-menu-item [routerLink]="['puestos']">Organizacion</button>
+      <button mat-menu-item [routerLink]="['premios']">Premios</button>
+    </mat-menu>
+    <span class="spacer"></span>
+    <!--Botonera-->
+    <div>
+        <button mat-button (click)="snav.toggle()"><mat-icon>person</mat-icon>{{identity.name}}</button>
+        <button mat-button [routerLink]="['logout/1']" ><mat-icon>exit_to_app</mat-icon>Salir</button>
+    </div>
+  </mat-toolbar>
+
+  <!--Deseño del toggle tanto fijo como para celulares -->
+  <mat-sidenav-container
+  class="sidenav-container"
+  [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav
+      #snav
+      role = "navigation"
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [opened]="
+        identity ?
+          mobileQuery.matches ? 'false' : 'true'
+        :'false'"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56">
+        <!--Aqui comeienza el diseño del sildevar-->
+        <div class="container-fluid">
+            <h4>Bienvenido {{identity.name}} </h4>
+        </div>
+        <!--Botonera de acciones-->
+        <div>
+          <mat-nav-list>
+            <mat-list-item  [routerLink]="['personal']">
+                <mat-icon mat-list-icon>people</mat-icon>
+                <h4 mat-line>Mi Equipo</h4>
+            </mat-list-item>
+            <!--divisor para el almacen-->
+            <mat-divider></mat-divider>
+            <h3 mat-subheader>Almacen</h3>
+            <mat-list-item>
+              <mat-icon mat-list-icon>store</mat-icon>
+              <h4 mat-line>Existencia</h4>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon mat-list-icon>store</mat-icon>
+              <h4 mat-line>Compras</h4>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon mat-list-icon>store</mat-icon>
+              <h4 mat-line>Venas</h4>
+            </mat-list-item>
+          </mat-nav-list>
+        </div>
+    </mat-sidenav>
+    <!-- Contendio general de la aplicacion -->
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

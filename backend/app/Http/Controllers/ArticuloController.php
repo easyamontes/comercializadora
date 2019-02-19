@@ -96,5 +96,10 @@ class ArticuloController extends Controller
         }
     }
     
+    /** almacenando imagenes */
+
+    public function upfiles($id,Request $request){
+        
+    }
 
 }//EndClass
