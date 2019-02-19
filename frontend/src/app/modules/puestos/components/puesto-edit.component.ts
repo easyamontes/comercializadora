@@ -58,15 +58,11 @@ export class PuestoEditComponent implements OnInit{
     onSubmit(form){
         this._GeneralCallService.updateRecord(this.token,'puestos',this.puestoe,this.puestoe.id).subscribe(
             response=>{
-                if(response.status){
-                    this._router.navigate(['puestos']);
-                }
-            },error=>{
+                this._router.navigate(['puestos']);
+                },error=>{
                 console.log(<any>error);
             }
         );
     }
-
-
 
 }//end Class

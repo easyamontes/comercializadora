@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit{
         this.logout();
     }
 
-    //iniciando siecion
+    //iniciando sesion
     onSubmit(form){
 
         //Invocando datos del usuario desde el servidor
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit{
 
     }
 
-    //cerrando secion
+    //cerrando sesion
     logout(){
         //recogiendo parametros desde URL
         this._route.params.subscribe(params =>{
