@@ -7,32 +7,31 @@
         <div class="row col-md-6 col-md-offset-3">
             <fieldset>
                 <legend>{{title}}</legend>
-                <div class="row form-group">
+                    <div class="row form-group">
+                        <mat-form-field class="col-md-12 col-xs-12">
+                            <input type="text" matInput name="puesto" #puesto="ngModel" [(ngModel)]="puestoe.puesto" placeholder="Puesto" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="row form-group">
+                        <mat-form-field class="col-md-12 col-xs-12">
+                        <mat-select name="nivel" #nivel="ngModel" [(ngModel)]="puestoe.nivel" placeholder = "Nivel" required>
+                                <mat-option value="1">1</mat-option>
+                                <mat-option value="2">2</mat-option>
+                        </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="row form-group">
                     <mat-form-field class="col-md-12 col-xs-12">
-                        <input type="text" matInput name="puesto" #puesto="ngModel" [(ngModel)]="puestoe.puesto" placeholder="Puesto" required>  
-                    </mat-form-field>
-                </div>
-                <div class="row form-group">
-                    <mat-form-field class="col-md-12 col-xs-12">
-                       <mat-select placeholder = "Nivel" name="nivel" #nivel="ngModel" [(ngModel)]="puestoe.nivel" required>
-                            <mat-option value="1">1</mat-option>
-                            <mat-option value="2">2</mat-option>
-                       </mat-select>
-                    </mat-form-field>
-                </div>
-                <div class="row form-group">
-                <mat-form-field class="col-md-12 col-xs-12">
-                        <textarea type="text" matInput name="descripcion" #descripcion="ngModel" [(ngModel)]="puestoe.descripcion" placeholder="Descripcion" required></textarea>
-                </mat-form-field> 
-                </div>
+                            <textarea type="text" matInput name="descripcion" #descripcion="ngModel" [(ngModel)]="puestoe.descripcion" placeholder="Descripcion" required></textarea>
+                    </mat-form-field> 
+                    </div>
             </fieldset> 
-              <div class="row form-group">
-                  <div class="col-md-5 col-xs-3">
-                        <input type="submit" value="Guardar" class="btn btn-success col-md-10" [disabled]="!puestoNew.form.valid">
-                  </div>
-
-             </div>
+                <div class="row form-group">
+                    <div class="col-md-5 col-xs-3">
+                            <input type="submit" value="Guardar" class="btn btn-success col-md-10" [disabled]="!puestoNew.form.valid">
+                    </div>
+                </div>
         </div>
-     </div>
+    </div>
 </form>
 </div>

@@ -1,45 +1,31 @@
-
-<div class="limiter">
-    <div class="container-login100" >
-      <div class="wrap-login100" *ngIf="token == null"> <br>
-
-            <form class="login100-form" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
-					<span class="login100-form-title">
-						Iniciar Sesión
-					</span><br>
-					<!--Mensaje de error-->
-					<div class="alert alert-danger" *ngIf="status=='error'">
-						Correo o contraseña no validos
-					</div>
-					<!--Campo email-->
-					<div class="wrap-input100">
-					<mat-form-field class="wrap-input100" >
-							<span matPrefix> <mat-icon matSuffix>email</mat-icon></span>
-							<input type="text" matInput name="email" #email="ngModel" [(ngModel)]="user.email"  matInput placeholder="Email" required>
+<div class="container-fluid">
+   <div class="contenedor">
+			 <h1 class="titulo"> Iniciar Sesión</h1>  
+         <hr class="border">
+      <div *ngIf="token == null">
+           <form class="formulario" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+			         <!--Campo email-->
+					<div class="form-group">
+							<i class ="icono izquierda fa fa-user"></i>
+							<input type="text" class="usuario" name="email" #email="ngModel" [(ngModel)]="user.email"  placeholder="Email" required>
 							<span *ngIf="!email.valid && email.touched"></span>
-					</mat-form-field>
-				    </div>
-					<!--Campo pass-->
-					<div class="wrap-input100">
-						<mat-form-field class="wrap-input100" >  
-							<span matPrefix> <mat-icon matSuffix>https</mat-icon></span>
-							<input type="password" matInput name="password" #password="ngModel" [(ngModel)]="user.password" matInput required placeholder="Contraseña" >	
+				   </div>
+					      <!--Campo pass-->
+					<div class="form-group">
+					     <i class = "icono izquierda fa fa-lock"></i>
+							<input type="password" class="usuario" name="password" #password="ngModel" [(ngModel)]="user.password"  required placeholder="Contraseña" >	
 							<span *ngIf="!password.valid && password.touched"></span>
-						</mat-form-field>
-						
 					</div>    
-						<br>
-							
+					 <div class="alerta" *ngIf="status=='error'">
+							Correo o contraseña no validos
+						</div>
+					   <br>
 						<div class="botones">
 							<div class="separar">
 								<button  class="boton" type="submit" value="Login"  [disabled]="!loginForm.form.valid">login</button>
 							</div> 
-						</div>
-						<br>
-
-            </form>
-
-      </div>
-    </div>
-
+					  </div>
+					</form>
+        </div>
+  </div>
 </div>
