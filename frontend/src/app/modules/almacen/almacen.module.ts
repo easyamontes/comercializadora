@@ -6,10 +6,12 @@ import { MaterialModule } from '../../module-materilize';
 import { AlmacenRoutingModule } from './almacen-routing.module';
 //components
 import { AlmacenMainComponent } from './components/main.component';
+import { ExistenciaViewComponent } from './components/existencia/listview.component'
 
 @NgModule({
     declarations: [
-        AlmacenMainComponent
+        AlmacenMainComponent,
+        ExistenciaViewComponent
     ],
     imports: [
         AlmacenRoutingModule,
@@ -19,7 +21,8 @@ import { AlmacenMainComponent } from './components/main.component';
         MaterialModule
     ],
     exports: [
-        AlmacenMainComponent
+        AlmacenMainComponent,
+        ExistenciaViewComponent
         ],
     providers: []
   })
