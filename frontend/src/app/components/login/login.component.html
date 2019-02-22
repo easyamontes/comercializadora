@@ -1,12 +1,11 @@
-<div class="container">
+<div class="container-fluid">
    <div class="contenedor">
-			 <h1 class="titulo"> Iniciar Sesión</h1>  
-         <hr class="border">
-      <div *ngIf="token == null">
+			  <div *ngIf="token == null">
+			<h1 class="titulo"> Iniciar Sesión</h1>
            <form class="formulario" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
 			         <!--Campo email-->
 					<div class="form-group">
-							<i class ="icono izquierda fa fa-user"></i>
+							<i class ="icono izquierda fa fa-envelope"></i>
 							<input type="text" class="usuario" name="email" #email="ngModel" [(ngModel)]="user.email"  placeholder="Email" required>
 							<span *ngIf="!email.valid && email.touched"></span>
 				   </div>
@@ -25,7 +24,7 @@
 								<button  class="boton" type="submit" value="Login"  [disabled]="!loginForm.form.valid">login</button>
 							</div> 
 					  </div>
-					</form>
-        </div>
-  </div>
+			</form>
+         </div>
+   </div>
 </div>

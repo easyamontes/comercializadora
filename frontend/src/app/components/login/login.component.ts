@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit{
         private _router: Router
     ){
         this.status = null;
-        this.title = 'Iniciar sesion '
+        this.title = 'Iniciar sesion ';
         this.user  = new User(0,0,0,'','','ROLE_USER','','','');
     }
 
@@ -85,9 +85,9 @@ export class LoginComponent implements OnInit{
                 this.token = null;
                 //redireccionando al login
                 this._router.navigate(['login']);
+               
             }
         });
     }
-
 
 }

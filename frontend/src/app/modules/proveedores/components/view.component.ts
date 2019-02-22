@@ -48,7 +48,7 @@ export class ProveedorViewComponent implements OnInit{
             });
     }
 
-    //Funcion que aplica el filreo en la tabla de proveedores
+    //Funcion que aplica el filtro en la tabla de proveedores
     applyFilter(filterValue: string) {
         this.proveedores.filter = filterValue.trim().toLowerCase();
     
