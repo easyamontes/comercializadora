@@ -34,7 +34,7 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
         private _GeneralListService: GeneralListService,
         private _router: Router
       ){
-        this.title = 'Oficinas';
+        this.title = 'Lista de Oficinas';
         this.token = this._UserService.getToken();
       }
 

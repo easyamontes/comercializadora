@@ -26,7 +26,7 @@ import {Banco} from './../../../models/banco';
             private _router: Router
 
          ){
-            this.title="Editando";
+            this.title="Editar Banco";
             this.token=this._UserService.getToken();
          }
 

@@ -8,7 +8,7 @@
   
 /**Botones de las tablas*/
 .botonpri{
-  background-color: #52BE80;
+  background-color:#4CAF50;
 }
 .botabl {
   display:flex;
@@ -25,6 +25,7 @@
 .principal{
   margin-right: 2%; 
   margin-left: 1%;
+  margin-top: 2%;
 }
 /**Espiner loader*/
 .loader {
@@ -43,6 +44,10 @@
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
 
+  }
+  .mat-tooltip {
+    background-color: darkblue;
+    font-size: 12px;
   }
 
   /* Safari */

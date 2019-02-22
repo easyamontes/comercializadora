@@ -28,7 +28,7 @@ export class PersonalStoreComponent implements OnInit{
         private _GeneralListService: GeneralListService,
         private _router: Router
     ){
-        this.title = 'Alta de personal';
+        this.title = 'Alta colaborador';
         this.token = this._UserService.getToken();
     }
 

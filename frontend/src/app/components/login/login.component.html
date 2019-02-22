@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
    <div class="contenedor">
 			 <h1 class="titulo"> Iniciar Sesión</h1>  
          <hr class="border">
@@ -15,7 +15,7 @@
 					     <i class = "icono izquierda fa fa-lock"></i>
 							<input type="password" class="usuario" name="password" #password="ngModel" [(ngModel)]="user.password"  required placeholder="Contraseña" >	
 							<span *ngIf="!password.valid && password.touched"></span>
-					</div>    
+					</div>  
 					 <div class="alerta" *ngIf="status=='error'">
 							Correo o contraseña no validos
 						</div>

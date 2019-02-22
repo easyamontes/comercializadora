@@ -35,7 +35,7 @@ export class PersonalViewComponent implements OnInit{
         private _GeneralCallService : GeneralCallService,
         public _MatDialog: MatDialog
     ){
-        this.title = 'Personal';
+        this.title = 'Colaborador';
         this.token = this._UserService.getToken();
     }
 

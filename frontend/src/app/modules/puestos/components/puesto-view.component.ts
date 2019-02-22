@@ -30,7 +30,7 @@ export class PuestoViewComponent implements OnInit{
         private _UserService: UserService,
         private _GeneralCallService: GeneralCallService
     ){
-        this.title = 'Organizacion';
+        this.title = 'Organización';
         this.token = this._UserService.getToken();
     }
 
