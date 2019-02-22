@@ -4,15 +4,7 @@
   *ngIf="identity"
   color="primary"
   class="toolbar">
-    <!---->
-    <h1 class="app-name">Dooy</h1>
-    <button mat-button [matMenuTriggerFor]="mCat">Catalogos<mat-icon>arrow_drop_down</mat-icon></button>
-    <mat-menu #mCat="matMenu">
-      <button mat-menu-item [routerLink] ="['bancos']">Bancos</button>
-      <button mat-menu-item [routerLink]="['oficinas']">Oficinas</button>
-      <button mat-menu-item [routerLink]="['puestos']">Organizacion</button>
-      <button mat-menu-item [routerLink]="['premios']">Premios</button>
-    </mat-menu>
+    <button mat-button [routerLink] ="['inicio']">Dooy</button>
     <span class="spacer"></span>
     <!--Botonera-->
     <div>
@@ -20,7 +12,6 @@
         <button mat-button [routerLink]="['logout/1']" ><mat-icon>exit_to_app</mat-icon>Salir</button>
     </div>
   </mat-toolbar>
-
   <!--Deseño del toggle tanto fijo como para celulares -->
   <mat-sidenav-container
   class="sidenav-container"
@@ -29,10 +20,9 @@
       #snav
       role = "navigation"
       [mode]="mobileQuery.matches ? 'over' : 'side'"
-      [opened]="
-        identity ?
-          mobileQuery.matches ? 'false' : 'true'
-        :'false'"
+      [opened]="identity ?
+        mobileQuery.matches ? 'false' : 'true'
+      :'false'"
       [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56">
         <!--Aqui comeienza el diseño del sildevar-->
@@ -48,25 +38,56 @@
             </mat-list-item>
             <!--divisor para el almacen-->
             <mat-divider></mat-divider>
-            <h3 mat-subheader>Almacen</h3>
-            <mat-list-item>
-              <mat-icon mat-list-icon>store</mat-icon>
-              <h4 mat-line>Existencia</h4>
-            </mat-list-item>
-            <mat-list-item>
-              <mat-icon mat-list-icon>store</mat-icon>
-              <h4 mat-line>Compras</h4>
-            </mat-list-item>
-            <mat-list-item>
-              <mat-icon mat-list-icon>store</mat-icon>
-              <h4 mat-line>Venas</h4>
-            </mat-list-item>
           </mat-nav-list>
+          <mat-accordion>
+              <!--Acordeon de Catalogos-->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  Catalogos
+                </mat-expansion-panel-header>
+                <mat-nav-list>
+                    <mat-list-item [routerLink] ="['bancos']">
+                      <h4 mat-line>Bancos</h4>
+                    </mat-list-item>
+                    <mat-list-item [routerLink]="['oficinas']">
+                      <h4 mat-line>Oficinas</h4>
+                    </mat-list-item>
+                    <mat-list-item [routerLink]="['puestos']">
+                      <h4 mat-line>Organizacion</h4>
+                    </mat-list-item>
+                    <mat-list-item [routerLink]="['premios']"> 
+                      <h4 mat-line>Premios</h4>
+                    </mat-list-item>
+                </mat-nav-list>
+            </mat-expansion-panel>
+              <!--Acordeon de almacen-->
+            <mat-expansion-panel>
+              <!--boton desplegable-->
+              <mat-expansion-panel-header>
+                Almacen
+              </mat-expansion-panel-header>
+              <!--contenido del boton-->
+              <mat-nav-list>
+                <mat-list-item [routerLink]="['almacen']">
+                  <mat-icon mat-list-icon>store</mat-icon>
+                  <h4 mat-line>Existencia</h4>
+                </mat-list-item>
+                <mat-list-item>
+                  <mat-icon mat-list-icon>shopping_cart</mat-icon>
+                  <h4 mat-line>Compras</h4>
+                </mat-list-item>
+                <mat-list-item>
+                  <mat-icon mat-list-icon>shopping_basket</mat-icon>
+                  <h4 mat-line>Venas</h4>
+                </mat-list-item>
+              </mat-nav-list>
+            </mat-expansion-panel>
+          </mat-accordion>
         </div>
     </mat-sidenav>
     <!-- Contendio general de la aplicacion -->
     <mat-sidenav-content>
-        <router-outlet></router-outlet>
+      <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

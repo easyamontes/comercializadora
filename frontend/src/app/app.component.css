@@ -31,12 +31,9 @@
   }
 
   .mat-sidenav{
-    width: 250px
+    width: 250px;
   }
   
-  .spacer{
-      flex:1 1 auto;
-  }
 /**Estilo para la cabesera del titulo*/
   .titleUser{
     align-content: center;
