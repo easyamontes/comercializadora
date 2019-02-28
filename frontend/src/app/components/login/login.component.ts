@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from '../../services/user.service';
+import { SidenavService } from '../../services/sidenavService';
 
 @Component({
     selector: 'login',
@@ -16,12 +18,14 @@ export class LoginComponent implements OnInit{
     public token;
     public identity;
     public status: any;
+    @ViewChild('snav') public sidenav: MatSidenav;
 
 
     constructor(
         private _UserService: UserService,
         private _route: ActivatedRoute,
-        private _router: Router
+        private _router: Router,
+        private _SidenavService:SidenavService
     ){
         this.status = null;
         this.title = 'Iniciar sesion ';
@@ -85,7 +89,6 @@ export class LoginComponent implements OnInit{
                 this.token = null;
                 //redireccionando al login
                 this._router.navigate(['login']);
-               
             }
         });
     }

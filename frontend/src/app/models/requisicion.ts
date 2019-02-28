@@ -12,5 +12,6 @@ export class Requisicion{
         public factura:string,
         public ffactura:Date,
         public divisa:string
+        
     ){}
 }

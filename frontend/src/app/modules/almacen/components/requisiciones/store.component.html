@@ -1,0 +1,59 @@
+<div class="principal">
+    <!-- creando cabecera de la requisicion -->
+    <div class="row">
+        <div class="container-fluid ">
+            <fieldset>
+                <legend>Hola soy la cabecera de la requisicion</legend>
+                <!--Dibujando la baecera de informacion-->
+                <mat-form-field>
+                    <input matInput
+                            [(ngModel)]="requi.fehca"
+                            [matDatepicker]="pickerFecha"
+                            #fecha="ngModel"
+                            placeholder="Fecha"
+                    >
+                    <mat-datepicker-toggle matSuffix [for]="pickerFecha"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFecha></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-select #provee="ngModel"
+                                [(ngModel)]="requi.proveedor_id"
+                                placeholder="Proveedor"        
+                    >
+                        <mat-option>
+                            hola
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput
+                            [(ngModel)]="requi.ffactura"
+                            [matDatepicker]="pickerFactura"
+                            #fecha="ngModel"
+                            placeholder="Fecha"
+                    >
+                    <mat-datepicker-toggle matSuffix [for]="pickerFactura"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFactura></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput
+                        [(ngModel)]="requi.ffactura"
+                        #factura = "ngModel"
+                        placeholder="Factura"
+                        >
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput
+                        type="number"
+                        [(ngModel)]="requi.importe"
+                        #importe = "ngModel"
+                        placeholder="importe"
+                                >
+                </mat-form-field>
+            </fieldset>
+        </div>
+    </div>
+    <!-- Creando tabla de -->
+    <div class="row">
+    </div>
+</div>  

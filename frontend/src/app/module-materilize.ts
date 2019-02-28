@@ -17,7 +17,9 @@ import {
   MatToolbarModule,
   MatMenuModule,
   MatTooltipModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 } from '@angular/material';
 
 
@@ -39,7 +41,9 @@ import {
     MatToolbarModule,
     MatMenuModule,
     MatTooltipModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
 
   ],
   exports: [
@@ -60,8 +64,9 @@ import {
     MatToolbarModule,
     MatMenuModule,
     MatTooltipModule,
-    MatExpansionModule
-
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
 })
 export class MaterialModule { }

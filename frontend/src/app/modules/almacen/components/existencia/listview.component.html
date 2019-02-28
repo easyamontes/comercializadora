@@ -1,13 +1,63 @@
-<mat-toolbar class="toolbar-cat">
-        <h3>{{title}}</h3>
-        <mat-form-field class="col-md-9">
-            <mat-icon matPrefix>search</mat-icon>
-            <input matInput>
+<div class="principal">
+    <h3>{{title}}</h3>
+    <div class="row">
+        <mat-form-field class="col-md-9 col-xs-8">
+         <input matInput
+                (keyup)="applyFilter($event.target.value)"
+                placeholder="buscar">
         </mat-form-field>
-        <span class="spacer"></span>
-        <button
-        class="botonpri"
-        matTooltip="Nueva Compra"
-        matTooltipPosition="after"
-        mat-raised-button ><mat-icon>add</mat-icon></button>
-</mat-toolbar>
+        <div class="col-md-3 col-xs-4">
+            <button class="col-md-8 col-xs-10 col-md-push-2 botonpri" 
+                    mat-raised-button 
+                    [routerLink]="['../nuevo']"><i class="material-icons">add</i></button>
+        </div>
+    </div>
+    <!--Comienza la tabla-->
+    <div class="row">
+        <table class="col-md-12 col-xs-12 mat-elevation-z8"
+               mat-table
+               [dataSource]="articulos"
+               mat-Sort
+        >
+        <ng-container matColumnDef="codigo">
+                <th class="thm"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header > Codigo </th>
+                <td mat-cell 
+                    *matCellDef="let row"> {{row.codigo}} </td>
+        </ng-container>
+        <ng-container matColumnDef="proveedor">
+                <th class="thm"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header > Proveedor </th>
+                <td mat-cell 
+                    *matCellDef="let row"> {{row.codigo}} </td>
+        </ng-container>
+        <ng-container matColumnDef="existencia">
+                <th class="thm"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header > Existencia </th>
+                <td mat-cell 
+                    *matCellDef="let row"> {{row.codigo}} </td>
+        </ng-container>
+        <ng-container matColumnDef="articulo">
+                <th class="thm"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header > Articulo </th>
+                <td mat-cell 
+                    *matCellDef="let row"> {{row.codigo}} </td>
+        </ng-container>
+        <tr mat-header-row 
+            *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row
+            *matRowDef="let row; columns: displayedColumns;">
+        </table>
+    </div>
+    <div class="row">
+            <mat-paginator [pageSizeOptions]="[25, 50]"></mat-paginator>
+    </div>
+</div>

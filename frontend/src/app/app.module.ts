@@ -7,6 +7,7 @@ import {FormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { IsLoggedGuard } from './services/guards/islogged.guard';
 import { UserService } from './services/user.service';
+import { SidenavService } from './services/sidenavService'
 //importando modulos
 import { PuestosModule } from './modules/puestos/puestos.module';
 import { PersonalModule } from './modules/personal/personal.module';
@@ -49,7 +50,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   providers: [
     appRoutingProviders,
     IsLoggedGuard,
-    UserService
+    UserService,
+    SidenavService
   ],
   bootstrap: [AppComponent]
 })

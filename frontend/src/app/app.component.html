@@ -1,7 +1,9 @@
-<div class="menu-container" [class.is-mobile]="mobileQuery.matches" >
+<div class="menu-container" 
+     *ngIf="identity"
+     [class.is-mobile]="mobileQuery.matches"
+>
   <!--Menu Superior-->
   <mat-toolbar
-  *ngIf="identity"
   color="primary"
   class="toolbar">
     <button mat-button [routerLink] ="['inicio']">Dooy</button>
@@ -18,7 +20,6 @@
   [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
     <mat-sidenav
       #snav
-      role = "navigation"
       [mode]="mobileQuery.matches ? 'over' : 'side'"
       [opened]="identity ?
         mobileQuery.matches ? 'false' : 'true'
@@ -90,4 +91,9 @@
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
+</div>
+<div
+class="menu-container"
+*ngIf="!identity">
+<login></login>
 </div>

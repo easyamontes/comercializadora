@@ -22,6 +22,10 @@ class CreateAlmacenTable extends Migration
             $table->unsignedInteger('requisicion_id');
             $table->unsignedInteger('proveedor_id');
             $table->unsignedInteger('articulo_id');
+            $table->string('codigo');
+            $table->string('articulo');
+            $table->string('marca');
+            $table->string('modelo');
             $table->integer('cantidad');
             $table->integer('precio');
             $table->integer('inpuesto');

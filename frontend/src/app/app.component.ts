@@ -1,5 +1,8 @@
-import { Component, OnInit, DoCheck,ChangeDetectorRef,OnDestroy} from '@angular/core';
-import {MediaMatcher} from '@angular/cdk/layout';
+import { Component, OnInit, DoCheck,ChangeDetectorRef,OnDestroy,ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { MatSidenav } from '@angular/material';
+import { SidenavService } from './services/sidenavService';
+import { MediaMatcher } from '@angular/cdk/layout';
 import { UserService } from './services/user.service';
 @Component({
   selector: 'app-root',
@@ -15,11 +18,14 @@ export class AppComponent implements OnInit, DoCheck,OnDestroy{
   private _mobileQueryListener: () => void;
   public token;
   public identity;
+  @ViewChild('snav') public sidenav: MatSidenav;
 
   constructor(
     private _UserService: UserService,
     changeDetectorRef: ChangeDetectorRef,
-    media: MediaMatcher
+    media: MediaMatcher,
+    private _SidenavService:SidenavService,
+    private _router: Router
   ){
     this.identity = _UserService.getIdentity();
     this.token = _UserService.getToken();
@@ -34,6 +40,7 @@ export class AppComponent implements OnInit, DoCheck,OnDestroy{
   }
   
   ngOnInit(){
+    this._SidenavService.setSidenav(this.sidenav);
   }
 
   ngOnDestroy(){
@@ -41,3 +48,4 @@ export class AppComponent implements OnInit, DoCheck,OnDestroy{
   }
 
 }
+
