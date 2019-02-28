@@ -18,6 +18,7 @@ import {MaterialModule} from './module-materilize';
 import {BancosModules} from './modules/bancos/bancos.modules';
 import {ProveedoresModule} from './modules/proveedores/proveedores.module';
 import {AlmacenModule} from './modules/almacen/almacen.module';
+import {VentaModule} from './modules/venta/venta.module';
 //conponentes
 import { LoginComponent } from './components/login/login.component';
 import { DefaultComponent } from './components/default/default.component';
@@ -45,7 +46,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MaterialModule,
     BancosModules,
     ProveedoresModule,
-    AlmacenModule
+    AlmacenModule,
+    VentaModule
   ],
   providers: [
     appRoutingProviders,

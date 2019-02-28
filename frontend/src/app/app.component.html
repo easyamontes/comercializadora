@@ -77,12 +77,28 @@
                   <mat-icon mat-list-icon>shopping_cart</mat-icon>
                   <h4 mat-line>Compras</h4>
                 </mat-list-item>
-                <mat-list-item>
-                  <mat-icon mat-list-icon>shopping_basket</mat-icon>
-                  <h4 mat-line>Ventas</h4>
-                </mat-list-item>
+                </mat-nav-list>
+            </mat-expansion-panel>
+    <!--=============================================
+				boton Ventas
+			============================================== -->
+            <mat-expansion-panel>
+                 <mat-expansion-panel-header>
+                  Venta
+                 </mat-expansion-panel-header>
+    <!--=============================================
+				inicio de la lista de ventas
+			============================================== -->
+              <mat-nav-list>
+                  <mat-list-item [routerLink]="['ventas']">
+                      <mat-icon mat-list-icon>store</mat-icon>
+                      <h4 mat-line>Hoja de pedido</h4>
+                  </mat-list-item>
               </mat-nav-list>
             </mat-expansion-panel>
+      <!--=============================================
+				final de mi lista principal
+			============================================== -->
           </mat-accordion>
         </div>
     </mat-sidenav>

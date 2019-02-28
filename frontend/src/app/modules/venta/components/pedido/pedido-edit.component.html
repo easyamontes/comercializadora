@@ -1,0 +1,29 @@
+<div class="principal" *ngIf = "pedi != null">              
+    <div class="alert alert-danger" *ngIf="status == 'success' && status"> Registro Guardado correctamente </div>
+       
+        <form *ngIf="pedi != null" #pedidoNew="ngForm" (ngSubmit)="onSubmit(pedidoNew)">
+            <div class="container-fluid">
+                <div class="col-md-6 col-md-offset-3">
+                    <fieldset>
+                        <legend>{{title}}</legend>
+                    <div class="row">
+                        <mat-form-field class="col-md-6 col-xs-12"> 
+                            <input type="date"  matInput name="fechapedido" #fechapedido="ngModel" [(ngModel)]="pedi.fechapedido"  placeholder="fecha pedido" required>
+                        </mat-form-field>
+                        <mat-form-field class="col-md-6 col-xs-12">
+                            <input type="number" matInput name="importe" #importe="ngModel" [(ngModel)]="pedi.importe"placeholder ="importe" required>
+                          </mat-form-field>
+                    </div>    
+                    <div class="row form-group"> <br>
+                        <div class="col-md-3 col-xs-3">
+                            <input type="submit" value="Guardar" class="btn btn-success col-md-12" [disabled]="!pedidoNew.form.valid">
+                        </div>
+                        <div class="col-md-3 col-xs-3">
+                            <a type="submit" class="btn btn-danger col-md-12" style="margin: 1px" (click)="botonCancelar()">Cancelar</a>
+                        </div>
+                    </div>
+                </fieldset>
+                </div>                 
+            </div>
+        </form>
+    </div>
