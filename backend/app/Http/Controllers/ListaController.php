@@ -30,4 +30,24 @@ class ListaController extends Controller
         );
         return $data;
     }
+
+    public function proveedoresList( Request $request ){
+        $proveedores = DB::table('proveedor')->select('id','nombre')->get();
+        $data = array(
+            'proveedorll' => $proveedores,
+            'code' => 200,
+            'status' => 'success'
+        );
+        return $data;
+    }
+    
+    public function artiucloList( Request $request ){
+        $articulos = DB::table('articulo')->get();
+        $data = array(
+            'articulos' =>  $articulos,
+            'code' => 200,
+            'status' => 'success'
+        );
+        return $data;
+    }
 }

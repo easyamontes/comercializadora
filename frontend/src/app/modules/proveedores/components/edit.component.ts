@@ -61,6 +61,8 @@ export class ProveedorEditComponent implements OnInit{
     addContacto(){
         let nuevoContacto = new Contacto(0,0,this.proveedor.id,'','',null);
         this.contactos.push(nuevoContacto);
+        console.log(this.contactos);
+        
     }
 
     /**Funcionpara eliminar el contacto */

@@ -14,15 +14,6 @@ class ContactoController extends Controller
         $this->middleware('islogged');
     }
 
-    public function index(Request $request){
-        $contacto = Contacto::all()->load('user');
-        $nop = $contacto->count();
-        return response()->json(array(
-            'contactos' => $contacto,
-            'status' => 'success'
-        ),200);
-    }
-
     public function store (Request $request){
         $json = $request->input('json',null);
         $params = json_decode($json);
