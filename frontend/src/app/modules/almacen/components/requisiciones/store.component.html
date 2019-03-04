@@ -20,9 +20,8 @@
                                 [(ngModel)]="requi.proveedor_id"
                                 placeholder="Proveedor"        
                     >
-                        <mat-option>
-                            hola
-                        </mat-option>
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let prov of provlist" [value]="prov.id">{{prov.nombre}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field>
@@ -37,7 +36,7 @@
                 </mat-form-field>
                 <mat-form-field>
                     <input matInput
-                        [(ngModel)]="requi.ffactura"
+                        [(ngModel)]="requi.factura"
                         #factura = "ngModel"
                         placeholder="Factura"
                         >
@@ -53,7 +52,115 @@
             </fieldset>
         </div>
     </div>
+    <div class="row">
+        <button mat-raised-button
+                class="pull-right botonpri"
+                [disabled]="!requi.proveedor_id"
+                (click)="createArticulo();"
+        >
+           <mat-icon>add</mat-icon> 
+        </button>
+    </div>
     <!-- Creando tabla de -->
     <div class="row">
+        <table mat-table
+               [dataSource]="articulos"
+               mat-Sort
+               class="col-md-12 col-xs-12"
+        >
+        <ng-container matColumnDef="codigo">
+                <th mat-header-cell
+                    class="thm
+                           col-md-1
+                    "
+                    *matHeaderCellDef
+                    mat-sort-header > Codigo </th>
+                <td mat-cell
+                    *matCellDef="let row"> {{row.codigo}} </td>
+            </ng-container>
+            <ng-container matColumnDef="nombre">
+                <th mat-header-cell
+                    class="thm
+                           col-md-3
+                    "
+                    *matHeaderCellDef
+                    mat-sort-header > Articulo </th>
+                <td mat-cell
+
+                    *matCellDef="let row; let i = index">
+                    <mat-form-field
+                    class="col-md-12"
+                    >
+                        <mat-select #articulo="ngModel"
+                                    [(ngModel)]="row.articulo_id"
+                                    (ngModelChange)="setArticulo($event,i)"
+                        >
+                        <mat-option *ngFor="let artitem of artilist" [value]="artitem.id">{{artitem.nombre}} {{artitem.marca}} {{artitem.modelo}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="cantidad">
+                <th mat-header-cell
+                    class="thm
+                           col-md-1
+                    "
+                    *matHeaderCellDef
+                    mat-sort-header > Cantidad </th>
+                <td mat-cell
+                    *matCellDef="let row">
+                    <mat-form-field>
+                            <input matInput
+                                [(ngModel)]="row.cantidad"
+                                #factura = "ngModel"
+                                type="number"
+                                >
+                    </mat-form-field>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="precio">
+                <th mat-header-cell
+                    class="thm
+                           col-md-1
+                    "
+                    *matHeaderCellDef
+                    mat-sort-header > precio </th>
+                <td mat-cell
+                    *matCellDef="let row">
+                    <mat-form-field>
+                            <input matInput
+                                [(ngModel)]="row.precio"
+                                #factura = "ngModel"
+                                type="number"
+                                >
+                    </mat-form-field>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="total">
+                <th mat-header-cell
+                    class="thm
+                           col-md-1
+                    "
+                    *matHeaderCellDef
+                    mat-sort-header > Total </th>
+                <td mat-cell
+                    *matCellDef="let row"> {{row.cantidad * row.precio  |currency}} </td>
+            </ng-container>
+            <!--Definicion de tbalas-->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></tr>
+        </table>
     </div>
-</div>  
+    <div class="row">
+        <mat-paginator [pageSizeOptions]="[10, 15, 20]"></mat-paginator>
+    </div>
+    <div class="row">
+        <button mat-raised-button
+                class="btn btn-success
+                       col-md-2   
+                "
+        >Guardar</button>
+        <button mat-raised-button
+                class="btn btn-danger">Cancelar</button>
+    </div>
+</div>
