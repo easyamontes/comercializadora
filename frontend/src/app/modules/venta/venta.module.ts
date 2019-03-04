@@ -7,13 +7,15 @@ import { VentaRoutingModule } from './venta-routing.module';
 //components
 import { VentaMainComponent } from './components/main.component';
 import {PedidoStoreComponent} from './components/pedido/pedido-store.component';
+import {PedidoEditComponent} from './components/pedido/pedido-edit.component';
 
 
 
 @NgModule({
     declarations: [
         VentaMainComponent,
-        PedidoStoreComponent
+        PedidoStoreComponent,
+        PedidoEditComponent
     ],
     imports: [
         VentaRoutingModule,
@@ -24,7 +26,8 @@ import {PedidoStoreComponent} from './components/pedido/pedido-store.component';
     ],
     exports: [
          VentaMainComponent,
-         PedidoStoreComponent
+         PedidoStoreComponent,
+         PedidoEditComponent
         ],
     providers: []
   })

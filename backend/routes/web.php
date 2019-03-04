@@ -33,3 +33,4 @@ Route::resource('/api/contactos','ContactoController');
 Route::resource('/api/premios','PremioController');
 Route::resource('/api/requisicion','RequisicionControler');
 Route::resource('/api/ventas','PedidoController');
+Route::resource('/api/conceptoventa','ConceptoventaController');
