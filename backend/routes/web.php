@@ -35,5 +35,6 @@ Route::resource('/api/proveedores','ProveedorController');
 Route::resource('/api/contactos','ContactoController');
 Route::resource('/api/premios','PremioController');
 Route::resource('/api/requisicion','RequisicionControler');
+Route::resource('/api/almaitem','AlmacenController');
 Route::resource('/api/ventas','PedidoController');
 Route::resource('/api/conceptoventa','ConceptoventaController');

@@ -10,12 +10,50 @@ use App\Almacen;
 class AlmacenController extends Controller
 {
     //
-    public function index(Request $request){
-        $user = $json = $request->input('userid',null);
-        $requisicion= DB::table('almacen');
-        return response()->json(array(
-            'requisicion' => $requisicion,
-            'status' => 'success'
-        ),200);
+    public function __construct()
+    {
+        $this->middleware('islogged');
     }
+
+    public function store (Request $request){
+        $json = $request->input('json',null);
+        $params = json_decode($json);
+        $params_array = json_decode($json,true);
+        $user = $json = $request->input('userid',null);
+        $cleanid = array();
+        foreach ($params_array as $item) {
+            array_push($cleanid,$item['id']);
+            $idrequi = $item['requisicion_id'];
+            if ($item['id'] < 1) {
+                $almacen = new Almacen();
+                $almacen->user_id = $user;
+                $almacen->requisicion_id = $item['requisicion_id'];
+                $almacen->proveedor_id = $item['proveedor_id'];
+                $almacen->articulo_id = $item['articulo_id'];
+                $almacen->codigo = $item['codigo'];
+                $almacen->articulo = $item['articulo'];
+                $almacen->marca = $item['marca'];
+                $almacen->modelo = $item['modelo'];
+                $almacen->cantidad = $item['cantidad'];
+                $almacen->precio = $item['precio'];
+                $almacen->impuesto = $item['impuesto'];
+                $almacen->total = $item['total'];
+                $almacen->save();
+                array_push($cleanid,$almacen['id']);
+            }else {
+                $almacen = Almacen::where('id',$item['id'])->update($item);
+            }
+        }
+        $almacen = Almacen::where('requisicion_id','=',$idrequi)->whereNotIn('id', $cleanid)->delete();
+        $data = array(
+            'almacen' => $almacen,
+            'code' => 200,
+            'satus' => 'success'
+        );
+        return response()->json($data,200);
+    }
+
+
 }
+
+

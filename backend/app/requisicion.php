@@ -13,6 +13,11 @@ class Requisicion extends Model
         return $this->belongsto('App\User','user_id');
     }
 
+    public function articulos(){
+        return $this->hasMany('App\Almacen','requisicion_id');
+    }
+
+
     public function porigen(){
         return $this->hasOne('App\perosnal','porigen_id');
     }

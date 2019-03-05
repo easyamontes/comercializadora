@@ -8,9 +8,9 @@ export class Requisicion{
         public tipo:string,
         public status:string,
         public importe:number,
-        public fehca:Date,
+        public fecha:string,
         public factura:string,
-        public ffactura:Date,
+        public ffactura:string,
         public divisa:string
         
     ){}

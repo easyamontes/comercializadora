@@ -7,6 +7,7 @@
                 <!--Dibujando la baecera de informacion-->
                 <mat-form-field>
                     <input matInput
+                            [value]="fecha.value"
                             [(ngModel)]="requi.fehca"
                             [matDatepicker]="pickerFecha"
                             #fecha="ngModel"
@@ -27,8 +28,9 @@
                 <mat-form-field>
                     <input matInput
                             [(ngModel)]="requi.ffactura"
+                            [value]="ffecha.value"
                             [matDatepicker]="pickerFactura"
-                            #fecha="ngModel"
+                            #ffecha="ngModel"
                             placeholder="Fecha"
                     >
                     <mat-datepicker-toggle matSuffix [for]="pickerFactura"></mat-datepicker-toggle>
@@ -52,16 +54,7 @@
             </fieldset>
         </div>
     </div>
-    <div class="row">
-        <button mat-raised-button
-                class="pull-right botonpri"
-                [disabled]="!requi.proveedor_id"
-                (click)="createArticulo();"
-        >
-           <mat-icon>add</mat-icon> 
-        </button>
-    </div>
-    <!-- Creando tabla de -->
+    <!-- Creando tabla de Articulos -->
     <div class="row">
         <table mat-table
                [dataSource]="articulos"
@@ -146,16 +139,41 @@
                 <td mat-cell
                     *matCellDef="let row"> {{row.cantidad * row.precio  |currency}} </td>
             </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell
+                    class="thm
+                           col-md-1
+                    "
+                    *matHeaderCellDef
+                    mat-sort-header >
+                        <button mat-raised-button
+                        class="botonpri"
+                        (click)="createArticulo();"
+                        >
+                            <mat-icon>add</mat-icon> 
+                        </button>
+                </th>
+                <td mat-cell
+                    *matCellDef="let i = index">
+                    <button mat-icon-button
+                            (click)="deleteArticulo(i)"
+                            color="primary">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
             <!--Definicion de tbalas-->
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></tr>
         </table>
     </div>
+    <!-- Creando paginador  -->
     <div class="row">
         <mat-paginator [pageSizeOptions]="[10, 15, 20]"></mat-paginator>
     </div>
     <div class="row">
         <button mat-raised-button
+                (click)="onSubmit();"
                 class="btn btn-success
                        col-md-2   
                 "
