@@ -34,6 +34,15 @@ class PedidoController extends Controller
        );
        return response()->json($data,200);
     }
+    public function destroy($id, Request $request){
+        $conceptoventa = Pedido::find($id);
+        $conceptoventa->delete();
+        $data = array(
+            'pedido' => $conceptoventa,
+            'status' => 'success',
+            'code' => 200
+        );
+    }
 
 }
 

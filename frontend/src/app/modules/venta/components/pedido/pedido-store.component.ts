@@ -24,6 +24,7 @@ export class PedidoStoreComponent implements OnInit {
      public conceptoventa: Array<Conceptoventa>;
      public status: any;
      public displayedColumns: string[] = ['articulo','eliminar'];
+
      @ViewChild(MatPaginator) paginator: MatPaginator;
      @ViewChild(MatSort) sort: MatSort;
     
@@ -34,37 +35,39 @@ export class PedidoStoreComponent implements OnInit {
         private _router: Router
      ){
          this.title = 'nuevo Pedido';
-         //this.conceptoventa = [];
+         this.conceptoventa = [];
          this.token = this._UserService.getToken();
          this.pedi = new Pedido (0,'',0);
      }
      ngOnInit(){
-       
+       this.getVentas();
    }//end ngOnInit
  
-   addConcepto(){
-    let nuevoConcepto = new Conceptoventa(0,this.pedi.id,0,0,'','','','',0,0,0,0,0);
-    this.conceptoventa.push(nuevoConcepto);
-    this.pedidos = new MatTableDataSource (this.conceptoventa);
-}
+        /*--------------------------------------------------------
+           BOTON GUARDAR
+        ---------------------------------------------------------- */
+   
 Guardar(){
     console.log(this.token);
     this._GeneralCallService.storeRecord(this.token,'ventas',this.pedi).subscribe(
         response=>{
-            this.pedi = response.pedis;
+            this.pedi = response.pedi;
             this.status = response.status;
-            if(this.status == 'success'){
-               /*   this.conceptoventa.forEach(item=>{
-                    item.pedido_id=this.pedi.id
-                    })*/
-                //Mandando los conceptos a guardar
-               this._GeneralCallService.storeRecord(this.token,'conceptoventa',this.conceptoventa).subscribe(
+                  if(this.status == 'success'){
+                    this.conceptoventa.forEach(item=>{
+                         item.pedido_id=this.pedi.id
+                   })
+        /*--------------------------------------------------------
+           GUARDAR CONCEPTOS INGRESADOS
+        ---------------------------------------------------------- */
+   
+               this._GeneralCallService.storeRecord(this.token,'ventas',this.conceptoventa).subscribe(
                    response =>{
                       console.log(<any>response);
             },error=>{
                       console.log(<any>error);
                     });
-                this._router.navigate(['inicio']);
+            this._router.navigate(['inicio']);
             }
         },error=>{
             console.log(<any>error);
@@ -74,13 +77,13 @@ Guardar(){
             this.pedi = null;
             this._router.navigate(['inicio']);
           }
-/* 
-          getArticulos(){
 
-            this._GeneralCallService.getRecords(this.token,'articulos').subscribe(
+          getVentas(){
+
+            this._GeneralCallService.getRecords(this.token,'ventas').subscribe(
                 response=>{
-                    this.pedidos = response.pedidos;
-                    this.pedidos = new MatTableDataSource(response.pedidos);
+                    this.pedidos = response.pedido;
+                    this.pedidos = new MatTableDataSource(response.pedido);
                     this.pedidos.paginator = this.paginator;
                     this.pedidos.sort = this.sort;
                 },error=>{
@@ -89,16 +92,31 @@ Guardar(){
             );
         }
     
-
+           /*--------------------------------------------------------
+           ELIMINAR REGISTRO DE CONCEPTOS
+           ---------------------------------------------------------- */
+     
           deleteRecord(id){
             if(confirm('Eliminar Registro')){
-                this._GeneralCallService.delteRcord(this.token,'pedidos',id).subscribe(
+                this._GeneralCallService.delteRcord(this.token,'ventas',id).subscribe(
                     response=>{
-                        this.getArticulos();
+                        this.getVentas();
+                    },error=>{
+                        console.log(<any>error);
                     }
-                );
+                )
             }
-        }*/
-     
+        }
+            
+        /*--------------------------------------------------------
+           AGREGAR CONCEPTO POR CONCEPTO
+        ---------------------------------------------------------- */
+        addConcepto(){
+            let nuevoConcepto = new Conceptoventa(0,this.pedi.id,0,0,'','','','',0,0,0,0,0);
+            this.conceptoventa.push(nuevoConcepto);
+            this.pedidos = new MatTableDataSource (this.conceptoventa);
+            this.pedidos.paginator = this.paginator;
+            this.pedidos.sort = this.sort;
+        }
 }
 
