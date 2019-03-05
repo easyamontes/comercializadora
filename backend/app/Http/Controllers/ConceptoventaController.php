@@ -36,7 +36,7 @@ class ConceptoventaController extends Controller
         }
         $conceptoventa = Conceptoventa::where('pedido_id','=',$idpedido)->whereNotIn('id', $cleanid)->delete();
         $data = array(
-            'contacto' => $conceptoventa,
+            'pedido' => $conceptoventa,
             'code' => 200,
             'satus' => 'success'
         );
