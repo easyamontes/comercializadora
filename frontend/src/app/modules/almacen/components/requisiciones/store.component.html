@@ -8,7 +8,7 @@
                 <mat-form-field>
                     <input matInput
                             [value]="fecha.value"
-                            [(ngModel)]="requi.fehca"
+                            [(ngModel)]="requi.fecha"
                             [matDatepicker]="pickerFecha"
                             #fecha="ngModel"
                             placeholder="Fecha"
@@ -28,7 +28,6 @@
                 <mat-form-field>
                     <input matInput
                             [(ngModel)]="requi.ffactura"
-                            [value]="ffecha.value"
                             [matDatepicker]="pickerFactura"
                             #ffecha="ngModel"
                             placeholder="Fecha"
@@ -55,7 +54,9 @@
         </div>
     </div>
     <!-- Creando tabla de Articulos -->
-    <div class="row">
+    <div class="row"
+         style="height: 53vh; overflow: auto;"
+    >
         <table mat-table
                [dataSource]="articulos"
                mat-Sort

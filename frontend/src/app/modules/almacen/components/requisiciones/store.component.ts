@@ -38,7 +38,7 @@ export class RequisicionStoreComponent implements OnInit{
         private _router: Router
     ){
         let fe = new Date();
-        let date:string =  fe.toISOString().substring(0,10);        
+        let date:string =  fe.toISOString();        
         this.token = this._UserService.getToken();
         this.item=[];
         this.requi = new Requisicion(0,0,0,0,0,'COMPRA','NUEVO',0,date,null,null,null);

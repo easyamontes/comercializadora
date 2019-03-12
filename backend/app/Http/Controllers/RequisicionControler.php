@@ -15,7 +15,11 @@ class RequisicionControler extends Controller
     }
 
     public function index(Request $request){
-        $requisicion = Requisicion::All()->load('user')->load('articulos');
+        $user = $json = $request->input('userid',null);
+        $requisicion = Requisicion::where(['user_id','=',$user],['status','=','NUEVO'])
+                                    ->load('user')
+                                    ->load('articulos')
+                                    ->get();
         return response()->json(array(
             'requisicion' => $requisicion,
             'status' => 'success'
@@ -34,8 +38,8 @@ class RequisicionControler extends Controller
         $folio = Requisicion::where('user_id','=',$user)->where('tipo','=',$params->tipo)->max('folio') + 1;
 
         $requisicion->user_id = $user;
-        $requisicion->porigen_id = 0;
-        $requisicion->pdestino_id = 0;
+        $requisicion->porigen_id = $params->porigen_id;
+        $requisicion->pdestino_id = $params->pdestino_id;
         $requisicion->proveedor_id = $params->proveedor_id;
         $requisicion->folio = $folio;
         $requisicion->tipo = $params->tipo;

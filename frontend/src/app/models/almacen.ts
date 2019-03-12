@@ -10,7 +10,7 @@ export class Almacen{
         public modelo:string,
         public cantidad:number,
         public precio:number,
-        public impuesto:number,
+        public existencia:number,
         public total:number
     ){}
 }

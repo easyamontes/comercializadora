@@ -19,7 +19,9 @@ import {
   MatTooltipModule,
   MatExpansionModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatCardModule,
+  MatBadgeModule
 } from '@angular/material';
 
 
@@ -44,7 +46,8 @@ import {
     MatExpansionModule,
     MatDatepickerModule,
     MatNativeDateModule,
-
+    MatCardModule,
+    MatBadgeModule
   ],
   exports: [
     MatGridListModule,
@@ -67,6 +70,8 @@ import {
     MatExpansionModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatCardModule,
+    MatBadgeModule
   ],
 })
 export class MaterialModule { }
