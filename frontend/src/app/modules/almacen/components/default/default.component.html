@@ -1,5 +1,26 @@
-<h3 class="h-1">Hola soy la botonera</h3>
+<h3>Hola soy la botonera</h3>
 <br>
+<div class="container-fluid
+            d-flex
+            h-25
+            flex-column
+            justify-content-center
+            ">
+    <div class="p-1
+                p-sm-1
+                flex-grow-1
+                flex-shrink-1">
+        <button mat-button
+                [routerLink]="['../list']"
+                class="btn
+                       btn-block
+                       btn-secondary
+                       h-75
+                    ">
+            <mat-icon>add_shopping_cart</mat-icon> Existencias
+        </button>
+    </div>
+</div>
 <div class="container-fluid
             h-25
             d-flex
@@ -11,7 +32,8 @@
                 p-sm-2
                 flex-grow-1
                 flex-shrink-1">
-        <button mat-button 
+        <button mat-button
+                [routerLink]="['../equinueva']"
                 class="btn
                        btn-block
                        btn-success
@@ -25,7 +47,7 @@
                 flex-grow-1
                 flex-shrink-1">
         <button  mat-button
-                 matBadge="8"
+                 matBadge="{{nalma}}"
                  matBadgePosition="after"
                  matBadgeColor="accent"
                  class="btn

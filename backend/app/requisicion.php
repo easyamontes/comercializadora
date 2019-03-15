@@ -22,8 +22,8 @@ class Requisicion extends Model
         return $this->hasOne('App\perosnal','porigen_id');
     }
 
-    public function pdestino(){
-        return $this->hasOne('App\perosnal','pdestino_id');
+    public function proveedor(){
+        return $this->belongsto('App\proveedor','proveedor_id');
     }
 
 }//END CLASS 

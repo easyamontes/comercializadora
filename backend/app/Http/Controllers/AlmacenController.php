@@ -16,7 +16,7 @@ class AlmacenController extends Controller
     }
 
     public function index(Request $request){
-    
+        $user = $json = $request->input('userid',null);
     }
 
     public function store (Request $request){

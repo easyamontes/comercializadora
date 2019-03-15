@@ -16,13 +16,13 @@ class RequisicionControler extends Controller
 
     public function index(Request $request){
         $user = $json = $request->input('userid',null);
-        $requisicion = Requisicion::where(['user_id','=',$user],['status','=','NUEVO'])
-                                    ->load('user')
-                                    ->load('articulos')
-                                    ->get();
+        $requisicion = Requisicion::where('user_id','=',$user)
+                                    ->where('status','=','NUEVO')
+                                    ->get()->load('proveedor');
         return response()->json(array(
             'requisicion' => $requisicion,
-            'status' => 'success'
+            'status' => 'success',
+            'code' => 200
         ),200);
     }
 
