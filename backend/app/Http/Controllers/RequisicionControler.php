@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Helpers\JwtAuth;
 use App\Requisicion;
@@ -58,7 +59,24 @@ class RequisicionControler extends Controller
             'status' => 'success'
         );
         return response()->json($data,200);
+    }
 
-
+    //Aceptando 
+    public function update( $id, Request $request ){
+        $json = $request->input('json',null);
+        $params = json_decode($json);
+        $params_array = json_decode($json, true);
+        $user = $json = $request->input('userid',null);
+        $requisicion = new Requisicion();
+        unset($params_array['proveedor']);
+        $requisicion = Requisicion::where('id',$id)->update($params_array);
+        //Cargando la existencia
+        DB::raw('UPDATE almacen SET existencia = cantidad WHERE requisicion_id ='. $id);
+        $data = array(
+            'requisicion' => $requisicion,
+            'code' => 200,
+            'status' => 'success'
+        );
+        return response()->json($data,200);
     }
 }

@@ -11,6 +11,7 @@ export class Almacen{
         public cantidad:number,
         public precio:number,
         public existencia:number,
-        public total:number
+        public total:number,
+        public totalExistencia:number
     ){}
 }

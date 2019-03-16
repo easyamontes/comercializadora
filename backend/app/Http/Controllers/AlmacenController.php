@@ -17,6 +17,16 @@ class AlmacenController extends Controller
 
     public function index(Request $request){
         $user = $json = $request->input('userid',null);
+        $almacen = Almacen::selectRaw(' * ,SUM(existencia) as totalExistencia')
+                        ->where('user_id',$user)
+                        ->groupBy('articulo_id','proveedor_id')
+                        ->get();
+        $data = array(
+            'existencia' => $almacen,
+            'code' => 200,
+            'satus' => 'success'
+        );
+        return response()->json($data,200);
     }
 
     public function store (Request $request){

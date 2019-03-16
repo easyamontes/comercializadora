@@ -37,6 +37,7 @@ export class RequisicionViewComponent implements OnInit{
     ngOnInit(){
         this.getRequi();
     }
+
     /** Funcion para traer las requisiciones pendientes por recibir */
     getRequi(){
         this._GeneralCallService.getRecords(this.token,'requisicion').subscribe(
@@ -51,6 +52,21 @@ export class RequisicionViewComponent implements OnInit{
             },error=>{
                 console.log(<any>error);
             });
+    }
+
+    /**Funcion que cambia el estatus de la entrada y lo manda a las exitencias */
+    acptarEntrada(id:any,item:Requisicion){
+        if(confirm('Desea Confirmar Esta Requisicion')){
+            item.status="RECIBIDO"
+            this._GeneralCallService.updateRecord(this.token,'requisicion',item,id).subscribe(
+                response=>{
+                    if(response.code==200){
+                        this.getRequi();
+                    }
+                },error=>{
+                    console.log(<any>error);
+            });
+        }
     }
 
     applyFilter(filterValue: string) {

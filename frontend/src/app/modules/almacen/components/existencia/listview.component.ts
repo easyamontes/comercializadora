@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Almacen } from './../../../../models/almacen';
-import { Requisicion } from './../../../../models/requisicion';
 import { UserService } from '../../../../services/user.service';
 import { GeneralCallService } from '../../../../services/generalCall.service';
 
@@ -37,9 +36,9 @@ export class ExistenciaViewComponent implements OnInit{
 
 
     getExistencias(){
-        this._GeneralCallService.getRecords(this.token,'requisicion').subscribe(
+        this._GeneralCallService.getRecords(this.token,'almaitem').subscribe(
             response=>{
-                this.articulos = response.requisicion
+                this.articulos = new MatTableDataSource(response.existencia);
                 this.articulos.paginator = this.paginator;
                 this.articulos.sort = this.sort;
             },error=>{

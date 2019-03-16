@@ -78,7 +78,7 @@ export class RequisicionStoreComponent implements OnInit{
     /**crea una nueva fila en la tabla de Articulos */
     createArticulo(){
         if(this.requi.proveedor_id){
-            let nitem = new Almacen(0,0,this.requi.proveedor_id,null,null,null,null,null,null,null,null,null);
+            let nitem = new Almacen(0,0,this.requi.proveedor_id,null,null,null,null,null,null,null,null,null,null);
             this.item.push(nitem);
             this.articulos = new MatTableDataSource(this.item);
             this.articulos.paginator = this.paginator;
@@ -106,7 +106,7 @@ export class RequisicionStoreComponent implements OnInit{
                     }
                     this._GeneralCallService.storeRecord(this.token,'almaitem',this.articulos.data).subscribe(
                         response=>{
-                            console.log(response.satus);
+                            this._router.navigate(['/../welcome']);
                         },error=>{
                             console.log(<any>error);
                         }
