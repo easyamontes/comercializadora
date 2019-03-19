@@ -9,26 +9,29 @@ import { AlmacenMainComponent } from './components/main.component';
 import { ExistenciaViewComponent } from './components/existencia/listview.component';
 import { RequisicionViewComponent } from './components/requisiciones/view.component';
 import { RequisicionStoreComponent } from './components/requisiciones/store.component'
+import { AlmacenDefaultComponent } from './components/default/default.component';
 
 @NgModule({
     declarations: [
         AlmacenMainComponent,
         ExistenciaViewComponent,
         RequisicionViewComponent,
-        RequisicionStoreComponent
+        RequisicionStoreComponent,
+        AlmacenDefaultComponent
     ],
     imports: [
         AlmacenRoutingModule,
         CommonModule,
         FormsModule,
         HttpClientModule,
-        MaterialModule
+        MaterialModule,
     ],
     exports: [
         AlmacenMainComponent,
         ExistenciaViewComponent,
         RequisicionViewComponent,
-        RequisicionStoreComponent
+        RequisicionStoreComponent,
+        AlmacenDefaultComponent
         ],
     providers: []
   })

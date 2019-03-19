@@ -15,6 +15,20 @@ class AlmacenController extends Controller
         $this->middleware('islogged');
     }
 
+    public function index(Request $request){
+        $user = $json = $request->input('userid',null);
+        $almacen = Almacen::selectRaw(' * ,SUM(existencia) as totalExistencia')
+                        ->where('user_id',$user)
+                        ->groupBy('articulo_id','proveedor_id')
+                        ->get();
+        $data = array(
+            'existencia' => $almacen,
+            'code' => 200,
+            'satus' => 'success'
+        );
+        return response()->json($data,200);
+    }
+
     public function store (Request $request){
         $json = $request->input('json',null);
         $params = json_decode($json);
@@ -36,7 +50,7 @@ class AlmacenController extends Controller
                 $almacen->modelo = $item['modelo'];
                 $almacen->cantidad = $item['cantidad'];
                 $almacen->precio = $item['precio'];
-                $almacen->impuesto = $item['impuesto'];
+                $almacen->existencia = $item['existencia'];
                 $almacen->total = $item['total'];
                 $almacen->save();
                 array_push($cleanid,$almacen['id']);

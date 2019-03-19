@@ -28,7 +28,7 @@ class CreateAlmacenTable extends Migration
             $table->string('modelo');
             $table->integer('cantidad');
             $table->integer('precio');
-            $table->integer('impuesto');
+            $table->integer('existencia');
             $table->integer('total');
             $table->timestamps();
         });

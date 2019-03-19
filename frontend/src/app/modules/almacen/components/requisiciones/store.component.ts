@@ -37,7 +37,7 @@ export class RequisicionStoreComponent implements OnInit{
         private _router: Router
     ){
         let fe = new Date();
-        let date:string =  fe.toISOString().substring(0,10);        
+        let date:string =  fe.toISOString();        
         this.token = this._UserService.getToken();
         this.item=[];
         this.requi = new Requisicion(0,0,0,0,0,'COMPRA','NUEVO',0,date,null,null,null);
@@ -77,7 +77,7 @@ export class RequisicionStoreComponent implements OnInit{
     /**crea una nueva fila en la tabla de Articulos */
     createArticulo(){
         if(this.requi.proveedor_id){
-            let nitem = new Almacen(0,0,this.requi.proveedor_id,null,null,null,null,null,null,null,null,null);
+            let nitem = new Almacen(0,0,this.requi.proveedor_id,null,null,null,null,null,null,null,null,null,null);
             this.item.push(nitem);
             this.articulos = new MatTableDataSource(this.item);
             this.articulos.paginator = this.paginator;
@@ -105,7 +105,7 @@ export class RequisicionStoreComponent implements OnInit{
                     }
                     this._GeneralCallService.storeRecord(this.token,'almaitem',this.articulos.data).subscribe(
                         response=>{
-                            console.log(response.satus);
+                            this._router.navigate(['/../welcome']);
                         },error=>{
                             console.log(<any>error);
                         }
