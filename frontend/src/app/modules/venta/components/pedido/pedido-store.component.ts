@@ -61,7 +61,7 @@ Guardar(){
            GUARDAR CONCEPTOS INGRESADOS
         ---------------------------------------------------------- */
    
-               this._GeneralCallService.storeRecord(this.token,'ventas',this.conceptoventa).subscribe(
+               this._GeneralCallService.storeRecord(this.token,'conceptoventa',this.conceptoventa).subscribe(
                    response =>{
                       console.log(<any>response);
             },error=>{
@@ -96,16 +96,9 @@ Guardar(){
            ELIMINAR REGISTRO DE CONCEPTOS
            ---------------------------------------------------------- */
      
-          deleteRecord(id){
-            if(confirm('Eliminar Registro')){
-                this._GeneralCallService.delteRcord(this.token,'ventas',id).subscribe(
-                    response=>{
-                        this.getVentas();
-                    },error=>{
-                        console.log(<any>error);
-                    }
-                )
-            }
+          deleteRecord(index){
+                //this.conceptoventa.data.splice(index,1);
+                //this.conceptoventa._updateChangeSubscription();
         }
             
         /*--------------------------------------------------------

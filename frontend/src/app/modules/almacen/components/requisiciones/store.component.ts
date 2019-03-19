@@ -17,7 +17,6 @@ import { Almacen } from './../../../../models/almacen';
     ]
 })
 
-
 export class RequisicionStoreComponent implements OnInit{
     public title:string;
     public status:string;
