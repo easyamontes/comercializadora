@@ -23,7 +23,8 @@ export class PedidoStoreComponent implements OnInit {
      public pedidos: MatTableDataSource<Conceptoventa>;
      public conceptoventa: Array<Conceptoventa>;
      public status: any;
-     public displayedColumns: string[] = ['articulo','eliminar'];
+     public displayedColumns: string[] = ['codigo','nombre','eliminar'];
+     public lisart:Array<any>;
 
      @ViewChild(MatPaginator) paginator: MatPaginator;
      @ViewChild(MatSort) sort: MatSort;
@@ -41,7 +42,33 @@ export class PedidoStoreComponent implements OnInit {
      }
      ngOnInit(){
        this.getVentas();
+       this.getListArticulo();
    }//end ngOnInit
+
+   getListArticulo(){
+    this._GeneralCallService.getRecords(this.token,'lartic').subscribe(
+        response=>{
+            this.lisart = response.articulos;
+        }
+    );
+}
+
+
+setArticulo(id,index){
+    this.pedidos.data[index].codigo = this.lisart.find(x=>x.id == id).codigo;
+    this.pedidos.data[index].articulo = this.lisart.find(x=>x.id == id).nombre;
+    this.pedidos.data[index].marca = this.lisart.find(x=>x.id == id).marca;
+    this.pedidos.data[index].modelo = this.lisart.find(x=>x.id == id).modelo;
+
+}
+
+   addConcepto(){
+    let nuevoConcepto = new Conceptoventa(0,this.pedi.id,0,0,'','','','',0,0,0,0,0);
+    this.conceptoventa.push(nuevoConcepto);
+    this.pedidos = new MatTableDataSource (this.conceptoventa);
+    this.pedidos.paginator = this.paginator;
+    this.pedidos.sort = this.sort;
+}
  
         /*--------------------------------------------------------
            BOTON GUARDAR
@@ -51,19 +78,22 @@ Guardar(){
     console.log(this.token);
     this._GeneralCallService.storeRecord(this.token,'ventas',this.pedi).subscribe(
         response=>{
-            this.pedi = response.pedi;
+            this.pedi = response.pedido;
+             console.log(this.pedi)
             this.status = response.status;
                   if(this.status == 'success'){
                     this.conceptoventa.forEach(item=>{
                          item.pedido_id=this.pedi.id
                    })
+                   console.log( this.conceptoventa);
         /*--------------------------------------------------------
            GUARDAR CONCEPTOS INGRESADOS
         ---------------------------------------------------------- */
    
                this._GeneralCallService.storeRecord(this.token,'conceptoventa',this.conceptoventa).subscribe(
                    response =>{
-                      console.log(<any>response);
+                       console.log (this.conceptoventa);
+                    this._router.navigate(['inicio']);
             },error=>{
                       console.log(<any>error);
                     });
@@ -104,12 +134,6 @@ Guardar(){
         /*--------------------------------------------------------
            AGREGAR CONCEPTO POR CONCEPTO
         ---------------------------------------------------------- */
-        addConcepto(){
-            let nuevoConcepto = new Conceptoventa(0,this.pedi.id,0,0,'','','','',0,0,0,0,0);
-            this.conceptoventa.push(nuevoConcepto);
-            this.pedidos = new MatTableDataSource (this.conceptoventa);
-            this.pedidos.paginator = this.paginator;
-            this.pedidos.sort = this.sort;
-        }
+  
 }
 
