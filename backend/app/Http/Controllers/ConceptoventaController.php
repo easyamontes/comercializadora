@@ -30,8 +30,12 @@ class ConceptoventaController extends Controller
                 $conceptoventa->codigo = $item['codigo'];
                 $conceptoventa->marca = $item['marca'];
                 $conceptoventa->modelo = $item['modelo'];
+                $conceptoventa->existencia = $item ['existencia'];
                 $conceptoventa->articulo = $item['articulo'];
                 $conceptoventa->articulo_id = $item['articulo_id'];
+                $conceptoventa->cantidad = $item['cantidad'];
+                $conceptoventa->precio = $item['precio'];
+
                 $conceptoventa->save();
                 array_push($cleanid,$conceptoventa['id']);
             }else {

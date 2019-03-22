@@ -71,7 +71,7 @@ class RequisicionControler extends Controller
         unset($params_array['proveedor']);
         $requisicion = Requisicion::where('id',$id)->update($params_array);
         //Cargando la existencia
-        DB::raw('UPDATE almacen SET existencia = cantidad WHERE requisicion_id ='. $id);
+        DB::update('UPDATE almacen SET existencia = cantidad WHERE requisicion_id ='. $id);
         $data = array(
             'requisicion' => $requisicion,
             'code' => 200,

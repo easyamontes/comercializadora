@@ -7,7 +7,7 @@ import { VentaRoutingModule } from './venta-routing.module';
 //components
 import { VentaMainComponent } from './components/main.component';
 import {PedidoStoreComponent} from './components/pedido/pedido-store.component';
-import {PedidoEditComponent} from './components/pedido/pedido-edit.component';
+
 
 
 
@@ -15,7 +15,7 @@ import {PedidoEditComponent} from './components/pedido/pedido-edit.component';
     declarations: [
         VentaMainComponent,
         PedidoStoreComponent,
-        PedidoEditComponent
+      
     ],
     imports: [
         VentaRoutingModule,
@@ -27,7 +27,7 @@ import {PedidoEditComponent} from './components/pedido/pedido-edit.component';
     exports: [
          VentaMainComponent,
          PedidoStoreComponent,
-         PedidoEditComponent
+     
         ],
     providers: []
   })

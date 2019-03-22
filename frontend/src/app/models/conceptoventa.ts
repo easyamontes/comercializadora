@@ -10,6 +10,7 @@ export class Conceptoventa{
         public modelo: string,
         public cantidad: number,
         public precio: number,
+        public existencia: number,
         public precioventa: number,
         public impuesto: number,
         public total: number,
