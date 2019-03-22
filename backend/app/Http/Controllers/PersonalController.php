@@ -20,8 +20,8 @@ class PersonalController extends Controller
         /* ------------> Funcion para generar el arbol genialogico
         $personal = Personal::with('allChildrenAccounts')->find($per);
         $personal->allChildrenAccounts; 
-        $personal->allChildrenAccounts->first()->allChildrenAccounts;
-        */
+        $personal->allChildrenAccounts->first()->allChildrenAccounts;*/
+
         
         $personal = Personal::all()->load('usuario');        
 

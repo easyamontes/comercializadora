@@ -17,10 +17,10 @@ class AlmacenController extends Controller
 
     public function index(Request $request){
         $user = $json = $request->input('userid',null);
-        $almacen = Almacen::selectRaw(' * ,SUM(existencia) as totalExistencia')
+        $almacen = Almacen::selectRaw(' * ,SUM(existencia) as totalExistencia, AVG(precio) AS costo')
                         ->where('user_id',$user)
                         ->groupBy('articulo_id','proveedor_id')
-                        ->get();
+                        ->get()->load('proveedor');
         $data = array(
             'existencia' => $almacen,
             'code' => 200,

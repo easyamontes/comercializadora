@@ -31,6 +31,7 @@ export class RequisicionViewComponent implements OnInit{
         private _GeneralCallService: GeneralCallService,
     ){
         this.token = this._UserService.getToken();
+        this.title = "Recepcion De Articulos";
     }
 
 

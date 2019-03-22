@@ -9,6 +9,7 @@ export class Almacen{
         public marca:string,
         public modelo:string,
         public cantidad:number,
+        public costo:number,
         public precio:number,
         public existencia:number,
         public total:number,
