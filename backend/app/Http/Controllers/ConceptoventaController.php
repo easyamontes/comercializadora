@@ -13,6 +13,7 @@ class ConceptoventaController extends Controller
       $this->middleware('islogged');
     }
 
+
     public function store (Request $request){
         $json = $request->input('json',null);
         $params = json_decode($json);
@@ -26,8 +27,11 @@ class ConceptoventaController extends Controller
                 $conceptoventa = new Conceptoventa();
                 $conceptoventa->user_id = $user;
                 $conceptoventa->pedido_id = $item['pedido_id'];
-                $conceptoventa->codigo = $item['codigo '];
+                $conceptoventa->codigo = $item['codigo'];
                 $conceptoventa->marca = $item['marca'];
+                $conceptoventa->modelo = $item['modelo'];
+                $conceptoventa->articulo = $item['articulo'];
+                $conceptoventa->articulo_id = $item['articulo_id'];
                 $conceptoventa->save();
                 array_push($cleanid,$conceptoventa['id']);
             }else {
