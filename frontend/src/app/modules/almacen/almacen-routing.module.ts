@@ -16,7 +16,8 @@ const almacenRoutes: Routes =[
                                                             { path:'welcome', component:AlmacenDefaultComponent },
                                                             { path:'list',component:ExistenciaViewComponent },
                                                             { path:'requisicions',component:RequisicionViewComponent },
-                                                            { path:'equinueva',component:RequisicionStoreComponent }
+                                                            { path:'equinueva',component:RequisicionStoreComponent },
+                                                            { path:'equinueva/:sure',component:RequisicionStoreComponent }
                                                          ]
     }
 ]

@@ -1,4 +1,4 @@
-<h3>Hola soy la botonera</h3>
+<h3>{{title}}</h3>
 <br>
 <div class="container-fluid
             d-flex
@@ -73,12 +73,13 @@
                 flex-shrink-1
                 ">
         <button mat-button
+                [routerLink]="['../equinueva/1']"
                 class="btn
                        btn-block
                        btn-success
                        h-75
                        ">
-            <mat-icon>add_shopping_cart</mat-icon> Nueva Compra
+            <mat-icon>add_shopping_cart</mat-icon> Nuevo Envio
         </button>
     </div>
     <div class="p-1
@@ -91,7 +92,7 @@
                         btn-info
                         h-75
                         ">
-            <mat-icon>receipt</mat-icon> Recepciones
+            <mat-icon>receipt</mat-icon> Aprobación
         </button>
     </div>
 </div>

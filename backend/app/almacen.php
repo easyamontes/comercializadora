@@ -18,4 +18,8 @@ class Almacen extends Model
         return $this->belongsto('App\requisicion','requisicion_id');
     }
 
+    public function proveedor(){
+        return $this->belongsto('App\proveedor','proveedor_id');
+    }
+
 }

@@ -63,6 +63,7 @@ class RequisicionControler extends Controller
 
     //Aceptando 
     public function update( $id, Request $request ){
+
         $json = $request->input('json',null);
         $params = json_decode($json);
         $params_array = json_decode($json, true);
