@@ -5,6 +5,7 @@ import { UserService } from '../../../../services/user.service';
 import {GeneralCallService} from '../../../../services/generalCall.service';
 import { Conceptoventa } from './../../../../models/conceptoventa';
 
+
 import { Pedido } from 'src/app/models/pedido';
 
 @Component ({
@@ -23,7 +24,7 @@ export class PedidoStoreComponent implements OnInit {
      public pedidos: MatTableDataSource<Conceptoventa>;
      public conceptoventa: Array<Conceptoventa>;
      public status: any;
-     public displayedColumns: string[] = ['codigo','nombre','eliminar'];
+     public displayedColumns: string[] = ['codigo','existencia','nombre','cantidad','precio','diferencia','eliminar'];
      public lisart:Array<any>;
 
      @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -35,7 +36,7 @@ export class PedidoStoreComponent implements OnInit {
         private _GeneralCallService: GeneralCallService,
         private _router: Router
      ){
-         this.title = 'nuevo Pedido';
+         this.title = 'Nuevo Pedido';
          this.conceptoventa = [];
          this.token = this._UserService.getToken();
          this.pedi = new Pedido (0,'',0);
@@ -45,10 +46,13 @@ export class PedidoStoreComponent implements OnInit {
        this.getListArticulo();
    }//end ngOnInit
 
+      /*==========================================================
+        GENERAR LISTA DE ARTICULOS
+       =============================================================*/
    getListArticulo(){
-    this._GeneralCallService.getRecords(this.token,'lartic').subscribe(
+    this._GeneralCallService.getRecords(this.token,'almaitem').subscribe(
         response=>{
-            this.lisart = response.articulos;
+            this.lisart = response.existencia;
         }
     );
 }
@@ -56,23 +60,27 @@ export class PedidoStoreComponent implements OnInit {
 
 setArticulo(id,index){
     this.pedidos.data[index].codigo = this.lisart.find(x=>x.id == id).codigo;
-    this.pedidos.data[index].articulo = this.lisart.find(x=>x.id == id).nombre;
+    this.pedidos.data[index].articulo = this.lisart.find(x=>x.id == id).articulo;
     this.pedidos.data[index].marca = this.lisart.find(x=>x.id == id).marca;
     this.pedidos.data[index].modelo = this.lisart.find(x=>x.id == id).modelo;
+    this.pedidos.data[index].existencia = this.lisart.find(x=>x.id == id).totalExistencia;
 
 }
 
+     /*=============================================================
+           AGREGAR CONCEPTO POR CONCEPTO
+    ================================================================= */
    addConcepto(){
-    let nuevoConcepto = new Conceptoventa(0,this.pedi.id,0,0,'','','','',0,0,0,0,0);
+    let nuevoConcepto = new Conceptoventa(0,this.pedi.id,0,0,'','','','',0,0,0,0,0,0);
     this.conceptoventa.push(nuevoConcepto);
     this.pedidos = new MatTableDataSource (this.conceptoventa);
     this.pedidos.paginator = this.paginator;
     this.pedidos.sort = this.sort;
 }
  
-        /*--------------------------------------------------------
+        /*=========================================================
            BOTON GUARDAR
-        ---------------------------------------------------------- */
+        ============================================================ */
    
 Guardar(){
     console.log(this.token);
@@ -86,9 +94,9 @@ Guardar(){
                          item.pedido_id=this.pedi.id
                    })
                    console.log( this.conceptoventa);
-        /*--------------------------------------------------------
-           GUARDAR CONCEPTOS INGRESADOS
-        ---------------------------------------------------------- */
+        /*==========================================================
+           GUARDAR CONCEPTOS INGRESADOS DENTRO DEL BOTON GUARDAR
+        ============================================================ */
    
                this._GeneralCallService.storeRecord(this.token,'conceptoventa',this.conceptoventa).subscribe(
                    response =>{
@@ -103,11 +111,8 @@ Guardar(){
             console.log(<any>error);
         });
 } 
-         botonCancelar(){
-            this.pedi = null;
-            this._router.navigate(['inicio']);
-          }
 
+    
           getVentas(){
 
             this._GeneralCallService.getRecords(this.token,'ventas').subscribe(
@@ -122,18 +127,23 @@ Guardar(){
             );
         }
     
-           /*--------------------------------------------------------
+           /*========================================================
            ELIMINAR REGISTRO DE CONCEPTOS
-           ---------------------------------------------------------- */
+           ========================================================== */
      
           deleteRecord(index){
-                //this.conceptoventa.data.splice(index,1);
-                //this.conceptoventa._updateChangeSubscription();
+                this.pedidos.data.splice(index,1);
+                this.pedidos._updateChangeSubscription();
         }
+
+           /*========================================================
+           CANCELAR TODO EL REGISTRO CON LOS ARTICULOS
+           ==========================================================*/
             
-        /*--------------------------------------------------------
-           AGREGAR CONCEPTO POR CONCEPTO
-        ---------------------------------------------------------- */
-  
+        CancelEdit(){
+            this.pedi = null;
+            this._router.navigate(['inicio']);
+        }
+      
 }
 

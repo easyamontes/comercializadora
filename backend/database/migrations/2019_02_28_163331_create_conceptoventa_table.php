@@ -28,6 +28,7 @@ class CreateConceptoventaTable extends Migration
             $table->string('modelo');
             $table->integer('cantidad');
             $table->integer('precio');
+            $table->integer('existencia');
             $table->integer('precioventa');
             $table->integer('impuesto');
             $table->integer('total');

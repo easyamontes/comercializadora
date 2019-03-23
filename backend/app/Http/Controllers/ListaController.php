@@ -49,5 +49,6 @@ class ListaController extends Controller
             'status' => 'success'
         );
         return $data;
-    }
+    } 
+
 }
