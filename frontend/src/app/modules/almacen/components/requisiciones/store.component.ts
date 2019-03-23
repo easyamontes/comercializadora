@@ -23,10 +23,10 @@ export class RequisicionStoreComponent implements OnInit{
     public status:string;
     public token:any;
     public identity:any;
-    public rurl:Array<string>;
+    public rurl:string[];
     public requi:Requisicion;
     public item: Array<Almacen>;
-    public displayedColumns: string[] = ['codigo', 'nombre','cantidad','precio','total','actions'];
+    public displayedColumns: string[];
     public articulos: MatTableDataSource<Almacen>;
     public provlist:Array<any>;
     public artilist:Array<any>;
@@ -50,10 +50,12 @@ export class RequisicionStoreComponent implements OnInit{
             this.title='Nuevo Traspaso';
             this.rurl = ["personal","almaitem"];
             this.requi = new Requisicion(0,0,0,0,0,"TRASPASO",'NUEVO',0,date,null,null,null);
+            this.displayedColumns = ['codigo', 'nombre','costo','cantidad','precio','total','actions'];
         }else{
             this.title = 'Nueva Compra';
             this.rurl =["lproved","lartic"];
             this.requi = new Requisicion(0,0,0,0,0,"COMPRA",'NUEVO',0,date,null,null,null);
+            this.displayedColumns = ['codigo', 'nombre','cantidad','precio','total','actions'];
         }
         this.token = this._UserService.getToken();
         this.item=[];
@@ -96,6 +98,8 @@ export class RequisicionStoreComponent implements OnInit{
         this.articulos.data[index].articulo = this.artilist.find(x=>x.id == id).nombre;
         this.articulos.data[index].marca = this.artilist.find(x=>x.id == id).marca;
         this.articulos.data[index].modelo = this.artilist.find(x=>x.id == id).modelo;
+        this.articulos.data[index].costo = this.artilist.find(x=>x.id == id).costo;
+        this.articulos.data[index].totalExistencia = this.artilist.find(x=>x.id == id).totalExistencia;
     }
 
     /**crea una nueva fila en la tabla de Articulos */
