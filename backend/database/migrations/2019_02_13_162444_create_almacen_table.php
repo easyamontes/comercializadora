@@ -19,6 +19,7 @@ class CreateAlmacenTable extends Migration
             $table->collation = 'utf8_unicode_ci';
             $table->increments('id');
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('userp_id')->nullable();
             $table->unsignedInteger('requisicion_id')->nullable();
             $table->unsignedInteger('proveedor_id')->nullable();
             $table->unsignedInteger('articulo_id')->nullable();

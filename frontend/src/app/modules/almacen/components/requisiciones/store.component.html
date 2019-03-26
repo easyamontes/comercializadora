@@ -68,7 +68,8 @@
         >
         <ng-container matColumnDef="codigo">
                 <th mat-header-cell
-                    class="thm"
+                    class="thm
+                           text-center"
                     *matHeaderCellDef
                     mat-sort-header > Codigo </th>
                 <td mat-cell
@@ -77,6 +78,7 @@
             <ng-container matColumnDef="nombre">
                 <th mat-header-cell
                     class="thm
+                           text-center
                     "
                     *matHeaderCellDef
                     mat-sort-header > Articulo </th>
@@ -87,7 +89,7 @@
                                     [(ngModel)]="row.articulo_id"
                                     (ngModelChange)="setArticulo($event,i)"
                         >
-                        <mat-option *ngFor="let artitem of artilist" [value]="artitem.id">{{artitem.nombre}} {{artitem.marca}} {{artitem.modelo}}</mat-option>
+                        <mat-option *ngFor="let artitem of artilist" [value]="artitem.id">{{artitem.articulo}} {{artitem.marca}} {{artitem.modelo}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </td>
@@ -95,6 +97,7 @@
             <ng-container matColumnDef="cantidad">
                 <th mat-header-cell
                     class="thm
+                           text-center
                     "
                     *matHeaderCellDef
                     mat-sort-header > Cantidad </th>
@@ -109,21 +112,23 @@
                     </mat-form-field>
                 </td>
             </ng-container>
-            <ng-container matColumnDef="costo"
+            <ng-container matColumnDef="existencia"
                           *ngIf="params==1">
                 <th mat-header-cell
                     class="thm
-                    "
+                           text-center"
                     *matHeaderCellDef
-                    mat-sort-header > Costo </th>
+                    mat-sort-header > Existencia </th>
                 <td mat-cell
+                    class="text-center"
                     *matCellDef="let row">
-                    {{row.costo |currency}}
+                    {{row.totalExistencia}}
                 </td>
             </ng-container>
             <ng-container matColumnDef="precio">
                 <th mat-header-cell
-                    class="thm"
+                    class="thm
+                           text-center"
                     *matHeaderCellDef
                     mat-sort-header > Precio </th>
                 <td mat-cell
@@ -139,7 +144,9 @@
             </ng-container>
             <ng-container matColumnDef="total">
                 <th mat-header-cell
-                    class="thm"
+                    class="thm
+                           text-center
+                    "
                     *matHeaderCellDef
                     mat-sort-header > Total </th>
                 <td mat-cell
@@ -147,7 +154,8 @@
             </ng-container>
             <ng-container matColumnDef="actions">
                 <th mat-header-cell
-                    class="thm"
+                    class="thm
+                           text-center"
                     *matHeaderCellDef
                     mat-sort-header >
                         <button mat-raised-button

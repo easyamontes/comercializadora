@@ -1,7 +1,7 @@
 export class Articulo{
     constructor(
         public id:number,
-        public nombre:string,
+        public articulo:string,
         public marca:string,
         public modelo:string,
         public codigo:string,
