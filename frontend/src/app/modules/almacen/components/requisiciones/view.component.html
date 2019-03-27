@@ -36,7 +36,14 @@
                     *matHeaderCellDef
                     mat-sort-header > Proveedor </th>
                 <td mat-cell 
-                    *matCellDef="let row"> {{row.proveedor.nombre}} </td>
+                    *matCellDef="let row">
+                    <span *ngIf="row.proveedor">
+                        {{row.proveedor.nombre}}
+                    </span>
+                    <span *ngIf="!row.proveedor">
+                        {{row.porigen.nombre}}
+                    </span>
+                </td>
         </ng-container>
         <ng-container matColumnDef="cnt">
                 <th class="thm"

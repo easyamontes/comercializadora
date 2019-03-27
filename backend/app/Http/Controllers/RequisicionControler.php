@@ -17,9 +17,12 @@ class RequisicionControler extends Controller
 
     public function index(Request $request){
         $user = $json = $request->input('userid',null);
-        $requisicion = Requisicion::where('pdestino_id','=',$user)
+        $per = $json = $request->input('per',null);
+        $requisicion = Requisicion::where('pdestino_id','=',$per)
                                     ->where('status','=','NUEVO')
-                                    ->get()->load('proveedor');
+                                    ->get()
+                                    ->load('porigen')
+                                    ->load('proveedor');
         return response()->json(array(
             'requisicion' => $requisicion,
             'status' => 'success',

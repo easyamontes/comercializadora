@@ -19,7 +19,7 @@ class Requisicion extends Model
 
 
     public function porigen(){
-        return $this->hasOne('App\perosnal','porigen_id');
+        return $this->belongsto('App\Personal','porigen_id');
     }
 
     public function proveedor(){

@@ -50,12 +50,12 @@ export class RequisicionStoreComponent implements OnInit{
         if(this.params==1){
             this.title='Nuevo Traspaso';
             this.rurl = ["personal","almaitem"];
-            this.requi = new Requisicion(0,this.identity.sub,0,0,0,"TRASPASO",'NUEVO',0,date,null,null,null);
+            this.requi = new Requisicion(0,this.identity.per,0,0,0,"TRASPASO",'NUEVO',0,date,null,null,null);
             this.displayedColumns = ['codigo', 'nombre','existencia','cantidad','precio','total','actions'];
         }else{
             this.title = 'Nueva Compra';
             this.rurl =["lproved","lartic"];
-            this.requi = new Requisicion(0,this.identity.sub,0,0,0,"COMPRA",'NUEVO',0,date,null,null,null);
+            this.requi = new Requisicion(0,this.identity.per,0,0,0,"COMPRA",'NUEVO',0,date,null,null,null);
             this.displayedColumns = ['codigo', 'nombre','cantidad','precio','total','actions'];
         }
         this.token = this._UserService.getToken();
