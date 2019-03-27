@@ -19,7 +19,6 @@ class RequisicionControler extends Controller
         $user = $json = $request->input('userid',null);
         $per = $json = $request->input('per',null);
         $requisicion = Requisicion::where('pdestino_id','=',$per)
-        $requisicion = Requisicion::where('user_id','=',$user)
                                     ->where('status','=','NUEVO')
                                     ->get()
                                     ->load('porigen')
