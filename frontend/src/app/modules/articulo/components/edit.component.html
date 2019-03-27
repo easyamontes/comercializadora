@@ -1,29 +1,31 @@
 <div class="principal" *ngIf="articuloe != null">
     <form #articuloEdit="ngForm" (ngSubmit)="onSubmit(articuloEdit)">
-        <div class="container-fluid">
-            <div class="row col-md-6 col-md-offset-3">
+        <!--========================================================
+           inicio div
+         ===========================================================-->
+        <div class="container">       
                 <fieldset>
                     <legend>{{title}}</legend>
                     <div class="row form-group">
-                        <mat-form-field class="col-md-12 col-xs-12">
+                        <mat-form-field class="col-md-6">
                             <input type="text" matInput name="codigo" #codigo="ngModel" [(ngModel)]="articuloe.codigo" placeholder="Codigo" required>
                         </mat-form-field>
                     </div>
                     <div class="row form-group">
-                        <mat-form-field class="col-md-12 col-xs-12">
+                        <mat-form-field class="col-md-6">
                             <input type="text" matInput name="arname" #nombre="ngModel" [(ngModel)]="articuloe.articulo" placeholder="Articulo" required>
                         </mat-form-field>
                     </div>
                     <div class="row form-group">
-                        <mat-form-field class="col-md-6 col-xs-6">
+                        <mat-form-field class="col-md-3">
                             <input type="text" matInput name="marca" #marca="ngModel" [(ngModel)]="articuloe.marca" placeholder="Marca" required>
                         </mat-form-field>
-                        <mat-form-field class="col-md-6 col-xs-6">
+                        <mat-form-field class="col-md-3">
                             <input type="text" matInput name="modelo" #modelo="ngModel" [(ngModel)]="articuloe.modelo" placeholder="Modelo" required>
                         </mat-form-field>
                     </div>
                     <div class="row form-group">
-                        <mat-form-field class="col-md-12 col-xs-12">
+                        <mat-form-field class="col-md-6">
                             <mat-select placeholder="Status"  name="status" #status="ngModel" [(ngModel)]="articuloe.status" >
                                 <mat-option value="ACTIVO">ACTIVO</mat-option>
                                 <mat-option value="INACTIVO">INACTIVO</mat-option>
@@ -32,20 +34,25 @@
                         </mat-form-field>
                     </div>
                     <div class="row form-group">
-                            <mat-form-field class="col-md-12 col-xs-12">
+                            <mat-form-field class="col-md-6">
                                 <textarea type="text" matInput name="descripcion" #descripcion="ngModel" [(ngModel)]="articuloe.descripcion" placeholder="Notas" required></textarea>
                             </mat-form-field>
                         </div>
                 </fieldset>
+         <!--========================================================
+            inicio de botones
+         ===========================================================-->     
                 <div class="row form-group">
-                    <div class="col-md-3 col-xs-3">
+                    <div class="col-md-2 col-6">
                         <input type="submit" value="Guardar" class="btn btn-success col-md-12" style="margin: 1px"  [disabled]="!articuloEdit.form.valid">
                     </div>
-                    <div class="col-md-3 col-xs-3">
+                    <div class="col-md-2 col-6">
                         <a type="submit" class="btn btn-danger col-md-12" style="margin: 1px" (click)="cancelEdit()">Cancelar</a>
                     </div>
                 </div>
-            </div>
         </div>
+        <!--========================================================
+           fin container
+        ===========================================================-->     
     </form>
 </div>

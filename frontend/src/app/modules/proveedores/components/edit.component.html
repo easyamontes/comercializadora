@@ -1,8 +1,106 @@
 <div class="principal">
     <div class="container-fluid" *ngIf="proveedor">
-        <!--Formulario de introduccuin de datos-->
+        <div class="row">
+         <!--==============================================================
+             Datos    
+        ==================================================================-->
+            <div class="col-md-6 col-lg-6">
+ 
+                 <form #proveedorEdit="ngForm" (submit)="onSubmit(proveedorEdit)">
+                    <legend>{{title}}</legend>
+                    <div class="row form-group">
+                        <mat-form-field class="col-md-12 col-xs-12">
+                            <input  type="text" matInput name="nombre" #nombre="ngModel" [(ngModel)]="proveedor.nombre" placeholder="Nombre" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="row form-group">
+                        <mat-form-field class="col-md-12 col-xs-12">
+                            <input  type="text" matInput name="razon_social	" #razon_social	="ngModel" [(ngModel)]="proveedor.razon_social" placeholder="Razon Social" required>
+                        </mat-form-field>
+                    </div>
+                    <legend>Direccion</legend>
+                    <div class="row form-group">
+                        <mat-form-field class="col-md-7 col-xs-6">
+                                <input  type="text" matInput name="calle" #calle="ngModel" [(ngModel)]="proveedor.calle" placeholder="Calle" required>
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-xs-3">
+                            <input  type="text" matInput name="noext" #noext="ngModel" [(ngModel)]="proveedor.noext" placeholder="No Ext" required>
+                        </mat-form-field>
+                        <mat-form-field class="col-md-2 col-xs-3">
+                            <input  type="text" matInput name="noint" #noint="ngModel" [(ngModel)]="proveedor.noint" placeholder="No Int">
+                        </mat-form-field>
+                    </div>
+                    <div class="row form-group">
+                        <mat-form-field class="col-md-7 col-xs-7">
+                            <input  type="text" matInput name="colonia" #colonia="ngModel" [(ngModel)]="proveedor.colonia" placeholder="Colonia" required>
+                        </mat-form-field>
+                        <mat-form-field class="col-md-5 col-xs-5">
+                            <input  type="text" matInput name="cp" #cp="ngModel" [(ngModel)]="proveedor.cp" placeholder="C.P" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="row form-group">
+                        <mat-form-field class="col-md-6 col-xs-6">
+                            <input  type="text" matInput name="estado" #estado="ngModel" [(ngModel)]="proveedor.estado" placeholder="Estado" required>
+                        </mat-form-field>
+                        <mat-form-field class="col-md-6 col-xs-6">
+                            <input  type="text" matInput name="ciudad" #ciudad="ngModel" [(ngModel)]="proveedor.ciudad" placeholder="Ciudad" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="row form-group"> <br>
+                        <div class="col-md-3 col-xs-3">
+                            <input type="submit" value="Guardar" class="btn btn-success col-md-12" [disabled]="!proveedorEdit.form.valid">
+                        </div>
+                        <div class="col-md-3 col-xs-3">
+                            <a type="submit" class="btn btn-danger col-md-12" style="margin: 1px" (click)="cancelEdit()">Cancelar</a>
+                        </div>
+                    </div>
+          
+                 </form>
+
+            </div>
+        <!--==============================================================
+             Contactos    
+        ==================================================================-->
+            <div class="col-6 col-md-6 col-lg-6">
+             <legend>Contactos</legend>
+                 <div class="row form-group">
+                    <!--Comienza la lista de contactos-->
+                    <mat-list>
+                        <mat-list-item *ngFor="let contacto of contactos; let i = index">
+                            <mat-form-field class="col-1 col-md-3 col-lg-2">
+                                <input  type="text" matInput  #ctipo="ngModel" [(ngModel)]="contacto.tipo" placeholder="Tipo" required>
+                            </mat-form-field>
+                            <mat-form-field class="col-2 col-md-3 col-lg-3">
+                                <input  type="text" matInput  #cnombre="ngModel" [(ngModel)]="contacto.nombre" placeholder="Nombre" required>
+                            </mat-form-field>
+                            <mat-form-field class="col-2 col-md-3 col-lg-3">
+                                <input  type="text" matInput  #cnumero="ngModel" [(ngModel)]="contacto.numero" placeholder="Numero" required>
+                            </mat-form-field>
+                            <button mat-icon-button color="warn" (click)="deleteContacto(i)">
+                                <mat-icon aria-label="Eliminar">delete</mat-icon>
+                            </button>
+                            </mat-list-item>
+                             <mat-list-item>
+                                <button mat-stroked-button color="primary" (click)="addContacto()"><i class="material-icons">add</i> Crear Nuevo contacto</button>
+                            </mat-list-item>
+                    </mat-list>
+                 </div>
+            </div>
+        <!--=========================================================
+        fin de contactos
+        ==============================================================-->
+        </div>
+        <!--=========================================================
+        fin del row
+        ==============================================================-->
+    </div>
+</div>
+
+<!--<div class="principal">
+    <div class="container-fluid" *ngIf="proveedor">
+     
+        <!--Formulario de introduccuin de datos
         <form #proveedorEdit="ngForm" (submit)="onSubmit(proveedorEdit)">
-            <div class="row col-md-6">
                 <legend>{{title}}</legend>
                 <div class="row form-group">
                     <mat-form-field class="col-md-12 col-xs-12">
@@ -50,13 +148,13 @@
                         <a type="submit" class="btn btn-danger col-md-12" style="margin: 1px" (click)="cancelEdit()">Cancelar</a>
                     </div>
                 </div>
-            </div>
+          
         </form>
-        <!--Listado de Contactos-->
-        <div class="row col-md-6 pull-right">
+        <!--Listado de Contactos
+        <div class="col-md-6 pull-right">
             <legend>Contactos</legend>
             <div class="row form-group">
-                <!--Comienza la lista de contactos-->
+                <!--Comienza la lista de contactos
                 <mat-list>
                     <mat-list-item *ngFor="let contacto of contactos; let i = index">
                         <mat-form-field class="col-md-2 col-xs-2">
@@ -80,3 +178,4 @@
         </div>
     </div>
 </div>
+-->

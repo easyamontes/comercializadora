@@ -41,12 +41,17 @@
             <mat-divider></mat-divider>
           </mat-nav-list>
           <mat-accordion>
-              <!--Acordeon de Catalogos-->
+              <!--======================================================
+                Acordeon de Catalogos
+              =========================================================-->
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
                   Catalogos
                 </mat-expansion-panel-header>
                 <mat-nav-list>
+                    <mat-list-item [routerLink] ="['articulos']">
+                        <h4 mat-line>Articulo</h4>
+                    </mat-list-item>
                     <mat-list-item [routerLink] ="['bancos']">
                       <h4 mat-line>Bancos</h4>
                     </mat-list-item>
@@ -64,7 +69,9 @@
                     </mat-list-item>
                 </mat-nav-list>
             </mat-expansion-panel>
-              <!--Acordeon de almacen-->
+              <!--=======================================================
+                Acordeon de almacen
+               ===========================================================-->
             <mat-expansion-panel>
               <!--boton desplegable-->
               <mat-expansion-panel-header>

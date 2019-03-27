@@ -64,7 +64,7 @@ setArticulo(id,index){
     this.pedidos.data[index].marca = this.lisart.find(x=>x.id == id).marca;
     this.pedidos.data[index].modelo = this.lisart.find(x=>x.id == id).modelo;
     this.pedidos.data[index].existencia = this.lisart.find(x=>x.id == id).totalExistencia;
-
+    
 }
 
      /*=============================================================
@@ -94,13 +94,17 @@ Guardar(){
                          item.pedido_id=this.pedi.id
                    })
                    console.log( this.conceptoventa);
-        /*==========================================================
+        /*==============================================================
            GUARDAR CONCEPTOS INGRESADOS DENTRO DEL BOTON GUARDAR
-        ============================================================ */
+        ================================================================ */
    
                this._GeneralCallService.storeRecord(this.token,'conceptoventa',this.conceptoventa).subscribe(
                    response =>{
                        console.log (this.conceptoventa);
+        /*======================================================================
+           GUARDAR CONCEPTOS EN EXISTENCIA INGRESADOS DENTRO DEL BOTON GUARDAR
+        ========================================================================= */
+   
                     this._router.navigate(['inicio']);
             },error=>{
                       console.log(<any>error);
