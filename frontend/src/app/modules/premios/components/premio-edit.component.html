@@ -1,40 +1,40 @@
 <div class="principal" *ngIf = "premi != null">
     <form #premioedit = "ngForm" (ngSubmit)="onSubmit(premioedit)">
         <div class="container-fluid">
-            <div class="row col-md-6 col-md-offset-3">
+            <div class=" col-md-6 col-lg-6">
                  <fieldset>
                       <legend>{{title}}</legend>
                         <div class="row form-group">
-                         <mat-form-field class="col-md-12 col-xs-12">
+                         <mat-form-field class="col-md-12 col-lg-12">
                             <input type="text" matInput name ="nombrepremio" #nombre = "ngModel"[(ngModel)] = "premi.nombre" placeholder="Nombre Premio">
                          </mat-form-field>
                         </div>
                         <div class="row form-group">
-                            <mat-form-field class="col-md-12 col-xs-12">
+                            <mat-form-field class="col-md-12 col-lg-12">
                                <input type="date" matInput name ="rinicio" #rinicio = "ngModel"[(ngModel)] = "premi.rinicio" placeholder="Fecha Inicio">
                             </mat-form-field>
                         </div>
                         <div class="row form-group">
-                                <mat-form-field class="col-md-12 col-xs-12">
+                                <mat-form-field class="col-md-12 col-lg-12">
                                    <input type="date" matInput name ="rfinal" #rfinal = "ngModel"[(ngModel)] = "premi.rfinal" placeholder="Fecha Final">
                                 </mat-form-field>
                         </div>
                         <div class="row form-group">
-                                <mat-form-field class="col-md-12 col-xs-12">
+                                <mat-form-field class="col-md-12 col-lg-12">
                                    <input type="text" matInput name ="periodopremio" #periodo = "ngModel"[(ngModel)] = "premi.periodo" placeholder="Periodo">
                                 </mat-form-field>
                         </div>
                         <div class="row form-group">
-                                <mat-form-field class="col-md-12 col-xs-12">
+                                <mat-form-field class="col-md-12 col-lg-12">
                                    <input type="text" matInput name ="descripcionpremio" #descripcion = "ngModel"[(ngModel)] = "premi.descripcion" placeholder="descripcion">
                                 </mat-form-field>
                         </div>
                  </fieldset>
                  <div class="row form-group">
-                        <div class="col-md-3 col-xs-3">
+                        <div class="col-6 col-md-3">
                             <input type="submit" value="Guardar" class="btn btn-success col-md-12" style="margin: 1px"  [disabled]="!premioedit.form.valid">
                         </div>
-                        <div class="col-md-3 col-xs-3">
+                        <div class="col-6 col-md-3">
                             <a type="submit" class="btn btn-danger col-md-12" style="margin: 1px" (click)="cancelEdit()">Cancelar</a>
                         </div>
                     </div>

@@ -107,7 +107,7 @@ class ProveedorController extends Controller
     public function show($id, Request $request){
         $proveedor = Proveedor::find($id);
         if(is_object($proveedor)){
-            $proveedor = Proveedor::find($id)->load('user')->load('contactos');
+            $proveedor = Proveedor::find($id)->load('user');
             return response()->json(array(
                 'proveedor' => $proveedor,
                 'status' => 'success'
