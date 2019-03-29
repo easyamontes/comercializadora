@@ -53,6 +53,14 @@
                 <td mat-cell 
                     *matCellDef="let row"> {{row.importe |currency}} </td>
         </ng-container>
+        <ng-container matColumnDef="tipo">
+            <th class="thm"
+                mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header > tipo </th>
+            <td mat-cell 
+                *matCellDef="let row"> {{row.tipo}} </td>
+        </ng-container>
         <ng-container matColumnDef="accion">
                 <th class="thm"
                     mat-header-cell

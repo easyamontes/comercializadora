@@ -23,7 +23,7 @@ class Requisicion extends Model
     }
 
     public function proveedor(){
-        return $this->belongsto('App\proveedor','proveedor_id');
+        return $this->belongsto('App\Proveedor','proveedor_id');
     }
 
 }//END CLASS 
