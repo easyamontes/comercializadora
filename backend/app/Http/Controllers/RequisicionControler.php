@@ -17,9 +17,12 @@ class RequisicionControler extends Controller
 
     public function index(Request $request){
         $user = $json = $request->input('userid',null);
-        $requisicion = Requisicion::where('user_id','=',$user)
+        $per = $json = $request->input('per',null);
+        $requisicion = Requisicion::where('pdestino_id','=',$per)
                                     ->where('status','=','NUEVO')
-                                    ->get()->load('proveedor');
+                                    ->get()
+                                    ->load('porigen')
+                                    ->load('proveedor');
         return response()->json(array(
             'requisicion' => $requisicion,
             'status' => 'success',
@@ -68,11 +71,18 @@ class RequisicionControler extends Controller
         $params = json_decode($json);
         $params_array = json_decode($json, true);
         $user = $json = $request->input('userid',null);
+        $per = $json = $request->input('per',null);
         $requisicion = new Requisicion();
         unset($params_array['proveedor']);
+        unset($params_array['porigen']);
         $requisicion = Requisicion::where('id',$id)->update($params_array);
         //Cargando la existencia
-        DB::update('UPDATE almacen SET existencia = cantidad WHERE requisicion_id ='. $id);
+        if ( $params_array['tipo'] =='TRASPASO' ) {
+            DB::update('UPDATE almacen SET existencia = cantidad, userp_id = '.$user.' WHERE requisicion_id ='. $id);
+        }else {
+            DB::update('UPDATE almacen SET existencia = cantidad WHERE requisicion_id ='. $id);
+        }
+        
         $data = array(
             'requisicion' => $requisicion,
             'code' => 200,

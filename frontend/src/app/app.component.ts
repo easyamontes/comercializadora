@@ -29,7 +29,7 @@ export class AppComponent implements OnInit, DoCheck,OnDestroy{
   ){
     this.identity = _UserService.getIdentity();
     this.token = _UserService.getToken();
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this.mobileQuery = media.matchMedia('(max-width: 769px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }

@@ -50,12 +50,12 @@ export class RequisicionStoreComponent implements OnInit{
         if(this.params==1){
             this.title='Nuevo Traspaso';
             this.rurl = ["personal","almaitem"];
-            this.requi = new Requisicion(0,this.identity.sub,0,0,0,"TRASPASO",'NUEVO',0,date,null,null,null);
+            this.requi = new Requisicion(0,this.identity.per,0,0,0,"TRASPASO",'NUEVO',0,date,null,null,null);
             this.displayedColumns = ['codigo', 'nombre','existencia','cantidad','precio','total','actions'];
         }else{
             this.title = 'Nueva Compra';
             this.rurl =["lproved","lartic"];
-            this.requi = new Requisicion(0,this.identity.sub,0,0,0,"COMPRA",'NUEVO',0,date,null,null,null);
+            this.requi = new Requisicion(0,this.identity.per,0,0,0,"COMPRA",'NUEVO',0,date,null,null,null);
             this.displayedColumns = ['codigo', 'nombre','cantidad','precio','total','actions'];
         }
         this.token = this._UserService.getToken();
@@ -101,9 +101,9 @@ export class RequisicionStoreComponent implements OnInit{
         this.articulos.data[index].modelo = this.artilist.find(x=>x.id == id).modelo;
         this.articulos.data[index].costo = this.artilist.find(x=>x.id == id).costo;
         if(this.params == 1){
+            this.articulos.data[index].articulo_id = this.artilist.find(x=>x.id == id).articulo_id;
             this.articulos.data[index].proveedor_id = this.artilist.find(x=>x.id == id).proveedor_id;
             this.articulos.data[index].costo = this.artilist.find(x=>x.id == id).costo;
-            this.articulos.data[index].existencia = this.artilist.find(x=>x.id == id).cantidad * -1;
         }
         this.articulos.data[index].totalExistencia = this.artilist.find(x=>x.id == id).totalExistencia;
         console.log(this.articulos.data);
@@ -140,7 +140,10 @@ export class RequisicionStoreComponent implements OnInit{
                     for(var c = 0 ; c < this.articulos.data.length ; c++ ){
                        this.articulos.data[c].total = this.articulos.data[c].cantidad * this.articulos.data[c].precio;
                        this.articulos.data[c].requisicion_id = this.requi.id;
-                       this.articulos.data[c].userp_id = this.requi.pdestino_id;
+                       this.articulos.data[c].userp_id = this.requi.porigen_id;
+                       if(this.params == 1){
+                        this.articulos.data[c].existencia = this.articulos.data[c].cantidad * - 1;
+                       }
                     }
                     this._GeneralCallService.storeRecord(this.token,'almaitem',this.articulos.data).subscribe(
                         response=>{

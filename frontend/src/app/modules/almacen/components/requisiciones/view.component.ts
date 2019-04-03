@@ -21,7 +21,7 @@ export class RequisicionViewComponent implements OnInit{
     public status: string;
     public token:any;
     public requisicion: MatTableDataSource<Requisicion>;
-    public displayedColumns: string[]=['codigo','articulo','proveedor','cnt','accion'];
+    public displayedColumns: string[]=['codigo','articulo','proveedor','cnt','tipo','accion'];
     //Vistas heredadas
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
