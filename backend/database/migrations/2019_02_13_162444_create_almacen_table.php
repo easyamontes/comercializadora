@@ -20,9 +20,11 @@ class CreateAlmacenTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('userp_id')->nullable();
-            $table->unsignedInteger('requisicion_id')->nullable();
+            $table->unsignedInteger('requisicion_id');
             $table->unsignedInteger('proveedor_id')->nullable();
-            $table->unsignedInteger('articulo_id')->nullable();
+            $table->unsignedInteger('articulo_id');
+            $table->string('folio')->nullable();
+            $table->string('tipo')->nullable();
             $table->string('codigo');
             $table->string('articulo');
             $table->string('marca');

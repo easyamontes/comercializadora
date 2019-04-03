@@ -47,19 +47,27 @@ export class RequisicionStoreComponent implements OnInit{
         let fe = new Date(); 
         let date:string =  fe.toISOString();
         this.identity = this._UserService.getIdentity();
-        if(this.params==1){
-            this.title='Nuevo Traspaso';
-            this.rurl = ["personal","almaitem"];
-            this.requi = new Requisicion(0,this.identity.per,0,0,0,"TRASPASO",'NUEVO',0,date,null,null,null);
-            this.displayedColumns = ['codigo', 'nombre','existencia','cantidad','precio','total','actions'];
-        }else{
-            this.title = 'Nueva Compra';
-            this.rurl =["lproved","lartic"];
-            this.requi = new Requisicion(0,this.identity.per,0,0,0,"COMPRA",'NUEVO',0,date,null,null,null);
-            this.displayedColumns = ['codigo', 'nombre','cantidad','precio','total','actions'];
-        }
         this.token = this._UserService.getToken();
         this.item=[];
+        if(this.params==1){
+            this.setVenta(date);
+        }else{
+            this.setCompra(date);
+        }
+    }
+
+    setCompra(date){
+        this.title = 'Nueva Compra';
+        this.rurl =["lproved","lartic"];
+        this.requi = new Requisicion(0,this.identity.per,0,0,0,"COMPRA",'NUEVO',0,date,null,null,null);
+        this.displayedColumns = ['codigo', 'nombre','cantidad','precio','total','actions'];
+    }
+
+    setVenta(date){
+        this.title='Nuevo Traspaso';
+        this.rurl = ["personal","almaitem"];
+        this.requi = new Requisicion(0,this.identity.per,0,0,0,"VENTA",'NUEVO',0,date,null,null,null);
+        this.displayedColumns = ['codigo', 'nombre','existencia','cantidad','precio','total','actions'];
     }
 
     ngOnInit(){
@@ -112,7 +120,7 @@ export class RequisicionStoreComponent implements OnInit{
     /**crea una nueva fila en la tabla de Articulos */
     createArticulo(){
         if(this.requi.proveedor_id || this.requi.pdestino_id){
-            let nitem = new Almacen(0,0,0,this.requi.proveedor_id,null,null,null,null,null,null,null,null,null,null,null);
+            let nitem = new Almacen(0,0,0,this.requi.proveedor_id,null,null,null,null,null,null,null,null,null,null,null,null,null);
             this.item.push(nitem);
             this.articulos = new MatTableDataSource(this.item);
             this.articulos.paginator = this.paginator;
