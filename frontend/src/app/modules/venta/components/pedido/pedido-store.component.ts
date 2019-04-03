@@ -64,7 +64,7 @@ setArticulo(id,index){
     this.pedidos.data[index].marca = this.lisart.find(x=>x.id == id).marca;
     this.pedidos.data[index].modelo = this.lisart.find(x=>x.id == id).modelo;
     this.pedidos.data[index].existencia = this.lisart.find(x=>x.id == id).totalExistencia;
-    
+
 }
 
      /*=============================================================
@@ -92,6 +92,7 @@ Guardar(){
                   if(this.status == 'success'){
                     this.conceptoventa.forEach(item=>{
                          item.pedido_id=this.pedi.id
+                         item.cantidad * -1;
                    })
                    console.log( this.conceptoventa);
         /*==============================================================
@@ -105,7 +106,6 @@ Guardar(){
            GUARDAR CONCEPTOS EN EXISTENCIA INGRESADOS DENTRO DEL BOTON GUARDAR
         ========================================================================= */
    
-                    this._router.navigate(['inicio']);
             },error=>{
                       console.log(<any>error);
                     });
@@ -147,7 +147,6 @@ Guardar(){
         CancelEdit(){
             this.pedi = null;
             this._router.navigate(['inicio']);
-        }
-      
+        }    
 }
 

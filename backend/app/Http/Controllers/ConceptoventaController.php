@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Helpers\JwtAuth;
 use App\Conceptoventa;
+use App\Almacen;
 
 class ConceptoventaController extends Controller
 {
@@ -20,6 +21,9 @@ class ConceptoventaController extends Controller
         $params_array = json_decode($json,true);
         $user = $json = $request->input('userid',null);
         $cleanid = array();
+        /*=================================================
+         ingreso datos tabla conceptoventas
+        ===================================================== */
         foreach ($params_array as $item) {
             array_push($cleanid,$item['id']);
             $idpedido = $item['pedido_id'];
@@ -35,13 +39,39 @@ class ConceptoventaController extends Controller
                 $conceptoventa->articulo_id = $item['articulo_id'];
                 $conceptoventa->cantidad = $item['cantidad'];
                 $conceptoventa->precio = $item['precio'];
-
                 $conceptoventa->save();
                 array_push($cleanid,$conceptoventa['id']);
             }else {
                 $conceptoventa = Conceptoventa::where('id',$item['id'])->update($item);
             }
         }
+         /*=========================================================
+          ingreso para almacen
+          ========================================================== */
+          foreach ($params_array as $item) {
+            array_push($cleanid,$item['id']);
+            $idpedido = $item['pedido_id'];
+            if ($item['id'] < 1) {
+                $conceptoventa = new Almacen();
+                $conceptoventa->user_id = $user;
+              
+                $conceptoventa->codigo = $item['codigo'];
+                $conceptoventa->marca = $item['marca'];
+                $conceptoventa->modelo = $item['modelo'];
+                $conceptoventa->existencia = $item ['existencia'];
+                $conceptoventa->articulo = $item['articulo'];
+                $conceptoventa->articulo_id = $item['articulo_id'];
+                $conceptoventa->cantidad = $item['cantidad'];
+                $conceptoventa->precio = $item['precio'];
+                $conceptoventa->save();
+                array_push($cleanid,$conceptoventa['id']);
+            }else {
+                $conceptoventa = Almacen::where('id',$item['id'])->update($item);
+            }
+        }
+
+          //===========================================
+
         $conceptoventa = Conceptoventa::where('pedido_id','=',$idpedido)->whereNotIn('id', $cleanid)->delete();
         $data = array(
             'pedido' => $conceptoventa,
@@ -50,7 +80,23 @@ class ConceptoventaController extends Controller
         );
         return response()->json($data,200);
     }
+ 
+    public function update ($id, Request $request){
+        $json = $request->input('json', null);
+        $params = json_decode($json);
+        $params_array = json_decode($json, true);
+        $user = $json = $request->input('userid',null);
+        $conceptoventa =  new Conceptoventa();
+        $conceptoventa =  Conceptoventa::Where('id', $id)->update($params_array);
+        DB::update('UPDATE almacen SET conceptoventa = cantidad WHERE id_pedido ='.$id);
+        $data = array(
+            'pedido' => $conceptoventa,
+            'code' => 200,
+            'satus' => 'success'
+        );
+        return response()->json($data,200);
 
+    }
 }
 
 ?>
