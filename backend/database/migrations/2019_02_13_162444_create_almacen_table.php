@@ -23,6 +23,9 @@ class CreateAlmacenTable extends Migration
             $table->unsignedInteger('requisicion_id')->nullable();
             $table->unsignedInteger('proveedor_id')->nullable();
             $table->unsignedInteger('articulo_id')->nullable();
+            $table->unsignedIntger('pedido_id')->nullable();
+            $table->int('folio')->nullable();
+            $table->string('tipo')->nullable();
             $table->string('codigo');
             $table->string('articulo');
             $table->string('marca');
@@ -32,6 +35,7 @@ class CreateAlmacenTable extends Migration
             $table->integer('precio');
             $table->integer('existencia')->nullable();
             $table->integer('total');
+            
             $table->timestamps();
         });
 
