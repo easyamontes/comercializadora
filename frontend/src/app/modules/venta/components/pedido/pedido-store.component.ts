@@ -3,9 +3,7 @@ import { Router} from '@angular/router';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { UserService } from '../../../../services/user.service';
 import {GeneralCallService} from '../../../../services/generalCall.service';
-import { Conceptoventa } from './../../../../models/conceptoventa';
-
-
+import { Almacen } from './../../../../models/almacen';
 import { Pedido } from 'src/app/models/pedido';
 
 @Component ({
@@ -21,8 +19,8 @@ export class PedidoStoreComponent implements OnInit {
      public title: string;
      public token: any;
      public pedi: Pedido;
-     public pedidos: MatTableDataSource<Conceptoventa>;
-     public conceptoventa: Array<Conceptoventa>;
+     public pedidos: MatTableDataSource<Almacen>;
+     public conceptoventa: Array<Almacen>;
      public status: any;
      public displayedColumns: string[] = ['codigo','existencia','nombre','cantidad','precio','diferencia','eliminar'];
      public lisart:Array<any>;
@@ -42,7 +40,7 @@ export class PedidoStoreComponent implements OnInit {
          this.pedi = new Pedido (0,'',0);
      }
      ngOnInit(){
-       this.getVentas();
+      // this.getVentas();
        this.getListArticulo();
    }//end ngOnInit
 
@@ -64,14 +62,13 @@ setArticulo(id,index){
     this.pedidos.data[index].marca = this.lisart.find(x=>x.id == id).marca;
     this.pedidos.data[index].modelo = this.lisart.find(x=>x.id == id).modelo;
     this.pedidos.data[index].existencia = this.lisart.find(x=>x.id == id).totalExistencia;
-
 }
 
      /*=============================================================
            AGREGAR CONCEPTO POR CONCEPTO
     ================================================================= */
    addConcepto(){
-    let nuevoConcepto = new Conceptoventa(0,this.pedi.id,0,0,'','','','',0,0,0,0,0,0);
+    let nuevoConcepto = new Almacen(0,0,0,0,0,0,null,"SALIDA",null,null,null,null,0,0,0,0,0,0);
     this.conceptoventa.push(nuevoConcepto);
     this.pedidos = new MatTableDataSource (this.conceptoventa);
     this.pedidos.paginator = this.paginator;
@@ -91,15 +88,15 @@ Guardar(){
             this.status = response.status;
                   if(this.status == 'success'){
                     this.conceptoventa.forEach(item=>{
-                         item.pedido_id=this.pedi.id
-                         item.cantidad * -1;
+                         item.pedido_id = this.pedi.id;
+                         
                    })
-                   console.log( this.conceptoventa);
+                  
         /*==============================================================
            GUARDAR CONCEPTOS INGRESADOS DENTRO DEL BOTON GUARDAR
         ================================================================ */
    
-               this._GeneralCallService.storeRecord(this.token,'conceptoventa',this.conceptoventa).subscribe(
+               this._GeneralCallService.storeRecord(this.token,'almaitem',this.conceptoventa).subscribe(
                    response =>{
                        console.log (this.conceptoventa);
         /*======================================================================
@@ -118,7 +115,6 @@ Guardar(){
 
     
           getVentas(){
-
             this._GeneralCallService.getRecords(this.token,'ventas').subscribe(
                 response=>{
                     this.pedidos = response.pedido;

@@ -120,7 +120,7 @@ export class RequisicionStoreComponent implements OnInit{
     /**crea una nueva fila en la tabla de Articulos */
     createArticulo(){
         if(this.requi.proveedor_id || this.requi.pdestino_id){
-            let nitem = new Almacen(0,0,0,this.requi.proveedor_id,null,null,null,null,null,null,null,null,null,null,null,null,null);
+            let nitem = new Almacen(0,0,0,0,this.requi.proveedor_id,null,null,null,null,null,null,null,null,null,null,null,null,null);
             this.item.push(nitem);
             this.articulos = new MatTableDataSource(this.item);
             this.articulos.paginator = this.paginator;

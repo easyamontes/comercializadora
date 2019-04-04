@@ -5,6 +5,7 @@ export class Almacen{
         public requisicion_id:number,
         public proveedor_id:number,
         public articulo_id:number,
+        public pedido_id:number,
         public folio:number,
         public tipo:string,
         public codigo:string,
