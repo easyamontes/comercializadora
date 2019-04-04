@@ -6,7 +6,7 @@ export class Almacen{
         public proveedor_id:number,
         public articulo_id:number,
         public folio:number,
-        public tipo,
+        public tipo:string,
         public codigo:string,
         public articulo:string,
         public marca:string,

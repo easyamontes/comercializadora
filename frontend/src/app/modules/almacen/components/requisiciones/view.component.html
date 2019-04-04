@@ -14,71 +14,71 @@
                [dataSource]="requisicion"
                mat-Sort
         >
-        <ng-container matColumnDef="codigo">
-            <th class="thm"
-                mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header > Folio </th>
-            <td mat-cell 
-                *matCellDef="let row"> {{row.folio}} </td>
-        </ng-container>
-        <ng-container matColumnDef="articulo">
+            <ng-container matColumnDef="codigo">
                 <th class="thm"
                     mat-header-cell
                     *matHeaderCellDef
-                    mat-sort-header > Fecha </th>
+                    mat-sort-header > Folio </th>
                 <td mat-cell 
-                    *matCellDef="let row"> {{row.fecha | date:'dd/MM/yyyy'}} </td>
-        </ng-container>
-        <ng-container matColumnDef="proveedor">
+                    *matCellDef="let row"> {{row.folio}} </td>
+            </ng-container>
+            <ng-container matColumnDef="articulo">
+                    <th class="thm"
+                        mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header > Fecha </th>
+                    <td mat-cell 
+                        *matCellDef="let row"> {{row.fecha | date:'dd/MM/yyyy'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="proveedor">
+                    <th class="thm"
+                        mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header > Proveedor </th>
+                    <td mat-cell 
+                        *matCellDef="let row">
+                        <span *ngIf="row.proveedor">
+                            {{row.proveedor.nombre}}
+                        </span>
+                        <span *ngIf="!row.proveedor">
+                            {{row.porigen.nombre}}
+                        </span>
+                    </td>
+            </ng-container>
+            <ng-container matColumnDef="cnt">
+                    <th class="thm"
+                        mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header > importe </th>
+                    <td mat-cell 
+                        *matCellDef="let row"> {{row.importe |currency}} </td>
+            </ng-container>
+            <ng-container matColumnDef="tipo">
                 <th class="thm"
                     mat-header-cell
                     *matHeaderCellDef
-                    mat-sort-header > Proveedor </th>
+                    mat-sort-header > tipo </th>
                 <td mat-cell 
-                    *matCellDef="let row">
-                    <span *ngIf="row.proveedor">
-                        {{row.proveedor.nombre}}
-                    </span>
-                    <span *ngIf="!row.proveedor">
-                        {{row.porigen.nombre}}
-                    </span>
-                </td>
-        </ng-container>
-        <ng-container matColumnDef="cnt">
-                <th class="thm"
-                    mat-header-cell
-                    *matHeaderCellDef
-                    mat-sort-header > importe </th>
-                <td mat-cell 
-                    *matCellDef="let row"> {{row.importe |currency}} </td>
-        </ng-container>
-        <ng-container matColumnDef="tipo">
-            <th class="thm"
-                mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header > tipo </th>
-            <td mat-cell 
-                *matCellDef="let row"> {{row.tipo}} </td>
-        </ng-container>
-        <ng-container matColumnDef="accion">
-                <th class="thm"
-                    mat-header-cell
-                    *matHeaderCellDef
-                    mat-sort-header > Recibir </th>
-                <td mat-cell 
-                    *matCellDef="let row">
-                    <button mat-icon-button
-                            (click)="acptarEntrada(row.id,row)"
-                            color="primary">
-                    <mat-icon>done</mat-icon>
-            </button>
-                </td>
-        </ng-container>
-        <tr mat-header-row 
-            *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row
-            *matRowDef="let row; columns: displayedColumns;">
+                    *matCellDef="let row"> {{row.tipo}} </td>
+            </ng-container>
+            <ng-container matColumnDef="accion">
+                    <th class="thm"
+                        mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header > Recibir </th>
+                    <td mat-cell 
+                        *matCellDef="let row">
+                        <button mat-icon-button
+                                (click)="acptarEntrada(row.id,row)"
+                                color="primary">
+                        <mat-icon>done</mat-icon>
+                </button>
+                    </td>
+            </ng-container>
+            <tr mat-header-row 
+                *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row
+                *matRowDef="let row; columns: displayedColumns;">
         </table>
     </div>
     <div class="row">

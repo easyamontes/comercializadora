@@ -45,6 +45,8 @@ class AlmacenController extends Controller
                 $almacen->requisicion_id = $item['requisicion_id'];
                 $almacen->proveedor_id = $item['proveedor_id'];
                 $almacen->articulo_id = $item['articulo_id'];
+                $almacen->folio = $item['folio'];
+                $almacen->tipo = $item['tipo'];
                 $almacen->codigo = $item['codigo'];
                 $almacen->articulo = $item['articulo'];
                 $almacen->marca = $item['marca'];

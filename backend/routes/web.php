@@ -24,6 +24,8 @@ Route::get('/api/lpersonal','ListaController@empleadosList')->middleware('islogg
 Route::get('/api/lpuesto','ListaController@puestosList')->middleware('islogged');
 Route::get('/api/lproved','ListaController@proveedoresList')->middleware('islogged');
 Route::get('/api/lartic','ListaController@artiucloList')->middleware('islogged');
+Route::put('/api/recive/{id}','RequisicionControler@recive')->middleware('islogged');
+
 
 //Rutas para el control de acciones en puestos
 Route::resource('/api/puestos','PuestoController');

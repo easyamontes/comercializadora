@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Helpers\JwtAuth;
 use App\Requisicion;
+use App\Almacen;
 
 class RequisicionControler extends Controller
 {
@@ -77,12 +78,7 @@ class RequisicionControler extends Controller
         unset($params_array['porigen']);
         $requisicion = Requisicion::where('id',$id)->update($params_array);
         //Cargando la existencia
-        if ( $params_array['tipo'] =='TRASPASO' ) {
-            DB::update('UPDATE almacen SET existencia = cantidad, userp_id = '.$user.' WHERE requisicion_id ='. $id);
-        }else {
-            DB::update('UPDATE almacen SET existencia = cantidad WHERE requisicion_id ='. $id);
-        }
-        
+        DB::update('UPDATE almacen SET existencia = cantidad WHERE requisicion_id ='. $id);
         $data = array(
             'requisicion' => $requisicion,
             'code' => 200,
@@ -90,4 +86,34 @@ class RequisicionControler extends Controller
         );
         return response()->json($data,200);
     }
-} 
+
+    public function recive ($id, Request $request){
+        $json = $request->input('json',null);
+        $params = json_decode($json);
+        $params_array = json_decode($json, true);
+        $user = $json = $request->input('userid',null);
+        $requisicion = Requisicion::with('articulos')->where('id',$id)->first();
+        $requisicion->status = "RECIBIDO";
+        $requisicion->save();
+        $almacen = $requisicion->articulos()->get();
+        //Duplicando requisicion
+        $newRequi = $requisicion->replicate();
+        $newRequi->tipo  = "COMPRA";
+        $newRequi->folio = Requisicion::where('user_id','=',$user)->where('tipo','=',$newRequi->tipo)->max('folio') + 1;
+        $newRequi->save();
+        //Duplicando conceptos
+        foreach ($almacen as $item) {
+            $articulo = Almacen::where('id',$item->id)->first();
+            $newArticulo = $articulo->replicate();
+            $newArticulo->userp_id = $user;
+            $newArticulo->existencia = $newArticulo->existencia *-1;
+            $newArticulo->save();
+        }
+        $data = array(
+            'requisicion' => $newRequi,
+            'code' => 200,
+            'status' => 'success'
+        );
+        return response()->json($data,200);
+    }
+} //End class

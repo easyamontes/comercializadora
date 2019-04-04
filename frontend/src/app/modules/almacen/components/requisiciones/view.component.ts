@@ -9,19 +9,19 @@ import { Requisicion } from './../../../../models/requisicion';
 @Component({
     selector: 'requi-view',
     templateUrl: './view.component.html',
-    providers:[
+    providers: [
         UserService,
         GeneralCallService
     ]
 })
 
-export class RequisicionViewComponent implements OnInit{
+export class RequisicionViewComponent implements OnInit {
     //Propiedades de la clasee
-    public title:string;
+    public title: string;
     public status: string;
-    public token:any;
+    public token: any;
     public requisicion: MatTableDataSource<Requisicion>;
-    public displayedColumns: string[]=['codigo','articulo','proveedor','cnt','tipo','accion'];
+    public displayedColumns: string[] = ['codigo', 'articulo', 'proveedor', 'cnt', 'tipo', 'accion'];
     //Vistas heredadas
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -29,52 +29,60 @@ export class RequisicionViewComponent implements OnInit{
     constructor(
         private _UserService: UserService,
         private _GeneralCallService: GeneralCallService,
-    ){
+    ) {
         this.token = this._UserService.getToken();
         this.title = "Recepcion De Articulos";
     }
 
 
-    ngOnInit(){
+    ngOnInit() {
         this.getRequi();
     }
 
     /** Funcion para traer las requisiciones pendientes por recibir */
-    getRequi(){
-        this._GeneralCallService.getRecords(this.token,'requisicion').subscribe(
-            response=>{
-                if(response.code==200){
+    getRequi() {
+        this._GeneralCallService.getRecords(this.token, 'requisicion').subscribe(
+            response => {
+                if (response.code == 200) {
                     this.requisicion = new MatTableDataSource(response.requisicion);
-                }else{
-                    let emitem:Array<Requisicion>
+                } else {
+                    let emitem: Array<Requisicion>
                     emitem = [];
                     this.requisicion = new MatTableDataSource(emitem);
                 }
-            },error=>{
+            }, error => {
                 console.log(<any>error);
             });
     }
 
     /**Funcion que cambia el estatus de la entrada y lo manda a las exitencias */
-    acptarEntrada(id:any,item:Requisicion){
-        if(confirm('Desea Confirmar Esta Requisicion')){
-            item.status="RECIBIDO"
-            this._GeneralCallService.updateRecord(this.token,'requisicion',item,id).subscribe(
-                response=>{
-                    if(response.code==200){
+    acptarEntrada(id: any, item: Requisicion) {
+        if (confirm('Desea Confirmar Esta Requisicion')) {
+            item.status = "RECIBIDO"
+            if(item.tipo == "COMPRA"){
+                this._GeneralCallService.updateRecord(this.token, 'requisicion', item, id).subscribe(
+                    response => {
+                        if (response.code == 200) {
+                            this.getRequi();
+                        }
+                    }, error => {
+                        console.log(<any>error);
+                    });
+            }else if(item.tipo = "VENTA"){
+                this._GeneralCallService.updateRecord(this.token, 'recive', item, id).subscribe(
+                    response => {
                         this.getRequi();
-                    }
-                },error=>{
-                    console.log(<any>error);
-            });
+                    }, error => {
+                        console.log(<any>error);
+                    });
+            }
         }
     }
 
     applyFilter(filterValue: string) {
         this.requisicion.filter = filterValue.trim().toLowerCase();
-    
         if (this.requisicion.paginator) {
-          this.requisicion.paginator.firstPage();
+            this.requisicion.paginator.firstPage();
         }
     }
 
