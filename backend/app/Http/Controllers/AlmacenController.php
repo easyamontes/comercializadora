@@ -38,6 +38,7 @@ class AlmacenController extends Controller
         foreach ($params_array as $item) {
             array_push($cleanid,$item['id']);
             $idrequi = $item['requisicion_id'];
+            $idpedi = $item ['pedido_id'];
             if ($item['id'] < 1) {
                 $almacen = new Almacen();
                 $almacen->user_id = $user;
@@ -45,6 +46,9 @@ class AlmacenController extends Controller
                 $almacen->requisicion_id = $item['requisicion_id'];
                 $almacen->proveedor_id = $item['proveedor_id'];
                 $almacen->articulo_id = $item['articulo_id'];
+                $almacen->pedido_id = $item ['pedido_id'];
+                $almacen->folio = $item ['folio'];
+                $almacen->tipo = $item ['tipo'];
                 $almacen->codigo = $item['codigo'];
                 $almacen->articulo = $item['articulo'];
                 $almacen->marca = $item['marca'];
@@ -59,7 +63,11 @@ class AlmacenController extends Controller
                 $almacen = Almacen::where('id',$item['id'])->update($item);
             }
         }
-        $almacen = Almacen::where('requisicion_id','=',$idrequi)->whereNotIn('id', $cleanid)->delete();
+        if ( $idpedi > 0 ){
+            $almacen = Almacen::where('pedido_id','=',$idpedi)->whereNotIn('id', $cleanid)->delete();
+        }else{  $almacen = Almacen::where('requisicion_id','=',$idrequi)->whereNotIn('id', $cleanid)->delete();
+        }
+      
         $data = array(
             'almacen' => $almacen,
             'code' => 200,

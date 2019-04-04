@@ -13,20 +13,10 @@ class PedidoController extends Controller
     {
         $this->middleware('islogged');
     }
-    /* 
+
     public function index(Request $request){
-        $user = $json = $request->input('userid',null);
-        $pedido = Pedido::selectRaw(' * ')
-                        ->where('user_id',$user)
-                        ->groupBy('articulo_id')
-                        ->get();
-        $data = array(
-            'pedido' => $pedido,
-            'code' => 200,
-            'satus' => 'success'
-        );
-        return response()->json($data,200);
-    }*/
+/** */
+    }
 
 
 
