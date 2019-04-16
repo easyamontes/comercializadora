@@ -20,6 +20,9 @@ class CreatePedidoTable extends Migration
             $table->increments('id');
             $table->date('fechapedido');
             $table->integer('importe');
+            $table->integer('pdestino');
+            $table->string('nombre');
+            $table->string('tipo');
             $table->timestamps();
         });
     }

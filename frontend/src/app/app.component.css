@@ -7,7 +7,7 @@
     left: 0;
     right: 0;
   }
-  
+
   .is-mobile .toolbar {
     position: fixed;
     /* nos aseguramos que la barra siempre este anclada en la parte superiror de la pagina */

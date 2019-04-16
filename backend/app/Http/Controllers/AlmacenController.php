@@ -35,11 +35,12 @@ class AlmacenController extends Controller
         $params_array = json_decode($json,true);
         $user = $json = $request->input('userid',null);
         $cleanid = array();
+        
         foreach ($params_array as $item) {
             array_push($cleanid,$item['id']);
             $idrequi = $item['requisicion_id'];
             $idpedi = $item ['pedido_id'];
-            if ($item['id'] < 1) {
+            if ($item['id'] < 1 ){
                 $almacen = new Almacen();
                 $almacen->user_id = $user;
                 $almacen->userp_id = $item['userp_id'];
@@ -62,11 +63,12 @@ class AlmacenController extends Controller
             }else {
                 $almacen = Almacen::where('id',$item['id'])->update($item);
             }
-        }
+      
         if ( $idpedi > 0 ){
-            $almacen = Almacen::where('pedido_id','=',$idpedi)->whereNotIn('id', $cleanid)->delete();
+            $almacen = Almacen::where('pedido_id','=',$idpedi);
         }else{  $almacen = Almacen::where('requisicion_id','=',$idrequi)->whereNotIn('id', $cleanid)->delete();
         }
+          }
       
         $data = array(
             'almacen' => $almacen,

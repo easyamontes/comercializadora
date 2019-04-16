@@ -3,6 +3,9 @@ export class Pedido{
         public id:number,
         public fechapedido:string,
         public importe:number,
+        public pdestino:number,
+        public nombre:string,
+        public tipo:string,
     ){}
 
 }//End Class

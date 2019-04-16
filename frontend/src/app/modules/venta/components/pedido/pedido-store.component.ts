@@ -6,9 +6,10 @@ import {GeneralCallService} from '../../../../services/generalCall.service';
 import { Almacen } from './../../../../models/almacen';
 import { Pedido } from 'src/app/models/pedido';
 
+
 @Component ({
        selector: 'pedido-store',
-       templateUrl:'./pedido-edit.component.html',
+       templateUrl:'./pedido-store.component.html',
        providers: [
            UserService,
            GeneralCallService
@@ -24,6 +25,9 @@ export class PedidoStoreComponent implements OnInit {
      public status: any;
      public displayedColumns: string[] = ['codigo','existencia','nombre','cantidad','precio','diferencia','eliminar'];
      public lisart:Array<any>;
+     public perso:Array<any>;
+  
+
 
      @ViewChild(MatPaginator) paginator: MatPaginator;
      @ViewChild(MatSort) sort: MatSort;
@@ -37,11 +41,12 @@ export class PedidoStoreComponent implements OnInit {
          this.title = 'Nuevo Pedido';
          this.conceptoventa = [];
          this.token = this._UserService.getToken();
-         this.pedi = new Pedido (0,'',0);
+         this.pedi = new Pedido (0,'',0,0,'',"SALIDA");
      }
      ngOnInit(){
       // this.getVentas();
        this.getListArticulo();
+       this.getListPersonal();
    }//end ngOnInit
 
       /*==========================================================
@@ -56,12 +61,26 @@ export class PedidoStoreComponent implements OnInit {
 }
 
 
+getListPersonal(){
+    this._GeneralCallService.getRecords(this.token,'personal').subscribe(
+        response=>{
+                this.perso = response.personal;         
+        }
+    );
+}
+
+
 setArticulo(id,index){
     this.pedidos.data[index].codigo = this.lisart.find(x=>x.id == id).codigo;
     this.pedidos.data[index].articulo = this.lisart.find(x=>x.id == id).articulo;
     this.pedidos.data[index].marca = this.lisart.find(x=>x.id == id).marca;
     this.pedidos.data[index].modelo = this.lisart.find(x=>x.id == id).modelo;
     this.pedidos.data[index].existencia = this.lisart.find(x=>x.id == id).totalExistencia;
+}
+
+setPersonal(id){
+     this.pedi.nombre = this.perso.find(x=>x.id == id).nombre;
+ 
 }
 
      /*=============================================================
@@ -89,7 +108,9 @@ Guardar(){
                   if(this.status == 'success'){
                     this.conceptoventa.forEach(item=>{
                          item.pedido_id = this.pedi.id;
-                         
+                         item.cantidad = item.cantidad * -1;
+                         item.existencia = item.cantidad;
+                         item.userp_id = this.pedi.pdestino;
                    })
                   
         /*==============================================================
@@ -99,14 +120,11 @@ Guardar(){
                this._GeneralCallService.storeRecord(this.token,'almaitem',this.conceptoventa).subscribe(
                    response =>{
                        console.log (this.conceptoventa);
-        /*======================================================================
-           GUARDAR CONCEPTOS EN EXISTENCIA INGRESADOS DENTRO DEL BOTON GUARDAR
-        ========================================================================= */
    
             },error=>{
                       console.log(<any>error);
                     });
-            this._router.navigate(['inicio']);
+            this._router.navigate(['./ventas/welcome']);
             }
         },error=>{
             console.log(<any>error);
@@ -142,7 +160,7 @@ Guardar(){
             
         CancelEdit(){
             this.pedi = null;
-            this._router.navigate(['inicio']);
+            this._router.navigate(['./ventas/welcome']);
         }    
 }
 
