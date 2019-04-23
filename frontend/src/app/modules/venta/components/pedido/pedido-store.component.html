@@ -1,35 +1,33 @@
 <div class="principal">
-    <!-- creando cabecera de la requisicion -->
     <div class="container-fluid">
+        <!-- creando cabecera de la requisicion -->
         <div class="row">
             <legend> {{title}}</legend>
             <!--Dibujando la baecera de informacion-->
-            <mat-form-field>
+            <mat-form-field class="col-md-3 col-xs-12">
                 <input matInput [matDatepicker]="picker" [(ngModel)]="pedi.fechapedido" #fechapedido="ngModel"
                     placeholder="Fecha pedido">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
-            <mat-form-field>
-
+            <mat-form-field class="col-md-3 col-xs-12">
                 <input matInput [(ngModel)]="pedi.importe" #importe="ngModel" placeholder="importe">
             </mat-form-field>
-
-            <mat-form-field>
-
+            <mat-form-field class="col-md-3 col-xs-12">
                 <mat-select matInput [(ngModel)]="pedi.pdestino" #nombre="ngModel" (ngModelChange)="setPersonal($event)"
                     placeholder="Asignar">
                     <mat-option *ngFor="let  pedi of perso" [value]="pedi.id">{{pedi.nombre}}</mat-option>
                 </mat-select>
             </mat-form-field>
+        <!--=============================================================
+         boton agregar articulo
+        =============================================================-->
+            <div class="col-xs-12 col-md-3">
+                <button class="ventas col-md-12" color="primary" mat-flat-button (click)="addConcepto()">NUEVO</button>
+            </div>
         </div>
     </div>
-    <!--=============================================================
-         boton agregar articulo
-    =============================================================-->
-    <div class="col-md-3 col-xs-4">
-        <a type="submit" class="btn btn-danger col-md-12" style="margin: 1px" (click)="addConcepto()">nuevo</a>
-    </div>
+
     <!--=============================================================
          Creando tabla 
     =============================================================-->
@@ -99,7 +97,7 @@
     <div class="row form-group">
         <div class="col-md-3 col-xs-3">
 
-            <a type="submit" class="btn btn-danger col-md-12" style="margin: 1px" (click)="Guardar()">Guardar</a>
+            <a type="submit" class="btn btn-success col-md-12" style="margin: 1px" (click)="Guardar()">Guardar</a>
         </div>
         <div class="col-md-3 col-xs-3">
             <a type="submit" class="btn btn-danger col-md-12" style="margin: 1px" (click)="CancelEdit()">Cancelar</a>

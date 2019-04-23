@@ -10,6 +10,7 @@ import { Pedido } from 'src/app/models/pedido';
 @Component ({
        selector: 'pedido-store',
        templateUrl:'./pedido-store.component.html',
+
        providers: [
            UserService,
            GeneralCallService
