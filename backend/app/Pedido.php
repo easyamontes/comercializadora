@@ -11,4 +11,10 @@ class Pedido extends Model
     public function user(){
         return $this->belongsto('App\User','user_id');
     }
+
+
+    public function articulos(){
+        return $this->hasMany('App\Almacen','pedido_id');
+    }
+
 }

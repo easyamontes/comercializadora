@@ -1,0 +1,108 @@
+<div class="principal">
+    <!-- creando cabecera de la requisicion -->
+    <div class="container-fluid">
+        <div class="row">
+            <legend> {{title}}</legend>
+            <!--Dibujando la baecera de informacion-->
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="pedi.fechapedido" #fechapedido="ngModel"
+                    placeholder="Fecha pedido">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+
+                <input matInput [(ngModel)]="pedi.importe" #importe="ngModel" placeholder="importe">
+            </mat-form-field>
+
+            <mat-form-field>
+
+                <mat-select matInput [(ngModel)]="pedi.pdestino" #nombre="ngModel" (ngModelChange)="setPersonal($event)"
+                    placeholder="Asignar">
+                    <mat-option *ngFor="let  pedi of perso" [value]="pedi.id">{{pedi.nombre}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <!--=============================================================
+         boton agregar articulo
+    =============================================================-->
+    <div class="col-md-3 col-xs-4">
+        <a type="submit" class="btn btn-danger col-md-12" style="margin: 1px" (click)="addConcepto()">nuevo</a>
+    </div>
+    <!--=============================================================
+         Creando tabla 
+    =============================================================-->
+    <div class="row">
+        <table class="col-md-12 col-xs-12 mat-elevation-z8" mat-table [dataSource]="pedidos" mat-Sort>
+            <ng-container matColumnDef="codigo">
+                <th mat-header-cell class="thm" *matHeaderCellDef mat-sort-header> Codigo </th>
+                <td mat-cell *matCellDef="let row"> {{row.codigo}} </td>
+            </ng-container>
+            <ng-container matColumnDef="existencia">
+                <th mat-header-cell class="thm" *matHeaderCellDef mat-sort-header> Existencia </th>
+                <td mat-cell *matCellDef="let row"> {{row.existencia}} </td>
+            </ng-container>
+            <ng-container matColumnDef="nombre">
+                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Articulo </th>
+                <td mat-cell *matCellDef="let row; let i = index">
+                    <mat-form-field>
+                        <mat-select matInput [(ngModel)]="row.articulo_id" #importe="ngModel"
+                            (ngModelChange)="setArticulo($event,i)">
+                            <mat-option *ngFor="let artitem of lisart" [value]="artitem.id">{{artitem.articulo}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="cantidad">
+                <th mat-header-cell class="thm" *matHeaderCellDef mat-sort-header> cantidad
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="row.cantidad" #factura="ngModel" type="number" min="1"
+                            max="{{row.existencia}}" pattern="^[0-9]+">
+                    </mat-form-field>
+
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="precio">
+                <th mat-header-cell class="thm" *matHeaderCellDef mat-sort-header> Precio
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="row.precio" #factura="ngModel" type="number">
+                    </mat-form-field>
+
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="diferencia">
+                <th mat-header-cell class="thm" *matHeaderCellDef mat-sort-header> Dif. Existencia </th>
+                <td mat-cell *matCellDef="let row"> {{row.existencia - row.cantidad }} </td>
+            </ng-container>
+            <ng-container matColumnDef="eliminar">
+                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
+                <td mat-cell *matCellDef="let i = index">
+                    <button mat-icon-button (click)="deleteRecord(i)" color="primary">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </table>
+    </div>
+    <div class="row">
+        <mat-paginator [pageSizeOptions]="[5, 10]"></mat-paginator>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-3 col-xs-3">
+
+            <a type="submit" class="btn btn-danger col-md-12" style="margin: 1px" (click)="Guardar()">Guardar</a>
+        </div>
+        <div class="col-md-3 col-xs-3">
+            <a type="submit" class="btn btn-danger col-md-12" style="margin: 1px" (click)="CancelEdit()">Cancelar</a>
+        </div>
+    </div>
+</div>
