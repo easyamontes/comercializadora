@@ -17,13 +17,13 @@ class PersonalController extends Controller
     public function index(Request $request){
         $json = $request->input('json',null);
         $per = $json = $request->input('per',null);
+        $user = $json = $request->input('userid',null);
         /* ------------> Funcion para generar el arbol genialogico
         $personal = Personal::with('allChildrenAccounts')->find($per);
-        $personal->allChildrenAccounts; 
-        $personal->allChildrenAccounts->first()->allChildrenAccounts;*/
-
-        
-        $personal = Personal::all()->load('usuario');        
+        $personal->allChildrenAccounts;
+        $personal = Personal::all()->load('usuario');   
+        */
+        $personal = Personal::all()->load('usuario'); 
 
         return response()->json(array(
             'personal' => $personal,
@@ -132,6 +132,16 @@ class PersonalController extends Controller
                 'status' => 'error'
             ),400);
         }
+    }
+
+    public function getHerencia(Request $request){
+        $user = $json = $request->input('userid',null);
+        $personal = Personal::with('familia')->find($user);
+        $personal->familia->first()->familia;
+        return response()->json(array(
+            'personal' => $personal,
+            'status' => 'success'
+        ),200);
     }
 
 }//End Class

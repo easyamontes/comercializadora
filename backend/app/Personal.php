@@ -22,12 +22,12 @@ class Personal extends Model
         return $this->belongsto('App\User','id','personal_id');
     }
 
-    public function childrenAccounts(){
+    public function hijos(){
         return $this->hasMany('App\Personal', 'personal_id', 'id');
     }
 
-    public function allChildrenAccounts(){
-        return $this->childrenAccounts()->with('allChildrenAccounts');
+    public function familia(){
+        return $this->hijos()->with('familia');
     }
 
 }

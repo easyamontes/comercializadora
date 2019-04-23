@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../../module-materilize';
 import { AlmacenRoutingModule } from './almacen-routing.module';
+//Pipes
+import {NestedPipe} from './../../pipes/nested.pipe';
 //components
 import { AlmacenMainComponent } from './components/main.component';
 import { ExistenciaViewComponent } from './components/existencia/listview.component';
@@ -17,7 +19,8 @@ import { AlmacenDefaultComponent } from './components/default/default.component'
         ExistenciaViewComponent,
         RequisicionViewComponent,
         RequisicionStoreComponent,
-        AlmacenDefaultComponent
+        AlmacenDefaultComponent,
+        NestedPipe
     ],
     imports: [
         AlmacenRoutingModule,
