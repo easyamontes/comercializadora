@@ -84,7 +84,7 @@ export class RequisicionStoreComponent implements OnInit {
         this._GeneralCallService.getRecords(this.token, this.rurl[0]).subscribe(
             response => {
                 if (this.params == 1) {
-                    this.provlist = this._PersonalUtil.getFamilia(response.personal.familia);
+                    this.provlist = this._PersonalUtil.getFamilia(response);
                 } else {
                     this.provlist = response.proveedorll;
                 }

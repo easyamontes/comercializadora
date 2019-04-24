@@ -30,4 +30,8 @@ class Personal extends Model
         return $this->hijos()->with('familia');
     }
 
+    public function padre(){
+        return $this->belongsto('App\Personal','personal_id');
+    }
+
 }
