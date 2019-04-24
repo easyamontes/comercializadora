@@ -33,10 +33,11 @@ class PedidoController extends Controller
        $params_array = json_decode($json,true);
        $user = $json = $request->input('userid',null);
        $pedido = new Pedido();
+       $fecha = substr($params->fechapedido,0,10); 
        //asignando informacion al objeto
        $pedido->user_id = $user;
        $pedido->id = $params->id;
-       $pedido->fechapedido = $params->fechapedido;
+       $pedido->fechapedido = $fecha;
        $pedido->importe = $params->importe;
        $pedido->pdestino = $params->pdestino;
        $pedido->nombre = $params->nombre;
@@ -90,7 +91,6 @@ class PedidoController extends Controller
         $params = json_decode($json);
         $params_array = json_decode($json, true);
         $pedido = new Pedido();
-
         unset($params_array['id']);
         unset($params_array['user_id']);
         unset($params_array['created_at']);

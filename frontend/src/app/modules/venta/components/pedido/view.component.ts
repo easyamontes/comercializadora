@@ -30,6 +30,7 @@ export class PedidoViewComponent implements OnInit {
       constructor (
         private _UserService: UserService,
         private _GeneralCallService: GeneralCallService,
+        private _router: Router
       ){
         this.token = this._UserService.getToken();
       }
@@ -59,4 +60,9 @@ export class PedidoViewComponent implements OnInit {
         this.dataSource.paginator.firstPage();
       }
   }
+
+              
+  CancelEdit(){
+    this._router.navigate(['./ventas/welcome']);
+}    
 }
