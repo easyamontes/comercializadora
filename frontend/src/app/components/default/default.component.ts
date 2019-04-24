@@ -20,7 +20,7 @@ export class DefaultComponent implements OnInit{
         private _route: ActivatedRoute,
         private _router: Router
     ){
-        this.title = 'Bienvenido a DOOY';
+        this.title = 'Bienvenido a EasyLoad';
         this.token = _UserService.getToken();
     }
     ngOnInit(){

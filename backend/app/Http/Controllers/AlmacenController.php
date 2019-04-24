@@ -35,21 +35,26 @@ class AlmacenController extends Controller
         $params_array = json_decode($json,true);
         $user = $json = $request->input('userid',null);
         $cleanid = array();
-        
         foreach ($params_array as $item) {
             array_push($cleanid,$item['id']);
             $idrequi = $item['requisicion_id'];
             $idpedi = $item ['pedido_id'];
+            $tipos = $item ['tipo'];
             if ($item['id'] < 1 ){
                 $almacen = new Almacen();
                 $almacen->user_id = $user;
-                $almacen->userp_id = $item['userp_id'];
                 $almacen->requisicion_id = $item['requisicion_id'];
                 $almacen->proveedor_id = $item['proveedor_id'];
                 $almacen->articulo_id = $item['articulo_id'];
                 $almacen->pedido_id = $item ['pedido_id'];
                 $almacen->folio = $item ['folio'];
                 $almacen->tipo = $item ['tipo'];
+                if( $idpedi > 0 and $tipos == 'ENTRADA'){ 
+                    $almacen->userp_id = $user; 
+                     }else 
+                     {
+                    $almacen->userp_id = $item['userp_id'];
+                     }
                 $almacen->codigo = $item['codigo'];
                 $almacen->articulo = $item['articulo'];
                 $almacen->marca = $item['marca'];
@@ -77,8 +82,4 @@ class AlmacenController extends Controller
         );
         return response()->json($data,200);
     }
-
-
 }
-
-
