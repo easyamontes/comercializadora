@@ -1,112 +1,143 @@
-<div class="menu-container" 
-     *ngIf="identity"
-     [class.is-mobile]="mobileQuery.matches"
->
+<div class="menu-container" *ngIf="identity" [class.is-mobile]="mobileQuery.matches">
   <!--Menu Superior-->
-  <mat-toolbar
-  color="primary"
-  class="toolbar">
-    <button mat-button [routerLink] ="['inicio']">EASYLOAD</button>
+  <mat-toolbar color="primary" class="toolbar">
+    <button mat-button [routerLink]="['inicio']">EASYLOAD</button>
     <span class="spacer"></span>
     <!--Botonera-->
     <div>
-        <button mat-button (click)="snav.toggle()"><mat-icon>person</mat-icon>{{identity.name}}</button>
-        <button mat-button [routerLink]="['logout/1']"><mat-icon>exit_to_app</mat-icon>Salir</button>
+      <button (click)="snav.toggle()" style="background: none; border: none; color: white;">
+        <span>
+          <span><i class="fas fa-user"></i></span>
+          <span> {{identity.name}} </span>
+        </span>
+      </button>
+      <button [routerLink]="['logout/1']" style="background: none; border: none; color: white;">
+        <span>
+          <span><i class="fas fa-sign-out-alt"></i></span>
+          <span> Salir </span>
+        </span>
+      </button>
     </div>
   </mat-toolbar>
   <!--Deseño del toggle tanto fijo como para celulares -->
-  <mat-sidenav-container
-  class="sidenav-container"
-  [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav
-      #snav
-      [mode]="mobileQuery.matches ? 'over' : 'side'"
-      [opened]="identity ?
+  <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="identity ?
         mobileQuery.matches ? 'false' : 'true'
-      :'false'"
-      [fixedInViewport]="mobileQuery.matches"
-      fixedTopGap="56">
-        <!--Aqui comeienza el diseño del sildevar-->
-        <div class="container-fluid">
-            <h4>Bienvenido {{identity.name}} </h4>
-        </div>
-        <!--Botonera de acciones-->
-        <div>
-          <mat-nav-list>
-            <mat-list-item  [routerLink]="['personal']">
-                <mat-icon mat-list-icon>people</mat-icon>
-                <h4 mat-line>Mi Equipo</h4>
-            </mat-list-item>
-            <!--divisor para el almacen-->
-            <mat-divider></mat-divider>
-          </mat-nav-list>
-          <mat-accordion>
-              <!--======================================================
+      :'false'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      <!--Aqui comeienza el diseño del sildevar-->
+      <div class="container-fluid">
+        <h4>Bienvenido {{identity.name}} </h4>
+      </div>
+      <!--Botonera de acciones-->
+      <div>
+        <mat-nav-list>
+          <mat-list-item [routerLink]="['personal']">
+            <span>
+              <span style="font-size: 1.3rem;"> <i class="fas fa-user-friends"></i> </span>
+              <span style="font-size: 1.2rem; padding-left: 1.3rem;"> Mi Equipo</span>
+            </span>
+          </mat-list-item>
+          <!--divisor para el almacen-->
+          <mat-divider></mat-divider>
+        </mat-nav-list>
+        <mat-accordion>
+          <!--======================================================
                 Acordeon de Catalogos
               =========================================================-->
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                  Catalogos
-                </mat-expansion-panel-header>
-                <mat-nav-list>
-                    <mat-list-item [routerLink] ="['articulos']">
-                        <h4 mat-line>Articulo</h4>
-                    </mat-list-item>
-                    <mat-list-item [routerLink] ="['bancos']">
-                      <h4 mat-line>Bancos</h4>
-                    </mat-list-item>
-                    <mat-list-item [routerLink]="['oficinas']">
-                      <h4 mat-line>Oficinas</h4>
-                    </mat-list-item>
-                    <mat-list-item [routerLink]="['puestos']">
-                      <h4 mat-line>Organizacion</h4>
-                    </mat-list-item>
-                    <mat-list-item [routerLink]="['premios']"> 
-                      <h4 mat-line>Premios</h4>
-                    </mat-list-item>
-                    <mat-list-item [routerLink]="['proveedores']"> 
-                      <h4 mat-line>proveedor </h4>
-                    </mat-list-item>
-                </mat-nav-list>
-            </mat-expansion-panel>
-              <!--=======================================================
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <span>
+                <span style="font-size: 1.3rem;"> <i class="fa fa-th-list"> </i></span>
+                <span style="font-size: 1.1rem;padding-left: 1.3rem;"> Catalogos</span>
+              </span>
+            </mat-expansion-panel-header>
+            <mat-nav-list>
+              <mat-list-item [routerLink]="['articulos']">
+                <span>
+                  <span style="font-size: 1.2rem;"> <i class="fas fa-bicycle"></i></span>
+                  <span style="font-size: 1rem;padding-left: .5rem;"> Articulo</span>
+                </span>
+              </mat-list-item>
+              <mat-list-item [routerLink]="['bancos']">
+                <span>
+                  <span style="font-size: 1.2rem;"> <i class="fas fa-money-check-alt"></i></span>
+                  <span style="font-size: 1rem;padding-left: .5rem;"> Bancos</span>
+                </span>
+              </mat-list-item>
+              <mat-list-item [routerLink]="['oficinas']">
+                <span>
+                  <span style="font-size: 1.2rem;"> <i class="fas fa-city"></i></span>
+                  <span style="font-size: 1rem;padding-left: .5rem;"> Oficinas</span>
+                </span>
+              </mat-list-item>
+              <mat-list-item [routerLink]="['puestos']">
+                <span>
+                  <span style="font-size: 1.2rem;"> <i class="fas fa-users"></i></span>
+                  <span style="font-size: 1rem;padding-left: .5rem;"> Organizacion</span>
+                </span>
+              </mat-list-item>
+              <mat-list-item [routerLink]="['premios']">
+                <span>
+                  <span style="font-size: 1.2rem;"> <i class="fas fa-gift"></i></span>
+                  <span style="font-size: 1rem;padding-left: .5rem;"> Premios</span>
+                </span>
+              </mat-list-item>
+              <mat-list-item [routerLink]="['proveedores']">
+                <span>
+                  <span style="font-size: 1.2rem;"> <i class="fas fa-handshake"></i></span>
+                  <span style="font-size: 1rem;padding-left: .5rem;"> proveedor</span>
+                </span>
+              </mat-list-item>
+            </mat-nav-list>
+          </mat-expansion-panel>
+          <!--=======================================================
                 Acordeon de almacen
                ===========================================================-->
-            <mat-expansion-panel>
-              <!--boton desplegable-->
-              <mat-expansion-panel-header>
-                Almacen
-              </mat-expansion-panel-header>
-              <!--contenido del boton-->
-              <mat-nav-list>
-                <mat-list-item [routerLink]="['almacen']">
-                  <mat-icon mat-list-icon>store</mat-icon>
-                  <h4 mat-line>Existencia</h4>
-                </mat-list-item>
-                </mat-nav-list>
-            </mat-expansion-panel>
-    <!--=============================================
+          <mat-expansion-panel>
+            <!--boton desplegable-->
+            <mat-expansion-panel-header>
+              <span>
+                <span style="font-size: 1.3rem;"> <i class="fas fa-store"> </i></span>
+                <span style="font-size: 1.1rem; padding-left: 1.3rem;"> Almacen</span>
+              </span>
+            </mat-expansion-panel-header>
+            <!--contenido del boton-->
+            <mat-nav-list>
+              <mat-list-item [routerLink]="['almacen']">
+                <span>
+                  <span style="font-size: 1.2rem;"> <i class="fas fa-store-alt"></i></span>
+                  <span style="font-size: 1rem;padding-left: .5rem;"> Existencia</span>
+                </span>
+              </mat-list-item>
+            </mat-nav-list>
+          </mat-expansion-panel>
+          <!--=============================================
 				boton Ventas
 			============================================== -->
-            <mat-expansion-panel>
-                 <mat-expansion-panel-header>
-                  Venta
-                 </mat-expansion-panel-header>
-    <!--=============================================
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <span>
+                <span style="font-size: 1.3rem;"> <i class="fas fa-cart-arrow-down"> </i> </span>
+                <span style="font-size: 1.1rem; padding-left: 1.3rem;"> Venta</span>
+              </span>
+            </mat-expansion-panel-header>
+            <!--=============================================
 				inicio de la lista de ventas
 			============================================== -->
-              <mat-nav-list>
-                  <mat-list-item [routerLink]="['ventas']">
-                      <mat-icon mat-list-icon>assignment</mat-icon>
-                      <h4 mat-line>Hoja de pedido</h4>
-                  </mat-list-item>
-              </mat-nav-list>
-            </mat-expansion-panel>
-      <!--=============================================
+            <mat-nav-list>
+              <mat-list-item [routerLink]="['ventas']">
+                <span>
+                  <span style="font-size: 1.2rem;"> <i class="fas fa-clipboard-list"></i></span>
+                  <span style="font-size: 1rem;padding-left: .5rem;"> Hoja de pedido</span>
+                </span>
+              </mat-list-item>
+            </mat-nav-list>
+          </mat-expansion-panel>
+          <!--=============================================
 				final de mi lista principal
 			============================================== -->
-          </mat-accordion>
-        </div>
+        </mat-accordion>
+      </div>
     </mat-sidenav>
     <!-- Contendio general de la aplicacion -->
     <mat-sidenav-content>
@@ -114,8 +145,6 @@
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
-<div
-class="menu-container"
-*ngIf="!identity">
-<login></login>
+<div class="menu-container" *ngIf="!identity">
+  <login></login>
 </div>
