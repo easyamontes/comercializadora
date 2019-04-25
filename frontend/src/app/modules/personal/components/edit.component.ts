@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Personal } from './../../../models/personal';
+//Utils
+import { PersonalUtil } from '../../../services/util/personal.util';
+//Servicios
 import { UserService } from '../../../services/user.service';
 import { GeneralCallService } from '../../../services/generalCall.service';
 import {GeneralListService} from '../../../services/generalList.service';
+//Modelos
+import { Personal } from './../../../models/personal';
+
 
 
 @Component({
@@ -22,11 +27,13 @@ export class PersonalEditComponent implements OnInit{
     public token: any;
     public persona: Personal;
     public selectList: any;
+    public jefeList: Array<any>;
 
     constructor(
         private _UserService: UserService,
         private _GeneralCallService :GeneralCallService,
         private _GeneralListService: GeneralListService,
+        private _PersonalUtil:PersonalUtil,
         private _route: ActivatedRoute,
         private _router: Router
     ){
@@ -43,7 +50,16 @@ export class PersonalEditComponent implements OnInit{
             }
         );
         this.getOptions();
+        this.getHerencia();
     }
+
+    getHerencia() {
+        this._GeneralCallService.getRecords(this.token,'here').subscribe(
+            response=>{
+                this.jefeList = this._PersonalUtil.getFamilia(response);   
+            });
+    }
+
     /** busca una persona en la base de datos */
     getPersona(id){
         this._GeneralCallService.getRecrod(this.token,'personal',id).subscribe(

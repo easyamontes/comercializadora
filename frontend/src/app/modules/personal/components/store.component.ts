@@ -25,11 +25,13 @@ export class PersonalStoreComponent implements OnInit {
     public token: any;
     public persona: Personal;
     public selectList: any;
+    public jefeList: Array<any>;
 
     constructor(
         private _UserService: UserService,
         private _GeneralCallService: GeneralCallService,
         private _GeneralListService: GeneralListService,
+        private _PersonalUtil: PersonalUtil,
         private _router: Router
     ) {
         this.title = 'Alta colaborador';
@@ -38,16 +40,26 @@ export class PersonalStoreComponent implements OnInit {
 
     ngOnInit() {
         this.persona = new Personal(0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '');
+        this.jefeList = [];
         this.getOptions();
+        this.getHerencia();
+    }
+
+    getHerencia() {
+        this._GeneralCallService.getRecords(this.token,'here').subscribe(
+            response=>{
+                this.jefeList = this._PersonalUtil.getFamilia(response);   
+            });
     }
 
     getOptions() {
-        this._GeneralListService.getListEmpleado(this.token, 'lpuesto').subscribe(
+        this._GeneralListService.getListEmpleado(this.token,'lpuesto').subscribe(
             response => {
                 this.selectList = response.puestol;
             }
         );
     }
+
 
     onSubmit(form) {
         this._GeneralCallService.storeRecord(this.token, 'personal', this.persona).subscribe(
