@@ -5,6 +5,7 @@
     "version": "0.2.0",
     "configurations": [
 
+
         {
             "type": "chrome",
             "request": "launch",
@@ -27,21 +28,6 @@
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]
-        },
-        {
-            "name": "Listen for XDebug",
-            "type": "php",
-            "request": "launch",
-            "program": "$(file)",
-            "port": 9000
-        },
-        {
-            "name": "Launch currently open script",
-            "type": "php",
-            "request": "launch",
-            "program": "$(file)",
-            "cwd": "${fileDirname}",
-            "port": 9000
         }
     ]
 }
