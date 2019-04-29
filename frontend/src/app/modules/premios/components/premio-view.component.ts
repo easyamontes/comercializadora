@@ -29,7 +29,7 @@ export class PremiosViewComponent implements OnInit {
          private _UserService: UserService,
          private _GeneralCallService:GeneralCallService
           ){
-            this.title = "Lista de Premios";
+            this.title = "Premios";
             this.token = this._UserService.getToken();
           }
 

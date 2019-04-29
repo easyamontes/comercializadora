@@ -39,7 +39,8 @@
                             <mat-select name="jefe" #status="ngModel" [(ngModel)]="persona.personal_id"
                                 placeholder="Jefe" required>
                                 <mat-option>None</mat-option>
-                                <mat-option *ngFor="let boss of jefeList" [value]="boss.id">{{boss.nombre}} {{boss.apellidop}} {{boss.apellidom}}</mat-option>
+                                <mat-option *ngFor="let boss of jefeList" [value]="boss.id">{{boss.nombre}}
+                                    {{boss.apellidop}} {{boss.apellidom}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>

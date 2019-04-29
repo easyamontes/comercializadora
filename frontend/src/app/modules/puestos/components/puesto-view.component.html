@@ -1,41 +1,41 @@
 <div class=" principal" *ngIf="puestos != null">
       <h3>{{title}}</h3>
-         <div class="row">
-               <mat-form-field class="col-md-9 col-xs-8">
-                     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="buscar">
-               </mat-form-field>
-               <div class="col-md-3 col-xs-4">
-                     <button class="col-md-8 col-xs-10 col-md-push-2 botonpri" 
-                        mat-raised-button 
-                        matTooltip = "nuevo" 
-                        matTooltipPosition="above"
-                     [routerLink]="['../nuevo']"><i class="material-icons">add</i></button>
-               </div>
-         </div>     
-         <div class="row">
+
+      <div class="row">
+            <mat-form-field class="col-md-10 col-xs-12">
+                  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="buscar">
+            </mat-form-field>
+            <div class="col-xs-12 col-md-2">
+                  <button class="ventas col-md-12" color="primary" mat-flat-button
+                        [routerLink]="['../nuevo']">NUEVO</button>
+            </div>
+      </div>
+      <div class="row">
             <table mat-table [dataSource]="dataSource" mat-Sort class="col-md-12 col-xs-12 mat-elevation-z8">
                   <ng-container matColumnDef="puesto">
-                        <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header > Puesto </th>
+                        <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Puesto </th>
                         <td mat-cell *matCellDef="let row"> {{row.puesto}} </td>
                   </ng-container>
                   <ng-container matColumnDef="descripcion">
-                        <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header > Descripcion </th>
+                        <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
                         <td mat-cell *matCellDef="let row"> {{row.descripcion}} </td>
                   </ng-container>
                   <ng-container matColumnDef="editar">
                         <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Editar </th>
-                        <td mat-cell *matCellDef="let row"> 
-                            <a mat-icon-button color="primary" [routerLink]="['../edit',row.id]">
-                            <mat-icon>edit</mat-icon>
-                            </a>
+                        <td mat-cell *matCellDef="let row">
+                              <a class="botontaba" [routerLink]="['../edit',row.id]">
+                                    <i class="fas fa-edit"></i>
+                              </a>
                         </td>
                   </ng-container>
-                  <ng-container matColumnDef= "eliminar">
+                  <ng-container matColumnDef="eliminar">
                         <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
                         <td mat-cell *matCellDef="let row">
-                                <a mat-icon-button color="primary" (click)="deltetePuesto(row.id)">
-                                    <mat-icon>delete</mat-icon>
-                                </a>
+                              <button class="botontaba" (click)="deltetePuesto(row.id)">
+                                    <span>
+                                          <i class="fas fa-trash-alt"></i>
+                                    </span>
+                              </button>
                         </td>
                   </ng-container>
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -43,9 +43,9 @@
                   </tr>
 
             </table>
-         </div>
-         <div class="row">
-               <mat-paginator [pageSizeOptions]="[25, 50]"></mat-paginator>
-       </div>
-   
+      </div>
+      <div class="row">
+            <mat-paginator [pageSizeOptions]="[25, 50]"></mat-paginator>
+      </div>
+
 </div>

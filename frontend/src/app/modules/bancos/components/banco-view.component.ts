@@ -30,7 +30,7 @@ export class BancosViewComponent implements OnInit{
        private _GeneralCallService:GeneralCallService,
        private _router: Router
    ){
-    this.title = "Lista de Bancos";
+    this.title = "Bancos";
     this.token = this._UserService.getToken();
     }
 

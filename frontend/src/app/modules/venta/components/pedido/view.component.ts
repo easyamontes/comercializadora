@@ -19,6 +19,7 @@ import { Pedido } from'src/app/models/pedido';
 export class PedidoViewComponent implements OnInit {
 
       public token: any;
+      public title:any;
       public pedidos :Array<Pedido>;
       public displayedColumns: string[] = ['id','nombre','fechapedido','importe','editar'];
       public dataSource: MatTableDataSource<Pedido>;
@@ -33,6 +34,7 @@ export class PedidoViewComponent implements OnInit {
         private _router: Router
       ){
         this.token = this._UserService.getToken();
+        this.title = "Devoluciones"
       }
 
     ngOnInit() {

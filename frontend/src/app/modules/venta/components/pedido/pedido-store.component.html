@@ -19,7 +19,7 @@
                     <mat-option *ngFor="let  pedi of perso" [value]="pedi.id">{{pedi.nombre}}</mat-option>
                 </mat-select>
             </mat-form-field>
-        <!--=============================================================
+            <!--=============================================================
          boton agregar articulo
         =============================================================-->
             <div class="col-xs-12 col-md-3">
@@ -81,8 +81,10 @@
             <ng-container matColumnDef="eliminar">
                 <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
                 <td mat-cell *matCellDef="let i = index">
-                    <button mat-icon-button (click)="deleteRecord(i)" color="primary">
-                        <mat-icon>delete</mat-icon>
+                    <button class="botontaba" (click)="deleteRecord(i)">
+                        <span>
+                            <i class="fas fa-trash-alt"></i>
+                        </span>
                     </button>
                 </td>
             </ng-container>

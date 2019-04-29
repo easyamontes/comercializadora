@@ -1,50 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-/*titulo de las tablas*/
+/*===============================================
+  titulo de la tabla
+ ===============================================*/
    .thm {
      background:black;
      color: #FFFFFF;
+     font-family: Arial, Helvetica, sans-serif;
    }
-  
-/**Botones de las tablas*/
+  /*===============================================
+    boton principal de cada presentacion
+ ===============================================*/
 .botonpri{
   background-color:#4CAF50;
+}
+/*===============================================
+ botones dentro de la tabla
+ ===============================================*/
+.botontaba {
+  font-size: 1.6em;
+  color:  blue;
+  background: none;
+  border: none;
+}
+.botontaba:hover {  
+ color: Dodgerblue;
 }
 .botabl {
   display:flex;
   justify-content: left;
   font-style: normal;
      }
-/**Titulos de las Tablas*/
-.titabla {
-  background:black;
-  color:#FFFFFF;
-  font-family: Arial, Helvetica, sans-serif;
-}
-/*margen en todas las pantallas*/
+/*===============================================
+   margen de la pantalla principal
+ ===============================================*/
 .principal{
   margin-right: 2%; 
   margin-left: 1%;
   margin-top: 2%;
 }
-/**Espiner loader*/
-.loader {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    z-index: 1;
-    width: 150px;
-    height: 150px;
-    margin: -75px 0 0 -75px;
-    border: 16px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 16px solid  #b30000;
-    width: 120px;
-    height: 120px;
-    -webkit-animation: spin 2s linear infinite;
-    animation: spin 2s linear infinite;
-
-  }
   .mat-tooltip {
     background-color: darkblue;
     font-size: 12px;
@@ -73,5 +67,4 @@
  ============================================================================*/
 .ventas {
   height: 75%;
-
 }

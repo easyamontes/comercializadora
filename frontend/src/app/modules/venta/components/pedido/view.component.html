@@ -30,8 +30,8 @@
             <ng-container matColumnDef="editar">
                 <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Entrega </th>
                 <td mat-cell *matCellDef="let row">
-                    <a mat-icon-button color="primary" [routerLink]="['../edit',row.id]">
-                        <mat-icon>edit</mat-icon>
+                    <a class="botontaba" [routerLink]="['../edit',row.id]">
+                        <i class="fas fa-edit"></i>
                     </a>
                 </td>
             </ng-container>
