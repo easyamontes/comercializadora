@@ -26,7 +26,7 @@ export class AlmacenDefaultComponent implements OnInit{
         private _router: Router
     ){
         this.token = this._UserService.getToken();
-        this.title = "Conrol de Almacen";
+        this.title = "Control de Almacen";
     }
 
 

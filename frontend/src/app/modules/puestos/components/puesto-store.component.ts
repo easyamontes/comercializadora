@@ -48,5 +48,9 @@ export class PuestoStoreComponent implements OnInit{
                 this.status_puesto = <any>error;
             });
     }
+    cancelEdit(){
+        this._router.navigate(['puestos']);
+    }
+
 
 }//End Class
