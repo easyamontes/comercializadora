@@ -130,7 +130,7 @@ class PersonalController extends Controller
     }
 
     public function getHerencia(Request $request){
-        $user = $json = $request->input('userid',null);
+        $user = $json = $request->input('per',null);
         $personal = Personal::with('familia')->find($user);
         $personal->familia->first()->familia;
         return response()->json(array(

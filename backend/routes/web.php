@@ -26,7 +26,8 @@ Route::get('/api/lproved','ListaController@proveedoresList')->middleware('islogg
 Route::get('/api/lartic','ListaController@artiucloList')->middleware('islogged');
 Route::get('/api/lartic','ListaController@artiucloList')->middleware('islogged');
 Route::get('/api/here','PersonalController@getHerencia')->middleware('islogged');
-Route::get('api/lisventa','AlmacenController@ventas')->middleware('islogged');
+Route::get('/api/lisventa','AlmacenController@ventas')->middleware('islogged');
+Route::put('/api/recive/{id}','RequisicionControler@recive')->middleware('islogged');
 
 
 //Rutas para el control de acciones en puestos
