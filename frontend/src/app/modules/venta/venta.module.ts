@@ -10,6 +10,7 @@ import {PedidoStoreComponent} from './components/pedido/pedido-store.component';
 import {PedidoDefaultComponent } from './components/default/default.component';
 import {PedidoViewComponent } from './components/pedido/view.component';
 import { PedidoEditComponent} from './components/pedido/pedido-edit.component';
+import { SocioComponent} from './components/socio_vendedor/socio.component';
 
 
 
@@ -21,6 +22,7 @@ import { PedidoEditComponent} from './components/pedido/pedido-edit.component';
         PedidoDefaultComponent,
         PedidoViewComponent,
         PedidoEditComponent,
+        SocioComponent,
       
     ],
     imports: [
@@ -36,6 +38,7 @@ import { PedidoEditComponent} from './components/pedido/pedido-edit.component';
          PedidoDefaultComponent,
          PedidoViewComponent,
          PedidoEditComponent,
+         SocioComponent,
      
         ],
     providers: []

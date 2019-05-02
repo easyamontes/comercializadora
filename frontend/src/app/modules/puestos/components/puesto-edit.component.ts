@@ -64,7 +64,7 @@ export class PuestoEditComponent implements OnInit{
             }
         );
     }
-
+    
     cancelEdit(){
         this._router.navigate(['puestos']);
     }

@@ -133,6 +133,20 @@
               </mat-list-item>
             </mat-nav-list>
           </mat-expansion-panel>
+
+          <!--=============================================
+			  boton de cambaceo
+			============================================== -->
+          <mat-nav-list>
+            <mat-list-item [routerLink]="['ventas/listaventa']">
+              <span>
+                <span style="font-size: 1.3rem;"> <i class="fas fa-user-tie"></i> </span>
+                <span style="font-size: 1.2rem; padding-left: 1.3rem;">Socio Vendedor</span>
+              </span>
+            </mat-list-item>
+            <!--divisor para el almacen-->
+            <mat-divider></mat-divider>
+          </mat-nav-list>
           <!--=============================================
 				final de mi lista principal
 			============================================== -->
