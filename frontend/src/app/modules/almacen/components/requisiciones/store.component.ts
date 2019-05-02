@@ -97,7 +97,7 @@ export class RequisicionStoreComponent implements OnInit {
         this._GeneralCallService.getRecords(this.token, this.rurl[1]).subscribe(
             response => {
                 if (this.params == 1) {
-                    this.artilist = response.pipe;
+                    this.artilist = response.existencia;
                 } else {
                     this.artilist = response.articulos;
                 }
@@ -107,23 +107,36 @@ export class RequisicionStoreComponent implements OnInit {
 
     /**refresca la seleccion del articulo segun la seleccion*/
     setArticulo(id, index) {
-        this.articulos.data[index].codigo = this.artilist.find(x => x.id == id).codigo;
-        this.articulos.data[index].articulo = this.artilist.find(x => x.id == id).articulo;
-        this.articulos.data[index].marca = this.artilist.find(x => x.id == id).marca;
-        this.articulos.data[index].modelo = this.artilist.find(x => x.id == id).modelo;
-        this.articulos.data[index].costo = this.artilist.find(x => x.id == id).costo;
-        if (this.params == 1) {
-            this.articulos.data[index].articulo_id = this.artilist.find(x => x.id == id).articulo_id;
-            this.articulos.data[index].proveedor_id = this.artilist.find(x => x.id == id).proveedor_id;
+        if (!id) {
+            this.articulos.data[index] = this.cleanKeys(this.articulos.data[index]);
+        } else {
+            this.articulos.data[index].codigo = this.artilist.find(x => x.id == id).codigo;
+            this.articulos.data[index].articulo = this.artilist.find(x => x.id == id).articulo;
+            this.articulos.data[index].marca = this.artilist.find(x => x.id == id).marca;
+            this.articulos.data[index].modelo = this.artilist.find(x => x.id == id).modelo;
             this.articulos.data[index].costo = this.artilist.find(x => x.id == id).costo;
+            if (this.params == 1) {
+                this.articulos.data[index].articulo_id = this.artilist.find(x => x.id == id).articulo_id;
+                this.articulos.data[index].proveedor_id = this.artilist.find(x => x.id == id).proveedor_id;
+                this.articulos.data[index].costo = this.artilist.find(x => x.id == id).costo;
+            }
+            this.articulos.data[index].totalExistencia = this.artilist.find(x => x.id == id).totalExistencia;
         }
-        this.articulos.data[index].totalExistencia = this.artilist.find(x => x.id == id).totalExistencia;
+    }
+
+    cleanKeys(Obj: Almacen): Almacen {
+        Object.entries(Obj).forEach(([key, value]) => {
+            if (key != 'proveedor_id') {
+                Obj[key] = null;
+            }
+        });
+        return Obj;
     }
 
     /**crea una nueva fila en la tabla de Articulos */
     createArticulo() {
         if (this.requi.proveedor_id || this.requi.pdestino_id) {
-            let nitem = new Almacen(0, 0, 0, 0, this.requi.proveedor_id, null, null, null, null, null, null, null, null, null, null, null, null, null);
+            let nitem = new Almacen(null, null, null, this.requi.proveedor_id, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
             this.item.push(nitem);
             this.articulos = new MatTableDataSource(this.item);
             this.articulos.paginator = this.paginator;

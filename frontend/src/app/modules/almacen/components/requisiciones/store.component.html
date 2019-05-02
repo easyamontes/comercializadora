@@ -8,7 +8,7 @@
             <fieldset>
                 <legend>{{title}}</legend>
                 <!--Dibujando la baecera de informacion-->
-                <mat-form-field>
+                <mat-form-field class="p-1">
                     <input matInput
                             [value]="fecha.value"
                             [(ngModel)]="requi.fecha"
@@ -19,7 +19,7 @@
                     <mat-datepicker-toggle matSuffix [for]="pickerFecha"></mat-datepicker-toggle>
                     <mat-datepicker #pickerFecha></mat-datepicker>
                 </mat-form-field>
-                <mat-form-field *ngIf="params != 1">
+                <mat-form-field *ngIf="params != 1" class="p-1">
                     <mat-select #provee="ngModel"
                                 [(ngModel)]="requi.proveedor_id"
                                 placeholder="Proveedor"        
@@ -28,7 +28,7 @@
                     <mat-option *ngFor="let prov of provlist" [value]="prov.id">{{prov.nombre}}</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field *ngIf="params == 1">
+                <mat-form-field *ngIf="params == 1" class="p-1">
                     <mat-select #socio="ngModel"
                                 [(ngModel)]="requi.pdestino_id"
                                 placeholder="Socio"        
@@ -37,7 +37,7 @@
                     <mat-option *ngFor="let prov of provlist" [value]="prov.id">{{prov.nombre}}</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field class="p-1">
                     <input matInput
                             [(ngModel)]="requi.ffactura"
                             [matDatepicker]="pickerFactura"
@@ -47,13 +47,14 @@
                     <mat-datepicker-toggle matSuffix [for]="pickerFactura"></mat-datepicker-toggle>
                     <mat-datepicker #pickerFactura></mat-datepicker>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field class="p-1">
                     <input matInput
                         [(ngModel)]="requi.factura"
                         #factura = "ngModel"
                         placeholder="Factura"
                         >
                 </mat-form-field>
+                <button  class="p-1" color="primary" mat-flat-button (click)="createArticulo();">NUEVO</button>
             </fieldset>
         </div>
     </div>
@@ -89,6 +90,7 @@
                                     [(ngModel)]="row.articulo_id"
                                     (ngModelChange)="setArticulo($event,i)"
                         >
+                        <mat-option>None</mat-option>
                         <mat-option *ngFor="let artitem of artilist" [value]="artitem.id">{{artitem.articulo}} {{artitem.marca}} {{artitem.modelo}}</mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -157,15 +159,9 @@
                     class="thm
                            text-center"
                     *matHeaderCellDef
-                    mat-sort-header >
-                        <button mat-raised-button
-                        class="botonpri"
-                        (click)="createArticulo();"
-                        >
-                            <mat-icon>add</mat-icon> 
-                        </button>
-                </th>
+                    mat-sort-header > Eliminar </th>
                 <td mat-cell
+                    class ="justify-content-center"
                     *matCellDef="let i = index">
                     <button mat-icon-button
                             (click)="deleteArticulo(i)"

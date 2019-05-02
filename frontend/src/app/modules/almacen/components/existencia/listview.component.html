@@ -1,15 +1,12 @@
 <div class="principal">
-    <h3>{{title}}</h3>
     <div class="row">
-        <mat-form-field class="col-md-9 col-xs-8">
+        <mat-form-field class="col-md-10 col-xs-12">
          <input matInput
                 (keyup)="applyFilter($event.target.value)"
                 placeholder="Buscar">
         </mat-form-field>
-        <div class="col-md-3 col-xs-4">
-            <button class="col-md-8 col-xs-10 col-md-push-2 botonpri" 
-                    mat-raised-button 
-                    [routerLink]="['../equinueva']"><i class="material-icons">add</i></button>
+        <div class="col-md-2 col-xs-12">
+            <button class="ventas col-md-12" color="primary" mat-flat-button [routerLink]="['../equinueva']">NUEVO</button>
         </div>
     </div>
     <!--Comienza la tabla-->
