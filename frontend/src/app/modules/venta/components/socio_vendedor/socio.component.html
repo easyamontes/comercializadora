@@ -3,11 +3,19 @@
         <legend>{{title}}</legend>
         <div class="form-group">
             <mat-list>
-                <mat-list-item *ngFor="let alma of ven; let i = index">
+                <mat-list-item *ngFor="let alma of vent; let i = index">
+                        <mat-form-field class="col-md-3">
+                                <input type="text" matInput #ctipo="ngModel" [(ngModel)]="alma.articulo" placeholder="Articulo"
+                                readonly>
+                            </mat-form-field>
                     <mat-form-field class="col-md-3">
-                        <input type="text" matInput #ctipo="ngModel" [(ngModel)]="alma.tipo" placeholder="Tipo"
-                            required>
+                        <input type="text" matInput #ctipo="ngModel" [(ngModel)]="alma.modelo" placeholder="Modelo"
+                        readonly>
                     </mat-form-field>
+                    <mat-form-field class="col-md-3">
+                            <input type="text" matInput #ctipo="ngModel" [(ngModel)]="alma.cantidad" placeholder="Cantidad"
+                            readonly>
+                        </mat-form-field>
                 </mat-list-item>
             </mat-list>
         </div>

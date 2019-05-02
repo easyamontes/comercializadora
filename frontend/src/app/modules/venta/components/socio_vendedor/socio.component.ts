@@ -20,7 +20,7 @@ export class SocioComponent implements OnInit {
 
     public token: any;
     public title: any;
-    public ven:Array<Almacen>;
+    public vent:Array<Almacen>;
 
 
     constructor(
@@ -33,6 +33,7 @@ export class SocioComponent implements OnInit {
     }
 
     ngOnInit() {
+
         this.lisventa();
 
     }
@@ -40,7 +41,7 @@ export class SocioComponent implements OnInit {
     lisventa (){
         this._GeneralCallService.getRecords(this.token,'lisventa').subscribe(
             response=>{
-                this.ven = response.almacen;
+                this.vent = response.almacen;
                console.log('lisventa');
             }
         )
