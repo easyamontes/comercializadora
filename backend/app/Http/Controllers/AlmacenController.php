@@ -82,4 +82,14 @@ class AlmacenController extends Controller
         );
         return response()->json($data,200);
     }
+
+
+    public function ventas(Request $request){
+        $user = $json = $request->input('userid',null);
+        $almacen = Almacen::where('tipo','=','SALIDA')->get()->load('user');
+        return response()->json(array(
+         'almacen' => $almacen,
+         'status' => 'success'
+        ),200);
+     }
 }

@@ -18,11 +18,6 @@ class PersonalController extends Controller
         $json = $request->input('json',null);
         $per = $json = $request->input('per',null);
         $user = $json = $request->input('userid',null);
-        /* ------------> Funcion para generar el arbol genialogico
-        $personal = Personal::with('allChildrenAccounts')->find($per);
-        $personal->allChildrenAccounts;
-        $personal = Personal::all()->load('usuario');   
-        */
         $personal = Personal::all()->load('usuario'); 
 
         return response()->json(array(
