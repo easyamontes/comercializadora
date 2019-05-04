@@ -35,8 +35,7 @@ class PuestoController extends Controller
         //validando datos de la peticion
         $validate = \Validator::make($params_array,[
             'puesto' => 'required|min:4',
-            "nivel" => 'required|unique:puesto',
-            "descripcion" => 'required',
+            "descripcion" => 'required'
         ]);
 
         if ($validate->fails()) {
