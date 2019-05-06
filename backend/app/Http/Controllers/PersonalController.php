@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Helpers\JwtAuth;
 use App\Personal;
+use Hamcrest\Type\IsObject;
 
 class PersonalController extends Controller
 {
@@ -132,7 +133,9 @@ class PersonalController extends Controller
     public function getHerencia(Request $request){
         $user = $json = $request->input('per',null);
         $personal = Personal::with('familia')->find($user);
-        $personal->familia->first()->familia;
+        if( count($personal->familia) > 0){
+            $personal->familia->first()->familia; 
+        }
         return response()->json(array(
             'personal' => $personal,
             'status' => 'success'
