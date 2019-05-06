@@ -116,4 +116,11 @@ class RequisicionControler extends Controller
         );
         return response()->json($data,200);
     }
+
+    function reciveNew ($id, Request $request){
+        $json = $request->input('json',null);
+        $user = $json = $request->input('userid',null);
+        $exis = Almacen::where('id',$user)->get();
+    }
+
 } //End class

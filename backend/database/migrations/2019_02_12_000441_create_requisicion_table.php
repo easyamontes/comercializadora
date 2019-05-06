@@ -18,10 +18,11 @@ class CreateRequisicionTable extends Migration
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
             $table->increments('id');
+            $table->unsignedInteger('idalmacen')->nullable();
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('porigen_id');
-            $table->unsignedInteger('pdestino_id');
-            $table->unsignedInteger('proveedor_id');
+            $table->unsignedInteger('porigen_id')->nullable();
+            $table->unsignedInteger('pdestino_id')->nullable();
+            $table->unsignedInteger('proveedor_id')->nullable();
             $table->integer('folio');
             $table->string('tipo');
             $table->string('status');
