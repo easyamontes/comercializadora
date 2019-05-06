@@ -5,20 +5,18 @@
             <fieldset>
                 <legend> {{title}}</legend>
                 <!--Dibujando la baecera de informacion-->
-                <mat-form-field>
-                    <input matInput [(ngModel)]="pedi.fechapedido" #fechapedido="ngModel"
-                        placeholder="Fecha pedido" readonly="readonly">
-                </mat-form-field>
-                <mat-form-field>
-                    <input matInput [(ngModel)]="pedi.importe" #importe="ngModel" placeholder="importe"
+                <mat-form-field class="col-md-3 col-xs-12">
+                    <input matInput [(ngModel)]="pedi.fechapedido" #fechapedido="ngModel" placeholder="Fecha pedido"
                         readonly="readonly">
                 </mat-form-field>
-                <mat-form-field>
-                    <input matInput [(ngModel)]="pedi.nombre" #importe="ngModel" placeholder="nombre"
-                        readonly="readonly">
+                <mat-form-field class="col-md-3 col-xs-12">
+                    <input matInput [(ngModel)]="pedi.importe" #importe="ngModel" placeholder="importe" readonly>
                 </mat-form-field>
-                <mat-form-field>
-                    <input matInput [(ngModel)]="pedi.tipo" #importe="ngModel" placeholder="nombre">
+                <mat-form-field class="col-md-3 col-xs-12">
+                    <input matInput [(ngModel)]="pedi.nombre" #importe="ngModel" placeholder="nombre" readonly>
+                </mat-form-field>
+                <mat-form-field class="col-md-3 col-xs-12">
+                    <input matInput [(ngModel)]="pedi.tipo" #importe="ngModel" placeholder="nombre" readonly>
                 </mat-form-field>
             </fieldset>
         </div>
