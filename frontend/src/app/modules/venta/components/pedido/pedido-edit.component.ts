@@ -41,6 +41,7 @@ import { isNgTemplate } from '@angular/compiler';
             this.token=this._UserService.getToken();
             this.pedi = new Pedido (0,'',0,0,'','');
             this.conceptoventa = [];
+            this.title = 'Devolucion';
          }
 
         ngOnInit(){
