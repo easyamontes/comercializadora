@@ -45,7 +45,6 @@ export class PedidoStoreComponent implements OnInit {
          this.pedi = new Pedido (0,'',0,0,'',"SALIDA");
      }
      ngOnInit(){
-      // this.getVentas();
        this.getListArticulo();
        this.getListPersonal();
    }//end ngOnInit
@@ -54,9 +53,9 @@ export class PedidoStoreComponent implements OnInit {
         GENERAR LISTA DE ARTICULOS
        =============================================================*/
    getListArticulo(){
-    this._GeneralCallService.getRecords(this.token,'almaitem').subscribe(
+    this._GeneralCallService.getRecords(this.token,'lisventa').subscribe(
         response=>{
-            this.lisart = response.existencia;
+            this.lisart = response.almacen;
         }
     );
 }
@@ -88,7 +87,7 @@ setPersonal(id){
            AGREGAR CONCEPTO POR CONCEPTO
     ================================================================= */
    addConcepto(){
-    let nuevoConcepto = new Almacen(0,0,0,0,0,0,null,"SALIDA",null,null,null,null,0,0,0,0,0,0);
+    let nuevoConcepto = new Almacen(0,0,0,0,0,0,0,null,"SALIDA",null,null,null,null,0,0,0,0,0,0,0);
     this.conceptoventa.push(nuevoConcepto);
     this.pedidos = new MatTableDataSource (this.conceptoventa);
     this.pedidos.paginator = this.paginator;
@@ -109,7 +108,7 @@ Guardar(){
                   if(this.status == 'success'){
                     this.conceptoventa.forEach(item=>{
                          item.pedido_id = this.pedi.id;
-                         item.cantidad = item.cantidad * -1;
+                         item.cantidad = item.cantidad;
                          item.existencia = item.cantidad;
                          item.userp_id = this.pedi.pdestino;
                    })
@@ -133,18 +132,7 @@ Guardar(){
 } 
 
     
-          getVentas(){
-            this._GeneralCallService.getRecords(this.token,'ventas').subscribe(
-                response=>{
-                    this.pedidos = response.pedido;
-                    this.pedidos = new MatTableDataSource(response.pedido);
-                    this.pedidos.paginator = this.paginator;
-                    this.pedidos.sort = this.sort;
-                },error=>{
-                    console.log(<any>error);
-                }
-            );
-        }
+
     
            /*========================================================
            ELIMINAR REGISTRO DE CONCEPTOS

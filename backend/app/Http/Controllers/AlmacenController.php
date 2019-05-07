@@ -83,11 +83,14 @@ class AlmacenController extends Controller
         return response()->json($data, 200);
     }
 
-
     public function ventas(Request $request)
     {
         $user = $json = $request->input('userid', null);
-        $almacen = Almacen::where('tipo', '=', 'SALIDA')->where('userp_id', '=', $user)->get()->load('user');
+        $almacen = Almacen::selectRaw(' * ,SUM(existencia) AS totalExistencia ')
+        ->where('tipo', '=', 'SALIDA')
+        ->where('userp_id', '=', $user)
+        ->groupBy('articulo_id','pedido_id')
+        ->get()->load('user');
         return response()->json(array(
             'almacen' => $almacen,
             'status' => 'success'
