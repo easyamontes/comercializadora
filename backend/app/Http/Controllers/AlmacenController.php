@@ -14,6 +14,9 @@ class AlmacenController extends Controller
         $this->middleware('islogged');
     }
 
+    /*==============================================================================
+        Crea los Nuevos registros
+    ==============================================================================*/
     public function index(Request $request)
     {
         $user = $json = $request->input('userid', null);
@@ -28,7 +31,9 @@ class AlmacenController extends Controller
         );
         return response()->json($data, 200);
     }
-
+    /*==============================================================================
+        Crea los Nuevos registros
+    ==============================================================================*/
     public function store(Request $request)
     {
         $json = $request->input('json', null);
@@ -41,7 +46,7 @@ class AlmacenController extends Controller
             $idrequi = $item['requisicion_id'];
             $idpedi = $item['pedido_id'];
             if ($item['id'] < 1) {
-                $ida = $this->saveRecod($item,$user,$item['userp_id']);
+                $ida = $this->saveRecod($item, $user, $item['userp_id']);
                 array_push($cleanid, $ida);
             } else {
                 $almacen = Almacen::where('id', $item['id'])->update($item);
@@ -59,9 +64,9 @@ class AlmacenController extends Controller
         );
         return response()->json($data, 200);
     }
-/*==============================================================================
-lista para dar hojas de salida
-==============================================================================*/
+    /*==============================================================================
+        lista para dar hojas de salida
+    ==============================================================================*/
 
     public function ventas(Request $request)
     {
@@ -77,7 +82,27 @@ lista para dar hojas de salida
         ), 200);
     }
 
-    /* Nueva funcion para la creacion de las entradas de almacen */
+    /*==============================================================================
+        lista que llega al cambaceador
+    ==============================================================================*/
+    public function ventacambaceo(Request $request)
+    {
+        $user = $json = $request->input('userid', null);
+        $almacen = Almacen::selectRaw(' * ,SUM(existencia) AS totalExistencia ')
+            ->where('userp_id', '=', $user)
+            ->where('tipo', '=', 'SALIDA')
+            ->groupBy('articulo_id', 'pedido_id')
+            ->get()->load('user');
+        return response()->json(array(
+            'almacen' => $almacen,
+            'status' => 'success'
+        ), 200);
+    }
+
+    /*==============================================================================
+        Nueva funcion para la creacion de las entradas de almacen
+    ==============================================================================*/
+
     function saveRecod($item, $user, $userp)
     {
         $almacen = new Almacen();
@@ -103,20 +128,6 @@ lista para dar hojas de salida
         return $almacen->id;
     }
 
-/*==============================================================================
-lista que llega al cambaceador
-==============================================================================*/
-    public function ventacambaceo (Request $request)
-    {
-        $user = $json = $request->input('userid', null);
-        $almacen = Almacen::selectRaw(' * ,SUM(existencia) AS totalExistencia ')
-        ->where('userp_id', '=', $user)
-        ->where('tipo','=','SALIDA')
-        ->groupBy('articulo_id','pedido_id')
-        ->get()->load('user');
-        return response()->json(array(
-            'almacen' => $almacen,
-            'status' => 'success'
-        ), 200);
-   }
 }
+
+

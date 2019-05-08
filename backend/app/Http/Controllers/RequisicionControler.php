@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Helpers\JwtAuth;
 use App\Requisicion;
 use App\Almacen;
 
@@ -17,7 +16,6 @@ class RequisicionControler extends Controller
     }
 
     public function index(Request $request){
-        $user = $json = $request->input('userid',null);
         $per = $json = $request->input('per',null);
         $requisicion = Requisicion::where('pdestino_id','=',$per)
                                     ->where('status','=','NUEVO')
@@ -34,14 +32,12 @@ class RequisicionControler extends Controller
     public function store( Request $request ){
         $json = $request->input('json',null);
         $params = json_decode($json);
-        $params_array = json_decode($json, true);
         $user = $json = $request->input('userid',null);
         $requisicion = new Requisicion();
         $fecha = substr($params->fecha,0,10);
         $ffactura = substr($params->ffactura,0,10);
         //Creando folio
         $folio = Requisicion::where('user_id','=',$user)->where('tipo','=',$params->tipo)->max('folio') + 1;
-
         $requisicion->user_id = $user;
         $requisicion->porigen_id = $params->porigen_id;
         $requisicion->pdestino_id = $params->pdestino_id;
