@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Helpers\JwtAuth;
 use App\Contacto;
 
 class ContactoController extends Controller

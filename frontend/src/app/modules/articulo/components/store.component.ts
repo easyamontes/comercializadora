@@ -33,7 +33,6 @@ export class ArticuloStoreComponent implements OnInit{
     }
 
     onSubmit(form){
-        console.log(this.token);
         this._GeneralCallService.storeRecord(this.token,'articulos',this.articuloe).subscribe(
             response=>{
                 this.articuloe = response.articulo;

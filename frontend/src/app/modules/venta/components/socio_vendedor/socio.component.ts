@@ -42,7 +42,6 @@ export class SocioComponent implements OnInit {
         this._GeneralCallService.getRecords(this.token,'lisventa').subscribe(
             response=>{
                 this.vent = response.almacen;
-               console.log('lisventa');
             }
         )
     }

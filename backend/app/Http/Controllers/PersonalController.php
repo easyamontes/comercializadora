@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Helpers\JwtAuth;
 use App\Personal;
-use Hamcrest\Type\IsObject;
 
 class PersonalController extends Controller
 {

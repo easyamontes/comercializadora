@@ -32,7 +32,7 @@ class ArticuloController extends Controller
         $articulo = new Articulo();
         //asignando informacion al objeto puesto
         $articulo->user_id = $user;
-        $articulo->nombre = $params->nombre;
+        $articulo->articulo = $params->articulo;
         $articulo->marca = $params->marca;
         $articulo->modelo = $params->modelo;
         $articulo->codigo = $params->codigo;
