@@ -44,6 +44,8 @@ class AlmacenController extends Controller
             if ($item['id'] < 1) {
                 $almacen = new Almacen();
                 $almacen->user_id = $user;
+                $almacen->recepcion = $item['recepcion'];
+                $almacen->id_almacen = $item['id_almacen'];
                 $almacen->requisicion_id = $item['requisicion_id'];
                 $almacen->proveedor_id = $item['proveedor_id'];
                 $almacen->articulo_id = $item['articulo_id'];
@@ -82,6 +84,9 @@ class AlmacenController extends Controller
         );
         return response()->json($data, 200);
     }
+/*==============================================================================
+lista para dar hojas de salida
+==============================================================================*/
 
     public function ventas(Request $request)
     {
@@ -89,11 +94,28 @@ class AlmacenController extends Controller
         $almacen = Almacen::selectRaw(' * ,SUM(existencia) AS totalExistencia ')
         ->where('tipo', '=', 'SALIDA')
         ->where('userp_id', '=', $user)
-        ->groupBy('articulo_id','pedido_id')
+        ->groupBy('articulo_id')
         ->get()->load('user');
         return response()->json(array(
             'almacen' => $almacen,
             'status' => 'success'
         ), 200);
     }
+
+/*==============================================================================
+lista que llega al cambaceador
+==============================================================================*/
+    public function ventacambaceo (Request $request)
+    {
+        $user = $json = $request->input('userid', null);
+        $almacen = Almacen::selectRaw(' * ,SUM(existencia) AS totalExistencia ')
+        ->where('userp_id', '=', $user)
+        ->where('tipo','=','SALIDA')
+        ->groupBy('articulo_id','pedido_id')
+        ->get()->load('user');
+        return response()->json(array(
+            'almacen' => $almacen,
+            'status' => 'success'
+        ), 200);
+   }
 }
