@@ -77,7 +77,7 @@ lista para dar hojas de salida
         ), 200);
     }
 
-    /** Nueva funcion para la creacion de las entradas de almacen */
+    /* Nueva funcion para la creacion de las entradas de almacen */
     function saveRecod($item, $user, $userp)
     {
         $almacen = new Almacen();
@@ -102,6 +102,7 @@ lista para dar hojas de salida
         $almacen->save();
         return $almacen->id;
     }
+
 /*==============================================================================
 lista que llega al cambaceador
 ==============================================================================*/
