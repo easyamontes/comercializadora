@@ -41,11 +41,12 @@
                 <th mat-header-cell class="thm" *matHeaderCellDef mat-sort-header> Existencia </th>
                 <td mat-cell *matCellDef="let row"> {{row.existencia}} </td>
             </ng-container>
+
             <ng-container matColumnDef="nombre">
                 <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Articulo </th>
                 <td mat-cell *matCellDef="let row; let i = index">
                     <mat-form-field>
-                        <mat-select matInput [(ngModel)]="row.articulo_id" #importe="ngModel"
+                        <mat-select matInput [(ngModel)]="row.id_almacen" #articulo="ngModel"
                             (ngModelChange)="setArticulo($event,i)">
                             <mat-option *ngFor="let artitem of lisart" [value]="artitem.id">{{artitem.articulo}}
                             </mat-option>

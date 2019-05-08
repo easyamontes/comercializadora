@@ -39,9 +39,10 @@ export class SocioComponent implements OnInit {
     }
 
     lisventa (){
-        this._GeneralCallService.getRecords(this.token,'lisventa').subscribe(
+        this._GeneralCallService.getRecords(this.token,'liscambaceo').subscribe(
             response=>{
                 this.vent = response.almacen;
+               console.log('liscambaceo');
             }
         )
     }

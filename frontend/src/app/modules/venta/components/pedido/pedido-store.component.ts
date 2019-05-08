@@ -72,6 +72,7 @@ getListPersonal(){
 
 setArticulo(id,index){
     this.pedidos.data[index].codigo = this.lisart.find(x=>x.id == id).codigo;
+    this.pedidos.data[index].articulo_id = this.lisart.find(x=>x.id == id).articulo_id;
     this.pedidos.data[index].articulo = this.lisart.find(x=>x.id == id).articulo;
     this.pedidos.data[index].marca = this.lisart.find(x=>x.id == id).marca;
     this.pedidos.data[index].modelo = this.lisart.find(x=>x.id == id).modelo;
@@ -110,6 +111,7 @@ Guardar(){
                          item.pedido_id = this.pedi.id;
                          item.cantidad = item.cantidad;
                          item.existencia = item.cantidad;
+                         item.recepcion = item.cantidad;
                          item.userp_id = this.pedi.pdestino;
                    })
                   
