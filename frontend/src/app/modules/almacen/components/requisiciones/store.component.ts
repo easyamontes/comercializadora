@@ -167,9 +167,7 @@ export class RequisicionStoreComponent implements OnInit {
                         this.articulos.data[c].tipo = this.requi.tipo;
                         this.articulos.data[c].requisicion_id = this.requi.id;
                         this.articulos.data[c].userp_id = this.requi.porigen_id;
-                        if (this.params == 1) {
-                            this.articulos.data[c].existencia = this.articulos.data[c].cantidad * - 1;
-                        }
+                        this.articulos.data[c].recepcion = this.articulos.data[c].cantidad;
                     }
                     this._GeneralCallService.storeRecord(this.token, 'almaitem', this.articulos.data).subscribe(
                         response => {

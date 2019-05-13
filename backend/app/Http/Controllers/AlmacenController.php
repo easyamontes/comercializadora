@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Almacen;
 
@@ -15,7 +14,7 @@ class AlmacenController extends Controller
     }
 
     /*==============================================================================
-        Crea los Nuevos registros
+        Crea un listado de existencias
     ==============================================================================*/
     public function index(Request $request)
     {
@@ -39,23 +38,12 @@ class AlmacenController extends Controller
         $json = $request->input('json', null);
         $params_array = json_decode($json, true);
         $user = $json = $request->input('userid', null);
-        $cleanid = array();
-
         foreach ($params_array as $item) {
-            array_push($cleanid, $item['id']);
-            $idrequi = $item['requisicion_id'];
-            $idpedi = $item['pedido_id'];
-            if ($item['id'] < 1) {
-                $ida = $this->saveRecod($item, $user, $item['userp_id']);
-                array_push($cleanid, $ida);
-            } else {
-                $almacen = Almacen::where('id', $item['id'])->update($item);
+            $tipo = $item['tipo'];
+            if( $tipo != "COMPRA"){
+                $item = $this->surteRecord($item,$user);
             }
-            if ($idpedi > 0) {
-                $almacen = Almacen::where('pedido_id', '=', $idpedi);
-            } else {
-                $almacen = Almacen::where('requisicion_id', '=', $idrequi)->whereNotIn('id', $cleanid)->delete();
-            }
+            $almacen = $this->saveRecod($item, $user);
         }
         $data = array(
             'almacen' => $almacen,
@@ -103,7 +91,7 @@ class AlmacenController extends Controller
         Nueva funcion para la creacion de las entradas de almacen
     ==============================================================================*/
 
-    function saveRecod($item, $user, $userp)
+    function saveRecod($item, $user)
     {
         $almacen = new Almacen();
         $almacen->user_id = $user;
@@ -114,7 +102,7 @@ class AlmacenController extends Controller
         $almacen->pedido_id = $item['pedido_id'];
         $almacen->folio = $item['folio'];
         $almacen->tipo = $item['tipo'];
-        $almacen->userp_id = $userp;
+        $almacen->userp_id = $item['userp_id'];
         $almacen->codigo = $item['codigo'];
         $almacen->articulo = $item['articulo'];
         $almacen->marca = $item['marca'];
@@ -125,7 +113,44 @@ class AlmacenController extends Controller
         $almacen->existencia = $item['existencia'];
         $almacen->total = $item['total'];
         $almacen->save();
-        return $almacen->id;
+        return $almacen;
     }
 
+<<<<<<< HEAD
 }
+=======
+    /*==============================================================================
+        Funcion para surtir una Existencia 
+    ==============================================================================*/
+    function surteRecord($item, $user)
+    {
+        $qrty = Almacen::where('articulo_id', '=', $item['articulo_id'])
+            ->where('userp_id', '=', $user)
+            ->get();
+        $exist = json_decode($qrty, true);
+        $dif = 0;
+        foreach ($exist as $existe) {
+            if ($existe['existencia'] >= $item['recepcion']) {
+                $dif =  $existe['existencia'] - $item['recepcion'];
+                $existe['existencia'] = $dif;
+                $upalma = new Almacen();
+                $upalma = Almacen::where('id', $existe['id'])->update($existe);
+                $item['id_almacen'] = $existe['id'];
+                $item['existencia'] = $item['cantidad'];
+                return $item;
+                break;
+            } else {
+                $dif =  $existe['existencia'] - $item['recepcion'];
+                if ($dif >= 0) {
+                    $existe['existencia'] = $dif;
+                    $item['id_almacen'] = $existe['id'];
+                    $item['recepcion'] = $dif - $item['recepcion'];
+                    $upalma = new Almacen();
+                    $upalma = Almacen::where('id', $existe['id'])->update($existe);
+                    saveRecod($item, $user);
+                }
+            }
+        }
+    }
+}//End Class 
+>>>>>>> fd16fe6913da5bddc9f4dcebfa7bacc47e83c897
