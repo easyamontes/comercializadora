@@ -129,5 +129,3 @@ class AlmacenController extends Controller
     }
 
 }
-
-
