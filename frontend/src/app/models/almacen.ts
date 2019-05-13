@@ -1,7 +1,7 @@
 export class Almacen{
     constructor(
         public id:number,
-        public id_alamcen:number,
+        public id_almacen:number,
         public userp_id:number,
         public requisicion_id:number,
         public proveedor_id:number,
