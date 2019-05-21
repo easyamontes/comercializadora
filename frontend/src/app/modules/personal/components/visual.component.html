@@ -9,37 +9,33 @@
                     <div class="row form-group">
                         <mat-form-field class="col-md-6 col-xs-12">
                             <input type="text" matInput name="nombre" #nombre="ngModel" [(ngModel)]="persona.nombre"
-                                placeholder="Nombre" required>
+                                placeholder="Nombre" readonly>
                         </mat-form-field>
                         <mat-form-field class="col-md-3 col-xs-12">
                             <input type="text" matInput name="apellidop" #apellidop="ngModel"
-                                [(ngModel)]="persona.apellidop" placeholder="Apellido Paterno" required>
+                                [(ngModel)]="persona.apellidop" placeholder="Apellido Paterno" readonly>
                         </mat-form-field>
                         <mat-form-field class="col-md-3 col-xs-12">
                             <input type="text" matInput name="apellidom" #apellidom="ngModel"
-                                [(ngModel)]="persona.apellidom" placeholder="Apellido Materno" required>
+                                [(ngModel)]="persona.apellidom" placeholder="Apellido Materno" readonly>
                         </mat-form-field>
                     </div>
                     <div class="row form-group">
                         <mat-form-field class="col-md-8 col-xs-12">
                             <input type="email" matInput name="email" #email="ngModel" [(ngModel)]="persona.email"
-                                placeholder="Email" required>
+                                placeholder="Email" readonly>
                         </mat-form-field>
                         <mat-form-field class="col-md-4 col-xs-12">
-                            <mat-select name="status" #status="ngModel" [(ngModel)]="persona.status"
-                                placeholder="Status" required>
-                                <mat-option value="ACTIVO">ACTIVO</mat-option>
-                                <mat-option value="INACTIVO">INACTIVO</mat-option>
-                                <mat-option value="BAJA">BAJA</mat-option>
-                            </mat-select>
+                            <input type="text" matInput name="status" #status="ngModel" [(ngModel)]="persona.status"
+                            placeholder="Status" readonly>
                         </mat-form-field>
                     </div>
                     <div class="row form-group">
                         <mat-form-field class="col-md-12 col-xs-12">
                             <mat-select name="jefe" #status="ngModel" [(ngModel)]="persona.personal_id"
-                                placeholder="Lider" required>
-                                <mat-option>None</mat-option>
-                                <mat-option *ngFor="let boss of jefeList" [value]="boss.id">{{boss.nombre}}
+                                placeholder="Lider" readonly>
+                                <mat-option disabled>None</mat-option>
+                                <mat-option disabled *ngFor="let boss of jefeList" [value]="boss.id">{{boss.nombre}}
                                     {{boss.apellidop}} {{boss.apellidom}}</mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -47,9 +43,9 @@
                     <div class="row form-group">
                         <mat-form-field class="col-md-12 col-xs-12">
                             <mat-select name="puesto" #puesto="ngModel" [(ngModel)]="persona.puesto_id"
-                                placeholder="Puesto" required>
-                                <mat-option>None</mat-option>
-                                <mat-option *ngFor="let item of selectList" [value]="item.id">{{item.puesto}}
+                                placeholder="Puesto" readonly>
+                                <mat-option disabled>None</mat-option>
+                                <mat-option disabled *ngFor="let item of selectList" [value]="item.id">{{item.puesto}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -57,7 +53,7 @@
                     <div class="row form-group">
                         <mat-form-field class="col-md-12 col-xs-12">
                             <textarea type="text" matInput name="descripcion" #descripcion="ngModel"
-                                [(ngModel)]="persona.descripcion" placeholder="Descripcion" required></textarea>
+                                [(ngModel)]="persona.descripcion" placeholder="Descripcion" readonly></textarea>
                         </mat-form-field>
                     </div>
                     <br>
@@ -68,57 +64,48 @@
                     <div class="row form-group">
                         <mat-form-field class="col-md-8 col-xs-12">
                             <input type="text" matInput name="calle" #calle="ngModel" [(ngModel)]="persona.calle"
-                                placeholder="Calle" required>
+                                placeholder="Calle" readonly>
                         </mat-form-field>
                         <mat-form-field class="col-md-2 col-xs-6">
                             <input type="text" matInput name="noint" #noint="ngModel" [(ngModel)]="persona.noint"
-                                placeholder="No Int" required>
+                                placeholder="No Int" readonly>
                         </mat-form-field>
                         <mat-form-field class="col-md-2 col-xs-6">
                             <input type="text" matInput name="noext" #noext="ngModel" [(ngModel)]="persona.noext"
-                                placeholder="No Ext">
+                                placeholder="No Ext" readonly>
                         </mat-form-field>
                     </div>
                     <div class="row form-group">
                         <mat-form-field class="col-md-6 col-xs-12">
                             <input type="text" matInput name="ciudad" #ciudad="ngModel" [(ngModel)]="persona.ciudad"
-                                placeholder="Ciudad" required>
+                                placeholder="Ciudad" readonly>
                         </mat-form-field>
                         <mat-form-field class="col-md-6 col-xs-12">
                             <input type="text" matInput name="estado" #estado="ngModel" [(ngModel)]="persona.estado"
-                                placeholder="Estado" required>
+                                placeholder="Estado" readonly>
                         </mat-form-field>
                     </div>
                     <div class="row form-group">
                         <mat-form-field class="col-md-7 col-xs-12">
                             <input type="text" matInput name="colonia" #colonia="ngModel" [(ngModel)]="persona.colonia"
-                                placeholder="Colonia" required>
+                                placeholder="Colonia" readonly>
                         </mat-form-field>
                         <mat-form-field class="col-md-5 col-xs-12">
                             <input type="text" matInput name="cp" #cp="ngModel" [(ngModel)]="persona.cp"
-                                placeholder="C.P." required>
+                                placeholder="C.P." readonly>
                         </mat-form-field>
                     </div>
                     <div class="row form-group">
-                          <mat-form-field class="col-md-10 col-xs-12">
-                            <mat-select name="oficina" #oficina="ngModel" [(ngModel)]="persona.oficina"
-                            placeholder="oficina" required>
-                            <mat-option>None</mat-option>
-                            <mat-option *ngFor="let item of lisofi" [value]="item.nombre">{{item.nombre}}
-                            </mat-option>
-                        </mat-select>
-                          </mat-form-field>
-                          
+                        <mat-form-field class="col-md-10 col-xs-12">
+                            <input type="text" matInput name="oficina" #oficina="ngModel" [(ngModel)]="persona.oficina"
+                                placeholder="oficina" readonly>
+                        </mat-form-field>
                     </div>
                 </fieldset>
             </div>
             <div class="row ">
-                <div class="col-md-3 col-xs-3">
-                    <input type="submit" value="Guardar" class="btn btn-success col-md-12"
-                        [disabled]="!personalEdit.form.valid">
-                </div>
-                <div class="col-md-3 col-xs-3">
-                    <a type="submit" class="btn btn-danger col-md-12" (click)="CancelEdit()">Cancelar</a>
+                <div class="col-md-6 col-xs-3">
+                    <a type="submit" class="btn btn-danger col-md-12" (click)="CancelEdit()">Regresar</a>
                 </div>
             </div>
         </div>

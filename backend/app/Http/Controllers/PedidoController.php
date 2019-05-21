@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Helpers\JwtAuth;
 use App\Pedido;
+use App\Almacen;
 
 class PedidoController extends Controller
 {
@@ -106,6 +107,25 @@ class PedidoController extends Controller
         return response()->json($data,200);
     }
 
+
+    public function ventacambaceo(Request $request)
+    {
+        $idp = Pedido::select('id')
+        ->where('tipo','=','SALIDA')
+        ->get()->load('articulos');
+       /* $per = $json = $request->input('per', null);
+        $almacen = Almacen::selectRaw(' * ,SUM(existencia) AS totalExistencia ')
+            ->where('userp_id', '=', $per)
+            ->where( $idp, '=', 'pedido_id')
+            ->groupBy('articulo_id', 'pedido_id')
+            ->get()->load('user');*/ 
+        return response()->json(array(
+            'almacen' => $idp,
+            'status' => 'success'
+        ), 200);
+    }
+
 }
 
 ?>
+

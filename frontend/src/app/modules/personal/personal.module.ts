@@ -9,6 +9,7 @@ import { PersonalMainComponent } from './components/main.component';
 import { PersonalViewComponent } from './components/view.component';
 import { PersonalEditComponent } from './components/edit.component';
 import { PersonalStoreComponent } from './components/store.component';
+import { PersonalVisualComponent } from './components/visual.component';
 import { PersonalRegisterComponent } from './components/register.component';
 
 //declaracion del modulo
@@ -18,7 +19,8 @@ declarations: [
     PersonalViewComponent,
     PersonalEditComponent,
     PersonalStoreComponent,
-    PersonalRegisterComponent
+    PersonalRegisterComponent,
+    PersonalVisualComponent,
 ],
 imports: [
     CommonModule,
@@ -32,7 +34,8 @@ exports: [
     PersonalViewComponent,
     PersonalEditComponent,
     PersonalStoreComponent,
-    PersonalRegisterComponent
+    PersonalRegisterComponent,
+    PersonalVisualComponent
 ],
 providers: []
 })

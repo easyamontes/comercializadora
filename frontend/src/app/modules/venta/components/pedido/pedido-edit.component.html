@@ -7,7 +7,7 @@
                 <!--Dibujando la baecera de informacion-->
                 <mat-form-field class="col-md-3 col-xs-12">
                     <input matInput [(ngModel)]="pedi.fechapedido" #fechapedido="ngModel" placeholder="Fecha pedido"
-                        readonly="readonly">
+                        readonly>
                 </mat-form-field>
                 <mat-form-field class="col-md-3 col-xs-12">
                     <input matInput [(ngModel)]="pedi.importe" #importe="ngModel" placeholder="importe" readonly>
@@ -45,7 +45,7 @@
                 </th>
                 <td mat-cell *matCellDef="let row">
                     <mat-form-field>
-                        <input matInput [(ngModel)]="row.devolucion" #factura="ngModel" type="number">
+                        <input matInput [(ngModel)]="row.cantidad - row.cantidad" #factura="ngModel" type="number">
                     </mat-form-field>
                 </td>
             </ng-container>

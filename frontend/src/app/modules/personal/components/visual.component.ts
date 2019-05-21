@@ -12,8 +12,8 @@ import { Personal } from './../../../models/personal';
 
 
 @Component({
-    selector: 'personal-edit',
-    templateUrl: './edit.component.html',
+    selector: 'personal-visual',
+    templateUrl: './visual.component.html',
     providers: [
         UserService,
         GeneralCallService,
@@ -21,7 +21,7 @@ import { Personal } from './../../../models/personal';
     ]
 })
 
-export class PersonalEditComponent implements OnInit {
+export class PersonalVisualComponent implements OnInit {
     public title: string;
     public status: string;
     public token: any;
@@ -38,7 +38,7 @@ export class PersonalEditComponent implements OnInit {
         private _route: ActivatedRoute,
         private _router: Router
     ) {
-        this.title = 'Editando';
+        this.title = 'Visualizando';
         this.token = this._UserService.getToken();
     }
 

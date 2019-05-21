@@ -27,7 +27,8 @@ Route::get('/api/lartic','ListaController@artiucloList')->middleware('islogged')
 Route::get('/api/lartic','ListaController@artiucloList')->middleware('islogged');
 Route::get('/api/here','PersonalController@getHerencia')->middleware('islogged');
 Route::get('/api/lisventa','AlmacenController@ventas')->middleware('islogged');
-Route::get('/api/liscambaceo','AlmacenController@ventacambaceo')->middleware('islogged');
+Route::get('/api/liscambaceo','PedidoController@ventacambaceo')->middleware('islogged');
+Route::get('/api/listaoficinas','ListaController@listaoficina')->middleware('islogged');
 Route::put('/api/recive/{id}','RequisicionControler@recive')->middleware('islogged');
 
 

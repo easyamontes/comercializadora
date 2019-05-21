@@ -1,0 +1,56 @@
+<div class="principal" *ngIf = "ofi != null">
+               
+    <div class="alert alert-danger" *ngIf="status_oficina == 'success' && status_oficina"> Registro Guardado correctamente </div>
+       
+        <form *ngIf="ofi != null" #oficinaNew="ngForm" (ngSubmit)="onSubmit(oficinaNew)">
+            <div class="container-fluid">
+                <div class="col-md-6 col-md-offset-3">
+                    <fieldset>
+                        <legend>{{title}}</legend>
+                    <div class="row">
+                        <mat-form-field class="col-md-6 col-xs-12"> 
+                            <input type="text"  matInput name="oficina" #nombre="ngModel" [(ngModel)]="ofi.nombre"  placeholder="Oficina" readonly>
+                        </mat-form-field>
+                        <mat-form-field class="col-md-6 col-xs-12">
+                            <input type="text"  matInput name="nombre" #nombre="ngModel" [(ngModel)]="ofi.encargado"  placeholder="Encargado" readonly>
+                        </mat-form-field>
+                     </div>   
+                    <div class="row">
+                        <mat-form-field class="col-md-6 col-xs-12">
+                                <input type="text" matInput name="calleofi" #calle="ngModel" [(ngModel)]="ofi.calle"placeholder ="Calle" readonly>
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-xs-12">
+                            <input type="text" matInput name="nointofi" #noint="ngModel" [(ngModel)]="ofi.noint" placeholder="No Int" readonly>
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-xs-12">
+                                <input type="text" matInput name="noextofi" #noext="ngModel" [(ngModel)]="ofi.noext" placeholder="No Ext"readonly>
+                        </mat-form-field>
+                    </div>
+    
+                    <div class="row">
+                        <mat-form-field class="col-md-6 col-xs-12">
+                            <input type="text" matInput name="coloniaofi" #colonia="ngModel" [(ngModel)]="ofi.colonia" placeholder="Colonia" readonly>
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-xs-12">
+                            <input type="text" matInput name="estadoofi" #estado="ngModel" [(ngModel)]="ofi.estado" placeholder="Estado" readonly>
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-xs-12">
+                            <input type="text" matInput name="ciudadofi" #ciudad="ngModel" [(ngModel)]="ofi.ciudad" placeholder="Ciudad" readonly>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field class="col-md-12 col-xs-12">
+                            <textarea matInput name="descripcionofi" #descripcion="ngModel"[(ngModel)]="ofi.descripcion" placeholder="Descripcion"  readonly></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="row form-group"> <br>
+               
+                        <div class="col-md-6 col-xs-3">
+                            <a type="submit" class="btn btn-danger col-md-12" style="margin: 1px" (click)="botonCancelar()">Regresar</a>
+                        </div>
+                    </div>
+                </fieldset>
+                </div>                 
+            </div>
+        </form>
+    </div>

@@ -40,6 +40,16 @@ class ListaController extends Controller
         );
         return $data;
     }
+
+    public function listaoficina (Request $request){
+        $oficinas =DB::table('oficina')->select('nombre')->get();
+        $data = array(
+            'oficinall' => $oficinas,
+            'code' => 200,
+            'status' => 'success'
+        );
+        return $data;
+    }
     
     public function artiucloList( Request $request ){
         $articulos = DB::table('articulo')->get();

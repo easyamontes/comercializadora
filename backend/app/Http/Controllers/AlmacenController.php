@@ -37,7 +37,7 @@ class AlmacenController extends Controller
     {
         $json = $request->input('json', null);
         $params_array = json_decode($json, true);
-        $user = $json = $request->input('userid', null);
+        $user = $json = $request->input('userid', null);    
         foreach ($params_array as $item) {
             $tipo = $item['tipo'];
             if( $tipo != "COMPRA"){
@@ -45,6 +45,7 @@ class AlmacenController extends Controller
             }
             $almacen = $this->saveRecod($item, $user);
         }
+
         $data = array(
             'almacen' => $almacen,
             'code' => 200,
@@ -58,11 +59,11 @@ class AlmacenController extends Controller
 
     public function ventas(Request $request)
     {
-        $user = $json = $request->input('userid', null);
+        $per = $json = $request->input('per', null);
         $almacen = Almacen::selectRaw(' * ,SUM(existencia) AS totalExistencia ')
-            ->where('tipo', '=', 'SALIDA')
-            ->where('userp_id', '=', $user)
-            ->groupBy('articulo_id', 'pedido_id')
+            ->where('tipo', 'in', 'COMPRA','ENTRADA')
+            ->where('userp_id', '=', $per)
+            ->groupBy('articulo_id')
             ->get()->load('user');
         return response()->json(array(
             'almacen' => $almacen,
@@ -75,9 +76,9 @@ class AlmacenController extends Controller
     ==============================================================================*/
     public function ventacambaceo(Request $request)
     {
-        $user = $json = $request->input('userid', null);
+        $per = $json = $request->input('per', null);
         $almacen = Almacen::selectRaw(' * ,SUM(existencia) AS totalExistencia ')
-            ->where('userp_id', '=', $user)
+            ->where('userp_id', '=', $per)
             ->where('tipo', '=', 'SALIDA')
             ->groupBy('articulo_id', 'pedido_id')
             ->get()->load('user');
@@ -116,9 +117,6 @@ class AlmacenController extends Controller
         return $almacen;
     }
 
-<<<<<<< HEAD
-}
-=======
     /*==============================================================================
         Funcion para surtir una Existencia 
     ==============================================================================*/
@@ -152,5 +150,22 @@ class AlmacenController extends Controller
             }
         }
     }
+
+
+    function update(Request $request){
+        $json = $request->input('json', null);
+        $params_array = json_decode($json, true);
+        $user = $json = $request->input('userid', null);
+        foreach ($params_array as $item) {
+            unset($item['totalExistencia']);
+            unset($item['user']);
+            $upalma = new Almacen();
+            $upalma = Almacen::where('id', $item['id'])->update($item);
+        }
+        return response()->json(array(
+            'almacen' => $upalma,
+            'status' => 'success'
+        ), 200);
+    }
+
 }//End Class 
->>>>>>> fd16fe6913da5bddc9f4dcebfa7bacc47e83c897

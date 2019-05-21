@@ -5,8 +5,7 @@ import { UserService } from '../../../../services/user.service';
 import {GeneralCallService} from '../../../../services/generalCall.service';
 import { Almacen } from './../../../../models/almacen';
 import { Pedido } from 'src/app/models/pedido';
-import { iterateListLike } from '@angular/core/src/change_detection/change_detection_util';
-import { isNgTemplate } from '@angular/compiler';
+
 
 @Component({
        selector: 'pedido-edit',
@@ -20,6 +19,7 @@ import { isNgTemplate } from '@angular/compiler';
     export class PedidoEditComponent implements OnInit {
          public title:string;
          public status:string;
+         public identity:any;
          public token:any;
          public pedi: Pedido;
          public pedidos: MatTableDataSource<Almacen>;
@@ -42,6 +42,7 @@ import { isNgTemplate } from '@angular/compiler';
             this.pedi = new Pedido (0,'',0,0,'','');
             this.conceptoventa = [];
             this.title = 'Devolucion';
+            this.identity = this._UserService.getIdentity();
          }
 
         ngOnInit(){
@@ -88,7 +89,8 @@ import { isNgTemplate } from '@angular/compiler';
                                 item.id =  0 ; 
                                 item.pedido_id = this.pedi.id;
                                 item.tipo = this.pedi.tipo;
-                                item.existencia  = item.cantidad;
+                                item.recepcion = item.cantidad;
+                                item.userp_id = this.identity.sub;
                           })
                          
                /*==============================================================
@@ -97,6 +99,7 @@ import { isNgTemplate } from '@angular/compiler';
           
                       this._GeneralCallService.storeRecord(this.token,'almaitem',this.conceptoventa).subscribe(
                           response =>{
+                              
                               console.log (this.conceptoventa);
           
                    },error=>{

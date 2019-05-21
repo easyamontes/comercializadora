@@ -1,33 +1,43 @@
+
 <div class="principal">
     <div class="container-fluid">
         <legend>{{title}}</legend>
         <div class="form-group">
             <mat-list>
                 <mat-list-item *ngFor="let alma of vent; let i = index">
-                    <mat-form-field class="col-md-3">
+                    <mat-form-field class="col-md-2">
                         <input type="text" matInput #ctipo="ngModel" [(ngModel)]="alma.articulo" placeholder="Articulo"
                             readonly>
                     </mat-form-field>
-                    <mat-form-field class="col-md-3">
+                    <mat-form-field class="col-md-2">
                         <input type="text" matInput #ctipo="ngModel" [(ngModel)]="alma.modelo" placeholder="Modelo"
                             readonly>
                     </mat-form-field>
-                    <mat-form-field class="col-md-3">
-                        <input type="text" matInput #ctipo="ngModel" [(ngModel)]="alma.totalExistencia" placeholder="Disponible"
+                    <mat-form-field class="col-md-2">
+                        <input type="text"  matInput #ctipo="ngModel" [(ngModel)]="alma.existencia" placeholder="Disponible"
                             readonly>
                     </mat-form-field>
-                    <button class="botontaba col-md-1">
+                    <mat-form-field class="col-md-2">
+                        <input type="text"  matInput #ctipo="ngModel" [(ngModel)]="alma.venta" placeholder="Venta"
+                            readonly>
+                    </mat-form-field>
+                   
+                    <button class="botontaba col-md-1" (click) ="aumentar(i,'suma');">
                         <span>
-                            <i class="fas fa-plus"></i>
+                            <i class="fas fa-plus"  value="aumentar"></i>
                         </span>
                     </button>
-                    <button class="botontaba col-md-1">
+                    <button class="botontaba col-md-1" (click) ="aumentar(i,'resta');">
                         <span>
                             <i class="fas fa-minus"></i>
                         </span>
                     </button>
                 </mat-list-item>
-
+                <button class="botontaba col-md-1" (click) ="Guardar()">
+                    <span>
+                        <i class="fas fa-shopping-cart"></i>
+                    </span>
+                </button>
             </mat-list>
         </div>
     </div>

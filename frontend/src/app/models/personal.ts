@@ -15,6 +15,7 @@ export class Personal{
         public ciudad: string,
         public cp: string,
         public descripcion: string,
-        public status:string
+        public status:string,
+        public oficina:string,
     ){}
 }//End Class

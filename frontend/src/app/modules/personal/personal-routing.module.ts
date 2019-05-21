@@ -6,6 +6,7 @@ import { PersonalMainComponent } from './components/main.component';
 import { PersonalViewComponent } from './components/view.component';
 import { PersonalEditComponent } from './components/edit.component';
 import { PersonalStoreComponent } from './components/store.component';
+import { PersonalVisualComponent } from './components/visual.component';
 import { PersonalRegisterComponent } from './components/register.component';
 
 const personalRoutes: Routes =[
@@ -15,6 +16,7 @@ const personalRoutes: Routes =[
                                                             {path:'list',component:PersonalViewComponent},
                                                             {path: '', redirectTo: 'list', pathMatch: 'full'},
                                                             {path:'edit/:id',component:PersonalEditComponent},
+                                                            {path:'visual/:id',component:PersonalVisualComponent},
                                                             {path:'nuevo',component:PersonalStoreComponent },
                                                             {path: 'register',component:PersonalRegisterComponent}
                                                         ]

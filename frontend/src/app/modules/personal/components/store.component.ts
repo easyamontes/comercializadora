@@ -9,6 +9,7 @@ import { GeneralListService } from '../../../services/generalList.service';
 //Modelos
 import { Personal } from '../../../models/personal';
 
+
 @Component({
     selector: 'personal-store',
     templateUrl: './edit.component.html',
@@ -26,6 +27,7 @@ export class PersonalStoreComponent implements OnInit {
     public persona: Personal;
     public selectList: any;
     public jefeList: Array<any>;
+    public lisofi: Array<any>;
 
     constructor(
         private _UserService: UserService,
@@ -39,25 +41,37 @@ export class PersonalStoreComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.persona = new Personal(0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '');
+        this.persona = new Personal(0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '','');
         this.jefeList = [];
         this.getOptions();
         this.getHerencia();
+        this.getOficina();
     }
 
     getHerencia() {
-        this._GeneralCallService.getRecords(this.token,'here').subscribe(
-            response=>{
-                this.jefeList = this._PersonalUtil.getFamilia(response);   
+        this._GeneralCallService.getRecords(this.token, 'here').subscribe(
+            response => {
+                this.jefeList = this._PersonalUtil.getFamilia(response);
             });
     }
 
     getOptions() {
-        this._GeneralListService.getListEmpleado(this.token,'lpuesto').subscribe(
+        this._GeneralListService.getListEmpleado(this.token, 'lpuesto').subscribe(
             response => {
                 this.selectList = response.puestol;
             }
         );
+    }
+    /*========================================================================
+        lista de oficinas 
+    ==========================================================================*/
+    getOficina() {
+        this._GeneralCallService.getRecords(this.token, 'listaoficinas').subscribe(
+            response => {
+                this.lisofi = response.oficinall;
+            }
+        )
+
     }
 
 

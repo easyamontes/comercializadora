@@ -23,7 +23,7 @@ export class PersonalViewComponent implements OnInit{
     public token: any;
     public personal: Array<Personal>;
     public selectList: Array<any>;
-    public displayedColumns: string[] = ['nombre','editar','eliminar','usuario'];
+    public displayedColumns: string[] = ['nombre','Visualizar','editar','eliminar','usuario'];
     public dataSource: MatTableDataSource<Personal>;
 
    

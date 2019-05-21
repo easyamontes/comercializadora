@@ -18,6 +18,7 @@ export class Almacen{
         public precio:number,
         public existencia:number,
         public recepcion:number,
+        public venta:number,
         public total:number,
         public totalExistencia:number
     ){}

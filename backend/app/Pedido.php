@@ -16,5 +16,6 @@ class Pedido extends Model
     public function articulos(){
         return $this->hasMany('App\Almacen','pedido_id');
     }
-
+   
+    
 }

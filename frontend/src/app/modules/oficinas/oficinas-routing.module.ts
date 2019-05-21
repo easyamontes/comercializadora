@@ -6,6 +6,7 @@ import {OficinaMainComponent} from './components/oficina-main.component';
 import {OficinaViewComponent} from './components/oficina-view.component';
 import {OficinaEditComponent} from './components/oficina-edit.component';
 import {OficinaStoreComponent} from './components/oficina-store.component';
+import {OficinaVisualComponent} from './components/oficina-visual.component';
 
 const oficinasRoutes: Routes =
 [
@@ -16,6 +17,7 @@ const oficinasRoutes: Routes =
                                                   {path:'list',component:OficinaViewComponent},
                                                   {path:'nuevo',component:OficinaStoreComponent},
                                                   {path:'edit/:id',component:OficinaEditComponent},
+                                                  {path:'visual/:id',component:OficinaVisualComponent},
                                                   {path:'',redirectTo:'list', pathMatch:'full'}
                                                   ]
      }
