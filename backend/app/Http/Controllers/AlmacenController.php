@@ -61,7 +61,7 @@ class AlmacenController extends Controller
     {
         $per = $json = $request->input('per', null);
         $almacen = Almacen::selectRaw(' * ,SUM(existencia) AS totalExistencia ')
-            ->where('tipo', 'in', 'COMPRA','ENTRADA')
+            ->whereIn('tipo',['COMPRA','ENTRADA'])
             ->where('userp_id', '=', $per)
             ->groupBy('articulo_id')
             ->get()->load('user');

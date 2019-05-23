@@ -61,4 +61,19 @@ class ListaController extends Controller
         return $data;
     } 
 
+    /*=============================================================
+       lista de premios
+   =================================================================== */
+   public function premio (Request $request){
+     $fechacatual = date('Y-m-d');
+    $premio = DB::table('premio')
+    ->where('rinicio', '<=', $fechacatual)->where('rfinal','>=',$fechacatual ) 
+    ->get();
+    $data = array(
+        'premios' => $premio,
+        'code' => 200,
+        'status' => 'success'
+    );
+    return $data;
+   }
 }

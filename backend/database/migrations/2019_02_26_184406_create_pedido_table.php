@@ -24,6 +24,7 @@ class CreatePedidoTable extends Migration
             $table->integer('pdestino');
             $table->string('nombre');
             $table->string('tipo');
+            $table->string('premio');
             $table->timestamps();
         });
     }

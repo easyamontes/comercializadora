@@ -42,7 +42,7 @@ export class PedidoStoreComponent implements OnInit {
          this.title = 'Nuevo Pedido';
          this.conceptoventa = [];
          this.token = this._UserService.getToken();
-         this.pedi = new Pedido (0,'',0,0,'',"SALIDA");
+         this.pedi = new Pedido (0,'',0,0,'',"SALIDA",'');
      }
      ngOnInit(){
        this.getListArticulo();
