@@ -7,6 +7,7 @@ import { ExistenciaViewComponent } from './components/existencia/listview.compon
 import { RequisicionViewComponent } from './components/requisiciones/view.component';
 import { RequisicionStoreComponent } from './components/requisiciones/store.component';
 import { AlmacenDefaultComponent } from './components/default/default.component';
+import { RequisicionReciveComponent } from './components/requisiciones/recive.component';
 
 const almacenRoutes: Routes =[
     {
@@ -17,7 +18,8 @@ const almacenRoutes: Routes =[
                                                             { path:'list',component:ExistenciaViewComponent },
                                                             { path:'requisicions',component:RequisicionViewComponent },
                                                             { path:'equinueva',component:RequisicionStoreComponent },
-                                                            { path:'equinueva/:sure',component:RequisicionStoreComponent }
+                                                            { path:'equinueva/:sure',component:RequisicionStoreComponent },
+                                                            { path:'recepcion/:sure',component:RequisicionReciveComponent}
                                                          ]
     }
 ]

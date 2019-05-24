@@ -55,29 +55,6 @@ export class RequisicionViewComponent implements OnInit {
             });
     }
 
-    /**Funcion que cambia el estatus de la entrada y lo manda a las exitencias */
-    acptarEntrada(id: any, item: Requisicion) {
-        if (confirm('Desea Confirmar Esta Requisicion')) {
-            item.status = "RECIBIDO"
-            if(item.tipo == "COMPRA"){
-                this._GeneralCallService.updateRecord(this.token, 'requisicion', item, id).subscribe(
-                    response => {
-                        if (response.code == 200) {
-                            this.getRequi();
-                        }
-                    }, error => {
-                        console.log(<any>error);
-                    });
-            }else if(item.tipo = "VENTA"){
-                this._GeneralCallService.updateRecord(this.token, 'recive', item, id).subscribe(
-                    response => {
-                        this.getRequi();
-                    }, error => {
-                        console.log(<any>error);
-                    });
-            }
-        }
-    }
 
     applyFilter(filterValue: string) {
         this.requisicion.filter = filterValue.trim().toLowerCase();

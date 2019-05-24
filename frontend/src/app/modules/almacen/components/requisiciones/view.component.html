@@ -69,7 +69,7 @@
                     <td mat-cell 
                         *matCellDef="let row">
                         <button mat-icon-button
-                                (click)="acptarEntrada(row.id,row)"
+                                [routerLink]="['../recepcion',row.id]"
                                 color="primary">
                         <mat-icon>done</mat-icon>
                 </button>

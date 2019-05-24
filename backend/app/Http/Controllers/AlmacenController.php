@@ -30,6 +30,7 @@ class AlmacenController extends Controller
         );
         return response()->json($data, 200);
     }
+
     /*==============================================================================
         Crea los Nuevos registros
     ==============================================================================*/
@@ -53,6 +54,27 @@ class AlmacenController extends Controller
         );
         return response()->json($data, 200);
     }
+
+     /*==============================================================================
+        Funcion para Actualizar los registros del almacen
+    ==============================================================================*/
+    function update(Request $request){
+        $json = $request->input('json', null);
+        $params_array = json_decode($json, true);
+        $user = $json = $request->input('userid', null);
+        foreach ($params_array as $item) {
+            unset($item['totalExistencia']);
+            unset($item['user']);
+            $upalma = new Almacen();
+            $upalma = Almacen::where('id', $item['id'])->update($item);
+        }
+        return response()->json(array(
+            'almacen' => $upalma,
+            'code'=> 200,
+            'status' => 'success'
+        ), 200);
+    }
+
     /*==============================================================================
         lista para dar hojas de salida
     ==============================================================================*/
@@ -134,7 +156,7 @@ class AlmacenController extends Controller
                 $upalma = new Almacen();
                 $upalma = Almacen::where('id', $existe['id'])->update($existe);
                 $item['id_almacen'] = $existe['id'];
-                $item['existencia'] = $item['cantidad'];
+                $item['existencia'] = 0;
                 return $item;
                 break;
             } else {
@@ -151,21 +173,6 @@ class AlmacenController extends Controller
         }
     }
 
-
-    function update(Request $request){
-        $json = $request->input('json', null);
-        $params_array = json_decode($json, true);
-        $user = $json = $request->input('userid', null);
-        foreach ($params_array as $item) {
-            unset($item['totalExistencia']);
-            unset($item['user']);
-            $upalma = new Almacen();
-            $upalma = Almacen::where('id', $item['id'])->update($item);
-        }
-        return response()->json(array(
-            'almacen' => $upalma,
-            'status' => 'success'
-        ), 200);
-    }
+    
 
 }//End Class 

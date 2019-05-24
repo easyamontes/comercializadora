@@ -66,7 +66,7 @@ export class ProveedorEditComponent implements OnInit{
     }
 
     /**Funcionpara eliminar el contacto */
-    deleteContacto(i,){
+    deleteContacto(i){
         this.contactos.splice(i,1);
     }
 

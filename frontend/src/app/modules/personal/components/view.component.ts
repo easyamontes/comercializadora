@@ -1,9 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Personal } from './../../../models/personal'
+import {MatPaginator, MatSort, MatTableDataSource, MatDialog} from '@angular/material';
+//Servicios
 import { UserService } from '../../../services/user.service';
 import {GeneralCallService} from '../../../services/generalCall.service';
-import {GeneralListService} from '../../../services/generalList.service';
-import {MatPaginator, MatSort, MatTableDataSource, MatDialog} from '@angular/material';
+//Utils
+import { PersonalUtil } from '../../../services/util/personal.util'
+//Modelos
+import { Personal } from './../../../models/personal'
+//Componentes
 import { PersonalRegisterComponent } from './register.component';
 
 
@@ -13,7 +17,7 @@ import { PersonalRegisterComponent } from './register.component';
     providers:[
         UserService,
         GeneralCallService,
-        GeneralListService
+        PersonalUtil
     ]
 })
 
@@ -32,8 +36,9 @@ export class PersonalViewComponent implements OnInit{
 
     constructor(
         private _UserService: UserService,
+        private _PersonalUtil:PersonalUtil,
         private _GeneralCallService : GeneralCallService,
-        public _MatDialog: MatDialog
+        private _MatDialog: MatDialog
     ){
         this.title = 'Colaborador';
         this.token = this._UserService.getToken();
@@ -55,10 +60,11 @@ export class PersonalViewComponent implements OnInit{
     }
 
     getPersonal(){
-        this._GeneralCallService.getRecords(this.token,'personal').subscribe(
+        this._GeneralCallService.getRecords(this.token,'here').subscribe(
             response=>{
-                this.personal = response.personal;
-                this.dataSource = new MatTableDataSource(response.personal);
+                this.personal = this._PersonalUtil.getFamilia(response);
+                this.personal.splice(0,1);
+                this.dataSource = new MatTableDataSource(this.personal);
                 this.dataSource.paginator = this.paginator;
                 this.dataSource.sort = this.sort;
             },error=>{

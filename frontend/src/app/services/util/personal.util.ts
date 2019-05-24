@@ -19,7 +19,7 @@ export class PersonalUtil {
                         res.push(i);
                     }
                 } else {
-                    res.push(value);
+                        res.push(value);
                 }
             }
         });
