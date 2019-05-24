@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, DoCheck ,ViewChild } from '@angular/core';
 import { Router} from '@angular/router';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { UserService } from '../../../../services/user.service';
@@ -17,14 +17,14 @@ import { Pedido } from 'src/app/models/pedido';
        ]
 })
 
-export class PedidoStoreComponent implements OnInit {
+export class PedidoStoreComponent implements OnInit , DoCheck {
      public title: string;
      public token: any;
      public pedi: Pedido;
      public pedidos: MatTableDataSource<Almacen>;
      public conceptoventa: Array<Almacen>;
      public status: any;
-     public displayedColumns: string[] = ['codigo','existencia','nombre','cantidad','precio','diferencia','eliminar'];
+     public displayedColumns: string[] = ['codigo','existencia','nombre','cantidad','precio','total','diferencia','eliminar'];
      public lisart:Array<any>;
      public perso:Array<any>;
   
@@ -48,7 +48,12 @@ export class PedidoStoreComponent implements OnInit {
        this.getListArticulo();
        this.getListPersonal();
    }//end ngOnInit
+    ngDoCheck(){
+    if(this.pedi){
+         this.pedi.importe = this.getTotalCost();
+    }
 
+    }
       /*==========================================================
         GENERAR LISTA DE ARTICULOS
        =============================================================*/
@@ -93,6 +98,7 @@ setPersonal(id){
     this.pedidos = new MatTableDataSource (this.conceptoventa);
     this.pedidos.paginator = this.paginator;
     this.pedidos.sort = this.sort;
+    
 }
  
         /*=========================================================
@@ -113,6 +119,7 @@ Guardar(){
                          item.existencia = item.cantidad;
                          item.recepcion = item.cantidad;
                          item.userp_id = this.pedi.pdestino;
+                        
                    })
                   
         /*==============================================================
@@ -153,5 +160,15 @@ Guardar(){
             this.pedi = null;
             this._router.navigate(['./ventas/welcome']);
         }    
+
+        getTotalCost() {
+            return this.conceptoventa.map(c => c.total).reduce((ant, act) => ant + act, 0);
+        }
+    
+
+        validaExistncia(index)  {
+             this.conceptoventa[index].total = this.conceptoventa[index].cantidad * this.conceptoventa[index].precio;
+         
+        }
 }
 
