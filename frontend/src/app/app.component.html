@@ -147,6 +147,33 @@
             <!--divisor para el almacen-->
             <mat-divider></mat-divider>
           </mat-nav-list>
+
+
+
+
+       <!--=============================================
+				REPORTES
+			============================================== -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <span>
+            <span style="font-size: 1.3rem;"> <i class="far fa-list-alt"></i> </span>
+            <span style="font-size: 1.1rem; padding-left: 1.3rem;"> Reportes</span>
+          </span>
+        </mat-expansion-panel-header>
+        <!--=============================================
+    
+  ============================================== -->
+        <mat-nav-list>
+          <mat-list-item [routerLink]="['ventas/reporte']">
+            <span>
+              <span style="font-size: 1.2rem;"> <i class="fas fa-clipboard-list"></i></span>
+              <span style="font-size: 1rem;padding-left: .5rem;"> Socio Comercial</span>
+            </span>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-expansion-panel>
+
           <!--=============================================
 				final de mi lista principal
 			============================================== -->

@@ -11,6 +11,8 @@ import {PedidoDefaultComponent } from './components/default/default.component';
 import {PedidoViewComponent } from './components/pedido/view.component';
 import { PedidoEditComponent} from './components/pedido/pedido-edit.component';
 import { SocioComponent} from './components/socio_vendedor/socio.component';
+import { ReporteDefaultComponent} from './components/reporte/reporte-default.component';
+import { ReportePremioComponent} from './components/reporte/reporte-premio.component';
 
 
 
@@ -23,6 +25,8 @@ import { SocioComponent} from './components/socio_vendedor/socio.component';
         PedidoViewComponent,
         PedidoEditComponent,
         SocioComponent,
+        ReporteDefaultComponent,
+        ReportePremioComponent,
       
     ],
     imports: [
@@ -39,6 +43,8 @@ import { SocioComponent} from './components/socio_vendedor/socio.component';
          PedidoViewComponent,
          PedidoEditComponent,
          SocioComponent,
+         ReporteDefaultComponent,
+         ReportePremioComponent
      
         ],
     providers: []

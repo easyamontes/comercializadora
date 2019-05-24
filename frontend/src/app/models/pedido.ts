@@ -7,6 +7,7 @@ export class Pedido{
         public nombre:string,
         public tipo:string,
         public premio:string,
+        public semana:number,
     ){}
 
 }//End Class
