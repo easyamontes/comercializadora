@@ -38,11 +38,12 @@ class AlmacenController extends Controller
     {
         $json = $request->input('json', null);
         $params_array = json_decode($json, true);
-        $user = $json = $request->input('userid', null);    
+        $user = $json = $request->input('userid', null);  
+        $per = $json = $request->input('per', null);      
         foreach ($params_array as $item) {
             $tipo = $item['tipo'];
             if( $tipo != "COMPRA"){
-                $item = $this->surteRecord($item,$user);
+                $item = $this->surteRecord($item,$user,$per);
             }
             $almacen = $this->saveRecod($item, $user);
         }
@@ -83,7 +84,7 @@ class AlmacenController extends Controller
     {
         $per = $json = $request->input('per', null);
         $almacen = Almacen::selectRaw(' * ,SUM(existencia) AS totalExistencia ')
-            ->where('tipo', 'in', 'COMPRA','ENTRADA')
+            ->whereIn('tipo',['COMPRA','ENTRADA'])
             ->where('userp_id', '=', $per)
             ->groupBy('articulo_id')
             ->get()->load('user');
@@ -142,10 +143,10 @@ class AlmacenController extends Controller
     /*==============================================================================
         Funcion para surtir una Existencia 
     ==============================================================================*/
-    function surteRecord($item, $user)
+    function surteRecord($item, $user, $per)
     {
         $qrty = Almacen::where('articulo_id', '=', $item['articulo_id'])
-            ->where('userp_id', '=', $user)
+            ->where('userp_id', '=', $per)
             ->get();
         $exist = json_decode($qrty, true);
         $dif = 0;

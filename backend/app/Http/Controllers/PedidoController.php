@@ -35,7 +35,12 @@ class PedidoController extends Controller
        $user = $json = $request->input('userid',null);
        $pedido = new Pedido();
        $fecha = substr($params->fechapedido,0,10); 
+       $dia = substr($fecha,8,2);
+       $mes = substr($fecha,5,2);
+       $anio = substr($fecha,0,4);  
+       $semana = date('W',  mktime(0,0,0,$mes,$dia,$anio)); 
        //asignando informacion al objeto
+       $sema = date('w');
        $pedido->user_id = $user;
        $pedido->id = $params->id;
        $pedido->fechapedido = $fecha;
@@ -43,6 +48,7 @@ class PedidoController extends Controller
        $pedido->pdestino = $params->pdestino;
        $pedido->nombre = $params->nombre;
        $pedido->tipo = $params->tipo;
+       $pedido->semana = $semana;
        $pedido->save();
        $data = array(
             'pedido' => $pedido,
@@ -124,6 +130,26 @@ class PedidoController extends Controller
             'status' => 'success'
         ), 200);
     }
+
+    public function premio(Request $request)
+    {
+        $fecha = date('Y-m-d');
+        $dia = substr($fecha,8,2);
+        $mes = substr($fecha,5,2);
+        $anio = substr($fecha,0,4);  
+        $semana = date('W',  mktime(0,0,0,$mes,$dia,$anio)); 
+        $per = $json = $request->input('per', null);
+        $pedido = Pedido::select('*')
+            ->where('user_id','=',$per)
+            ->where('semana','=',$semana)
+            ->orderby('nombre','fechapedido')
+            ->get()->load('user');
+        return response()->json(array(
+            'pedidoall' => $pedido,
+            'status' => 'success'
+        ), 200);
+    }
+
 
 }
 

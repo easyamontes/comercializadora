@@ -13,10 +13,20 @@
                     <input matInput [(ngModel)]="pedi.importe" #importe="ngModel" placeholder="importe" readonly>
                 </mat-form-field>
                 <mat-form-field class="col-md-3 col-xs-12">
-                    <input matInput [(ngModel)]="pedi.nombre" #importe="ngModel" placeholder="nombre" readonly>
+                    <input matInput [(ngModel)]="pedi.nombre" #nombre="ngModel" placeholder="nombre" readonly>
                 </mat-form-field>
                 <mat-form-field class="col-md-3 col-xs-12">
-                    <input matInput [(ngModel)]="pedi.tipo" #importe="ngModel" placeholder="nombre" readonly>
+                    <input matInput [(ngModel)]="pedi.tipo" #tipo="ngModel" placeholder="tipo" readonly>
+                </mat-form-field>
+                <mat-form-field class="col-md-6 col-xs-12">
+
+                    <mat-select name="premio" #premio="ngModel" [(ngModel)]="pedi.premio" placeholder="premio">
+                        <mat-option>none</mat-option>
+                        <mat-option *ngFor="let item of list" [value]="item.nombre">
+                            <span>{{item.nombre}}</span> |
+                            <small>{{item.descripcion}}</small>
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
             </fieldset>
         </div>
@@ -54,7 +64,7 @@
         </table>
     </div>
     <div class="row">
-        
+
         <mat-paginator [pageSizeOptions]="[5, 10]"></mat-paginator>
     </div>
 

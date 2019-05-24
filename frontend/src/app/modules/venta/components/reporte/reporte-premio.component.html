@@ -1,0 +1,39 @@
+<div class="principal">
+
+    <fieldset>
+        <mat-form-field class="col-md-3 col-xs-12">
+            <input matInput placeholder="fecha inicio">
+        </mat-form-field>
+        <mat-form-field class="col-md-3 col-xs-12">
+            <input matInput placeholder="fecha final">
+        </mat-form-field>
+        <mat-form-field class="col-md-3 col-xs-12">
+            <input matInput placeholder="socio Comercial">
+        </mat-form-field>
+
+        <a type="submit" class=" col-md-3 col-xs-12 btn btn-success " (click)="Guardar()">Buscar</a>
+    </fieldset>
+    <div class="form-group">
+        <mat-list>
+            <mat-list-item *ngFor="let lis of lista; let i = index">
+                <mat-form-field class="col-md-2">
+                    <input type="text" matInput #id="ngModel" [(ngModel)]="lis.id" placeholder="id" readonly>
+                </mat-form-field>
+                <mat-form-field class="col-md-2">
+                    <input type="text" matInput #nom="ngModel" [(ngModel)]="lis.nombre" placeholder="Nombre" readonly>
+                </mat-form-field>
+                <mat-form-field class="col-md-2">
+                    <input type="text" matInput #impo="ngModel" [(ngModel)]="lis.importe" placeholder="importe"
+                        readonly>
+                </mat-form-field>
+                <mat-form-field class="col-md-2">
+                    <input type="text" matInput #pre="ngModel" [(ngModel)]="lis.premio" placeholder="premio" readonly>
+                </mat-form-field>
+                <mat-form-field class="col-md-2">
+                    <input type="text" matInput #fp="ngModel" [(ngModel)]="lis.fechapedido" placeholder="Fecha Pedido"
+                        readonly>
+                </mat-form-field>
+            </mat-list-item>
+        </mat-list>
+    </div>
+</div>

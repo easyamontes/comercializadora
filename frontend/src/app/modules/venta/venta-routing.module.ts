@@ -8,6 +8,9 @@ import { PedidoDefaultComponent } from './components/default/default.component';
 import { PedidoViewComponent } from './components/pedido/view.component';
 import { PedidoEditComponent} from './components/pedido/pedido-edit.component';
 import { SocioComponent } from './components/socio_vendedor/socio.component';
+import { ReporteDefaultComponent } from './components/reporte/reporte-default.component';
+import { ReportePremioComponent } from './components/reporte/reporte-premio.component';
+
 ;
 
 
@@ -22,6 +25,8 @@ const ventaRoutes: Routes = [
                                                             {path: 'list',component:PedidoViewComponent},
                                                             {path: 'edit/:id',component:PedidoEditComponent},
                                                             {path:'listaventa',component:SocioComponent},
+                                                            {path:'reporte',component:ReporteDefaultComponent},
+                                                            {path:'premio',component:ReportePremioComponent},  
                                                           ]
     }
   ]  

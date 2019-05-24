@@ -24,6 +24,7 @@ import { Pedido } from 'src/app/models/pedido';
          public pedi: Pedido;
          public pedidos: MatTableDataSource<Almacen>;
          public conceptoventa: Array<Almacen>;
+         public list:Array<any>;
          public displayedColumns: string[] = ['codigo','nombre','diferencia','devolucion'];
 
 
@@ -39,7 +40,7 @@ import { Pedido } from 'src/app/models/pedido';
          ){
             
             this.token=this._UserService.getToken();
-            this.pedi = new Pedido (0,'',0,0,'','');
+            this.pedi = new Pedido (0,'',0,0,'','','',0);
             this.conceptoventa = [];
             this.title = 'Devolucion';
             this.identity = this._UserService.getIdentity();
@@ -52,8 +53,20 @@ import { Pedido } from 'src/app/models/pedido';
                        this.getPedido(id);
                    }
             );
+            this.getPremio();
          }//end ngonit
-  /*=============================================================================
+
+  /*=======================================================================
+     lista de premio
+ ============================================================================= */
+        getPremio(){
+            this._GeneralCallService.getRecords(this.token,'listapremio').subscribe(
+                response => {
+                    this.list = response.premios;
+                }
+            )
+        }
+/*=============================================================================
            LISTA DE PEDIDOS TABLA PEDIDOS
   =============================================================================== */   
          
