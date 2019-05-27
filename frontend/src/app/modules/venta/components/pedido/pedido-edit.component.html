@@ -6,21 +6,21 @@
                 <legend> {{title}}</legend>
                 <!--Dibujando la baecera de informacion-->
                 <mat-form-field class="col-md-3 col-xs-12">
-                    <input matInput [(ngModel)]="pedi.fechapedido" #fechapedido="ngModel" placeholder="Fecha pedido"
+                    <input matInput [(ngModel)]="pedi.fechapedido" #fechapedido="ngModel" placeholder="Fecha Pedido"
                         readonly>
                 </mat-form-field>
                 <mat-form-field class="col-md-3 col-xs-12">
-                    <input matInput [(ngModel)]="pedi.importe" #importe="ngModel" placeholder="importe" readonly>
+                    <input matInput [(ngModel)]="pedi.importe" #importe="ngModel" placeholder="Importe" readonly>
                 </mat-form-field>
                 <mat-form-field class="col-md-3 col-xs-12">
-                    <input matInput [(ngModel)]="pedi.nombre" #nombre="ngModel" placeholder="nombre" readonly>
+                    <input matInput [(ngModel)]="pedi.nombre" #nombre="ngModel" placeholder="Nombre" readonly>
                 </mat-form-field>
                 <mat-form-field class="col-md-3 col-xs-12">
-                    <input matInput [(ngModel)]="pedi.tipo" #tipo="ngModel" placeholder="tipo" readonly>
+                    <input matInput [(ngModel)]="pedi.tipo" #tipo="ngModel" placeholder="Tipo" readonly>
                 </mat-form-field>
                 <mat-form-field class="col-md-6 col-xs-12">
 
-                    <mat-select name="premio" #premio="ngModel" [(ngModel)]="pedi.premio" placeholder="premio">
+                    <mat-select name="premio" #premio="ngModel" [(ngModel)]="pedi.premio" placeholder="Premio">
                         <mat-option>none</mat-option>
                         <mat-option *ngFor="let item of list" [value]="item.nombre">
                             <span>{{item.nombre}}</span> |

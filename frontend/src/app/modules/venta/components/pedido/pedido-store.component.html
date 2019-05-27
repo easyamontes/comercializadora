@@ -6,12 +6,12 @@
             <!--Dibujando la baecera de informacion-->
             <mat-form-field class="col-md-3 col-xs-12">
                 <input name="" matInput [matDatepicker]="picker" [(ngModel)]="pedi.fechapedido" #fechapedido="ngModel"
-                    placeholder="Fecha pedido">
+                    placeholder="Fecha Pedido">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
             <mat-form-field class="col-md-3 col-xs-12">
-                <input matInput [(ngModel)]="pedi.importe" #importe="ngModel" placeholder="importe">
+                <input matInput [(ngModel)]="pedi.importe" #importe="ngModel" placeholder="Importe">
             </mat-form-field>
             <mat-form-field class="col-md-3 col-xs-12">
                 <mat-select matInput [(ngModel)]="pedi.pdestino" #nombre="ngModel" (ngModelChange)="setPersonal($event)"
@@ -55,7 +55,7 @@
                 </td>
             </ng-container>
             <ng-container matColumnDef="cantidad">
-                <th mat-header-cell class="thm" *matHeaderCellDef mat-sort-header> cantidad
+                <th mat-header-cell class="thm" *matHeaderCellDef mat-sort-header> Cantidad
                 </th>
                 <td mat-cell *matCellDef="let row">
                     <mat-form-field>

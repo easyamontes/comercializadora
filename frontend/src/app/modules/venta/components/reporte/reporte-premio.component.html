@@ -2,13 +2,13 @@
 
     <fieldset>
         <mat-form-field class="col-md-3 col-xs-12">
-            <input matInput placeholder="fecha inicio">
+            <input matInput placeholder="Fecha Inicio">
         </mat-form-field>
         <mat-form-field class="col-md-3 col-xs-12">
-            <input matInput placeholder="fecha final">
+            <input matInput placeholder="Fecha Final">
         </mat-form-field>
         <mat-form-field class="col-md-3 col-xs-12">
-            <input matInput placeholder="socio Comercial">
+            <input matInput placeholder="Socio Comercial">
         </mat-form-field>
 
         <a type="submit" class=" col-md-3 col-xs-12 btn btn-success " (click)="Guardar()">Buscar</a>
@@ -23,11 +23,11 @@
                     <input type="text" matInput #nom="ngModel" [(ngModel)]="lis.nombre" placeholder="Nombre" readonly>
                 </mat-form-field>
                 <mat-form-field class="col-md-2">
-                    <input type="text" matInput #impo="ngModel" [(ngModel)]="lis.importe" placeholder="importe"
+                    <input type="text" matInput #impo="ngModel" [(ngModel)]="lis.importe" placeholder="Importe"
                         readonly>
                 </mat-form-field>
                 <mat-form-field class="col-md-2">
-                    <input type="text" matInput #pre="ngModel" [(ngModel)]="lis.premio" placeholder="premio" readonly>
+                    <input type="text" matInput #pre="ngModel" [(ngModel)]="lis.premio" placeholder="Premio" readonly>
                 </mat-form-field>
                 <mat-form-field class="col-md-2">
                     <input type="text" matInput #fp="ngModel" [(ngModel)]="lis.fechapedido" placeholder="Fecha Pedido"

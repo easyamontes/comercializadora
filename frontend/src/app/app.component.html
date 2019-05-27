@@ -1,14 +1,14 @@
 <div class="menu-container" *ngIf="identity" [class.is-mobile]="mobileQuery.matches">
   <!--Menu Superior-->
   <mat-toolbar color="primary" class="toolbar">
-    <button mat-button [routerLink]="['inicio']">EASYLOAD</button>
+    <button mat-button [routerLink]="['inicio']"><img style="width: 25%" src="../../assets/favicon.ico" alt="">EASYLOAD</button>
     <span class="spacer"></span>
     <!--Botonera-->
     <div>
       <button (click)="snav.toggle()" style="background: none; border: none; color: white;">
         <span>
           <span><i class="fas fa-user"></i></span>
-          <span> {{identity.name}} </span>
+          <span style="text-transform:uppercase"> {{identity.name}} </span>
         </span>
       </button>
       <button [routerLink]="['logout/1']" style="background: none; border: none; color: white;">
