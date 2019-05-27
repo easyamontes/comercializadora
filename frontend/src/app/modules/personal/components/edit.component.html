@@ -103,7 +103,6 @@
                           <mat-form-field class="col-md-10 col-xs-12">
                             <mat-select name="oficina" #oficina="ngModel" [(ngModel)]="persona.oficina"
                             placeholder="oficina" required>
-                            <mat-option>None</mat-option>
                             <mat-option *ngFor="let item of lisofi" [value]="item.nombre">{{item.nombre}}
                             </mat-option>
                         </mat-select>

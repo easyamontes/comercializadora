@@ -99,10 +99,10 @@ import { Pedido } from 'src/app/models/pedido';
                          if(this.status == 'success'){
                              this.conceptoventa = this.pedidos.data;
                              this.conceptoventa.forEach(item=>{
-                                item.id =  0 ; 
                                 item.pedido_id = this.pedi.id;
                                 item.tipo = this.pedi.tipo;
                                 item.recepcion = item.cantidad;
+                                item.existencia = item.existencia - item.venta;
                                 item.userp_id = this.identity.sub;
                           })
                          
@@ -110,7 +110,7 @@ import { Pedido } from 'src/app/models/pedido';
                   GUARDAR CONCEPTOS INGRESADOS DENTRO DEL BOTON GUARDAR
                ================================================================ */
           
-                      this._GeneralCallService.storeRecord(this.token,'almaitem',this.conceptoventa).subscribe(
+                      this._GeneralCallService.updateRecord(this.token,'almaitem',this.conceptoventa,this.conceptoventa[0].id).subscribe(
                           response =>{
                               
                               console.log (this.conceptoventa);

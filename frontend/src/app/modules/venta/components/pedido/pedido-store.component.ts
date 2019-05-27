@@ -75,14 +75,15 @@ export class PedidoStoreComponent implements OnInit, DoCheck {
     }
 
 
-    setArticulo(id, index) {
-        this.pedidos.data[index].codigo = this.lisart.find(x => x.id == id).codigo;
-        this.pedidos.data[index].articulo_id = this.lisart.find(x => x.id == id).articulo_id;
-        this.pedidos.data[index].articulo = this.lisart.find(x => x.id == id).articulo;
-        this.pedidos.data[index].marca = this.lisart.find(x => x.id == id).marca;
-        this.pedidos.data[index].modelo = this.lisart.find(x => x.id == id).modelo;
-     
-    }
+setArticulo(id,index){
+    this.pedidos.data[index].codigo = this.lisart.find(x=>x.id == id).codigo;
+    this.pedidos.data[index].proveedor_id = this.lisart.find(x=>x.id == id).proveedor_id;
+    this.pedidos.data[index].articulo_id = this.lisart.find(x=>x.id == id).articulo_id;
+    this.pedidos.data[index].articulo = this.lisart.find(x=>x.id == id).articulo;
+    this.pedidos.data[index].marca = this.lisart.find(x=>x.id == id).marca;
+    this.pedidos.data[index].modelo = this.lisart.find(x=>x.id == id).modelo;
+    this.pedidos.data[index].existencia = this.lisart.find(x=>x.id == id).totalExistencia;
+}
 
     setPersonal(id) {
         this.pedi.nombre = this.perso.find(x => x.id == id).nombre;
