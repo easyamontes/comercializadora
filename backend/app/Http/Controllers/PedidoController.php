@@ -115,11 +115,10 @@ class PedidoController extends Controller
 
 
     public function ventacambaceo(Request $request)
-    {
-        $per = $json = $request->input('per', null);
+    {    $per = $json = $request->input('per', null);
         $idp = Pedido::select('id')
         ->where('tipo','=','SALIDA')
-        ->where('pdestino','=',$per)
+        ->where('pdestino', '=', $per)
         ->get()->load('articulos');
         return response()->json(array(
             'almacen' => $idp,
