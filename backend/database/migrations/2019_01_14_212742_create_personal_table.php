@@ -36,9 +36,6 @@ class CreatePersonalTable extends Migration
             $table->string('status');
             $table->string('oficina');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('puesto_id')->references('id')->on('puesto');
-            $table->foreign('personal_id')->references('id')->on('personal');
         });
     }
 

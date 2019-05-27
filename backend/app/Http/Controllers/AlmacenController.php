@@ -19,9 +19,11 @@ class AlmacenController extends Controller
     public function index(Request $request)
     {
         $user = $json = $request->input('userid', null);
+        $per = $json = $request->input('per', null);
         $almacen = Almacen::selectRaw(' * ,SUM(existencia) as totalExistencia, AVG(precio) AS costo')
-            ->where('userp_id', $user)
-            ->groupBy('articulo_id', 'proveedor_id')
+            ->where('userp_id',$per)
+            //->groupBy('articulo_id', 'proveedor_id')
+            ->groupBy('articulo_id')
             ->get()->load('proveedor');
         $data = array(
             'existencia' => $almacen,
@@ -38,8 +40,8 @@ class AlmacenController extends Controller
     {
         $json = $request->input('json', null);
         $params_array = json_decode($json, true);
-        $user = $json = $request->input('userid', null);  
-        $per = $json = $request->input('per', null);      
+        $user = $json = $request->input('userid', null);
+        $per = $json = $request->input('per', null);  
         foreach ($params_array as $item) {
             $tipo = $item['tipo'];
             if( $tipo != "COMPRA"){
@@ -84,7 +86,7 @@ class AlmacenController extends Controller
     {
         $per = $json = $request->input('per', null);
         $almacen = Almacen::selectRaw(' * ,SUM(existencia) AS totalExistencia ')
-            ->whereIn('tipo',['COMPRA','ENTRADA'])
+            ->whereIn('tipo', ['COMPRA','ENTRADA'])
             ->where('userp_id', '=', $per)
             ->groupBy('articulo_id')
             ->get()->load('user');
@@ -143,7 +145,7 @@ class AlmacenController extends Controller
     /*==============================================================================
         Funcion para surtir una Existencia 
     ==============================================================================*/
-    function surteRecord($item, $user, $per)
+    function surteRecord($item, $user,$per)
     {
         $qrty = Almacen::where('articulo_id', '=', $item['articulo_id'])
             ->where('userp_id', '=', $per)
@@ -173,7 +175,4 @@ class AlmacenController extends Controller
             }
         }
     }
-
-    
-
 }//End Class 

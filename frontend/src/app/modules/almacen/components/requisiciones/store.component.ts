@@ -85,6 +85,7 @@ export class RequisicionStoreComponent implements OnInit {
             response => {
                 if (this.params == 1) {
                     this.provlist = this._PersonalUtil.getFamilia(response);
+                    this.provlist.splice(0,1);
                 } else {
                     this.provlist = response.proveedorll;
                 }

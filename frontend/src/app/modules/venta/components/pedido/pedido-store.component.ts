@@ -72,6 +72,7 @@ getListPersonal(){
 
 setArticulo(id,index){
     this.pedidos.data[index].codigo = this.lisart.find(x=>x.id == id).codigo;
+    this.pedidos.data[index].proveedor_id = this.lisart.find(x=>x.id == id).proveedor_id;
     this.pedidos.data[index].articulo_id = this.lisart.find(x=>x.id == id).articulo_id;
     this.pedidos.data[index].articulo = this.lisart.find(x=>x.id == id).articulo;
     this.pedidos.data[index].marca = this.lisart.find(x=>x.id == id).marca;
