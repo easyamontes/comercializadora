@@ -15,7 +15,7 @@ class Personal extends Model
     }
     //relacion con puestos
     public function puesto(){
-        return $this->belongsto('App\Personal','puesto_id');
+        return $this->belongsto('App\Puesto','puesto_id');
     }
     
     public function usuario(){
@@ -23,7 +23,7 @@ class Personal extends Model
     }
 
     public function hijos(){
-        return $this->hasMany('App\Personal', 'personal_id', 'id');
+        return $this->hasMany('App\Personal', 'personal_id', 'id')->with('padre')->with('puesto');
     }
 
     public function familia(){

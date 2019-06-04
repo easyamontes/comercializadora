@@ -17,7 +17,7 @@ class PersonalController extends Controller
         $json = $request->input('json',null);
         $per = $json = $request->input('per',null);
         $user = $json = $request->input('userid',null);
-        $personal = Personal::all()->load('usuario'); 
+        $personal = Personal::all()->load('usuario')->load('padre'); 
 
         return response()->json(array(
             'personal' => $personal,
@@ -52,6 +52,7 @@ class PersonalController extends Controller
         $personal->cp = $params->cp;
         $personal->status = $params->status;
         $personal->descripcion = $params->descripcion;
+        $personal->oficina = $params->oficina;
 
         //validando datos 
         $validate = \Validator::make($params_array,[
@@ -131,6 +132,18 @@ class PersonalController extends Controller
     public function getHerencia(Request $request){
         $user = $json = $request->input('per',null);
         $personal = Personal::with('familia')->find($user);
+        if( count($personal->familia) > 0){
+            $personal->familia->first()->familia; 
+        }
+        return response()->json(array(
+            'personal' => $personal,
+            'status' => 'success'
+        ),200);
+    }
+
+
+    public function getEquipo($id, Request $request){
+        $personal = Personal::with('familia')->find($id);
         if( count($personal->familia) > 0){
             $personal->familia->first()->familia; 
         }

@@ -93,4 +93,5 @@ class RequisicionControler extends Controller
         return response()->json($data, 200);
     }
 
+    
 } //End class

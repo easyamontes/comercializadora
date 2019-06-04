@@ -32,7 +32,7 @@ Route::get('/api/liscambaceo','PedidoController@ventacambaceo')->middleware('isl
 Route::get('/api/lispremio','PedidoController@premio')->middleware('islogged');
 Route::get('/api/listaoficinas','ListaController@listaoficina')->middleware('islogged');
 Route::put('/api/recive/{id}','RequisicionControler@recive')->middleware('islogged');
-
+Route::put('/api/equipo/{id}','PersonalController@getEquipo')->middleware('islogged');
 
 
 //Rutas para el control de acciones en puestos
@@ -47,4 +47,3 @@ Route::resource('/api/premios','PremioController');
 Route::resource('/api/requisicion','RequisicionControler');
 Route::resource('/api/almaitem','AlmacenController');
 Route::resource('/api/ventas','PedidoController');
-Route::resource('/api/conceptoventa','ConceptoventaController');

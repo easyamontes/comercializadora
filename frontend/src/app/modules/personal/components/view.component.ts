@@ -27,7 +27,7 @@ export class PersonalViewComponent implements OnInit{
     public token: any;
     public personal: Array<Personal>;
     public selectList: Array<any>;
-    public displayedColumns: string[] = ['nombre','Visualizar','editar','eliminar','usuario'];
+    public displayedColumns: string[] = ['nombre','oficina','Visualizar','editar','eliminar','usuario'];
     public dataSource: MatTableDataSource<Personal>;
 
    
@@ -64,6 +64,7 @@ export class PersonalViewComponent implements OnInit{
             response=>{
                 this.personal = this._PersonalUtil.getFamilia(response);
                 this.personal.splice(0,1);
+                console.log(this.personal);
                 this.dataSource = new MatTableDataSource(this.personal);
                 this.dataSource.paginator = this.paginator;
                 this.dataSource.sort = this.sort;
@@ -74,7 +75,7 @@ export class PersonalViewComponent implements OnInit{
 
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
-    
+
         if (this.dataSource.paginator) {
           this.dataSource.paginator.firstPage();
         }
@@ -90,6 +91,13 @@ export class PersonalViewComponent implements OnInit{
                 }
             );
         }
+    }
+
+    getEquipo(lider=null,puesto=null){
+        let filters = {padre:[lider],puesto:[puesto]}
+        return this.personal.filter(o =>
+            Object.keys(filters).every(k =>
+                [].concat(filters[k]).some(v => o[k].includes(v))));
     }
 
 }//End Class

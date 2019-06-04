@@ -11,6 +11,8 @@ import { RequisicionViewComponent } from './components/requisiciones/view.compon
 import { RequisicionStoreComponent } from './components/requisiciones/store.component'
 import { AlmacenDefaultComponent } from './components/default/default.component';
 import { RequisicionReciveComponent } from './components/requisiciones/recive.component';
+import { DiarioViewComponent } from './components/reporteDiario/view.component';
+
 
 @NgModule({
     declarations: [
@@ -19,7 +21,8 @@ import { RequisicionReciveComponent } from './components/requisiciones/recive.co
         RequisicionViewComponent,
         RequisicionStoreComponent,
         AlmacenDefaultComponent,
-        RequisicionReciveComponent
+        RequisicionReciveComponent,
+        DiarioViewComponent
     ],
     imports: [
         AlmacenRoutingModule,
@@ -34,7 +37,8 @@ import { RequisicionReciveComponent } from './components/requisiciones/recive.co
         RequisicionViewComponent,
         RequisicionStoreComponent,
         AlmacenDefaultComponent,
-        RequisicionReciveComponent
+        RequisicionReciveComponent,
+        DiarioViewComponent
         ],
     providers: []
   })

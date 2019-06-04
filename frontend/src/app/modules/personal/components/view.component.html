@@ -1,20 +1,32 @@
 <div class="principal">
     <h3>{{title}}</h3>
     <div class="row">
-        <mat-form-field class="col-md-10 col-xs-12">
+        <mat-form-field class="col-md-4 col-xs-12">
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="buscar">
+        </mat-form-field>
+        <mat-form-field class="col-md-3 col-xs-12">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Lider">
+        </mat-form-field>
+        <mat-form-field class="col-md-3 col-xs-12">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Puesto">
         </mat-form-field>
         <div class="col-xs-12 col-md-2">
             <button class="ventas col-md-12" color="primary" mat-flat-button [routerLink]="['../nuevo']">NUEVO</button>
         </div>
     </div>
     <div class="row">
-        <table mat-table [dataSource]="dataSource" mat-Sort class="col-md-12 col-xs-12 mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort class="col-md-12 col-xs-12 mat-elevation-z8">
             <ng-container matColumnDef="nombre">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                <th class="thm" mat-header-cell *matHeaderCellDef> Nombre</th>
                 <td style="padding-top:.7em;" mat-cell *matCellDef="let row">
                     <h5>{{row.nombre}} {{row.apellidop}} {{row.apellidom}}</h5>
                     <p>{{row.oficina}}</p>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="oficina">
+                <th class="thm" mat-header-cell *matHeaderCellDef> Lider</th>
+                <td style="padding-top:.7em;" mat-cell *matCellDef="let row">
+                        {{row.puesto.puesto}}
                 </td>
             </ng-container>
             <ng-container matColumnDef="Visualizar">
@@ -44,7 +56,7 @@
                 </td>
             </ng-container>
             <ng-container matColumnDef="usuario">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Cuenta </th>
+                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Cuenta</th>
                 <td mat-cell *matCellDef="let row">
                     <button class="botontaba" (click)="openDialog(row)" [disabled]="row.usuario != null">
                         <span>
@@ -53,11 +65,8 @@
                     </button>
                 </td>
             </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns ;sticky: true"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-    </div>
-    <div class="row">
-        <mat-paginator [pageSizeOptions]="[25, 50]"></mat-paginator>
     </div>
 </div>
