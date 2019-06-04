@@ -1,15 +1,14 @@
-import { Component, OnInit,  } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { Router } from '@angular/router';
 //servicios
 import { UserService } from './../../../../services/user.service';
 import { GeneralCallService } from '../../../../services/generalCall.service';
-import { Pedido } from 'src/app/models/pedido';
+import { Almacen } from 'src/app/models/almacen';
 import { Busqueda } from '../../../../models/busqueda';
 
-
 @Component({
-   selector: 'pedido-default',
-   templateUrl: './reporte-premio.component.html',
+   selector: 'reporte-pieza',
+   templateUrl: './reporte-piezas.component.html',
    providers: [
        UserService,
        GeneralCallService,
@@ -17,15 +16,12 @@ import { Busqueda } from '../../../../models/busqueda';
 })
 
 
-export class ReportePremioComponent implements OnInit {
-
+export class ReportePiezaComponent implements OnInit {
     public title:string;
     public token:any;
-    public lista:Array<Pedido>;
     public busqueda:Busqueda;
+    public lista:Array<Almacen>;
     public perso: Array<any>;
- 
-
 
     constructor (
         private _UserService: UserService,
@@ -33,37 +29,32 @@ export class ReportePremioComponent implements OnInit {
         private _router: Router
     ){
         this.token = this._UserService.getToken();
-        this.title = 'Reporte Premio';
+        this.title = 'Reporte Piezas';
         this.busqueda = new Busqueda (null,null,null);
-        
     }
 
     ngOnInit(){
         this.getListPersonal();
     }
-
-    /*==========================================================
+     /*==========================================================
       GENERAR LISTA DEL PERSONAL
      =============================================================*/
-
-     getListPersonal() {
+    getListPersonal() {
         this._GeneralCallService.getRecords(this.token, 'personal').subscribe(
             response => {
                 this.perso = response.personal;
             }
         );
     }
- /*==========================================================
-      BOTON BUSCAR
-=============================================================*/
-    listapremio(){
-        this._GeneralCallService.storeRecord(this.token,'lispremio',this.busqueda).subscribe(
+
+    listapieza(){
+        this._GeneralCallService.storeRecord(this.token,'lispieza',this.busqueda).subscribe(
             response =>{
-                this.lista = response.pedidoall;
-                this.busqueda.inicio = null;
-                this.busqueda.final = null;
+                this.lista = response.piezaall;
                 this.busqueda.socio = null;
-                console.log('lispremio')
+                this.busqueda.final = null;
+                this.busqueda.inicio = null;
+                console.log('listapieza')
             }
         )
 

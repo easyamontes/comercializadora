@@ -1,9 +1,14 @@
 <div class="menu-container" *ngIf="identity" [class.is-mobile]="mobileQuery.matches">
-  <!--Menu Superior-->
+        <!--==========================================
+             Menu Superior
+        ============================================-->
   <mat-toolbar color="primary" class="toolbar">
-    <button mat-button [routerLink]="['inicio']"><img style="width: 25%" src="../../assets/favicon.ico" alt="">EASYLOAD</button>
+    <button mat-button [routerLink]="['inicio']"><img style="width: 25%" src="../../assets/favicon.ico"
+        alt="">EASYLOAD</button>
     <span class="spacer"></span>
-    <!--Botonera-->
+        <!--==========================================
+            Botonera
+        ============================================-->
     <div>
       <button (click)="snav.toggle()" style="background: none; border: none; color: white;">
         <span>
@@ -19,16 +24,22 @@
       </button>
     </div>
   </mat-toolbar>
-  <!--Deseño del toggle tanto fijo como para celulares -->
+      <!--=================================================
+          Deseño del toggle tanto fijo como para celulares 
+      ===================================================-->
   <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="identity ?
         mobileQuery.matches ? 'false' : 'true'
       :'false'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
-      <!--Aqui comeienza el diseño del sildevar-->
+      <!--==================================================
+            Aqui comeienza el diseño del sildevar
+      ===================================================-->
       <div class="container-fluid" style="padding-top:1rem;">
         <h4>Bienvenido {{identity.name}} </h4>
       </div>
-      <!--Botonera de acciones-->
+         <!--===================================================
+               Botonera de acciones
+         ====================================================-->
       <div>
         <mat-nav-list>
           <mat-list-item [routerLink]="['personal']">
@@ -37,13 +48,15 @@
               <span style="font-size: 1.2rem; padding-left: 1.3rem;"> Mi Equipo</span>
             </span>
           </mat-list-item>
-          <!--divisor para el almacen-->
+          <!--==================================================
+                divisor para el almacen
+          ===================================================-->
           <mat-divider></mat-divider>
         </mat-nav-list>
         <mat-accordion>
           <!--======================================================
                 Acordeon de Catalogos
-              =========================================================-->
+          =========================================================-->
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <span>
@@ -90,18 +103,22 @@
               </mat-list-item>
             </mat-nav-list>
           </mat-expansion-panel>
-          <!--=======================================================
+             <!--=======================================================
                 Acordeon de almacen
-               ===========================================================-->
+             =========================================================-->
           <mat-expansion-panel>
-            <!--boton desplegable-->
+            <!--======================================================
+                boton desplegable
+            ========================================================-->
             <mat-expansion-panel-header>
               <span>
                 <span style="font-size: 1.3rem;"> <i class="fas fa-store"> </i></span>
                 <span style="font-size: 1.1rem; padding-left: 1.3rem;"> Almacen</span>
               </span>
             </mat-expansion-panel-header>
-            <!--contenido del boton-->
+            <!--=====================================================
+              contenido del boton
+            =======================================================-->
             <mat-nav-list>
               <mat-list-item [routerLink]="['almacen']">
                 <span>
@@ -112,8 +129,8 @@
             </mat-nav-list>
           </mat-expansion-panel>
           <!--=============================================
-				boton Ventas
-			============================================== -->
+			       	boton Ventas
+		    	============================================== -->
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <span>
@@ -122,21 +139,21 @@
               </span>
             </mat-expansion-panel-header>
             <!--=============================================
-				inicio de la lista de ventas
-			============================================== -->
+			         	inicio de la lista de ventas
+			      ============================================== -->
             <mat-nav-list>
               <mat-list-item [routerLink]="['ventas']">
                 <span>
                   <span style="font-size: 1.2rem;"> <i class="fas fa-clipboard-list"></i></span>
-                  <span style="font-size: 1rem;padding-left: .5rem;"> Hoja de pedido</span>
+                  <span style="font-size: 1rem;padding-left: .5rem;"> Hoja de Pedido</span>
                 </span>
               </mat-list-item>
             </mat-nav-list>
           </mat-expansion-panel>
 
           <!--=============================================
-			  boton de cambaceo
-			============================================== -->
+			          boton de cambaceo
+			    ============================================== -->
           <mat-nav-list>
             <mat-list-item [routerLink]="['ventas/listaventa']">
               <span>
@@ -144,43 +161,43 @@
                 <span style="font-size: 1.2rem; padding-left: 1.3rem;">Socio Comercial</span>
               </span>
             </mat-list-item>
-            <!--divisor para el almacen-->
+            <!--===========================================
+              divisor para el almacen
+            =============================================-->
             <mat-divider></mat-divider>
           </mat-nav-list>
-
-
-
-
-       <!--=============================================
-				REPORTES
-			============================================== -->
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <span>
-            <span style="font-size: 1.3rem;"> <i class="far fa-list-alt"></i> </span>
-            <span style="font-size: 1.1rem; padding-left: 1.3rem;"> Reportes</span>
-          </span>
-        </mat-expansion-panel-header>
-        <!--=============================================
+          <!--=============================================
+				        REPORTES
+			    ============================================== -->
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <span>
+                <span style="font-size: 1.3rem;"> <i class="far fa-list-alt"></i> </span>
+                <span style="font-size: 1.1rem; padding-left: 1.3rem;"> Reportes</span>
+              </span>
+            </mat-expansion-panel-header>
+            <!--=============================================
     
-  ============================================== -->
-        <mat-nav-list>
-          <mat-list-item [routerLink]="['ventas/reporte']">
-            <span>
-              <span style="font-size: 1.2rem;"> <i class="fas fa-clipboard-list"></i></span>
-              <span style="font-size: 1rem;padding-left: .5rem;"> Socio Comercial</span>
-            </span>
-          </mat-list-item>
-        </mat-nav-list>
-      </mat-expansion-panel>
+            ============================================== -->
+            <mat-nav-list>
+              <mat-list-item [routerLink]="['ventas/reporte']">
+                <span>
+                  <span style="font-size: 1.2rem;"> <i class="fas fa-clipboard-list"></i></span>
+                  <span style="font-size: 1rem;padding-left: .5rem;"> Socio Comercial</span>
+                </span>
+              </mat-list-item>
+            </mat-nav-list>
+          </mat-expansion-panel>
 
           <!--=============================================
-				final de mi lista principal
-			============================================== -->
+				      final de mi lista principal
+			    ==============================================-->
         </mat-accordion>
       </div>
     </mat-sidenav>
-    <!-- Contendio general de la aplicacion -->
+         <!--====================================================
+              Contendio general de la aplicacion
+         ====================================================-->
     <mat-sidenav-content>
       <router-outlet></router-outlet>
     </mat-sidenav-content>

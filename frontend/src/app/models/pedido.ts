@@ -8,6 +8,7 @@ export class Pedido{
         public tipo:string,
         public premio:string,
         public semana:number,
+        public dia:string,
     ){}
 
 }//End Class

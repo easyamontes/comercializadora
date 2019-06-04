@@ -76,4 +76,5 @@ class ListaController extends Controller
     );
     return $data;
    }
+   
 }

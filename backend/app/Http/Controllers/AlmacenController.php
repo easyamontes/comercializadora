@@ -77,7 +77,7 @@ class AlmacenController extends Controller
             'status' => 'success'
         ), 200);
     }
-
+ 
     /*==============================================================================
         lista para dar hojas de salida
     ==============================================================================*/
@@ -159,7 +159,7 @@ class AlmacenController extends Controller
                 $upalma = new Almacen();
                 $upalma = Almacen::where('id', $existe['id'])->update($existe);
                 $item['id_almacen'] = $existe['id'];
-                $item['existencia'] = 0;
+                //$item['existencia'] = 0;
                 return $item;
                 break;
             } else {
@@ -175,4 +175,49 @@ class AlmacenController extends Controller
             }
         }
     }
+
+
+    /*======================================================================
+        REPORTE POR PIEZAS VENDIDAD POR EL SOCIO COMERCIAL
+    ====================================================================== */
+
+    
+    public function pieza(Request $request)
+    {
+        
+        $json = $request->input('json',null);
+        $params = json_decode ($json);
+        $per = $json = $request->input('per', null);
+        $socio = $params->socio;
+        $pieza = Almacen::selectRaw('id,articulo,modelo, SUM(venta) AS venta')
+            ->where('user_id','=',$per)->where('userp_id','=',$socio)
+            ->groupby( 'userp_id','articulo_id')
+            ->get()->load('user');
+        return response()->json(array(
+            'piezaall' => $pieza,
+            'status' => 'success'
+        ), 200);
+    } 
+
+        /*======================================================================
+         FUNCION PARA ACTUALIZAR EL CAMPO VENTA
+    ====================================================================== */
+    public function actualizar (Request $request, $id){
+        $json = $request->input('json',null);
+        $params = json_decode($json);
+        $params_array = json_decode($json, true);
+         foreach ($params_array as $item){
+            $actualizar = new Almacen();
+            $devolucion = $item['exitencia']- $item ['venta'];
+            $actualizar = Almacen::where('id', $item['id'])->update(['venta'=>$devolucion]);
+         }
+           
+        return response()->json(array(
+            'actua' => $actualizar,
+            'status' => 'success'
+        ),200);
+     }
+
 }//End Class 
+
+?>

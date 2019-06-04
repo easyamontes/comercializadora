@@ -10,6 +10,7 @@ import { PedidoEditComponent} from './components/pedido/pedido-edit.component';
 import { SocioComponent } from './components/socio_vendedor/socio.component';
 import { ReporteDefaultComponent } from './components/reporte/reporte-default.component';
 import { ReportePremioComponent } from './components/reporte/reporte-premio.component';
+import { ReportePiezaComponent } from './components/reporte/reporte-piezas.component';
 
 ;
 
@@ -26,7 +27,8 @@ const ventaRoutes: Routes = [
                                                             {path: 'edit/:id',component:PedidoEditComponent},
                                                             {path:'listaventa',component:SocioComponent},
                                                             {path:'reporte',component:ReporteDefaultComponent},
-                                                            {path:'premio',component:ReportePremioComponent},  
+                                                            {path:'premio',component:ReportePremioComponent},
+                                                            {path:'piezas',component:ReportePiezaComponent},  
                                                           ]
     }
   ]  

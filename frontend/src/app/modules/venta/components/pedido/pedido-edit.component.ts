@@ -7,6 +7,7 @@ import { Almacen } from './../../../../models/almacen';
 import { Pedido } from 'src/app/models/pedido';
 
 
+
 @Component({
        selector: 'pedido-edit',
        templateUrl: './pedido-edit.component.html',
@@ -40,8 +41,9 @@ import { Pedido } from 'src/app/models/pedido';
          ){
             
             this.token=this._UserService.getToken();
-            this.pedi = new Pedido (0,'',0,0,'','','',0);
+            this.pedi = new Pedido (0,'',0,0,'','','',0,null);
             this.conceptoventa = [];
+        
             this.title = 'Devolucion';
             this.identity = this._UserService.getIdentity();
          }
@@ -51,9 +53,13 @@ import { Pedido } from 'src/app/models/pedido';
                    params=>{
                        let id = +params['id'];
                        this.getPedido(id);
+                     
+                       
                    }
             );
             this.getPremio();
+            
+            
          }//end ngonit
 
   /*=======================================================================
@@ -66,6 +72,8 @@ import { Pedido } from 'src/app/models/pedido';
                 }
             )
         }
+
+
 /*=============================================================================
            LISTA DE PEDIDOS TABLA PEDIDOS
   =============================================================================== */   
@@ -84,7 +92,6 @@ import { Pedido } from 'src/app/models/pedido';
                     console.log(<any>error);
                 }
             );
-
          }
          /*=============================================================================
            UPDATE DE TABLA PEDIDOS Y CREACION DE NUEVO REGISTRO PARA LOS CONCEPTOS
@@ -98,19 +105,24 @@ import { Pedido } from 'src/app/models/pedido';
                    this.status = response.status;
                          if(this.status == 'success'){
                              this.conceptoventa = this.pedidos.data;
+                            this._GeneralCallService.updateRecord(this.token,'act',this.pedidos.data,this.pedidos.data[0].id).subscribe(
+                              response => {
+                                 
+                              }   
+                            )
                              this.conceptoventa.forEach(item=>{
                                 item.pedido_id = this.pedi.id;
                                 item.tipo = this.pedi.tipo;
                                 item.recepcion = item.cantidad;
-                                item.existencia = item.existencia - item.venta;
+                                item.existencia = item.cantidad;
                                 item.userp_id = this.identity.sub;
                           })
-                         
+           
                /*==============================================================
                   GUARDAR CONCEPTOS INGRESADOS DENTRO DEL BOTON GUARDAR
                ================================================================ */
-          
-                      this._GeneralCallService.updateRecord(this.token,'almaitem',this.conceptoventa,this.conceptoventa[0].id).subscribe(
+              
+                      this._GeneralCallService.storeRecord(this.token,'almaitem',this.conceptoventa).subscribe(
                           response =>{
                               
                               console.log (this.conceptoventa);
@@ -118,6 +130,7 @@ import { Pedido } from 'src/app/models/pedido';
                    },error=>{
                              console.log(<any>error);
                            });
+                        this   
                    this._router.navigate(['./ventas/welcome']);
                    }
                },error=>{

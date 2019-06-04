@@ -13,6 +13,8 @@ import { PedidoEditComponent} from './components/pedido/pedido-edit.component';
 import { SocioComponent} from './components/socio_vendedor/socio.component';
 import { ReporteDefaultComponent} from './components/reporte/reporte-default.component';
 import { ReportePremioComponent} from './components/reporte/reporte-premio.component';
+import { ReportePiezaComponent} from './components/reporte/reporte-piezas.component';
+
 
 
 
@@ -27,6 +29,7 @@ import { ReportePremioComponent} from './components/reporte/reporte-premio.compo
         SocioComponent,
         ReporteDefaultComponent,
         ReportePremioComponent,
+        ReportePiezaComponent,
       
     ],
     imports: [
@@ -44,7 +47,8 @@ import { ReportePremioComponent} from './components/reporte/reporte-premio.compo
          PedidoEditComponent,
          SocioComponent,
          ReporteDefaultComponent,
-         ReportePremioComponent
+         ReportePremioComponent,
+         ReportePiezaComponent
      
         ],
     providers: []
