@@ -26,6 +26,7 @@ class CreatePedidoTable extends Migration
             $table->string('tipo');
             $table->string('premio');
             $table->integer('semana');
+            $table->string('dia');
             $table->timestamps();
         });
     }

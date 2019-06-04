@@ -29,10 +29,11 @@ Route::get('/api/listapremio','ListaController@premio')->middleware('islogged');
 Route::get('/api/here','PersonalController@getHerencia')->middleware('islogged');
 Route::get('/api/lisventa','AlmacenController@ventas')->middleware('islogged');
 Route::get('/api/liscambaceo','PedidoController@ventacambaceo')->middleware('islogged');
-Route::get('/api/lispremio','PedidoController@premio')->middleware('islogged');
+Route::post('/api/lispremio','PedidoController@premio')->middleware('islogged');
+Route::post('/api/lispieza','AlmacenController@pieza')->middleware('islogged');
 Route::get('/api/listaoficinas','ListaController@listaoficina')->middleware('islogged');
 Route::put('/api/recive/{id}','RequisicionControler@recive')->middleware('islogged');
-
+Route::put('/api/act/{id}','AlmacenController@actualizar')->middleware('islogged');
 
 
 //Rutas para el control de acciones en puestos

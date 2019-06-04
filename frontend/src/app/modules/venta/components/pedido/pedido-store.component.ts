@@ -42,7 +42,7 @@ export class PedidoStoreComponent implements OnInit, DoCheck {
         this.title = 'Nuevo Pedido';
         this.conceptoventa = [];
         this.token = this._UserService.getToken();
-        this.pedi = new Pedido(0, '', 0, 0, '', "SALIDA", '',0);
+        this.pedi = new Pedido(0, '', 0, 0, '', "SALIDA", '',0,null);
     }
     ngOnInit() {
         this.getListArticulo();
@@ -64,7 +64,9 @@ export class PedidoStoreComponent implements OnInit, DoCheck {
             }
         );
     }
-
+    /*==========================================================
+      GENERAR LISTA DEL PERSONAL
+     =============================================================*/
 
     getListPersonal() {
         this._GeneralCallService.getRecords(this.token, 'personal').subscribe(
@@ -110,7 +112,7 @@ setArticulo(id,index){
         console.log(this.token);
         this._GeneralCallService.storeRecord(this.token, 'ventas', this.pedi).subscribe(
             response => {
-                this.pedi = response.pedido;
+                this.pedi = response.pedido;     
                 console.log(this.pedi)
                 this.status = response.status;
                 if (this.status == 'success') {

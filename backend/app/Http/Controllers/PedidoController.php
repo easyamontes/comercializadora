@@ -24,9 +24,6 @@ class PedidoController extends Controller
         'status' => 'success'
        ),200);
     }
-
-
-
     public function store ( Request $request)
     {
        $json = $request->input('json',null);
@@ -34,13 +31,15 @@ class PedidoController extends Controller
        $params_array = json_decode($json,true);
        $user = $json = $request->input('userid',null);
        $pedido = new Pedido();
+       //sacar el numero de samana
        $fecha = substr($params->fechapedido,0,10); 
        $dia = substr($fecha,8,2);
        $mes = substr($fecha,5,2);
        $anio = substr($fecha,0,4);  
-       $semana = date('W',  mktime(0,0,0,$mes,$dia,$anio)); 
-       //asignando informacion al objeto
-       $sema = date('w');
+       $semana = date('W',  mktime(0,0,0,$mes,$dia,$anio));
+       //PONER EL NOMBRE DEL DIA 
+       $texto = $this->getdia($fecha);
+      //asignando informacion al objeto
        $pedido->user_id = $user;
        $pedido->id = $params->id;
        $pedido->fechapedido = $fecha;
@@ -49,6 +48,7 @@ class PedidoController extends Controller
        $pedido->nombre = $params->nombre;
        $pedido->tipo = $params->tipo;
        $pedido->semana = $semana;
+       $pedido->dia = $texto;
        $pedido->save();
        $data = array(
             'pedido' => $pedido,
@@ -57,6 +57,7 @@ class PedidoController extends Controller
        );
        return response()->json($data,200);
     }
+    
     public function destroy($id, Request $request){
         $conceptoventa = Pedido::find($id);
         $conceptoventa->delete();
@@ -126,25 +127,89 @@ class PedidoController extends Controller
         ), 200);
     }
 
+    /*======================================================================
+       LISTA DE REPORTE DE PREMIO VENDIDO POR EL SOCIO 
+    ====================================================================== */
     public function premio(Request $request)
     {
-        $fecha = date('Y-m-d');
-        $dia = substr($fecha,8,2);
-        $mes = substr($fecha,5,2);
-        $anio = substr($fecha,0,4);  
-        $semana = date('W',  mktime(0,0,0,$mes,$dia,$anio)); 
+     
+        $json = $request->input('json',null);
+        $params = json_decode ($json);
         $per = $json = $request->input('per', null);
-        $pedido = Pedido::select('*')
+        $socio = $params->socio;
+        
+        $inicio = $params->inicio;
+        $dateinicio = str_replace('/','-',$inicio);
+        $dateinicio = date('Y-m-d',strtotime($dateinicio));
+        $final = $params->final;
+        $datefinal = str_replace('/','-',$final);
+        $datefinal = date('Y-m-d',strtotime($datefinal));
+        if($socio == "" and $inicio != '' and $final != ''){
+            $pedido = Pedido::select('*')
             ->where('user_id','=',$per)
-            ->where('semana','=',$semana)
+            ->where( 'fechapedido','>=',$dateinicio)->where('fechapedido','<=',$datefinal)
+            ->where('tipo', '=', 'ENTRADA')
+            ->orderby('nombre')
+            ->orderby('fechapedido')
+            ->get()->load('user');
+        }else if 
+        ( $socio != "" and $inicio == "" and $final == "")
+        {
+            $pedido = Pedido::select('*')
+            ->where('user_id','=',$per)
+            ->where( 'pdestino','=',$socio)
+            ->where('tipo', '=', 'ENTRADA')
+            ->orderby('fechapedido')
+            ->get()->load('user');
+        }else if
+        ($socio != "" and $inicio != "" and $final != "")
+        {
+            $pedido = Pedido::select('*')
+            ->where('user_id','=',$per)
+            ->where( 'pdestino','=',$socio)
+            ->where( 'fechapedido','>=',$dateinicio)
+            ->where('fechapedido','<=',$datefinal)
+            ->where('tipo', '=', 'ENTRADA')
             ->orderby('nombre','fechapedido')
             ->get()->load('user');
+        }
         return response()->json(array(
             'pedidoall' => $pedido,
             'status' => 'success'
         ), 200);
     }
 
+    /*======================================================================
+         FUNCION DE DIA DE LA SEMANA
+    ====================================================================== */
+    function getdia ($fecha){
+        $fechas = date("N",strtotime($fecha));//pasamos a timestamp
+        switch ($fechas){
+            case "1":
+            $texto = "LUNES";
+            break;  
+            case "2":
+            $texto = "MARTES";
+            break;
+            case "3":
+            $texto = "MIERCOLES";
+            break;
+            case "4":
+            $texto = "JUEVES";
+            break;
+            case "5":
+            $texto = "VIERNES";
+            break;
+            case "6":
+            $texto = "SABADO";
+            break;
+            case "7":
+            $texto = "DOMINGO";
+            break;
+            }
+          return $texto;
+    }
+    
 
 }
 
