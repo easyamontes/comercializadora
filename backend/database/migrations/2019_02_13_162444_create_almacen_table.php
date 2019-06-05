@@ -32,7 +32,8 @@ class CreateAlmacenTable extends Migration
             $table->string('modelo');
             $table->integer('cantidad');
             $table->integer('costo')->nullable();
-            $table->integer('precio');
+            $table->integer('precio'); 
+            $table->integer('devolucion');
             $table->integer('existencia')->nullable();
             $table->integer('total');
             

@@ -96,7 +96,7 @@ setArticulo(id,index){
           AGREGAR CONCEPTO POR CONCEPTO
    ================================================================= */
     addConcepto() {
-        let nuevoConcepto = new Almacen(0, 0, 0, 0, 0, 0, 0, null, "SALIDA", null, null, null, null, 0, 0, 0, 0, 0, 0, 0, 0);
+        let nuevoConcepto = new Almacen(0, 0, 0, 0, 0, 0, 0, null, "SALIDA", null, null, null, null, 0, 0, 0, 0 ,0, 0, 0, 0, 0);
         this.conceptoventa.push(nuevoConcepto);
         this.pedidos = new MatTableDataSource(this.conceptoventa);
         this.pedidos.paginator = this.paginator;

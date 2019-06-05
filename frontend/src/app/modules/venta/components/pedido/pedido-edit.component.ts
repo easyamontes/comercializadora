@@ -5,6 +5,7 @@ import { UserService } from '../../../../services/user.service';
 import {GeneralCallService} from '../../../../services/generalCall.service';
 import { Almacen } from './../../../../models/almacen';
 import { Pedido } from 'src/app/models/pedido';
+import { isNgTemplate } from '@angular/compiler';
 
 
 
@@ -106,25 +107,28 @@ import { Pedido } from 'src/app/models/pedido';
                          if(this.status == 'success'){
                              this.conceptoventa = this.pedidos.data;
                             this._GeneralCallService.updateRecord(this.token,'act',this.pedidos.data,this.pedidos.data[0].id).subscribe(
-                              response => {
-                                 
+                              response => {         
                               }   
                             )
                              this.conceptoventa.forEach(item=>{
                                 item.pedido_id = this.pedi.id;
                                 item.tipo = this.pedi.tipo;
-                                item.recepcion = item.cantidad;
-                                item.existencia = item.cantidad;
-                                item.userp_id = this.identity.sub;
+                                item.recepcion = item.devolucion;
+                                item.existencia = item.devolucion;
+                                item.cantidad = item.devolucion;
+                                item.userp_id = this.identity.sub;                       
                           })
            
                /*==============================================================
                   GUARDAR CONCEPTOS INGRESADOS DENTRO DEL BOTON GUARDAR
                ================================================================ */
-              
+                           this.conceptoventa = this.conceptoventa.filter(function  (obj) {
+                               return obj.devolucion > 0;
+                               
+                           });
+
                       this._GeneralCallService.storeRecord(this.token,'almaitem',this.conceptoventa).subscribe(
-                          response =>{
-                              
+                          response =>{  
                               console.log (this.conceptoventa);
           
                    },error=>{

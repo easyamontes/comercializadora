@@ -44,7 +44,7 @@ class AlmacenController extends Controller
         $per = $json = $request->input('per', null);  
         foreach ($params_array as $item) {
             $tipo = $item['tipo'];
-            if( $tipo != "COMPRA"){
+            if( $tipo != "COMPRA" && $tipo != "ENTRADA"){
                 $item = $this->surteRecord($item,$user,$per);
             }
             $almacen = $this->saveRecod($item, $user);
@@ -136,6 +136,7 @@ class AlmacenController extends Controller
         $almacen->recepcion = $item['recepcion'];
         $almacen->cantidad = $item['cantidad'];
         $almacen->precio = $item['precio'];
+        $almacen->devolucion = $item['devolucion'];
         $almacen->existencia = $item['existencia'];
         $almacen->total = $item['total'];
         $almacen->save();
@@ -189,7 +190,7 @@ class AlmacenController extends Controller
         $params = json_decode ($json);
         $per = $json = $request->input('per', null);
         $socio = $params->socio;
-        $pieza = Almacen::selectRaw('id,articulo,modelo, SUM(venta) AS venta')
+        $pieza = Almacen::selectRaw('articulo,modelo, SUM(venta) AS venta, SUM(total) AS total, AVG(PRECIO) AS precio')
             ->where('user_id','=',$per)->where('userp_id','=',$socio)
             ->groupby( 'userp_id','articulo_id')
             ->get()->load('user');
@@ -208,10 +209,14 @@ class AlmacenController extends Controller
         $params_array = json_decode($json, true);
          foreach ($params_array as $item){
             $actualizar = new Almacen();
-            $devolucion = $item['exitencia']- $item ['venta'];
-            $actualizar = Almacen::where('id', $item['id'])->update(['venta'=>$devolucion]);
-         }
-           
+            $ca = $item['devolucion'];
+            $devolucion = $item['existencia']- $item ['devolucion'];
+            if($ca < 1 ){
+                $actualizar = Almacen::where('id', $item['id'])->update(['venta'=> $item['cantidad'] ]);
+            }else{
+                $actualizar = Almacen::where('id', $item['id'])->update(['venta'=>$devolucion]);
+            }
+         }      
         return response()->json(array(
             'actua' => $actualizar,
             'status' => 'success'
