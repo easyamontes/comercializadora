@@ -29,9 +29,9 @@
             <tr>
                 <th>Articulo</th>
                 <th>Modelo</th>
-                <th>Venta</th>
-                <th>Costo Total</th>
+                <th>Piezas Vendidas</th>
                 <th>Precio Por Pieza</th>
+                <th>Costo Total</th>
             </tr>
         </thead>
         <tbody>
@@ -39,8 +39,8 @@
                 <td>{{ lis.articulo }}</td>
                 <td>{{ lis.modelo }}</td>
                 <td>{{ lis.venta }}</td>
-                <td>{{ lis.total }}</td>
-                <td>{{ lis.precio }}</td>
+                <td>{{ lis.precio |currency}}</td>
+                <td>{{ lis.total |currency}}</td>
             </tr>
         </tbody>
     </table>

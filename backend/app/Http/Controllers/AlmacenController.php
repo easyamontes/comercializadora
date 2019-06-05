@@ -191,7 +191,7 @@ class AlmacenController extends Controller
         $per = $json = $request->input('per', null);
         $socio = $params->socio;
         $pieza = Almacen::selectRaw('articulo,modelo, SUM(venta) AS venta, SUM(total) AS total, AVG(PRECIO) AS precio')
-            ->where('user_id','=',$per)->where('userp_id','=',$socio)
+            ->where('user_id','=',$per)->where('userp_id','=',$socio)->where('tipo','=', 'SALIDA')
             ->groupby( 'userp_id','articulo_id')
             ->get()->load('user');
         return response()->json(array(
@@ -211,10 +211,11 @@ class AlmacenController extends Controller
             $actualizar = new Almacen();
             $ca = $item['devolucion'];
             $devolucion = $item['existencia']- $item ['devolucion'];
+            $precio = $devolucion * $item['precio'];
             if($ca < 1 ){
                 $actualizar = Almacen::where('id', $item['id'])->update(['venta'=> $item['cantidad'] ]);
             }else{
-                $actualizar = Almacen::where('id', $item['id'])->update(['venta'=>$devolucion]);
+                $actualizar = Almacen::where('id', $item['id'])->update(['venta'=>$devolucion,'total'=>$precio]);
             }
          }      
         return response()->json(array(
