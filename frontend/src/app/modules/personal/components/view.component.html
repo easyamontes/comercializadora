@@ -5,13 +5,24 @@
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="buscar">
         </mat-form-field>
         <mat-form-field class="col-md-3 col-xs-12">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Lider">
+            <input matInput [(ngModel)]="lider" (change)="getEquipo(lider)" placeholder="Lider">
         </mat-form-field>
         <mat-form-field class="col-md-3 col-xs-12">
-                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Puesto">
+                <input matInput [(ngModel)]="puesto" (keyup)="applyFilter($event.target.value)" placeholder="Puesto">
         </mat-form-field>
-        <div class="col-xs-12 col-md-2">
-            <button class="ventas col-md-12" color="primary" mat-flat-button [routerLink]="['../nuevo']">NUEVO</button>
+        <div class="col-xs-12 col-md-1">
+            <button class="ventas col-12 " color="primary" mat-flat-button>
+                <span>
+                    <i class="fas fa-search"></i>
+                </span>
+            </button>
+        </div>
+        <div class="col-xs-12 col-md-1">
+            <button class="ventas col-12" color="primary" mat-flat-button [routerLink]="['../nuevo']">
+                <span>
+                    <i class="fas fa-plus"></i>
+                </span>
+            </button>
         </div>
     </div>
     <div class="row">
