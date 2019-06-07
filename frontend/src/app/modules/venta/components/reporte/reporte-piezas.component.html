@@ -24,24 +24,27 @@
         <button type="submit" class=" col-md-3 col-xs-12  botonbuscar " (click)="listapieza()">Buscar</button>
     </fieldset>
     <br>
-    <table class="table table-striped">
-        <thead class="tablareporte">
-            <tr>
-                <th>Articulo</th>
-                <th>Modelo</th>
-                <th>Piezas Vendidas</th>
-                <th>Precio Por Pieza</th>
-                <th>Costo Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let lis of lista;let i = index">
-                <td>{{ lis.articulo }}</td>
-                <td>{{ lis.modelo }}</td>
-                <td>{{ lis.venta }}</td>
-                <td>{{ lis.precio |currency}}</td>
-                <td>{{ lis.total |currency}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="reporte">
+            <table  class="table table-striped">
+                <thead class="tablareporte">
+                    <tr >
+                        <th >Articulo</th>
+                        <th >Modelo</th>
+                        <th >Piezas Vendidas</th>
+                        <th >Precio Por Pieza</th>
+                        <th >Costo Total</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr class="p" *ngFor="let lis of lista;let i = index">
+                        <td >{{ lis.articulo }}</td>
+                        <td >{{ lis.modelo }}</td>
+                        <td >{{ lis.venta }}</td>
+                        <td >{{ lis.precio |currency}}</td>
+                        <td >{{ lis.total |currency}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        
+    </div>
 </div>

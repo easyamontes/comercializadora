@@ -1,49 +1,60 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 /*===============================================
-  titulo de la tabla
+  TITULOS DE LAS TABLAS DE LOS CATALOGOS
  ===============================================*/
-   .thm {
+   .thm 
+   {
      background:black;
      color: #FFFFFF;
      font-family: Arial, Helvetica, sans-serif;
    }
   /*===============================================
-    boton principal de cada presentacion
+    BOTON PRINCIPAL DE CADA PRESENTACION 
  ===============================================*/
-.botonpri{
+.botonpri
+{
   background-color:#4CAF50;
 }
 /*===============================================
- botones dentro de la tabla
+  BOTONES DE ACCION DENTRO DE LA TABLA
  ===============================================*/
-.botontaba {
+.botontaba 
+{
   font-size: 1.6em;
   color:  blue;
   background: none;
   border: none;
 }
-.botontaba:hover {  
+.botontaba:hover 
+{  
  color: Dodgerblue;
 }
-.botabl {
+.botabl
+{
   display:flex;
   justify-content: left;
   font-style: normal;
-     }
+ }
 /*===============================================
    margen de la pantalla principal
  ===============================================*/
-.principal{
+.principal
+{
   margin-right: 2%; 
   margin-left: 1%;
   margin-top: 2%;
 }
-  .mat-tooltip {
-    background-color: darkblue;
-    font-size: 12px;
+/*===============================================
+   COLOR BARRA DE MENU
+ ===============================================*/
+
+.navbar {
+  background: LightGrey;
+  color: #fff;
   }
-  .loader {
+  .loader 
+  {
     border: 16px solid #f3f3f3;
     border-radius: 50%;
     border-top: 16px solid blue;
@@ -94,3 +105,60 @@
    color: white;
    border:0px;
  }
+ /*===============================================
+   LISTA PARA TELEFONOS MOBILES
+ ===============================================*/
+ @media screen and (max-width: 600px) {
+  .reporte .table, .reporte thead, .reporte tbody, .reporte th, .reporte td, .reporte tr {
+    display: block;
+  }
+
+  /* ======================================================
+     AL INGRESAR EN MOBIL NO MUESTRE EL ENCABEZADO DE LA TABLA 
+  =============================================================*/
+  .reporte thead tr {
+     display: none;
+  }
+
+  .reporte tr {
+    margin: 0 0 1rem 0;
+  }
+    
+  .reporte td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 3px solid #eee;
+    position: relative;
+    text-align: right;
+
+  }
+
+  .reporte td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 0;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    padding-top: 10px;
+    white-space: nowrap;
+  }
+
+  /*==========================================================================
+    SIRVE PARA MOSTRAR EL TITULO EN CADA TD DE LA TABLA PIEZAS
+  ==========================================================================*/
+  .p td:nth-of-type(1):before { content: "Articulo"; }
+  .p td:nth-of-type(2):before { content: "Modelo"; }
+  .p td:nth-of-type(3):before { content: "Piezas Vendidas"; }
+  .p td:nth-of-type(4):before { content: "Precio Piezas"; }
+  .p td:nth-of-type(5):before { content: "Costo Total"; }
+  /*==========================================================================
+    SIRVE PARA MOSTRAR EL TITULO EN CADA TD DE LA TABLA PREMIO
+  ==========================================================================*/
+  .rpre td:nth-of-type(1):before { content: "ID Pedido"; }
+  .rpre td:nth-of-type(2):before { content: "Socio"; }
+  .rpre td:nth-of-type(3):before { content: "Premio"; }
+  .rpre td:nth-of-type(4):before { content: "Dia"; }
+}
+

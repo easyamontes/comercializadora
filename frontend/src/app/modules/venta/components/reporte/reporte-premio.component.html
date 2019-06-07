@@ -16,30 +16,32 @@
             <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="col-md-3 col-xs-12">
-            <mat-select matInput [(ngModel)]="busqueda.socio" placeholder="Socio Comercial" #socio="ngModel" (ngModelChange)="setPersonal($event)">
+            <mat-select matInput [(ngModel)]="busqueda.socio" placeholder="Socio Comercial" #socio="ngModel"
+                (ngModelChange)="setPersonal($event)">
                 <mat-option *ngFor="let  pedi of perso" [value]="pedi.id">{{pedi.nombre}}</mat-option>
             </mat-select>
         </mat-form-field>
         <button type="submit" class=" col-md-3 col-xs-12  botonbuscar " (click)="listapremio()">Buscar</button>
     </fieldset>
-
     <br>
-    <table class="table table-striped">
-        <thead class="tablareporte">
-            <tr>
-                <th>Id Pedido</th>
-                <th>Nombre Socio</th>
-                <th>Premio</th>
-                <th>Dia</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let lis of lista;let i = index">
-                <td>{{ lis.id }}</td>
-                <td>{{ lis.nombre }}</td>
-                <td>{{ lis.premio }}</td>
-                <td>{{ lis.dia }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="reporte">
+        <table class="table table-striped">
+            <thead class="tablareporte">
+                <tr>
+                    <th>Id Pedido</th>
+                    <th>Socio</th>
+                    <th>Premio</th>
+                    <th>Dia</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="rpre" *ngFor="let lis of lista;let i = index">
+                    <td>{{ lis.id }}</td>
+                    <td>{{ lis.nombre }}</td>
+                    <td>{{ lis.premio }}</td>
+                    <td>{{ lis.dia }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

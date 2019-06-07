@@ -1,30 +1,25 @@
 <div class="menu-container" *ngIf="identity" [class.is-mobile]="mobileQuery.matches">
-        <!--==========================================
+  <!--==========================================
              Menu Superior
         ============================================-->
-  <mat-toolbar color="primary" class="toolbar">
-    <button mat-button [routerLink]="['inicio']"><img style="width: 25%" src="../../assets/favicon.ico"
-        alt="">EASYLOAD</button>
-    <span class="spacer"></span>
-        <!--==========================================
-            Botonera
-        ============================================-->
-    <div>
-      <button (click)="snav.toggle()" style="background: none; border: none; color: white;">
-        <span>
-          <span><i class="fas fa-user"></i></span>
-          <span style="text-transform:uppercase"> {{identity.name}} </span>
-        </span>
-      </button>
-      <button [routerLink]="['logout/1']" style="background: none; border: none; color: white;">
-        <span>
-          <span><i class="fas fa-sign-out-alt"></i></span>
-          <span> Salir </span>
-        </span>
-      </button>
-    </div>
-  </mat-toolbar>
-      <!--=================================================
+        <nav class="navbar">
+            <img style="width:65px;" src="../../assets/favicon.ico" [routerLink]="['inicio']">
+            <span class="navbar">
+                <button (click)="snav.toggle()" style="font-size: 1.0em; background: none; border: none; color: black;">
+                    <span>
+                      <span><i class="fas fa-user" style="size: 1.3em"></i></span>
+                      <span style="text-transform:uppercase;font-size: 1.3em"> {{identity.name}} </span>
+                    </span>
+                  </button>
+                  <button [routerLink]="['logout/1']" style="font-size: 1.0em; background: none; border: none; color: black;">
+                    <span>
+                      <span><i class="fas fa-sign-out-alt" style="size: 1.4em"></i></span>
+                      <span style="font-size: 1.3em"> Salir </span>
+                    </span>
+                  </button>
+            </span>
+          </nav>
+  <!--=================================================
           Deseño del toggle tanto fijo como para celulares 
       ===================================================-->
   <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
@@ -37,7 +32,7 @@
       <div class="container-fluid" style="padding-top:1rem;">
         <h4>Bienvenido {{identity.name}} </h4>
       </div>
-         <!--===================================================
+      <!--===================================================
                Botonera de acciones
          ====================================================-->
       <div>
@@ -103,7 +98,7 @@
               </mat-list-item>
             </mat-nav-list>
           </mat-expansion-panel>
-             <!--=======================================================
+          <!--=======================================================
                 Acordeon de almacen
              =========================================================-->
           <mat-expansion-panel>
@@ -195,7 +190,7 @@
         </mat-accordion>
       </div>
     </mat-sidenav>
-         <!--====================================================
+    <!--====================================================
               Contendio general de la aplicacion
          ====================================================-->
     <mat-sidenav-content>

@@ -104,7 +104,6 @@ class PedidoController extends Controller
         unset($params_array['created_at']);
         unset($params_array['user']);
         unset($params_array['articulos']);
-
         $pedido = Pedido::where('id',$id)->update($params_array);
         $data = array(
             'pedido' => $params,
