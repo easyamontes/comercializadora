@@ -6,7 +6,7 @@ import { GeneralCallService } from '../../../services/generalCall.service';
 //Utils
 import { PersonalUtil } from '../../../services/util/personal.util';
 //Modelos
-import { Personal } from './../../../models/personal';
+import { Personal } from './../../../models/personal'
 //Componentes
 import { PersonalRegisterComponent } from './register.component';
 
@@ -29,6 +29,7 @@ export class PersonalViewComponent implements OnInit {
     public selectList: Array<any>;
     public displayedColumns: string[] = ['nombre', 'oficina', 'Visualizar', 'editar', 'eliminar', 'usuario'];
     public dataSource: MatTableDataSource<Personal>;
+    public organi:Array<any>
     public lider:string;
     public puesto:string;
 
@@ -48,6 +49,7 @@ export class PersonalViewComponent implements OnInit {
 
     ngOnInit() {
         this.getPersonal();
+        this.getPuesto();
     }
 
 
@@ -65,10 +67,10 @@ export class PersonalViewComponent implements OnInit {
         this._GeneralCallService.getRecords(this.token, 'here').subscribe(
             response => {
                 this.personal = this._PersonalUtil.getFamilia(response);
-                this.lider = response.personal.nombre + ' ' + response.personal.apellidop;
-                this.personal.splice(0, 1);
-                console.log(this.personal);
+                this.lider = response.personal.id;
                 this.dataSource = new MatTableDataSource(this.personal);
+                this.dataSource.data.splice(1,0);
+                this.dataSource._updateChangeSubscription;
                 this.dataSource.paginator = this.paginator;
                 this.dataSource.sort = this.sort;
             }, error => {
@@ -96,12 +98,27 @@ export class PersonalViewComponent implements OnInit {
         }
     }
 
-    getEquipo(lider = null, puesto = null) {
-        let filters = { padre: [lider], puesto: [puesto] }
-        this.dataSource.data = this.personal.filter(o =>
-            Object.keys(filters).every(k =>
-                [].concat(filters[k]).some(v => o[k].includes(v))));
-        this.dataSource._updateChangeSubscription();
+    getPuesto(){
+        this._GeneralCallService.getRecords(this.token,'puestos').subscribe(
+            response=>{
+                this.organi = response.puestos;
+            },error=>{
+                console.log(<any>error);
+            }
+        );
+    }
+
+    viewFilter(){
+        let fileter = {
+            lider: this.lider
+        }
+        this._GeneralCallService.storeRecord(this.token,'equipo',fileter).subscribe(
+            response=>{
+                let perso = this._PersonalUtil.getFamilia(response);
+                this.dataSource.data = perso;
+                this.dataSource._renderChangesSubscription;
+            }
+        );
     }
 
 }//End Class

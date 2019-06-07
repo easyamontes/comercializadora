@@ -131,7 +131,7 @@ class PersonalController extends Controller
 
     public function getHerencia(Request $request){
         $user = $json = $request->input('per',null);
-        $personal = Personal::with('familia')->find($user);
+        $personal = Personal::with('familia')->with('puesto')->find($user);
         if( count($personal->familia) > 0){
             $personal->familia->first()->familia; 
         }
@@ -142,8 +142,10 @@ class PersonalController extends Controller
     }
 
 
-    public function getEquipo($id, Request $request){
-        $personal = Personal::with('familia')->find($id);
+    public function getEquipo(Request $request){
+        $json = $request->input('json',null);
+        $params_array = json_decode($json, true); 
+        $personal = Personal::with('familia')->with('puesto')->find($params_array['lider']);
         if( count($personal->familia) > 0){
             $personal->familia->first()->familia; 
         }

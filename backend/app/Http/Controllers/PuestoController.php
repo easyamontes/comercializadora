@@ -19,6 +19,7 @@ class PuestoController extends Controller
         $puesto = Puesto::all()->load('user');
         $nop = $puesto->count();
         return response()->json(array(
+            'code' => 200,
             'puestos' => $puesto,
             'status' => 'success'
         ),200);
