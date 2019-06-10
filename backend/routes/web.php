@@ -33,7 +33,7 @@ Route::post('/api/lispremio','PedidoController@premio')->middleware('islogged');
 Route::post('/api/lispieza','AlmacenController@pieza')->middleware('islogged');
 Route::get('/api/listaoficinas','ListaController@listaoficina')->middleware('islogged');
 Route::put('/api/recive/{id}','RequisicionControler@recive')->middleware('islogged');
-Route::put('/api/equipo/{id}','PersonalController@getEquipo')->middleware('islogged');
+Route::post('/api/equipo','PersonalController@getEquipo')->middleware('islogged');
 Route::put('/api/act/{id}','AlmacenController@actualizar')->middleware('islogged');
 
 

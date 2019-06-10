@@ -5,13 +5,23 @@
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="buscar">
         </mat-form-field>
         <mat-form-field class="col-md-3 col-xs-12">
-            <input matInput [(ngModel)]="lider" (change)="getEquipo(lider)" placeholder="Lider">
+            <mat-select matInput [(ngModel)]="lider"  placeholder="Lider">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let persona of personal" [value]="persona.id">
+                    {{persona.nombre+ ' ' +persona.apellidop+ ' '+ persona.apellidom}}
+                </mat-option>
+            </mat-select>
         </mat-form-field>
         <mat-form-field class="col-md-3 col-xs-12">
-                <input matInput [(ngModel)]="puesto" (keyup)="applyFilter($event.target.value)" placeholder="Puesto">
+            <mat-select matInput [(ngModel)]="puesto" placeholder="Puesto">
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let persona of personal" [value]="persona.id">
+                        {{persona.nombre+ ' ' +persona.apellidop+ ' '+ persona.apellidom}}
+                    </mat-option>
+            </mat-select>
         </mat-form-field>
         <div class="col-xs-12 col-md-1">
-            <button class="ventas col-12 " color="primary" mat-flat-button>
+            <button class="ventas col-12 " color="primary" mat-flat-button (click)="viewFilter();">
                 <span>
                     <i class="fas fa-search"></i>
                 </span>
