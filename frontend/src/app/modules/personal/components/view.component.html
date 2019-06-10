@@ -6,8 +6,7 @@
         </mat-form-field>
         <mat-form-field class="col-md-3 col-xs-12">
             <mat-select matInput [(ngModel)]="lider"  placeholder="Lider">
-                <mat-option>None</mat-option>
-                <mat-option *ngFor="let persona of personal" [value]="persona.id">
+                <mat-option *ngFor="let persona of personaList" [value]="persona.id">
                     {{persona.nombre+ ' ' +persona.apellidop+ ' '+ persona.apellidom}}
                 </mat-option>
             </mat-select>
@@ -15,8 +14,8 @@
         <mat-form-field class="col-md-3 col-xs-12">
             <mat-select matInput [(ngModel)]="puesto" placeholder="Puesto">
                     <mat-option>None</mat-option>
-                    <mat-option *ngFor="let persona of personal" [value]="persona.id">
-                        {{persona.nombre+ ' ' +persona.apellidop+ ' '+ persona.apellidom}}
+                    <mat-option *ngFor="let puesto of organi" [value]="puesto.id">
+                        {{ puesto.puesto }}
                     </mat-option>
             </mat-select>
         </mat-form-field>

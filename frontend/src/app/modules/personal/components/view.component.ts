@@ -26,6 +26,7 @@ export class PersonalViewComponent implements OnInit {
     public status: string;
     public token: any;
     public personal: Array<Personal>;
+    public personaList: Array<Personal>;
     public selectList: Array<any>;
     public displayedColumns: string[] = ['nombre', 'oficina', 'Visualizar', 'editar', 'eliminar', 'usuario'];
     public dataSource: MatTableDataSource<Personal>;
@@ -52,8 +53,9 @@ export class PersonalViewComponent implements OnInit {
         this.getPuesto();
     }
 
-
-    /** Funcion para abrir cuadro de dialogo para el registro */
+    /*==============================================================
+        FUNCION PARA EL CUADRO DE DIALOGO DE REGISTRO DE USUARIO
+    ================================================================ */
     openDialog(data: Personal): void {
         const dialogRef = this._MatDialog.open(PersonalRegisterComponent, {
             data: { persona: data }
@@ -63,14 +65,18 @@ export class PersonalViewComponent implements OnInit {
         });
     }
 
+
+    /*==============================================================
+        FUNCION PARA INVOCAR LA LISTA DE PERSONAL
+    ================================================================ */
     getPersonal() {
         this._GeneralCallService.getRecords(this.token, 'here').subscribe(
             response => {
                 this.personal = this._PersonalUtil.getFamilia(response);
+                this.personaList =this._PersonalUtil.getFamilia(response);
                 this.lider = response.personal.id;
+                this.personal.splice(0,1);
                 this.dataSource = new MatTableDataSource(this.personal);
-                this.dataSource.data.splice(1,0);
-                this.dataSource._updateChangeSubscription;
                 this.dataSource.paginator = this.paginator;
                 this.dataSource.sort = this.sort;
             }, error => {
@@ -78,6 +84,10 @@ export class PersonalViewComponent implements OnInit {
             });
     }
 
+
+    /*==============================================================
+        FUNCION PARA QUE CONTROLA EL FILTRADO LIBRE 
+    ================================================================ */
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
 
@@ -86,6 +96,9 @@ export class PersonalViewComponent implements OnInit {
         }
     }
 
+    /*==============================================================
+        FUNCION PARA ELIMINAR EL REGISTRO DE UN EMPLEADO
+    ================================================================ */
     deletePersona(id) {
         if (confirm('Eliminar este registro?')) {
             this._GeneralCallService.delteRcord(this.token, 'personal', id).subscribe(
@@ -98,6 +111,9 @@ export class PersonalViewComponent implements OnInit {
         }
     }
 
+    /*==============================================================
+        FUNCION PARA INVOCAR LAS LISTAS DE PUESTOS
+    ================================================================ */
     getPuesto(){
         this._GeneralCallService.getRecords(this.token,'puestos').subscribe(
             response=>{
@@ -108,6 +124,9 @@ export class PersonalViewComponent implements OnInit {
         );
     }
 
+    /*==============================================================
+        FUNCION  QUE CONTROLA EL FILTRADO SEGUN SELECCION EN LOS OTIONS 
+    ================================================================ */
     viewFilter(){
         let fileter = {
             lider: this.lider
@@ -115,6 +134,10 @@ export class PersonalViewComponent implements OnInit {
         this._GeneralCallService.storeRecord(this.token,'equipo',fileter).subscribe(
             response=>{
                 let perso = this._PersonalUtil.getFamilia(response);
+                perso.splice(0,1);
+                if(this.puesto){
+                    perso = perso.filter(x => x.puesto_id == this.puesto);
+                }
                 this.dataSource.data = perso;
                 this.dataSource._renderChangesSubscription;
             }
