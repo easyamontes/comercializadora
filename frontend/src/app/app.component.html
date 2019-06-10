@@ -2,35 +2,32 @@
   <!--==========================================
              Menu Superior
         ============================================-->
-        <nav class="navbar">
-            <img style="width:65px;" src="../../assets/favicon.ico" [routerLink]="['inicio']">
-            <span class="navbar">
-                <button (click)="snav.toggle()" style="font-size: 1.0em; background: none; border: none; color: black;">
-                    <span>
-                      <span><i class="fas fa-user" style="size: 1.3em"></i></span>
-                      <span style="text-transform:uppercase;font-size: 1.3em"> {{identity.name}} </span>
-                    </span>
-                  </button>
-                  <button [routerLink]="['logout/1']" style="font-size: 1.0em; background: none; border: none; color: black;">
-                    <span>
-                      <span><i class="fas fa-sign-out-alt" style="size: 1.4em"></i></span>
-                      <span style="font-size: 1.3em"> Salir </span>
-                    </span>
-                  </button>
-            </span>
-          </nav>
+  <nav class="navbar">
+    <img style="width:8vh;" src="../../assets/favicon.ico" [routerLink]="['inicio']">
+    <span class="navbar">
+      <button (click)="snav.toggle()" style="background: none; border: none; color: black;margin-right: .5vh;">
+        <span><i class="fas fa-user" style="font-size: 2.6vh"></i></span>
+        <span style="text-transform:uppercase;font-size: 3.3vh;font-family: Merriweather;"> {{identity.name}} </span>
+      </button>
+      <button [routerLink]="['logout/1']" style="background: none; border: none; color: black;">
+        <span><i class="fas fa-sign-out-alt" style="font-size:3.0vh"></i></span>
+        <span style="font-size: 3.5vh;font-family: Merriweather;"> Salir </span>
+      </button>
+    </span>
+
+  </nav>
   <!--=================================================
           Deseño del toggle tanto fijo como para celulares 
       ===================================================-->
-  <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+  <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="identity ?
         mobileQuery.matches ? 'false' : 'true'
-      :'false'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      :'false'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="60">
       <!--==================================================
             Aqui comeienza el diseño del sildevar
       ===================================================-->
       <div class="container-fluid" style="padding-top:1rem;">
-        <h4>Bienvenido {{identity.name}} </h4>
+        <h4 style="font-size: 2.2vh;">Bienvenido {{identity.name}} </h4>
       </div>
       <!--===================================================
                Botonera de acciones
@@ -39,8 +36,8 @@
         <mat-nav-list>
           <mat-list-item [routerLink]="['personal']">
             <span>
-              <span style="font-size: 1.3rem;"> <i class="fas fa-user-friends"></i> </span>
-              <span style="font-size: 1.2rem; padding-left: 1.3rem;"> Mi Equipo</span>
+              <span style="font-size: 2.8vh;"> <i class="fas fa-user-friends"></i> </span>
+              <span style="font-size: 2.8vh; padding-left: 2vh;"> Mi Equipo</span>
             </span>
           </mat-list-item>
           <!--==================================================
@@ -55,45 +52,45 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <span>
-                <span style="font-size: 1.3rem;"> <i class="fa fa-th-list"> </i></span>
-                <span style="font-size: 1.1rem;padding-left: 1.3rem;"> Catalogos</span>
+                <span style="font-size: 2.3vh;"> <i class="fa fa-th-list"> </i></span>
+                <span style="font-size: 2.3vh;padding-left:2vh;"> Catalogos</span>
               </span>
             </mat-expansion-panel-header>
             <mat-nav-list>
-              <mat-list-item [routerLink]="['articulos']">
+              <mat-list-item [routerLink]="['articulos']" style="height: 5vh; margin-top: -2vh;" >
                 <span>
-                  <span style="font-size: 1.2rem;"> <i class="fas fa-bicycle"></i></span>
-                  <span style="font-size: 1rem;padding-left: .5rem;"> Articulo</span>
+                  <span style="font-size: 1.8vh;"> <i class="fas fa-bicycle"></i></span>
+                  <span style="font-size: 1.8vh;padding-left: .5vh;"> Articulo</span>
                 </span>
               </mat-list-item>
-              <mat-list-item [routerLink]="['bancos']">
+              <mat-list-item [routerLink]="['bancos']"style="height: 5vh">
                 <span>
-                  <span style="font-size: 1.2rem;"> <i class="fas fa-money-check-alt"></i></span>
-                  <span style="font-size: 1rem;padding-left: .5rem;"> Bancos</span>
+                  <span style="font-size: 1.8vh;"> <i class="fas fa-money-check-alt"></i></span>
+                  <span style="font-size: 1.8vh;padding-left: .5vh;"> Bancos</span>
                 </span>
               </mat-list-item>
-              <mat-list-item [routerLink]="['oficinas']">
+              <mat-list-item [routerLink]="['oficinas']" style="height: 5vh">
                 <span>
-                  <span style="font-size: 1.2rem;"> <i class="fas fa-city"></i></span>
-                  <span style="font-size: 1rem;padding-left: .5rem;"> Oficinas</span>
+                  <span style="font-size: 1.8vh;"> <i class="fas fa-city"></i></span>
+                  <span style="font-size: 1.8vh;padding-left: .5vh;"> Oficinas</span>
                 </span>
               </mat-list-item>
-              <mat-list-item [routerLink]="['puestos']">
+              <mat-list-item [routerLink]="['puestos']" style="height: 5vh">
                 <span>
-                  <span style="font-size: 1.2rem;"> <i class="fas fa-users"></i></span>
-                  <span style="font-size: 1rem;padding-left: .5rem;"> Organizacion</span>
+                  <span style="font-size: 1.8vh;"> <i class="fas fa-users"></i></span>
+                  <span style="font-size: 1.8vh;padding-left: .5vh;"> Organizacion</span>
                 </span>
               </mat-list-item>
-              <mat-list-item [routerLink]="['premios']">
+              <mat-list-item [routerLink]="['premios']" style="height: 5vh" >
                 <span>
-                  <span style="font-size: 1.2rem;"> <i class="fas fa-gift"></i></span>
-                  <span style="font-size: 1rem;padding-left: .5rem;"> Premios</span>
+                  <span style="font-size: 1.8vh;"> <i class="fas fa-gift"></i></span>
+                  <span style="font-size: 1.8vh;padding-left: .5vh;"> Premios</span>
                 </span>
               </mat-list-item>
-              <mat-list-item [routerLink]="['proveedores']">
+              <mat-list-item [routerLink]="['proveedores']" style="height: 5vh" >
                 <span>
-                  <span style="font-size: 1.2rem;"> <i class="fas fa-handshake"></i></span>
-                  <span style="font-size: 1rem;padding-left: .5rem;"> proveedor</span>
+                  <span style="font-size: 1.8vh;"> <i class="fas fa-handshake"></i></span>
+                  <span style="font-size: 1.8vh;padding-left: .5vh;"> proveedor</span>
                 </span>
               </mat-list-item>
             </mat-nav-list>
@@ -105,20 +102,20 @@
             <!--======================================================
                 boton desplegable
             ========================================================-->
-            <mat-expansion-panel-header>
-              <span>
-                <span style="font-size: 1.3rem;"> <i class="fas fa-store"> </i></span>
-                <span style="font-size: 1.1rem; padding-left: 1.3rem;"> Almacen</span>
+            <mat-expansion-panel-header >
+              <span >
+                <span style="font-size: 2.3vh;"> <i class="fas fa-store"> </i></span>
+                <span style="font-size: 2.3vh; padding-left: 2vh;"> Almacen</span>
               </span>
             </mat-expansion-panel-header>
             <!--=====================================================
               contenido del boton
             =======================================================-->
-            <mat-nav-list>
+            <mat-nav-list style="margin-top: -2vh;">
               <mat-list-item [routerLink]="['almacen']">
                 <span>
-                  <span style="font-size: 1.2rem;"> <i class="fas fa-store-alt"></i></span>
-                  <span style="font-size: 1rem;padding-left: .5rem;"> Existencia</span>
+                  <span style="font-size: 1.8vh;"> <i class="fas fa-store-alt"></i></span>
+                  <span style="font-size: 1.8vh;padding-left: .5rem;"> Existencia</span>
                 </span>
               </mat-list-item>
             </mat-nav-list>
@@ -129,18 +126,18 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <span>
-                <span style="font-size: 1.3rem;"> <i class="fas fa-cart-arrow-down"> </i> </span>
-                <span style="font-size: 1.1rem; padding-left: 1.3rem;"> Venta</span>
+                <span style="font-size: 2.3vh;"> <i class="fas fa-cart-arrow-down"> </i> </span>
+                <span style="font-size: 2.3vh; padding-left: 2vh;"> Venta</span>
               </span>
             </mat-expansion-panel-header>
             <!--=============================================
 			         	inicio de la lista de ventas
 			      ============================================== -->
-            <mat-nav-list>
+            <mat-nav-list style="margin-top: -2vh;">
               <mat-list-item [routerLink]="['ventas']">
                 <span>
-                  <span style="font-size: 1.2rem;"> <i class="fas fa-clipboard-list"></i></span>
-                  <span style="font-size: 1rem;padding-left: .5rem;"> Hoja de Pedido</span>
+                  <span style="font-size: 1.8vh;"> <i class="fas fa-clipboard-list"></i></span>
+                  <span style="font-size: 1.8vh;padding-left: .5rem;"> Hoja de Pedido</span>
                 </span>
               </mat-list-item>
             </mat-nav-list>
@@ -148,12 +145,13 @@
 
           <!--=============================================
 			          boton de cambaceo
-			    ============================================== -->
+          ============================================== -->
+         
           <mat-nav-list>
             <mat-list-item [routerLink]="['ventas/listaventa']">
               <span>
-                <span style="font-size: 1.3rem;"> <i class="fas fa-user-tie"></i> </span>
-                <span style="font-size: 1.2rem; padding-left: 1.3rem;">Socio Comercial</span>
+                <span style="font-size: 2.3vh;"> <i class="fas fa-user-tie"></i> </span>
+                <span style="font-size: 2.3vh; padding-left: 2vh;">Socio Comercial</span>
               </span>
             </mat-list-item>
             <!--===========================================
@@ -161,24 +159,25 @@
             =============================================-->
             <mat-divider></mat-divider>
           </mat-nav-list>
+     
           <!--=============================================
 				        REPORTES
 			    ============================================== -->
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <span>
-                <span style="font-size: 1.3rem;"> <i class="far fa-list-alt"></i> </span>
-                <span style="font-size: 1.1rem; padding-left: 1.3rem;"> Reportes</span>
+                <span style="font-size: 2.3vh;"> <i class="far fa-list-alt"></i> </span>
+                <span style="font-size: 2.3vh; padding-left: 2vh;"> Reportes</span>
               </span>
             </mat-expansion-panel-header>
             <!--=============================================
     
             ============================================== -->
-            <mat-nav-list>
+            <mat-nav-list style="margin-top: -2vh;">
               <mat-list-item [routerLink]="['ventas/reporte']">
                 <span>
-                  <span style="font-size: 1.2rem;"> <i class="fas fa-clipboard-list"></i></span>
-                  <span style="font-size: 1rem;padding-left: .5rem;"> Socio Comercial</span>
+                  <span style="font-size: 1.8vh;"> <i class="fas fa-clipboard-list"></i></span>
+                  <span style="font-size: 1.8vh;padding-left: .5rem;"> Socio Comercial</span>
                 </span>
               </mat-list-item>
             </mat-nav-list>

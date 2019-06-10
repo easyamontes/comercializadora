@@ -40,7 +40,7 @@ export class ReportePiezaComponent implements OnInit {
       GENERAR LISTA DEL PERSONAL
      =============================================================*/
     getListPersonal() {
-        this._GeneralCallService.getRecords(this.token, 'personal').subscribe(
+        this._GeneralCallService.getRecords(this.token,'personal').subscribe(
             response => {
                 this.perso = response.personal;
             }
