@@ -5,7 +5,6 @@ import { UserService } from '../../../../services/user.service';
 import {GeneralCallService} from '../../../../services/generalCall.service';
 import { Almacen } from './../../../../models/almacen';
 import { Pedido } from 'src/app/models/pedido';
-import { isNgTemplate } from '@angular/compiler';
 
 
 
@@ -27,7 +26,7 @@ import { isNgTemplate } from '@angular/compiler';
          public pedidos: MatTableDataSource<Almacen>;
          public conceptoventa: Array<Almacen>;
          public list:Array<any>;
-         public displayedColumns: string[] = ['codigo','nombre','diferencia','devolucion'];
+         public displayedColumns: string[] = ['codigo','nombre','diferencia','devolucion','ventas'];
 
 
          @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -54,14 +53,12 @@ import { isNgTemplate } from '@angular/compiler';
                    params=>{
                        let id = +params['id'];
                        this.getPedido(id);
-                     
-                       
                    }
             );
             this.getPremio();
             
             
-         }//end ngonit
+         }
 
   /*=======================================================================
      lista de premio
@@ -144,6 +141,14 @@ import { isNgTemplate } from '@angular/compiler';
            });
       }
 
+      checkMinMax(index){
+        let cantidad = this.pedidos.data[index].existencia ;
+        let recepcion = this.pedidos.data[index].devolucion;
+        if(cantidad < recepcion || recepcion < 0 || !recepcion){
+            this.pedidos.data[index].devolucion = 0;
+            this.pedidos._updateChangeSubscription;
+        }
+    }
          /*=============================================================================
            BOTON DE CANCELAR EN EL HTML
          =============================================================================== */   

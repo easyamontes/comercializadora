@@ -1,3 +1,94 @@
 <div class="container">
-
+    <!--=============================================================
+                         Cabecera de filtrado
+    =============================================================-->
+    <div class="row d-flex justify-content-center">
+        <h3 class="col-12 text-center">Reporte Diario</h3>
+        <mat-form-field class="col-8">
+                <mat-select matInput [(ngModel)]="personaid"  placeholder="socio" (selectionChange)="onChangeSelector()">
+                    <mat-option *ngFor="let persona of personaList" [value]="persona.id">
+                        {{persona.nombre+ ' ' +persona.apellidop+ ' '+ persona.apellidom}}
+                    </mat-option>
+                </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-4">
+            <input matInput [matDatepicker]="pickerFecha" placeholder="Fecha">
+            <mat-datepicker-toggle matSuffix [for]="pickerFecha"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFecha></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <!--=============================================================
+                         Tabla de Existencias
+    =============================================================-->
+    <div class="row d-flex justify-content-center">
+        <h3 class="col-12 text-center">Existencias</h3>
+        <table class="table table-striped">
+            <thead class="tablareporte">
+                <tr>
+                    <th>#</th>
+                    <th>Articulo</th>
+                    <th>Existencia</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="p" *ngFor="let arti of existenciaRepo; let i = index">
+                    <td>{{ i }}</td>
+                    <td>{{ arti.articulo }}</td>
+                    <td>{{ arti.existencia }}</td>
+                    <td>{{ arti.total |currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <!--=============================================================
+                         Tabla de Compras
+    =============================================================-->
+    <div class="row d-flex justify-content-center">
+        <h3 class="col-12 text-center">Compras</h3>
+        <table class="table table-striped">
+            <thead class="tablareporte">
+                <tr>
+                    <th>#</th>
+                    <th>Articulo</th>
+                    <th>Mdelo</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="p" *ngFor="let arti of compraRepo; let i = index">
+                    <td>{{ i }}</td>
+                    <td>{{ arti.articulo }}</td>
+                    <td>{{ arti.modelo }}</td>
+                    <td>{{ arti.total |currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <!--=============================================================
+                         Tabla de Ventas
+    =============================================================-->
+    <div class="row d-flex justify-content-center">
+        <h3 class="col-12 text-center">Ventas</h3>
+        <table class="table table-striped">
+            <thead class="tablareporte">
+                <tr>
+                    <th>#</th>
+                    <th>Articulo</th>
+                    <th>Mdelo</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="p" *ngFor="let arti of ventaRepo; let i = index">
+                    <td>{{ i }}</td>
+                    <td>{{ arti.articulo }}</td>
+                    <td>{{ arti.modelo }}</td>
+                    <td>{{ arti.total |currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

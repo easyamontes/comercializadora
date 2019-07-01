@@ -12,7 +12,7 @@
                         <input type="text"  matInput name="oficina" #nombre="ngModel" [(ngModel)]="ofi.nombre"  placeholder="Oficina" required>
                     </mat-form-field>
                     <mat-form-field class="col-md-6 col-xs-12">
-                        <mat-select  name="encargadoofi" [(ngModel)]="ofi.personal_id" #encargado="ngModel" (ngModelChange)="setEncargado($event)" placeholder= "Encargado" required>
+                        <mat-select  name="encargadoofi" [(ngModel)]="ofi.personal_id" #encargado="ngModel" (ngModelChange)="setEncargado($event)" placeholder= "Encargado">
                             <mat-option>None</mat-option>
                             <mat-option *ngFor="let item of selectList" [value]="item.id">{{item.nombre}}</mat-option>
                         </mat-select>

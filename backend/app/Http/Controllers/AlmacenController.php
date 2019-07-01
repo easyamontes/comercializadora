@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Almacen;
 
 class AlmacenController extends Controller
 {
-    //
     public function __construct()
     {
         $this->middleware('islogged');
@@ -160,7 +160,6 @@ class AlmacenController extends Controller
                 $upalma = new Almacen();
                 $upalma = Almacen::where('id', $existe['id'])->update($existe);
                 $item['id_almacen'] = $existe['id'];
-                //$item['existencia'] = 0;
                 return $item;
                 break;
             } else {
@@ -181,7 +180,6 @@ class AlmacenController extends Controller
     /*======================================================================
         REPORTE POR PIEZAS VENDIDAD POR EL SOCIO COMERCIAL
     ====================================================================== */
-
     
     public function pieza(Request $request)
     {
@@ -200,9 +198,10 @@ class AlmacenController extends Controller
         ), 200);
     } 
 
-        /*======================================================================
+    /*======================================================================
          FUNCION PARA ACTUALIZAR EL CAMPO VENTA
     ====================================================================== */
+    
     public function actualizar (Request $request, $id){
         $json = $request->input('json',null);
         $params = json_decode($json);
@@ -222,8 +221,25 @@ class AlmacenController extends Controller
             'actua' => $actualizar,
             'status' => 'success'
         ),200);
+    }
+
+
+    /*======================================================================
+         FUNCION PARA CREAR EL REPORTE DE DIARIO
+    ====================================================================== */
+     public function diario(Request $request,$id){
+        $json = $request->input('json',null);
+        $per = $json = $request->input('per', null);
+        $existe = DB::select('select id, proveedor_id, articulo_id, articulo, sum(existencia) as existencia, sum(total) as total from almacen where userp_id = ? and tipo = ? GROUP BY proveedor_id, articulo_id',[$id,'COMPRA']);
+        $compra = DB::select('select al.id, al.proveedor_id, al.articulo_id, al.articulo, al.modelo, sum(al.total) as total from almacen al INNER JOIN requisicion rq where rq.pdestino_id = ? and rq.tipo = ? GROUP BY proveedor_id, articulo_id',[$id,'COMPRA']);
+        $venta =  DB::select('select al.id, al.proveedor_id, al.articulo_id, al.articulo, al.modelo, sum(al.total) as total from almacen al INNER JOIN requisicion rq where rq.pdestino_id = ? and rq.tipo = ? GROUP BY proveedor_id, articulo_id',[$id,'VENTA']);
+        return response()->json(
+            array(
+            'existencia' => $existe,
+            'compra' => $compra,
+            'venta'  => $venta
+        ),200);
+        return $compra;
      }
 
-}//End Class 
-
-?>
+    }//End Class 

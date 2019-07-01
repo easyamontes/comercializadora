@@ -72,7 +72,7 @@
                         </mat-form-field>
                         <mat-form-field class="col-md-2 col-xs-6">
                             <input type="text" matInput name="noint" #noint="ngModel" [(ngModel)]="persona.noint"
-                                placeholder="No Int" required>
+                                placeholder="No Int">
                         </mat-form-field>
                         <mat-form-field class="col-md-2 col-xs-6">
                             <input type="text" matInput name="noext" #noext="ngModel" [(ngModel)]="persona.noext"
@@ -102,12 +102,11 @@
                     <div class="row form-group">
                           <mat-form-field class="col-md-10 col-xs-12">
                             <mat-select name="oficina" #oficina="ngModel" [(ngModel)]="persona.oficina"
-                            placeholder="oficina" required>
+                            placeholder="oficina">
                             <mat-option *ngFor="let item of lisofi" [value]="item.nombre">{{item.nombre}}
                             </mat-option>
                         </mat-select>
                           </mat-form-field>
-                          
                     </div>
                 </fieldset>
             </div>

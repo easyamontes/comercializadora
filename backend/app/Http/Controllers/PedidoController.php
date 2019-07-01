@@ -14,12 +14,16 @@ class PedidoController extends Controller
     {
         $this->middleware('islogged');
     }
+
     /* =====================================================
        lista de pedidos con status salida
      ======================================================*/ 
     public function index(Request $request){
-       $pedido = Pedido::where('tipo','=','SALIDA')->get()->load('user');
-       return response()->json(array(
+        $user = $request->input('userid', null);
+        $pedido = Pedido::where('tipo','=','SALIDA')
+                        ->where('user_id','=',$user)
+                        ->get()->load('user');
+        return response()->json(array(
         'pedidos' => $pedido,
         'status' => 'success'
        ),200);
@@ -115,7 +119,8 @@ class PedidoController extends Controller
 
 
     public function ventacambaceo(Request $request)
-    {    $per = $json = $request->input('per', null);
+    {   
+        $per = $json = $request->input('per', null);
         $idp = Pedido::select('id')
         ->where('tipo','=','SALIDA')
         ->where('pdestino', '=', $per)

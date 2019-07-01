@@ -35,6 +35,7 @@ Route::get('/api/listaoficinas','ListaController@listaoficina')->middleware('isl
 Route::put('/api/recive/{id}','RequisicionControler@recive')->middleware('islogged');
 Route::post('/api/equipo','PersonalController@getEquipo')->middleware('islogged');
 Route::put('/api/act/{id}','AlmacenController@actualizar')->middleware('islogged');
+Route::get('/api/repo/{id}','AlmacenController@diario')->middleware('islogged');
 
 
 //Rutas para el control de acciones en puestos

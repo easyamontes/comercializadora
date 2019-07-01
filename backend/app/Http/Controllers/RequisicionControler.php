@@ -68,8 +68,8 @@ class RequisicionControler extends Controller
     public function show($id, Request $request)
     {
         $requisicion = Requisicion::find($id)->load('articulos')
-                                             ->load('porigen')
-                                             ->load('proveedor');
+            ->load('porigen')
+            ->load('proveedor');
         return response()->json(array(
             'requisicion' => $requisicion,
             'status' => 'success'
@@ -92,6 +92,4 @@ class RequisicionControler extends Controller
         );
         return response()->json($data, 200);
     }
-
-    
 } //End class

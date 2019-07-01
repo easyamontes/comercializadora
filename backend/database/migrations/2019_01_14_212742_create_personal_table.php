@@ -27,7 +27,7 @@ class CreatePersonalTable extends Migration
             $table->string('email');
             $table->string('calle');
             $table->string('noint');
-            $table->string('noext');
+            $table->string('noext')->nullable();
             $table->string('colonia');
             $table->string('estado');
             $table->string('ciudad');
@@ -35,6 +35,8 @@ class CreatePersonalTable extends Migration
             $table->string('descripcion');
             $table->string('status');
             $table->string('oficina');
+            $table->string('nacimiento')->nullable();
+            $table->string('telefono')->nullable();
             $table->timestamps();
         });
     }
