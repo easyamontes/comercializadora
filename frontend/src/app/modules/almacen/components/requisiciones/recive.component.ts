@@ -109,6 +109,7 @@ export class RequisicionReciveComponent implements OnInit{
     SetExistencia() {
         for (var c = 0; c < this.articulos.data.length; c++){
             this.articulos.data[c].existencia = this.articulos.data[c].existencia + this.articulos.data[c].recepcion;
+            this.articulos.data[c].pendiente = this.articulos.data[c].pendiente - this.articulos.data[c].recepcion;
             this.articulos.data[c].recepcion = 0;
         }
     }
@@ -134,7 +135,7 @@ export class RequisicionReciveComponent implements OnInit{
        Verifica que se ingrese un numero valido para la recepcion de articulos
     ==============================================================================*/
     checkMinMax(index){
-        let cantidad = this.articulos.data[index].cantidad + this.articulos.data[index].existencia;
+        let cantidad = this.articulos.data[index].pendiente;
         let recepcion = this.articulos.data[index].recepcion;
         if(cantidad < recepcion || recepcion < 0 || !recepcion){
             this.articulos.data[index].recepcion = 0;

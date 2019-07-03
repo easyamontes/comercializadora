@@ -1,87 +1,53 @@
 <div class="principal">
     <h3>{{title}}</h3>
     <div class="row">
-            <mat-form-field class="col-12">
-             <input matInput
-                    (keyup)="applyFilter($event.target.value)"
-                    placeholder="buscar">
-            </mat-form-field>
+        <mat-form-field class="col-12">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="buscar">
+        </mat-form-field>
     </div>
- <!--Comienza la tabla-->
- <div class="row">
-        <table class="col-md-12 col-xs-12 mat-elevation-z8"
-               mat-table
-               [dataSource]="requisicion"
-               mat-Sort
-        >
+    <!--Comienza la tabla-->
+    <div class="row">
+        <table class="col-md-12 col-xs-12 mat-elevation-z8" mat-table [dataSource]="requisicion" mat-Sort>
             <ng-container matColumnDef="codigo">
-                <th class="thm"
-                    mat-header-cell
-                    *matHeaderCellDef
-                    mat-sort-header > Folio </th>
-                <td mat-cell 
-                    *matCellDef="let row"> {{row.folio}} </td>
+                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Folio </th>
+                <td mat-cell *matCellDef="let row"> {{row.folio}} </td>
             </ng-container>
             <ng-container matColumnDef="articulo">
-                    <th class="thm"
-                        mat-header-cell
-                        *matHeaderCellDef
-                        mat-sort-header > Fecha </th>
-                    <td mat-cell 
-                        *matCellDef="let row"> {{row.fecha | date:'dd/MM/yyyy'}} </td>
+                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+                <td mat-cell *matCellDef="let row"> {{row.fecha | date:'dd/MM/yyyy'}} </td>
             </ng-container>
             <ng-container matColumnDef="proveedor">
-                    <th class="thm"
-                        mat-header-cell
-                        *matHeaderCellDef
-                        mat-sort-header > Proveedor </th>
-                    <td mat-cell 
-                        *matCellDef="let row">
-                        <span *ngIf="row.proveedor">
-                            {{row.proveedor.nombre}}
-                        </span>
-                        <span *ngIf="!row.proveedor">
-                            {{row.porigen.nombre}}
-                        </span>
-                    </td>
+                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Proveedor </th>
+                <td mat-cell *matCellDef="let row">
+                    <span *ngIf="row.proveedor">
+                        {{row.proveedor.nombre}}
+                    </span>
+                    <span *ngIf="!row.proveedor">
+                        {{row.porigen.nombre}}
+                    </span>
+                </td>
             </ng-container>
             <ng-container matColumnDef="cnt">
-                    <th class="thm"
-                        mat-header-cell
-                        *matHeaderCellDef
-                        mat-sort-header > importe </th>
-                    <td mat-cell 
-                        *matCellDef="let row"> {{row.importe |currency}} </td>
+                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> importe </th>
+                <td mat-cell *matCellDef="let row"> {{row.importe |currency}} </td>
             </ng-container>
             <ng-container matColumnDef="tipo">
-                <th class="thm"
-                    mat-header-cell
-                    *matHeaderCellDef
-                    mat-sort-header > tipo </th>
-                <td mat-cell 
-                    *matCellDef="let row"> {{row.tipo}} </td>
+                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> tipo </th>
+                <td mat-cell *matCellDef="let row"> {{row.tipo}} </td>
             </ng-container>
-            <ng-container matColumnDef="accion">
-                    <th class="thm"
-                        mat-header-cell
-                        *matHeaderCellDef
-                        mat-sort-header > Recibir </th>
-                    <td mat-cell 
-                        *matCellDef="let row">
-                        <button mat-icon-button
-                                [routerLink]="['../recepcion',row.id]"
-                                color="primary">
+            <ng-container matColumnDef="recive">
+                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Recibir </th>
+                <td mat-cell *matCellDef="let row">
+                    <button mat-icon-button [routerLink]="['../recepcion',row.id]" color="primary">
                         <mat-icon>done</mat-icon>
-                </button>
-                    </td>
+                    </button>
+                </td>
             </ng-container>
-            <tr mat-header-row 
-                *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row
-                *matRowDef="let row; columns: displayedColumns;">
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
         </table>
     </div>
     <div class="row">
-            <mat-paginator [pageSizeOptions]="[25, 50]"></mat-paginator>
+        <mat-paginator [pageSizeOptions]="[25, 50]"></mat-paginator>
     </div>
 </div>

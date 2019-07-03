@@ -9,163 +9,96 @@
                 <legend>{{title}}</legend>
                 <!--Dibujando la baecera de informacion-->
                 <mat-form-field class="p-1">
-                    <input matInput
-                            [value]="fecha.value"
-                            [(ngModel)]="requi.fecha"
-                            [matDatepicker]="pickerFecha"
-                            #fecha="ngModel"
-                            placeholder="Fecha"
-                    >
+                    <input matInput [value]="fecha.value" [(ngModel)]="requi.fecha" [matDatepicker]="pickerFecha"
+                        #fecha="ngModel" placeholder="Fecha">
                     <mat-datepicker-toggle matSuffix [for]="pickerFecha"></mat-datepicker-toggle>
                     <mat-datepicker #pickerFecha></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field *ngIf="params != 1" class="p-1">
-                    <mat-select #provee="ngModel"
-                                [(ngModel)]="requi.proveedor_id"
-                                placeholder="Proveedor"        
-                    >
-                    <mat-option>None</mat-option>
-                    <mat-option *ngFor="let prov of provlist" [value]="prov.id">{{prov.nombre}}</mat-option>
+                    <mat-select #provee="ngModel" [(ngModel)]="requi.proveedor_id" placeholder="Proveedor">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let prov of provlist" [value]="prov.id">{{prov.nombre}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field *ngIf="params == 1" class="p-1">
-                    <mat-select #socio="ngModel"
-                                [(ngModel)]="requi.pdestino_id"
-                                placeholder="Socio"        
-                    >
-                    <mat-option>None</mat-option>
-                    <mat-option *ngFor="let prov of provlist" [value]="prov.id">{{prov.nombre}}</mat-option>
+                    <mat-select #socio="ngModel" [(ngModel)]="requi.pdestino_id" placeholder="Socio">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let prov of provlist" [value]="prov.id">{{prov.nombre}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field class="p-1">
-                    <input matInput
-                            [(ngModel)]="requi.ffactura"
-                            [matDatepicker]="pickerFactura"
-                            #ffecha="ngModel"
-                            placeholder="Fecha"
-                    >
+                    <input matInput [(ngModel)]="requi.ffactura" [matDatepicker]="pickerFactura" #ffecha="ngModel"
+                        placeholder="Fecha">
                     <mat-datepicker-toggle matSuffix [for]="pickerFactura"></mat-datepicker-toggle>
                     <mat-datepicker #pickerFactura></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field class="p-1">
-                    <input matInput
-                        [(ngModel)]="requi.factura"
-                        #factura = "ngModel"
-                        placeholder="Factura"
-                        >
+                    <input matInput [(ngModel)]="requi.factura" #factura="ngModel" placeholder="Factura">
                 </mat-form-field>
-                <button  class="p-1" color="primary" mat-flat-button (click)="createArticulo();">NUEVO</button>
+                <button class="p-1" color="primary" mat-flat-button (click)="createArticulo();">NUEVO</button>
             </fieldset>
         </div>
     </div>
     <!-- Creando tabla de Articulos -->
-    <div class="row"
-         style="height: 53vh; overflow: auto;"
-    >
-        <table mat-table
-               [dataSource]="articulos"
-               mat-Sort
-               class="col-12"
-        >
-        <ng-container matColumnDef="codigo">
-                <th mat-header-cell
-                    class="thm
-                           text-center"
-                    *matHeaderCellDef
-                    mat-sort-header > Codigo </th>
-                <td mat-cell
-                    *matCellDef="let row"> {{row.codigo}} </td>
+    <div class="row" style="height: 53vh; overflow: auto;">
+        <table mat-table [dataSource]="articulos" mat-Sort class="col-12">
+            <ng-container matColumnDef="codigo">
+                <th mat-header-cell class="thm
+                           text-center" *matHeaderCellDef mat-sort-header> Codigo </th>
+                <td mat-cell *matCellDef="let row"> {{row.codigo}} </td>
             </ng-container>
             <ng-container matColumnDef="nombre">
-                <th mat-header-cell
-                    class="thm
+                <th mat-header-cell class="thm
                            text-center
-                    "
-                    *matHeaderCellDef
-                    mat-sort-header > Articulo </th>
-                <td mat-cell
-                    *matCellDef="let row; let i = index">
+                    " *matHeaderCellDef mat-sort-header> Articulo </th>
+                <td mat-cell *matCellDef="let row; let i = index">
                     <mat-form-field>
-                        <mat-select #articulo="ngModel"
-                                    [(ngModel)]="row.articulo_id"
-                                    (ngModelChange)="setArticulo($event,i)"
-                        >
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let artitem of artilist" [value]="artitem.id">{{artitem.articulo}} {{artitem.marca}} {{artitem.modelo}}</mat-option>
+                        <mat-select #articulo="ngModel" [(ngModel)]="row.articulo_id"
+                            (ngModelChange)="setArticulo($event,i)">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let artitem of artilist" [value]="artitem.id">{{artitem.articulo}}
+                                {{artitem.marca}} {{artitem.modelo}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </td>
             </ng-container>
             <ng-container matColumnDef="cantidad">
-                <th mat-header-cell
-                    class="thm
+                <th mat-header-cell class="thm
                            text-center
-                    "
-                    *matHeaderCellDef
-                    mat-sort-header > Cantidad </th>
-                <td mat-cell
-                    *matCellDef="let row">
+                    " *matHeaderCellDef mat-sort-header> Cantidad </th>
+                <td mat-cell *matCellDef="let row">
                     <mat-form-field>
-                            <input matInput
-                                [(ngModel)]="row.cantidad"
-                                #factura = "ngModel"
-                                type="number"
-                                >
+                        <input matInput [(ngModel)]="row.cantidad" #factura="ngModel" type="number">
                     </mat-form-field>
                 </td>
             </ng-container>
-            <ng-container matColumnDef="existencia"
-                          *ngIf="params==1">
-                <th mat-header-cell
-                    class="thm
-                           text-center"
-                    *matHeaderCellDef
-                    mat-sort-header > Existencia </th>
-                <td mat-cell
-                    class="text-center"
-                    *matCellDef="let row">
+            <ng-container matColumnDef="existencia" *ngIf="params==1">
+                <th mat-header-cell class="thm
+                           text-center" *matHeaderCellDef mat-sort-header> Existencia </th>
+                <td mat-cell class="text-center" *matCellDef="let row">
                     {{row.totalExistencia}}
                 </td>
             </ng-container>
             <ng-container matColumnDef="precio">
-                <th mat-header-cell
-                    class="thm
-                           text-center"
-                    *matHeaderCellDef
-                    mat-sort-header > Precio </th>
-                <td mat-cell
-                    *matCellDef="let row">
+                <th mat-header-cell class="thm
+                           text-center" *matHeaderCellDef mat-sort-header> Precio </th>
+                <td mat-cell *matCellDef="let row">
                     <mat-form-field>
-                            <input matInput
-                                [(ngModel)]="row.precio"
-                                #factura = "ngModel"
-                                type="number"
-                                >
+                        <input matInput [(ngModel)]="row.precio" #factura="ngModel" type="number">
                     </mat-form-field>
                 </td>
             </ng-container>
             <ng-container matColumnDef="total">
-                <th mat-header-cell
-                    class="thm
+                <th mat-header-cell class="thm
                            text-center
-                    "
-                    *matHeaderCellDef
-                    mat-sort-header > Total </th>
-                <td mat-cell
-                    *matCellDef="let row"> {{row.cantidad * row.precio  |currency}} </td>
+                    " *matHeaderCellDef mat-sort-header> Total </th>
+                <td mat-cell *matCellDef="let row"> {{row.cantidad * row.precio  |currency}} </td>
             </ng-container>
             <ng-container matColumnDef="actions">
-                <th mat-header-cell
-                    class="thm
-                           text-center"
-                    *matHeaderCellDef
-                    mat-sort-header > Eliminar </th>
-                <td mat-cell
-                    class ="justify-content-center"
-                    *matCellDef="let i = index">
-                    <button mat-icon-button
-                            (click)="deleteArticulo(i)"
-                            color="primary">
+                <th mat-header-cell class="thm
+                           text-center" *matHeaderCellDef mat-sort-header> Eliminar </th>
+                <td mat-cell class="justify-content-center" *matCellDef="let i = index">
+                    <button mat-icon-button (click)="deleteArticulo(i)" color="primary">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </td>
@@ -180,14 +113,9 @@
         <mat-paginator [pageSizeOptions]="[10, 15, 20]"></mat-paginator>
     </div>
     <div class="row offset-1">
-        <button mat-raised-button
-                (click)="onSubmit();"
-                class="btn btn-success
+        <button mat-raised-button (click)="onSubmit();" class="btn btn-success
                        col-md-2   
-                "
-        >Guardar</button>
-        <button mat-raised-button
-                (click)="onCancel()"
-                class="btn btn-danger">Cancelar</button>
+                ">Guardar</button>
+        <button mat-raised-button (click)="onCancel()" class="btn btn-danger">Cancelar</button>
     </div>
 </div>

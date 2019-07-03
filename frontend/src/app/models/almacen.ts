@@ -21,6 +21,7 @@ export class Almacen{
         public venta:number,
         public devolucion:number,
         public total:number,
-        public totalExistencia:number
+        public totalExistencia:number,
+        public pendiente:number
     ){}
 }

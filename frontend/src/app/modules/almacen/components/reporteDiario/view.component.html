@@ -7,7 +7,7 @@
         <mat-form-field class="col-8">
                 <mat-select matInput [(ngModel)]="personaid"  placeholder="socio" (selectionChange)="onChangeSelector()">
                     <mat-option *ngFor="let persona of personaList" [value]="persona.id">
-                        {{persona.nombre+ ' ' +persona.apellidop+ ' '+ persona.apellidom}}
+                        {{persona.nombre+ ' ' +persona.apellidop  }}
                     </mat-option>
                 </mat-select>
         </mat-form-field>
