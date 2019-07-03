@@ -96,6 +96,7 @@ import { Pedido } from 'src/app/models/pedido';
          =============================================================================== */   
          Guardar(){
             this.pedi.tipo = "ENTRADA";
+            this.conceptoventa.map(c => c.total).reduce((ant, act) => ant + act, 0);
              this._GeneralCallService.updateRecord(this.token,'ventas',this.pedi,this.pedi.id).subscribe(
                 response=>{
                     this.pedi = response.pedido;
@@ -104,8 +105,7 @@ import { Pedido } from 'src/app/models/pedido';
                          if(this.status == 'success'){
                              this.conceptoventa = this.pedidos.data;
                             this._GeneralCallService.updateRecord(this.token,'act',this.pedidos.data,this.pedidos.data[0].id).subscribe(
-                              response => {         
-                              }   
+                          
                             )
                              this.conceptoventa.forEach(item=>{
                                 item.pedido_id = this.pedi.id;
@@ -132,7 +132,7 @@ import { Pedido } from 'src/app/models/pedido';
                    },error=>{
                              console.log(<any>error);
                            });
-                        this   
+                      
                    this._router.navigate(['./ventas/welcome']);
                    }
                },error=>{

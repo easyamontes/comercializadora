@@ -27,6 +27,9 @@ class CreatePedidoTable extends Migration
             $table->string('premio');
             $table->integer('semana');
             $table->string('dia');
+            $table->integer('porcentaje');
+            $tabla->integer('ahorro');
+            $tabla->string('status');
             $table->timestamps();
         });
     }
