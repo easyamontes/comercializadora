@@ -139,6 +139,7 @@ class AlmacenController extends Controller
         $almacen->devolucion = $item['devolucion'];
         $almacen->existencia = $item['existencia'];
         $almacen->total = $item['total'];
+        $almacen->pendiente = $item['pendiente'];
         $almacen->save();
         return $almacen;
     }
@@ -228,9 +229,7 @@ class AlmacenController extends Controller
          FUNCION PARA CREAR EL REPORTE DE DIARIO
     ====================================================================== */
      public function diario(Request $request,$id){
-        $json = $request->input('json',null);
-        $per = $json = $request->input('per', null);
-        $existe = DB::select('select id, proveedor_id, articulo_id, articulo, sum(existencia) as existencia, sum(total) as total from almacen where userp_id = ? and tipo = ? GROUP BY proveedor_id, articulo_id',[$id,'COMPRA']);
+        $existe = DB::select('select id, proveedor_id, articulo_id, articulo, sum(existencia) as existencia, sum(total) as total from almacen where userp_id = ? and existencia > 0 GROUP BY proveedor_id, articulo_id',[$id]);
         $compra = DB::select('select al.id, al.proveedor_id, al.articulo_id, al.articulo, al.modelo, sum(al.total) as total from almacen al INNER JOIN requisicion rq where rq.pdestino_id = ? and rq.tipo = ? GROUP BY proveedor_id, articulo_id',[$id,'COMPRA']);
         $venta =  DB::select('select al.id, al.proveedor_id, al.articulo_id, al.articulo, al.modelo, sum(al.total) as total from almacen al INNER JOIN requisicion rq where rq.pdestino_id = ? and rq.tipo = ? GROUP BY proveedor_id, articulo_id',[$id,'VENTA']);
         return response()->json(
@@ -239,7 +238,5 @@ class AlmacenController extends Controller
             'compra' => $compra,
             'venta'  => $venta
         ),200);
-        return $compra;
      }
-
     }//End Class 

@@ -85,7 +85,7 @@ export class RequisicionStoreComponent implements OnInit {
             response => {
                 if (this.params == 1) {
                     this.provlist = this._PersonalUtil.getFamilia(response);
-                    this.provlist.splice(0,1);
+                    this.provlist.splice(0, 1);
                 } else {
                     this.provlist = response.proveedorll;
                 }
@@ -137,7 +137,7 @@ export class RequisicionStoreComponent implements OnInit {
     /**crea una nueva fila en la tabla de Articulos */
     createArticulo() {
         if (this.requi.proveedor_id || this.requi.pdestino_id) {
-            let nitem = new Almacen(null,null, null, null, this.requi.proveedor_id, null, null, null, null, null,null, null, null, null, null, null,null, null, null,0, null, null);
+            let nitem = new Almacen(null, null, null, null, this.requi.proveedor_id, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0, null, null, 0);
             this.item.push(nitem);
             this.articulos = new MatTableDataSource(this.item);
             this.articulos.paginator = this.paginator;
@@ -168,6 +168,7 @@ export class RequisicionStoreComponent implements OnInit {
                         this.articulos.data[c].tipo = this.requi.tipo;
                         this.articulos.data[c].requisicion_id = this.requi.id;
                         this.articulos.data[c].userp_id = this.requi.pdestino_id;
+                        this.articulos.data[c].pendiente = this.articulos.data[c].cantidad;
                         this.articulos.data[c].recepcion = this.articulos.data[c].cantidad;
                     }
                     this._GeneralCallService.storeRecord(this.token, 'almaitem', this.articulos.data).subscribe(

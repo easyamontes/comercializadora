@@ -34,6 +34,16 @@ class PedidoController extends Controller
        $params = json_decode($json);
        $params_array = json_decode($json,true);
        $user = $json = $request->input('userid',null);
+       $exist = Pedido::where('pdestino','=',$params->pdestino)
+                      ->where('tipo','=','SALIDA')->count();
+       if ($exist > 0) {
+        $data = array(
+            'error' => 'Este promotor ya cuenta con una hoja de pedido activa',
+            'code' => 500,
+            'status' =>'error'
+       );
+       return response()->json($data,200);
+       }
        $pedido = new Pedido();
        //sacar el numero de samana
        $fecha = substr($params->fechapedido,0,10); 

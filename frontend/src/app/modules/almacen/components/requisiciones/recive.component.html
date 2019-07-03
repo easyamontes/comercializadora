@@ -9,121 +9,56 @@
                 <legend>{{title}}</legend>
                 <!--Dibujando la baecera de informacion-->
                 <mat-form-field class="p-1">
-                    <input matInput
-                            [(ngModel)]="requi.fecha"
-                            #fecha="ngModel"
-                            readonly
-                    >
+                    <input matInput [(ngModel)]="requi.fecha" #fecha="ngModel" readonly>
                 </mat-form-field>
                 <mat-form-field *ngIf="requi.tipo == 'COMPRA'" class="p-1">
-                    <input matInput
-                           #provee="ngModel"
-                           [(ngModel)]="proveedor.nombre"
-                           placeholder="Proveedor"
-                           readonly        
-                    >
+                    <input matInput #provee="ngModel" [(ngModel)]="proveedor.nombre" placeholder="Proveedor" readonly>
                 </mat-form-field>
                 <mat-form-field *ngIf="requi.tipo == 'VENTA'" class="p-1">
-                    <input matInput
-                           #socio="ngModel"
-                           [(ngModel)]="persona.nombre"
-                           placeholder="Socio" 
-                           readonly
-                    >
+                    <input matInput #socio="ngModel" [(ngModel)]="persona.nombre" placeholder="Socio" readonly>
                 </mat-form-field>
                 <mat-form-field class="p-1">
-                    <input matInput
-                            [(ngModel)]="requi.ffactura"
-                            #ffecha="ngModel"
-                            placeholder="Fecha"
-                    >
+                    <input matInput [(ngModel)]="requi.ffactura" #ffecha="ngModel" placeholder="Fecha">
                 </mat-form-field>
                 <mat-form-field class="p-1">
-                    <input matInput
-                        [(ngModel)]="requi.factura"
-                        #factura = "ngModel"
-                        placeholder="Factura"
-                        >
+                    <input matInput [(ngModel)]="requi.factura" #factura="ngModel" placeholder="Factura">
                 </mat-form-field>
             </fieldset>
         </div>
     </div>
     <!-- Creando tabla de Articulos -->
-    <div class="row"
-         style="height: 53vh; overflow: auto;"
-    >
-        <table mat-table
-               *ngIf="articulos"
-               [dataSource]="articulos"
-               mat-Sort
-               class="col-12"
-        >
-        <ng-container matColumnDef="codigo">
-                <th mat-header-cell
-                    class="thm
-                           text-center"
-                    *matHeaderCellDef
-                    mat-sort-header > Codigo </th>
-                <td mat-cell
-                    *matCellDef="let row">
-                            <input 
-                                matInput
-                                [(ngModel)]="row.codigo"
-                                #codigo = "ngModel"
-                                readonly
-                                >
+    <div class="row" style="height: 53vh; overflow: auto;">
+        <table mat-table *ngIf="articulos" [dataSource]="articulos" mat-Sort class="col-12">
+            <ng-container matColumnDef="codigo">
+                <th mat-header-cell class="thm
+                           text-center" *matHeaderCellDef mat-sort-header> Codigo </th>
+                <td mat-cell *matCellDef="let row">
+                    <input matInput [(ngModel)]="row.codigo" #codigo="ngModel" readonly>
                 </td>
             </ng-container>
             <ng-container matColumnDef="nombre">
-                <th mat-header-cell
-                    class="thm
+                <th mat-header-cell class="thm
                            text-center
-                    "
-                    *matHeaderCellDef
-                    mat-sort-header > Articulo </th>
-                <td mat-cell
-                    *matCellDef="let row">
-                            <input 
-                                matInput
-                                [(ngModel)]="row.articulo"
-                                #articulo = "ngModel"
-                                readonly
-                                >
+                    " *matHeaderCellDef mat-sort-header> Articulo </th>
+                <td mat-cell *matCellDef="let row">
+                    <input matInput [(ngModel)]="row.articulo" #articulo="ngModel" readonly>
                 </td>
             </ng-container>
             <ng-container matColumnDef="cantidad">
-                <th mat-header-cell
-                    class="thm
+                <th mat-header-cell class="thm
                            text-center
-                    "
-                    *matHeaderCellDef
-                    mat-sort-header > Cantidad </th>
-                <td mat-cell
-                    *matCellDef="let row">
-                            <input 
-                                matInput
-                                [(ngModel)]="row.cantidad"
-                                #cantidad = "ngModel"
-                                readonly
-                                >
+                    " *matHeaderCellDef mat-sort-header> Pendiente </th>
+                <td mat-cell *matCellDef="let row">
+                    <input matInput [(ngModel)]="row.pendiente" #cantidad="ngModel" readonly>
                 </td>
             </ng-container>
             <ng-container matColumnDef="precio">
-                <th mat-header-cell
-                    class="thm
-                           text-center"
-                    *matHeaderCellDef
-                    > Recepcion </th>
-                <td mat-cell
-                    *matCellDef="let row; let i = index">
+                <th mat-header-cell class="thm
+                           text-center" *matHeaderCellDef> Recepcion </th>
+                <td mat-cell *matCellDef="let row; let i = index">
                     <mat-form-field>
-                            <input 
-                                matInput
-                                (change)="checkMinMax(i);"
-                                [(ngModel)]="row.recepcion"
-                                #recepcion = "ngModel"
-                                type="number"
-                                >
+                        <input matInput (change)="checkMinMax(i);" [(ngModel)]="row.recepcion" #recepcion="ngModel"
+                            type="number">
                     </mat-form-field>
                 </td>
             </ng-container>
@@ -137,14 +72,9 @@
         <mat-paginator [pageSizeOptions]="[10, 15, 20]"></mat-paginator>
     </div>
     <div class="row offset-1">
-        <button mat-raised-button
-                (click)="onSubmit();"
-                class="btn btn-success
+        <button mat-raised-button (click)="onSubmit();" class="btn btn-success
                        col-md-2   
-                "
-        >Guardar</button>
-        <button mat-raised-button
-                (click)="onCancel()"
-                class="btn btn-danger">Cancelar</button>
+                ">Guardar</button>
+        <button mat-raised-button (click)="onCancel()" class="btn btn-danger">Cancelar</button>
     </div>
 </div>

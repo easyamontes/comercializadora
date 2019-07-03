@@ -42,7 +42,7 @@ export class PedidoStoreComponent implements OnInit, DoCheck {
         this.title = 'Nuevo Pedido';
         this.conceptoventa = [];
         this.token = this._UserService.getToken();
-        this.pedi = new Pedido(0, '', 0, 0, '', "SALIDA", '',0,null);
+        this.pedi = new Pedido(0, '', 0, 0, '', "SALIDA", '', 0, null);
     }
     ngOnInit() {
         this.getListArticulo();
@@ -77,15 +77,15 @@ export class PedidoStoreComponent implements OnInit, DoCheck {
     }
 
 
-setArticulo(id,index){
-    this.pedidos.data[index].codigo = this.lisart.find(x=>x.id == id).codigo;
-    this.pedidos.data[index].proveedor_id = this.lisart.find(x=>x.id == id).proveedor_id;
-    this.pedidos.data[index].articulo_id = this.lisart.find(x=>x.id == id).articulo_id;
-    this.pedidos.data[index].articulo = this.lisart.find(x=>x.id == id).articulo;
-    this.pedidos.data[index].marca = this.lisart.find(x=>x.id == id).marca;
-    this.pedidos.data[index].modelo = this.lisart.find(x=>x.id == id).modelo;
-    this.pedidos.data[index].existencia = this.lisart.find(x=>x.id == id).totalExistencia;
-}
+    setArticulo(id, index) {
+        this.pedidos.data[index].codigo = this.lisart.find(x => x.id == id).codigo;
+        this.pedidos.data[index].proveedor_id = this.lisart.find(x => x.id == id).proveedor_id;
+        this.pedidos.data[index].articulo_id = this.lisart.find(x => x.id == id).articulo_id;
+        this.pedidos.data[index].articulo = this.lisart.find(x => x.id == id).articulo;
+        this.pedidos.data[index].marca = this.lisart.find(x => x.id == id).marca;
+        this.pedidos.data[index].modelo = this.lisart.find(x => x.id == id).modelo;
+        this.pedidos.data[index].existencia = this.lisart.find(x => x.id == id).totalExistencia;
+    }
 
     setPersonal(id) {
         this.pedi.nombre = this.perso.find(x => x.id == id).nombre;
@@ -96,7 +96,7 @@ setArticulo(id,index){
           AGREGAR CONCEPTO POR CONCEPTO
    ================================================================= */
     addConcepto() {
-        let nuevoConcepto = new Almacen(0, 0, 0, 0, 0, 0, 0, null, "SALIDA", null, null, null, null, 0, 0, 0, 0 ,0, 0, 0, 0, 0);
+        let nuevoConcepto = new Almacen(0, 0, 0, 0, 0, 0, 0, null, "SALIDA", null, null, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         this.conceptoventa.push(nuevoConcepto);
         this.pedidos = new MatTableDataSource(this.conceptoventa);
         this.pedidos.paginator = this.paginator;
@@ -112,17 +112,15 @@ setArticulo(id,index){
         console.log(this.token);
         this._GeneralCallService.storeRecord(this.token, 'ventas', this.pedi).subscribe(
             response => {
-                this.pedi = response.pedido;     
-                console.log(this.pedi)
-                this.status = response.status;
-                if (this.status == 'success') {
+                this.pedi = response.pedido;
+                if (response.code == 200) {
+
                     this.conceptoventa.forEach(item => {
                         item.pedido_id = this.pedi.id;
                         item.cantidad = item.cantidad;
                         item.existencia = item.cantidad;
                         item.recepcion = item.cantidad;
                         item.userp_id = this.pedi.pdestino;
-
                     })
 
                     /*==============================================================
@@ -131,11 +129,14 @@ setArticulo(id,index){
 
                     this._GeneralCallService.storeRecord(this.token, 'almaitem', this.conceptoventa).subscribe(
                         response => {
-                            console.log(this.conceptoventa);
+                            console.log(response);
 
                         }, error => {
                             console.log(<any>error);
                         });
+                    this._router.navigate(['./ventas/welcome']);
+                } else {
+                    alert(response.error);
                     this._router.navigate(['./ventas/welcome']);
                 }
             }, error => {
@@ -167,7 +168,6 @@ setArticulo(id,index){
 
     validaExistncia(index) {
         this.conceptoventa[index].total = this.conceptoventa[index].cantidad * this.conceptoventa[index].precio;
-
     }
 }
 

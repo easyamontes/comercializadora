@@ -113,8 +113,7 @@ import { Pedido } from 'src/app/models/pedido';
                                 item.recepcion = item.devolucion;
                                 item.existencia = item.devolucion;
                                 item.cantidad = item.devolucion;
-                                item.userp_id = this.identity.sub;
-                                            
+                                item.userp_id = this.identity.sub;            
                           })
            
                /*==============================================================

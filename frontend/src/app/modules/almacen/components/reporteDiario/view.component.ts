@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 //Utils
 import { PersonalUtil } from '../../../../services/util/personal.util';
 //Servicios
