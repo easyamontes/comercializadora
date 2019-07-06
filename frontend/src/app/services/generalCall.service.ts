@@ -21,6 +21,7 @@ export class GeneralCallService{
         .set('Authorization', token);
         return this._http.get(this.url+page,{headers:headers});
     }
+
       /**Funcion para crear un nuevo puesto */
     storeRecord(token, page:string, elemento:any):Observable<any>{
         let json = JSON.stringify(elemento);
