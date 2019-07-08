@@ -24,12 +24,12 @@ Route::get('/api/lpersonal','ListaController@empleadosList')->middleware('islogg
 Route::get('/api/lpuesto','ListaController@puestosList')->middleware('islogged');
 Route::get('/api/lproved','ListaController@proveedoresList')->middleware('islogged');
 Route::get('/api/lartic','ListaController@artiucloList')->middleware('islogged');
-Route::get('/api/lartic','ListaController@artiucloList')->middleware('islogged');
 Route::get('/api/listapremio','ListaController@premio')->middleware('islogged');
 Route::get('/api/here','PersonalController@getHerencia')->middleware('islogged');
 Route::get('/api/lisventa','AlmacenController@ventas')->middleware('islogged');
 Route::get('/api/liscambaceo','PedidoController@ventacambaceo')->middleware('islogged');
 Route::post('/api/lispremio','PedidoController@premio')->middleware('islogged');
+Route::post('/api/lisahorro','PedidoController@listaahorro')->middleware('islogged');
 Route::post('/api/lispieza','AlmacenController@pieza')->middleware('islogged');
 Route::get('/api/listaoficinas','ListaController@listaoficina')->middleware('islogged');
 Route::put('/api/recive/{id}','RequisicionControler@recive')->middleware('islogged');
@@ -50,3 +50,4 @@ Route::resource('/api/premios','PremioController');
 Route::resource('/api/requisicion','RequisicionControler');
 Route::resource('/api/almaitem','AlmacenController');
 Route::resource('/api/ventas','PedidoController');
+Route::resource('/api/conceptos','ConceptoahorroController');

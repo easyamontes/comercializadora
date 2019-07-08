@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Almacen;
+use App\Pedido;
 
 class AlmacenController extends Controller
 {
@@ -207,17 +208,21 @@ class AlmacenController extends Controller
         $json = $request->input('json',null);
         $params = json_decode($json);
         $params_array = json_decode($json, true);
+        $tot = 0;
          foreach ($params_array as $item){
             $actualizar = new Almacen();
             $ca = $item['devolucion'];
             $devolucion = $item['existencia']- $item ['devolucion'];
             $precio = $devolucion * $item['precio'];
+            $tot = $tot + $precio;
             if($ca < 1 ){
                 $actualizar = Almacen::where('id', $item['id'])->update(['venta'=> $item['cantidad'] ]);
             }else{
                 $actualizar = Almacen::where('id', $item['id'])->update(['venta'=>$devolucion,'total'=>$precio]);
             }
-         }      
+         }
+        $aho = $tot * 0.05;
+        Pedido::where('id','=',$id)->update(['importe' =>  $tot, 'ahorro' =>  $aho]);
         return response()->json(array(
             'actua' => $actualizar,
             'status' => 'success'

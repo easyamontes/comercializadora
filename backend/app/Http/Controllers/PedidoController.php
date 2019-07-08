@@ -28,12 +28,16 @@ class PedidoController extends Controller
         'status' => 'success'
        ),200);
     }
+
+    /* =====================================================
+       CREAR PEDIDOS (REGISTRO)
+     ======================================================*/ 
     public function store ( Request $request)
     {
        $json = $request->input('json',null);
        $params = json_decode($json);
        $params_array = json_decode($json,true);
-       $user = $json = $request->input('userid',null);
+       $user = $json = $request->input('per',null);
        $exist = Pedido::where('pdestino','=',$params->pdestino)
                       ->where('tipo','=','SALIDA')->count();
        if ($exist > 0) {
@@ -46,10 +50,10 @@ class PedidoController extends Controller
        }
        $pedido = new Pedido();
        //sacar el numero de samana
-       $fecha = substr($params->fechapedido,0,10); 
+       $fecha = substr($params->fechapedido,0,10);
        $dia = substr($fecha,8,2);
        $mes = substr($fecha,5,2);
-       $anio = substr($fecha,0,4);  
+       $anio = substr($fecha,0,4);
        $semana = date('W',  mktime(0,0,0,$mes,$dia,$anio));
        //PONER EL NOMBRE DEL DIA 
        $texto = $this->getdia($fecha);
@@ -62,6 +66,7 @@ class PedidoController extends Controller
        $pedido->nombre = $params->nombre;
        $pedido->tipo = $params->tipo;
        $pedido->semana = $semana;
+       $pedido->año = $anio;
        $pedido->dia = $texto;
        $pedido->save();
        $data = array(
@@ -89,7 +94,7 @@ class PedidoController extends Controller
     {
         $pedido = Pedido::find($id);
         if (is_object($pedido)){
-            $pedido = Pedido::find($id)->load('user')
+            $pedido = Pedido::find($id)
             ->load('articulos');
             return response()->json(array(
                 'pedido' => $pedido,
@@ -150,8 +155,7 @@ class PedidoController extends Controller
         $json = $request->input('json',null);
         $params = json_decode ($json);
         $per = $json = $request->input('per', null);
-        $socio = $params->socio;
-        
+        $socio = $params->socio;     
         $inicio = $params->inicio;
         $dateinicio = str_replace('/','-',$inicio);
         $dateinicio = date('Y-m-d',strtotime($dateinicio));
@@ -165,7 +169,7 @@ class PedidoController extends Controller
             ->where('tipo', '=', 'ENTRADA')
             ->orderby('nombre')
             ->orderby('fechapedido')
-            ->get()->load('user');
+            ->get();
         }else if 
         ( $socio != "" and $inicio == "" and $final == "")
         {
@@ -174,7 +178,7 @@ class PedidoController extends Controller
             ->where( 'pdestino','=',$socio)
             ->where('tipo', '=', 'ENTRADA')
             ->orderby('fechapedido')
-            ->get()->load('user');
+            ->get();
         }else if
         ($socio != "" and $inicio != "" and $final != "")
         {
@@ -185,13 +189,71 @@ class PedidoController extends Controller
             ->where('fechapedido','<=',$datefinal)
             ->where('tipo', '=', 'ENTRADA')
             ->orderby('nombre','fechapedido')
-            ->get()->load('user');
+            ->get();
         }
         return response()->json(array(
             'pedidoall' => $pedido,
             'status' => 'success'
         ), 200);
     }
+
+        /*======================================================================
+       LISTA PARA SELECCIONAR LOS PEDIDOS PARA LA CAJA DE AHORRO
+    ====================================================================== */
+    public function listaahorro(Request $request)
+    {
+     
+
+
+        $json = $request->input('json',null);
+        $params = json_decode ($json);
+        $per = $json = $request->input('per', null);
+        $socio = $params->socio;     
+        $inicio = $params->inicio;
+        $dateinicio = str_replace('/','-',$inicio);
+        $dateinicio = date('Y-m-d',strtotime($dateinicio));
+        $final = $params->final;
+        $datefinal = str_replace('/','-',$final);
+        $datefinal = date('Y-m-d',strtotime($datefinal));
+        if($socio == "" and $inicio != '' and $final != ''){
+            $pedido = Pedido::select('*')
+            ->where('user_id','=',$socio)
+            ->where( 'fechapedido','>=',$dateinicio)->where('fechapedido','<=',$datefinal)
+            ->where('tipo', '=', 'ENTRADA')
+            ->where('status', '=','SIN PAGAR')
+            ->orderby('nombre')
+            ->orderby('fechapedido')
+            ->get();
+        }else if 
+
+        ( $socio != "" and $inicio == "" and $final == "")
+        {
+            $pedido = Pedido::selectRaw('*,SUM(importe) AS importe , SUM(ahorro) AS ahorro')
+            ->where('user_id','=',$socio)
+            ->where('tipo', '=', 'ENTRADA')
+            ->where('status', '=','SIN PAGAR')
+            ->groupBy('user_id')
+            ->groupBy('fechapedido')
+            ->orderby('fechapedido')
+            ->get();
+        }else if
+        ($socio != "" and $inicio != "" and $final != "")
+        {
+            $pedido = Pedido::select('*')
+            ->where('user_id','=',$socio)
+            ->where( 'fechapedido','>=',$dateinicio)
+            ->where('fechapedido','<=',$datefinal)
+            ->where('tipo', '=', 'ENTRADA')
+            ->where('status', '=','SIN PAGAR')
+            ->orderby('nombre','fechapedido')
+            ->get()->load('user');
+        }
+        return response()->json(array(
+            'ahorroall' => $pedido,
+            'status' => 'success'
+        ), 200);
+    }
+
 
     /*======================================================================
          FUNCION DE DIA DE LA SEMANA

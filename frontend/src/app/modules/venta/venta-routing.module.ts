@@ -11,6 +11,8 @@ import { SocioComponent } from './components/socio_vendedor/socio.component';
 import { ReporteDefaultComponent } from './components/reporte/reporte-default.component';
 import { ReportePremioComponent } from './components/reporte/reporte-premio.component';
 import { ReportePiezaComponent } from './components/reporte/reporte-piezas.component';
+import { AhorroViewComponent } from './components/ahorro/ahorro-view.component';
+import { AhorroStoreComponent } from './components/ahorro/ahorro-store.component';
 
 ;
 
@@ -28,7 +30,9 @@ const ventaRoutes: Routes = [
                                                             {path:'listaventa',component:SocioComponent},
                                                             {path:'reporte',component:ReporteDefaultComponent},
                                                             {path:'premio',component:ReportePremioComponent},
-                                                            {path:'piezas',component:ReportePiezaComponent},  
+                                                            {path:'piezas',component:ReportePiezaComponent},
+                                                            {path:'ahorro',component:AhorroViewComponent},
+                                                            {path:'crear',component:AhorroStoreComponent},  
                                                           ]
     }
   ]  

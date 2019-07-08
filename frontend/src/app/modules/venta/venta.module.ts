@@ -14,6 +14,8 @@ import { SocioComponent} from './components/socio_vendedor/socio.component';
 import { ReporteDefaultComponent} from './components/reporte/reporte-default.component';
 import { ReportePremioComponent} from './components/reporte/reporte-premio.component';
 import { ReportePiezaComponent} from './components/reporte/reporte-piezas.component';
+import { AhorroViewComponent } from './components/ahorro/ahorro-view.component';
+import { AhorroStoreComponent } from './components/ahorro/ahorro-store.component';
 
 
 
@@ -30,6 +32,8 @@ import { ReportePiezaComponent} from './components/reporte/reporte-piezas.compon
         ReporteDefaultComponent,
         ReportePremioComponent,
         ReportePiezaComponent,
+        AhorroViewComponent,
+        AhorroStoreComponent
       
     ],
     imports: [
@@ -48,7 +52,9 @@ import { ReportePiezaComponent} from './components/reporte/reporte-piezas.compon
          SocioComponent,
          ReporteDefaultComponent,
          ReportePremioComponent,
-         ReportePiezaComponent
+         ReportePiezaComponent,
+         AhorroViewComponent,
+         AhorroStoreComponent
      
         ],
     providers: []

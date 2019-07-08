@@ -41,7 +41,7 @@ import { Pedido } from 'src/app/models/pedido';
          ){
             
             this.token=this._UserService.getToken();
-            this.pedi = new Pedido (0,'',0,0,'','','',0,null);
+            this.pedi = new Pedido (0,'',0,0,'','','',0,null,null);
             this.conceptoventa = [];
         
             this.title = 'Devolucion';
@@ -96,7 +96,7 @@ import { Pedido } from 'src/app/models/pedido';
          =============================================================================== */   
          Guardar(){
             this.pedi.tipo = "ENTRADA";
-            this.conceptoventa.map(c => c.total).reduce((ant, act) => ant + act, 0);
+           
              this._GeneralCallService.updateRecord(this.token,'ventas',this.pedi,this.pedi.id).subscribe(
                 response=>{
                     this.pedi = response.pedido;
@@ -104,8 +104,7 @@ import { Pedido } from 'src/app/models/pedido';
                    this.status = response.status;
                          if(this.status == 'success'){
                              this.conceptoventa = this.pedidos.data;
-                            this._GeneralCallService.updateRecord(this.token,'act',this.pedidos.data,this.pedidos.data[0].id).subscribe(
-                          
+                            this._GeneralCallService.updateRecord(this.token,'act',this.pedidos.data,this.pedidos.data[0].pedido_id).subscribe(
                             )
                              this.conceptoventa.forEach(item=>{
                                 item.pedido_id = this.pedi.id;
@@ -113,7 +112,8 @@ import { Pedido } from 'src/app/models/pedido';
                                 item.recepcion = item.devolucion;
                                 item.existencia = item.devolucion;
                                 item.cantidad = item.devolucion;
-                                item.userp_id = this.identity.sub;            
+                                item.userp_id = this.identity.sub;    
+                                
                           })
            
                /*==============================================================
