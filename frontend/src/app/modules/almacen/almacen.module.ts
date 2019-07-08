@@ -12,6 +12,7 @@ import { RequisicionStoreComponent } from './components/requisiciones/store.comp
 import { AlmacenDefaultComponent } from './components/default/default.component';
 import { RequisicionReciveComponent } from './components/requisiciones/recive.component';
 import { DiarioViewComponent } from './components/reporteDiario/view.component';
+import { CobranzaViewComponent } from './components/cuentasPC/viewCobrar.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { DiarioViewComponent } from './components/reporteDiario/view.component';
         RequisicionStoreComponent,
         AlmacenDefaultComponent,
         RequisicionReciveComponent,
-        DiarioViewComponent
+        DiarioViewComponent,
+        CobranzaViewComponent
     ],
     imports: [
         AlmacenRoutingModule,
@@ -38,7 +40,8 @@ import { DiarioViewComponent } from './components/reporteDiario/view.component';
         RequisicionStoreComponent,
         AlmacenDefaultComponent,
         RequisicionReciveComponent,
-        DiarioViewComponent
+        DiarioViewComponent,
+        CobranzaViewComponent
         ],
     providers: []
   })

@@ -16,6 +16,10 @@ class RequisicionControler extends Controller
         $this->middleware('islogged');
     }
 
+    /* =====================================================
+       Muestra la lista de requisiciones guardadas
+     ======================================================*/
+
     public function index(Request $request)
     {
         $per = $json = $request->input('per', null);
@@ -32,6 +36,10 @@ class RequisicionControler extends Controller
         ), 200);
     }
 
+    /* =====================================================
+       Guardando Nuevos Registros
+     ======================================================*/
+
     public function store(Request $request)
     {
         $json = $request->input('json', null);
@@ -40,7 +48,6 @@ class RequisicionControler extends Controller
         $requisicion = new Requisicion();
         $fecha = substr($params->fecha, 0, 10);
         $ffactura = substr($params->ffactura, 0, 10);
-        //Creando folio
         $folio = Requisicion::where('user_id', '=', $user)->where('tipo', '=', $params->tipo)->max('folio') + 1;
         $requisicion->user_id = $user;
         $requisicion->porigen_id = $params->porigen_id;
@@ -65,6 +72,10 @@ class RequisicionControler extends Controller
         return response()->json($data, 200);
     }
 
+    /* =====================================================
+       Editando Registros
+     ======================================================*/
+
     public function show($id, Request $request)
     {
         $requisicion = Requisicion::find($id)->load('articulos')
@@ -75,6 +86,10 @@ class RequisicionControler extends Controller
             'status' => 'success'
         ), 200);
     }
+
+    /* =====================================================
+       Editando Registros
+     ======================================================*/
 
     public function update($id, Request $request)
     {
@@ -92,4 +107,22 @@ class RequisicionControler extends Controller
         );
         return response()->json($data, 200);
     }
+    /* =====================================================
+       lista de requisiciones sin pagar
+     ======================================================*/
+    public function cxc( Request $request)
+    {
+        $json = $request->input('json', null);
+        $params_array = json_decode($json, true);
+        $requisicion = Requisicion::where('pdestino_id', '=', $params_array['socio'])
+            ->where('statuspago', '=', 'PENDIENTE')
+            ->get()->load('articulos');
+        $data = array(
+            'requisicion' => $requisicion,
+            'code' => 200,
+            'status' => 'success'
+        );
+        return response()->json($data, 200);
+    }
+
 } //End class

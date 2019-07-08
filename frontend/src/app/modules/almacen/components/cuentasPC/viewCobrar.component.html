@@ -1,0 +1,89 @@
+<div class="principal">
+    <!--=============================================================
+                         Cabecera de filtrado
+    =============================================================-->
+    <div class="row d-flex justify-content-center">
+        <h4 class="col-12 text-center">Cuentas por Cobrar</h4>
+        <mat-form-field class="col-6">
+            <mat-select matInput [(ngModel)]="busqueda.socio" placeholder="Socio">
+                <mat-option *ngFor="let persona of personaList" [value]="persona.id">
+                    {{persona.nombre+ ' ' +persona.apellidop + ' ' + persona.apellidom | uppercase}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+            <input matInput [(ngModel)]="busqueda.inicio" [matDatepicker]="pickerFechai" placeholder="Fecha Inicio">
+            <mat-datepicker-toggle matSuffix [for]="pickerFechai"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFechai></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+            <input matInput [(ngModel)]="busqueda.final" [matDatepicker]="pickerFechaf" placeholder="Fecha Final">
+            <mat-datepicker-toggle matSuffix [for]="pickerFechaf"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFechaf></mat-datepicker>
+        </mat-form-field>
+        <button type="submit" class=" col-2 botonbuscar" (click)="getRequisicionCobrar();">Buscar</button>
+    </div>
+
+    <div class="row d-flex justify-content-center">
+        <h3 class="col-12 text-center">Existencias</h3>
+        <table class="table table-striped">
+            <thead class="tablareporte">
+                <tr>
+                    <th>Folio</th>
+                    <th>Fecha</th>
+                    <th>Importe</th>
+                    <th>Ver</th>
+                    <th>Pagar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="p" *ngFor="let item of repoRequi; let i = index">
+                    <td>{{ item.folio }}</td>
+                    <td>{{ item.fecha | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{ item.importe |currency}}</td>
+                    <td> <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#exampleModal" (click)="repoArti = item.articulos">Ver</button> </td>
+                    <td> <button>Pagar</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--=============================================================
+                         Tabla de Por Cobrar
+=============================================================-->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Lista de Articulos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead class="tablareporte">
+                        <tr>
+                            <th>Articulo</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="p" *ngFor="let item of repoArti; let i = index">
+                            <td>{{ item.articulo }}</td>
+                            <td>{{ item.cantidad }}</td>
+                            <td>{{ item.precio |currency}}</td>
+                            <td>{{ item.total |currency}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

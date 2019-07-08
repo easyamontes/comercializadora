@@ -12,10 +12,10 @@
                     <input matInput [(ngModel)]="requi.fecha" #fecha="ngModel" readonly>
                 </mat-form-field>
                 <mat-form-field *ngIf="requi.tipo == 'COMPRA'" class="p-1">
-                    <input matInput #provee="ngModel" [(ngModel)]="proveedor.nombre" placeholder="Proveedor" readonly>
+                    <input matInput #provee="ngModel" [(ngModel)]="proveedor" placeholder="Proveedor" readonly>
                 </mat-form-field>
                 <mat-form-field *ngIf="requi.tipo == 'VENTA'" class="p-1">
-                    <input matInput #socio="ngModel" [(ngModel)]="persona.nombre" placeholder="Socio" readonly>
+                    <input matInput #socio="ngModel" [(ngModel)]="persona" placeholder="Socio" readonly>
                 </mat-form-field>
                 <mat-form-field class="p-1">
                     <input matInput [(ngModel)]="requi.ffactura" #ffecha="ngModel" placeholder="Fecha">

@@ -172,3 +172,14 @@
   .rahorro td:nth-of-type(6):before { content: "Seleccionar"; }
 }
 
+.modal-backdrop {
+  z-index: 1040 !important;
+}
+.modal-dialog {
+  margin: 2px auto;
+  z-index: 1100 !important;
+}
+.modal-backdrop {
+  /* bug fix - no overlay */    
+  display: none;    
+}

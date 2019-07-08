@@ -30,8 +30,8 @@ export class RequisicionReciveComponent implements OnInit{
     public item: Array<Almacen>;
     public displayedColumns: string[] =  ['codigo', 'nombre', 'precio', 'cantidad'];
     public articulos: MatTableDataSource<Almacen>;
-    public proveedor: Array<any>;
-    public persona: Array<any>;
+    public proveedor: string = "";
+    public persona: string = "";
     public rateControl
     //Vistas heredadas para la tabla
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -67,8 +67,8 @@ export class RequisicionReciveComponent implements OnInit{
             response=>{
                 this.requi = response.requisicion;
                 this.articulos = new MatTableDataSource(response.requisicion.articulos);
-                this.proveedor = response.requisicion.proveedor;
-                this.persona = response.requisicion.porigen;
+                this.proveedor = response.requisicion.proveedor.nombre;
+                this.persona = response.requisicion.porigen.nombre;
             },error=>{
                 console.log(<any>error);
             });
