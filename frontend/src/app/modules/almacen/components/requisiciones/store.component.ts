@@ -188,7 +188,9 @@ export class RequisicionStoreComponent implements OnInit {
     }
 
     getTotalCost() {
-        return this.articulos.data.map(c => c.precio).reduce((ant, act) => ant + act, 0);
+        let precio = this.articulos.data.map(c => c.precio).reduce((ant, act) => ant + act, 0);
+        let cantidad = this.articulos.data.map(c => c.cantidad).reduce((ant, act) => ant + act, 0);
+        return precio*cantidad;
     }
 
 }//End Class

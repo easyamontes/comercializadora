@@ -1,9 +1,9 @@
 <div class="principal">
+    <h4 class="col-12 text-center">Cuentas por {{title}}</h4>
     <!--=============================================================
                          Cabecera de filtrado
     =============================================================-->
-    <div class="row d-flex justify-content-center">
-        <h4 class="col-12 text-center">Cuentas por Cobrar</h4>
+    <div class="row d-flex justify-content-center" *ngIf="params === 'c'">
         <mat-form-field class="col-6">
             <mat-select matInput [(ngModel)]="busqueda.socio" placeholder="Socio">
                 <mat-option *ngFor="let persona of personaList" [value]="persona.id">
@@ -21,16 +21,19 @@
             <mat-datepicker-toggle matSuffix [for]="pickerFechaf"></mat-datepicker-toggle>
             <mat-datepicker #pickerFechaf></mat-datepicker>
         </mat-form-field>
-        <button type="submit" class=" col-2 botonbuscar" (click)="getRequisicionCobrar();">Buscar</button>
+        <button type="submit" class=" col-2 botonbuscar" (click)="getRequisicionCobrar();"
+            [disabled]="!busqueda.socio">Buscar</button>
     </div>
-
+    <!--=============================================================
+                         Tabla de Existencias
+    =============================================================-->
     <div class="row d-flex justify-content-center">
-        <h3 class="col-12 text-center">Existencias</h3>
         <table class="table table-striped">
             <thead class="tablareporte">
                 <tr>
                     <th>Folio</th>
                     <th>Fecha</th>
+                    <th>Proveedor</th>
                     <th>Importe</th>
                     <th>Ver</th>
                     <th>Pagar</th>
@@ -40,15 +43,39 @@
                 <tr class="p" *ngFor="let item of repoRequi; let i = index">
                     <td>{{ item.folio }}</td>
                     <td>{{ item.fecha | date: 'dd/MM/yyyy'}}</td>
+                    <td *ngIf="item.proveedor">{{ item.proveedor.nombre }}</td>
+                    <td *ngIf="item.porigen && !item.proveedor">{{ item.porigen.nombre }}</td>
                     <td>{{ item.importe |currency}}</td>
-                    <td> <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#exampleModal" (click)="repoArti = item.articulos">Ver</button> </td>
-                    <td> <button>Pagar</button></td>
+                    <td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                            (click)="repoArti = item.articulos">
+                            <i class="fas fa-eye"></i> Ver
+                        </button>
+                    </td>
+                    <td>
+                        <button *ngIf="ind != i" class="btn btn-success" (click)="setPagado(item,i)">
+                            <i class="fas fa-dollar-sign"></i> Pagar
+                        </button>
+                        <button *ngIf="ind == i" class="btn btn-success" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Pagando...
+                        </button>
+                    </td>
+                </tr>
+                <tr *ngIf="repoRequi">
+                    <td></td>
+                    <td colspan="3"></td>
+                    <td>
+                        <h4>Total:</h4>
+                    </td>
+                    <td>
+                        <h4>{{ getTotal() | currency }}</h4>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+
 
 <!--=============================================================
                          Tabla de Por Cobrar
