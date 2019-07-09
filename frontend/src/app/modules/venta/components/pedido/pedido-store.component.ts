@@ -42,7 +42,7 @@ export class PedidoStoreComponent implements OnInit, DoCheck {
         this.title = 'Nuevo Pedido';
         this.conceptoventa = [];
         this.token = this._UserService.getToken();
-        this.pedi = new Pedido(0, '', 0, 0, '', "SALIDA", '', 0, null);
+        this.pedi = new Pedido(0, '', 0, 0, '', "SALIDA", '', 0, null,null);
     }
     ngOnInit() {
         this.getListArticulo();

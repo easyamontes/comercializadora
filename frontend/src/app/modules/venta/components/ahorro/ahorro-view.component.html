@@ -1,0 +1,52 @@
+<div class="principal">
+    <div style="text-align: center;padding-top: 1%">
+        <h3>{{title}}</h3>
+    </div>
+    <fieldset>
+        <mat-form-field class="col-md-3 col-xs-12">
+            <input matInput [matDatepicker]="picker1" placeholder="Fecha Inicio" #inicio="ngModel"
+                [(ngModel)]="busqueda.inicio">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-md-3 col-xs-12">
+            <input matInput [matDatepicker]="picker2" placeholder="Fecha Final" #final="ngModel"
+                [(ngModel)]="busqueda.final">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-md-3 col-xs-12">
+            <mat-select matInput [(ngModel)]="busqueda.socio" placeholder="Socio Comercial" #socio="ngModel"
+                (ngModelChange)="setPersonal($event)">
+                <mat-option *ngFor="let  pedi of perso" [value]="pedi.id">{{pedi.nombre}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button type="submit" class=" col-md-3 col-xs-12  botonbuscar " (click)="listaahorro()">Buscar</button>
+    </fieldset>
+    <br>
+    <div class="reporte">
+        <table class="table table-striped">
+            <thead class="tablareporte">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Fecha</th>
+                    <th>Dia</th>
+                    <th>Importe</th>
+                    <th>Status</th>
+                    <th>Seleccion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="rahorro" *ngFor="let lis of lisahorro;let i = index">
+                    <td>{{ lis.nombre }}</td>
+                    <td>{{ lis.fechapedido }}</td>
+                    <td>{{ lis.dia }}</td>
+                    <td>{{ lis.importe }}</td>
+                    <td>{{ lis.status }}</td>
+                    <td> <button type="submit" (click)= "ingresaahorro(i)">seleccionar</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

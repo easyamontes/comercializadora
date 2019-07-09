@@ -160,6 +160,16 @@
   .rpre td:nth-of-type(2):before { content: "Socio"; }
   .rpre td:nth-of-type(3):before { content: "Premio"; }
   .rpre td:nth-of-type(4):before { content: "Dia"; }
+
+    /*==========================================================================
+    SIRVE PARA MOSTRAR EL TITULO EN CADA TD DE LA TABLA AHORRO
+  ==========================================================================*/
+  .rahorro td:nth-of-type(1):before { content: "Nombre"; }
+  .rahorro td:nth-of-type(2):before { content: "Fecha"; }
+  .rahorro td:nth-of-type(3):before { content: "Dia"; }
+  .rahorro td:nth-of-type(4):before { content: "Importe"; }
+  .rahorro td:nth-of-type(5):before { content: "Status"; }
+  .rahorro td:nth-of-type(6):before { content: "Seleccionar"; }
 }
 
 .modal-backdrop {
