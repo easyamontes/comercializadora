@@ -32,13 +32,14 @@ Route::post('/api/lispremio','PedidoController@premio')->middleware('islogged');
 Route::post('/api/lisahorro','PedidoController@listaahorro')->middleware('islogged');
 Route::post('/api/lispieza','AlmacenController@pieza')->middleware('islogged');
 Route::get('/api/listaoficinas','ListaController@listaoficina')->middleware('islogged');
-Route::put('/api/recive/{id}','RequisicionControler@recive')->middleware('islogged');
+Route::put('/api/recive/{id}','RequisicionController@recive')->middleware('islogged');
 Route::post('/api/equipo','PersonalController@getEquipo')->middleware('islogged');
 Route::put('/api/act/{id}','AlmacenController@actualizar')->middleware('islogged');
 Route::get('/api/repo/{id}','AlmacenController@diario')->middleware('islogged');
 Route::post('/api/cxc','RequisicionController@cxc')->middleware('islogged');
 Route::post('/api/listatus','AhorroController@listastatus')->middleware('islogged');
 Route::put('/api/pagar/{id}','PedidoController@pagar')->middleware('islogged');
+
 
 //Rutas para el control de acciones en puestos
 Route::resource('/api/puestos','PuestoController');
@@ -49,7 +50,7 @@ Route::resource('/api/bancos','BancoController');
 Route::resource('/api/proveedores','ProveedorController');
 Route::resource('/api/contactos','ContactoController');
 Route::resource('/api/premios','PremioController');
-Route::resource('/api/requisicion','RequisicionControler');
+Route::resource('/api/requisicion','RequisicionController');
 Route::resource('/api/almaitem','AlmacenController');
 Route::resource('/api/ventas','PedidoController');
 Route::resource('/api/conceptos','ConceptoahorroController');

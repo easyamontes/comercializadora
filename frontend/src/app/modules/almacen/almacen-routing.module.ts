@@ -23,7 +23,7 @@ const almacenRoutes: Routes =[
                                                             { path:'equinueva/:sure',component:RequisicionStoreComponent },
                                                             { path:'recepcion/:sure',component:RequisicionReciveComponent},
                                                             { path:'diario',component:DiarioViewComponent },
-                                                            { path:'cxc' ,component:CobranzaViewComponent}
+                                                            { path:'cx/:tip' ,component:CobranzaViewComponent}
                                                          ]
     }
 ]

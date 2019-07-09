@@ -42,7 +42,7 @@ class AlmacenController extends Controller
         $json = $request->input('json', null);
         $params_array = json_decode($json, true);
         $user = $json = $request->input('userid', null);
-        $per = $json = $request->input('per', null);  
+        $per = $json = $request->input('per', null);
         foreach ($params_array as $item) {
             $tipo = $item['tipo'];
             if( $tipo != "COMPRA" && $tipo != "ENTRADA"){
