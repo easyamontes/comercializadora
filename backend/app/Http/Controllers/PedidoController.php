@@ -203,8 +203,6 @@ class PedidoController extends Controller
     public function listaahorro(Request $request)
     {
      
-
-
         $json = $request->input('json',null);
         $params = json_decode ($json);
         $per = $json = $request->input('per', null);
@@ -252,6 +250,29 @@ class PedidoController extends Controller
             'ahorroall' => $pedido,
             'status' => 'success'
         ), 200);
+    }
+
+/*======================================================================
+         FUNCION PARA PAGAR EL PEDIDO
+    ====================================================================== */
+    
+    public function pagar ($id, Request $request){
+        $json = $request->input('json',null);
+        $params = json_decode($json);
+        $params_array = json_decode($json, true);
+        $pedido = new Pedido();
+        unset($params_array['id']);
+        unset($params_array['user_id']);
+        unset($params_array['created_at']);
+        unset($params_array['user']);
+        unset($params_array['articulos']);
+        $pedido = Pedido::where('fechapedido',$id)->update(['status' => 'PAGADO']);
+        $data = array(
+            'pedido' => $pedido,
+            'code' => 200,
+            'status' => 'success'
+        );
+        return response()->json($data,200);
     }
 
 

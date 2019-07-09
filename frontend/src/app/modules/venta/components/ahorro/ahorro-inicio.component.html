@@ -1,0 +1,28 @@
+<div class="container-fluid">
+    <div class="botones">
+        <div class="row">
+            <!--==============================================================
+         div del boton salida mercancia
+        ==================================================================-->
+            <div class="mercancias col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <button type="button" [routerLink]="['../crear']" class="btn btn-primary btn-lg btn-block  btn-success">
+                    <i class="fas fa-cart-arrow-down"></i>
+                    Crear Fondo Ahorro
+                </button>
+            </div>
+            <!--==============================================================
+         div del boton devolucion
+        ==================================================================-->
+            <div class="mercancias col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <button type="button" [routerLink]="['../ahorro']" class="btn btn-lg btn-block btn-info">
+                <i class="fa fa-angle-double-right"></i> Aplicar</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="mercancias col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <button type="button" [routerLink]="['../lista']" class="btn btn-lg btn-block btn-info">
+                <i class="fa fa-angle-double-right"></i> Fondo Ahorro</button>
+            </div> 
+        </div>
+    </div>
+</div>

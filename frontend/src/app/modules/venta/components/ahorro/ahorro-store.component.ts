@@ -16,23 +16,26 @@ import { Ahorro } from 'src/app/models/ahorro';
     ]
 })
 
+/*==========================================================
+   CREAR CAJA DE AHORRO CON MODEL
+=============================================================*/
 export class AhorroStoreComponent {
 
     public token: any;
     public perso: Array<any>;
     public ahor: Ahorro;
-    
+
     constructor(
         private _UserService: UserService,
         private _GeneralCallService: GeneralCallService,
-        private _router: Router 
+        private _router: Router
 
-    ){
+    ) {
         this.token = this._UserService.getToken();
-        this.ahor = new Ahorro(0,null,null,null,0,0,null);    
+        this.ahor = new Ahorro(0, null, null, null, 0, 0, "SIN PAGAR");
     }
 
-    ngOnInit(){
+    ngOnInit() {
         this.getListPersonal();
     }
 
@@ -48,5 +51,26 @@ export class AhorroStoreComponent {
         this.ahor.nombre = this.perso.find(x => x.id == id).nombre;
 
     }
+
+    /*==========================================================
+    CREAR CAJA DE AHORRO
+    =============================================================*/
+
+    ingresaahorro() {
+        this._GeneralCallService.storeRecord(this.token, 'ahorros', this.ahor).subscribe(
+            response => {
+                this.ahor = response.ahorro;
+            }
+        )
+
+    }
+
+    /*==========================================================
+        BOTO CANCELAR 
+    =============================================================*/
+    botonCancelar(){
+        this.ahor = null;
+        this._router.navigate(['ventas/default']);
+      }
 
 }

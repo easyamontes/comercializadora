@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Busqueda } from 'src/app/models/busqueda';
 import { Pedido } from 'src/app/models/pedido';
 import { Conceptoahorro } from 'src/app/models/conceptoahorro';
+import { Ahorro } from 'src/app/models/ahorro';
 
 @Component({
     selector: 'ahorro-view',
@@ -80,5 +81,17 @@ export class AhorroViewComponent {
             }
         )
 
+    }
+
+    /*==========================================================
+      BOTON SIRVE PARA PAGAR
+    =============================================================*/
+    pagar(i){
+         this._GeneralCallService.updateRecord(this.token,'pagar',this.lisahorro[i],this.lisahorro[i].fechapedido).subscribe(
+            response=> {
+                   
+            }
+               
+         )
     }
 }

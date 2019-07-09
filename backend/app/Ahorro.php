@@ -14,6 +14,6 @@ class Ahorro extends Model
     }
 
     public function conceptoahorro(){
-        return $this->belongsto('App\Conceptoahorro','id_ahorro');
+        return $this->hasMany('App\Conceptoahorro','id_ahorro');
     }
 }

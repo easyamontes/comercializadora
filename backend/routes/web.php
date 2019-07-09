@@ -36,8 +36,9 @@ Route::put('/api/recive/{id}','RequisicionControler@recive')->middleware('islogg
 Route::post('/api/equipo','PersonalController@getEquipo')->middleware('islogged');
 Route::put('/api/act/{id}','AlmacenController@actualizar')->middleware('islogged');
 Route::get('/api/repo/{id}','AlmacenController@diario')->middleware('islogged');
-Route::post('/api/cxc','RequisicionControler@cxc')->middleware('islogged');
-
+Route::post('/api/cxc','RequisicionController@cxc')->middleware('islogged');
+Route::post('/api/listatus','AhorroController@listastatus')->middleware('islogged');
+Route::put('/api/pagar/{id}','PedidoController@pagar')->middleware('islogged');
 
 //Rutas para el control de acciones en puestos
 Route::resource('/api/puestos','PuestoController');
@@ -52,3 +53,4 @@ Route::resource('/api/requisicion','RequisicionControler');
 Route::resource('/api/almaitem','AlmacenController');
 Route::resource('/api/ventas','PedidoController');
 Route::resource('/api/conceptos','ConceptoahorroController');
+Route::resource('/api/ahorros','AhorroController');

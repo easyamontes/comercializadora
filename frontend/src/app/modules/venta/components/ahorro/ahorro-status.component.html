@@ -1,3 +1,6 @@
+<!--================================================================================================
+     MODULO PARA VISUALIZAR EN MODO LISTA TODAS LAS CAJAS DE FONDO DE AHORRO QUE ESTAN CREADAS EN EL SISTEMA
+ ===================================================================================================-->
 <div class="principal">
     <div style="text-align: center;padding-top: 1%">
         <h3>{{title}}</h3>
@@ -16,11 +19,13 @@
             <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="col-md-3 col-xs-12">
-            <mat-select matInput [(ngModel)]="busqueda.socio" placeholder="Socio Comercial" #socio="ngModel">
-                <mat-option *ngFor="let  pedi of perso" [value]="pedi.id">{{pedi.nombre}}</mat-option>
+            <mat-select matInput [(ngModel)]="busqueda.socio" placeholder="Status" #socio="ngModel">
+                <mat-option>None</mat-option>
+                <mat-option value="SIN PAGAR">SIN PAGAR</mat-option>
+                <mat-option value="PAGADO">PAGADO</mat-option>
             </mat-select>
         </mat-form-field>
-        <button type="submit" class=" col-md-3 col-xs-12  botonbuscar " (click)="listaahorro()">Buscar</button>
+        <button type="submit" class=" col-md-3 col-xs-12  botonbuscar " (click)="listaa()">Buscar</button>
     </fieldset>
     <br>
     <div class="reporte">
@@ -28,21 +33,21 @@
             <thead class="tablareporte">
                 <tr>
                     <th>Nombre</th>
-                    <th>Fecha</th>
-                    <th>Dia</th>
-                    <th>Importe</th>
-                    <th>Ahorro</th>
-                    <th>Seleccion</th>
+                    <th>Fecha De Pago</th>
+                    <th>Limite De Ahorro</th>
+                    <th>Status</th>
+                    <th>Monto Pagado</th>
+                    <th>Desglose</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="rahorro" *ngFor="let lis of lisahorro;let i = index">
+                <tr class="rahorro" *ngFor="let lis of listaahorro;let i = index">
                     <td>{{ lis.nombre }}</td>
-                    <td>{{ lis.fechapedido }}</td>
-                    <td>{{ lis.dia }}</td>
-                    <td>{{ lis.importe }}</td>
-                    <td>{{ lis.ahorro }}</td>
-                    <td> <button type="submit" (click)= "pagar(i)">Pagar</button></td>
+                    <td>{{ lis.fechapago }}</td>
+                    <td>{{ lis.limiteahorro }}</td>
+                    <td>{{ lis.status }}</td>                 
+                    <td>{{ lis.montopagado }}</td>    
+                    <td> <button type="submit" (click)="ingresaahorro(i)">seleccionar</button></td>
                 </tr>
             </tbody>
         </table>
