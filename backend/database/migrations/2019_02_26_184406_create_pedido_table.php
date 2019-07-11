@@ -29,8 +29,8 @@ class CreatePedidoTable extends Migration
             $table->string('dia');
             $table->string('año');
             $table->integer('porcentaje');
-            $tabla->integer('ahorro');
-            $tabla->string('status');
+            $table->integer('ahorro');
+            $table->string('status');
             $table->timestamps();
         });
     }

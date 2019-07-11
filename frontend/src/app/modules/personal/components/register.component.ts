@@ -18,6 +18,7 @@ export class PersonalRegisterComponent implements OnInit{
     public title:string;
     public status: string;
     public token: any;
+    public identity: any;
     public user: User;
     public email: any;
     public persona: Personal;
@@ -25,16 +26,19 @@ export class PersonalRegisterComponent implements OnInit{
     constructor(
         private _UserService: UserService,
         private _MatSnackBar: MatSnackBar,
+        private _GeneralCallService: GeneralCallService,
         public _MatDialogRef: MatDialogRef<PersonalRegisterComponent>,
         @Inject(MAT_DIALOG_DATA) public data
     ){
         this.persona = this.data.persona;
         this.title = 'Editando';
         this.token = _UserService.getToken();
-        this.user = new User(0,this.persona.id,0,'',this.persona.email,'',this.persona.nombre,this.persona.apellidop,'');
+        this.identity = this._UserService.getIdentity();
+        this.user = new User(0,this.persona.id,0,'',this.persona.email,'',this.persona.nombre,this.persona.apellidop,'',null);
     }
 
     ngOnInit(){
+        this.getUser();
     }
 
     closeDialog() {
@@ -58,5 +62,16 @@ export class PersonalRegisterComponent implements OnInit{
                 let reserror = <any>error;
                 console.log(reserror);
             });
+    }
+
+    getUser(){
+        this._GeneralCallService.updateRecord(this.token,'views',1,this.persona.id).subscribe(
+            response =>{
+                this.user.password = response.user[0].decpassword;
+            },error=>{
+                console.log(<any>error);
+            }
+        )
+
     }
 }

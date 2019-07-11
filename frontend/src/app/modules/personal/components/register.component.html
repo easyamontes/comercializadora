@@ -16,15 +16,15 @@
                 </div>
                 <div class="row form-group">
                         <mat-form-field class="col-md-12 col-xs-12">
-                            <input type="password" matInput name="password" #password="ngModel" [(ngModel)]="user.password" placeholder="Password" required>
+                            <input type="text" matInput name="password" #password="ngModel" [(ngModel)]="user.password" placeholder="Password" required>
                         </mat-form-field>
                 </div>
                 <div class= "row form-group">
                     <div class="col-md-5 col-xs-5">
-                        <input type="submit" value="registrar" class="btn btn-primary" name="registrar"  [disabled]="!userEdit.form.valid">
+                        <button type="submit" value="registrar" class="btn btn-primary" name="registrar" [disabled]="!userEdit.form.valid">Guardar</button>
                     </div>
                     <div class="col-md-5 col-xs-5">
-                        <a class="btn btn-danger" name="cancelar"  (click)="closeDialog()">cancelar</a>
+                            <button type="button" class="btn btn-danger" name="cancelar" (click)="closeDialog()">Cancelar</button>
                     </div>
                 </div>
             </div>

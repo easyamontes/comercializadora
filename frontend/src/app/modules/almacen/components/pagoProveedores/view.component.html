@@ -1,0 +1,138 @@
+<div class="principal">
+    <h4 class="col-12 text-center">{{title}}</h4>
+
+    <!--=============================================================
+                         Cabecera de filtrado 
+    =============================================================-->
+    <div class="row d-flex justify-content-center">
+        <mat-form-field class="col-4">
+            <input matInput [(ngModel)]="busqueda.socio" placeholder="Buscar">
+        </mat-form-field>
+        <mat-form-field class="col-2">
+            <input matInput [(ngModel)]="busqueda.inicio" [matDatepicker]="pickerFechai" placeholder="Fecha Inicio">
+            <mat-datepicker-toggle matSuffix [for]="pickerFechai"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFechai></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+            <input matInput [(ngModel)]="busqueda.final" [matDatepicker]="pickerFechaF" placeholder="Fecha Inicio">
+            <mat-datepicker-toggle matSuffix [for]="pickerFechaF"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFechaF></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+            <mat-select matInput [(ngModel)]="tipo" placeholder="Ver" (ngModelChange)="onOptionSwitch($event)">
+                <mat-option value="SIN PAGAR">SIN PAGAR</mat-option>
+                <mat-option value="PAGADO">PAGADO</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button class=" col-2 botonbuscar" data-backdrop="static" data-toggle="modal" data-target="#exampleModal"
+            (click)="getProveedores()">
+            <i class="fas fa-plus"></i> Nuevo
+        </button>
+    </div>
+
+    <!--=============================================================
+                         Tabla para ver las facturas
+    =============================================================-->
+    <div class="row d-flex justify-content-center">
+        <table class="table table-striped">
+            <thead class="tablareporte">
+                <tr>
+                    <th>facturas</th>
+                    <th>Fecha</th>
+                    <th>Proveedor</th>
+                    <th>Concepto</th>
+                    <th>Importe</th>
+                    <th>Iva</th>
+                    <th>Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="p" *ngFor="let item of facturas | filter : busqueda.socio; let i = index">
+                    <td>{{ item.factura }}</td>
+                    <td>{{ item.fecha | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{ item.proveedor.nombre }}</td>
+                    <td>{{ item.concepto}}</td>
+                    <td>{{ item.importe |currency}}</td>
+                    <td>{{ item.iva |currency}}</td>
+                    <td>{{ item.total |currency}}</td>
+                    <td>
+                        <button *ngIf="ind != i && item.status == 'SIN PAGAR'" class="btn btn-success" (click)="setPagado(item,i)">
+                            <i class="fas fa-dollar-sign"></i> Pagar
+                        </button>
+                        <button *ngIf="ind == i && item.status == 'SIN PAGAR'" class="btn btn-success" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Pagando...
+                        </button>
+                        <button class="btn btn-light" (click)="onDestroy(item.id,i)">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr *ngIf="facturas">
+                    <td></td>
+                    <td colspan="5"></td>
+                    <td>
+                        <h4>Total:</h4>
+                    </td>
+                    <td>
+                        <h4>{{ getTotal() | currency }}</h4>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--=============================================================
+                         Tabla de Por Cobrar
+=============================================================-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nueva factura</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeBtn>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row d-flex justify-content-center">
+                    <mat-form-field class="col-3">
+                        <input matInput [(ngModel)]="factura.factura" placeholder="Factura">
+                    </mat-form-field>
+                    <mat-form-field class="col-6">
+                        <mat-select matInput [(ngModel)]="factura.proveedor_id" placeholder="Proveedor">
+                            <mat-option *ngFor="let proveedor of proove" [value]="proveedor.id">
+                                {{proveedor.razon_social | uppercase}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="col-3">
+                        <input matInput [(ngModel)]="factura.fecha" [matDatepicker]="pickerFechap" placeholder="Fecha">
+                        <mat-datepicker-toggle matSuffix [for]="pickerFechap"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerFechap></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <mat-form-field class="col-12">
+                        <input matInput [(ngModel)]="factura.concepto" placeholder="Concepto">
+                    </mat-form-field>
+                </div>
+                <div class="row d-flex justify-content-start">
+                    <mat-form-field class="col-4">
+                        <input matInput [(ngModel)]="factura.importe" placeholder="importe">
+                    </mat-form-field>
+                    <mat-form-field class="col-3">
+                        <input matInput [(ngModel)]="factura.iva" placeholder="Iva">
+                    </mat-form-field>
+                    <h4>{{factura.importe - factura.iva| currency}}</h4>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="onSubmit()">Guardar</button>
+                <button type="button" class="btn btn-danger" (click)="onCancel()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

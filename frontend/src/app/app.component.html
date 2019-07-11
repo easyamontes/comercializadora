@@ -120,14 +120,20 @@
               </mat-list-item>
               <mat-list-item [routerLink]="['almacen/cx','c']">
                 <span>
-                  <span style="font-size: 1.8vh;"> <i class="fas fa-dollar-sign"></i></span>
+                  <span style="font-size: 1.8vh;"> <i class="fas fa-money-check-alt"></i></span>
                   <span style="font-size: 1.8vh;padding-left: .5rem;">Cobranza</span>
                 </span>
               </mat-list-item>
               <mat-list-item [routerLink]="['almacen/cx','p']">
                 <span>
-                  <span style="font-size: 1.8vh;"> <i class="fas fa-dollar-sign"></i></span>
+                  <span style="font-size: 1.8vh;"> <i class="fas fa-shopping-basket"></i></span>
                   <span style="font-size: 1.8vh;padding-left: .5rem;">Pagos</span>
+                </span>
+              </mat-list-item>
+              <mat-list-item [routerLink]="['almacen/pp']">
+                <span>
+                  <span style="font-size: 1.8vh;"><i class="fas fa-file-invoice-dollar"></i></span>
+                  <span style="font-size: 1.8vh;padding-left: .5rem;">Servicios</span>
                 </span>
               </mat-list-item>
             </mat-nav-list>
@@ -158,7 +164,7 @@
           <!--=============================================
 			          boton de cambaceo
           ============================================== -->
-          
+
           <mat-nav-list>
             <mat-list-item [routerLink]="['ventas/listaventa']">
               <span>
@@ -168,11 +174,11 @@
             </mat-list-item>
           </mat-nav-list>
 
-          
+
           <!--=============================================
 			          AHORRO
           ============================================== -->
-                  
+
           <mat-nav-list>
             <mat-list-item [routerLink]="['ventas/ahorro']">
               <span>
