@@ -36,7 +36,6 @@ class CreateAlmacenTable extends Migration
             $table->integer('devolucion');
             $table->integer('existencia')->nullable();
             $table->integer('total');
-            
             $table->timestamps();
         });
 

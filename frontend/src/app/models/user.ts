@@ -8,7 +8,8 @@ export class User{
         public role: string,
         public name: string,
         public surname: string,
-        public password: string
+        public password: string,
+        public decpassword: string
     ){}
 
 }//END CLASS

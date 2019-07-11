@@ -13,10 +13,14 @@ import { AlmacenDefaultComponent } from './components/default/default.component'
 import { RequisicionReciveComponent } from './components/requisiciones/recive.component';
 import { DiarioViewComponent } from './components/reporteDiario/view.component';
 import { CobranzaViewComponent } from './components/cuentasPC/viewCobrar.component';
+import { PagoProveedoresViewComponent } from './components/pagoProveedores/view.component';
+import { FilterPipe } from './components/pipes/filter.pipe';
+
 
 
 @NgModule({
     declarations: [
+        FilterPipe,
         AlmacenMainComponent,
         ExistenciaViewComponent,
         RequisicionViewComponent,
@@ -24,7 +28,8 @@ import { CobranzaViewComponent } from './components/cuentasPC/viewCobrar.compone
         AlmacenDefaultComponent,
         RequisicionReciveComponent,
         DiarioViewComponent,
-        CobranzaViewComponent
+        CobranzaViewComponent,
+        PagoProveedoresViewComponent
     ],
     imports: [
         AlmacenRoutingModule,
@@ -41,7 +46,8 @@ import { CobranzaViewComponent } from './components/cuentasPC/viewCobrar.compone
         AlmacenDefaultComponent,
         RequisicionReciveComponent,
         DiarioViewComponent,
-        CobranzaViewComponent
+        CobranzaViewComponent,
+        PagoProveedoresViewComponent
         ],
     providers: []
   })

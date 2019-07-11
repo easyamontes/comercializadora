@@ -10,6 +10,7 @@ import { AlmacenDefaultComponent } from './components/default/default.component'
 import { RequisicionReciveComponent } from './components/requisiciones/recive.component';
 import { DiarioViewComponent } from './components/reporteDiario/view.component';
 import { CobranzaViewComponent } from './components/cuentasPC/viewCobrar.component';
+import { PagoProveedoresViewComponent } from './components/pagoProveedores/view.component';
 
 const almacenRoutes: Routes =[
     {
@@ -23,7 +24,8 @@ const almacenRoutes: Routes =[
                                                             { path:'equinueva/:sure',component:RequisicionStoreComponent },
                                                             { path:'recepcion/:sure',component:RequisicionReciveComponent},
                                                             { path:'diario',component:DiarioViewComponent },
-                                                            { path:'cx/:tip' ,component:CobranzaViewComponent}
+                                                            { path:'cx/:tip' ,component:CobranzaViewComponent},
+                                                            { path:'pp', component:PagoProveedoresViewComponent }
                                                          ]
     }
 ]

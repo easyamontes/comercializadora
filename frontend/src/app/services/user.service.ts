@@ -16,10 +16,6 @@ export class UserService{
         this.url = GLOBAL.url;
     }
 
-    pruebas(){
-        return 'hola Mundo';
-    }
-
     /** Función para registrar usuarios en la base de datos  */
     register(user): Observable<any>{
         let json = JSON.stringify(user);

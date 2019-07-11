@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Helpers\JwtAuth;
 use App\Proveedor;
 
 class ProveedorController extends Controller
@@ -18,8 +17,8 @@ class ProveedorController extends Controller
     public function index(Request $request)
     {
         $proveedor = Proveedor::all()->load('user');
-        $nop = $proveedor->count();
         return response()->json(array(
+            'code' => 200,
             'proveedores' => $proveedor,
             'status' => 'success'
         ), 200);

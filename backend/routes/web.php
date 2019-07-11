@@ -19,6 +19,7 @@ Route::get('/', function () {
 Route::post('/api/register','UserController@register');
 Route::post('/api/login','UserController@login');
 Route::post('/api/show','UserController@verUser')->middleware('islogged');
+Route::put('/api/views/{id}','UserController@retUser')->middleware('islogged');
 //Llamadas a las listas
 Route::get('/api/lpersonal','ListaController@empleadosList')->middleware('islogged');
 Route::get('/api/lpuesto','ListaController@puestosList')->middleware('islogged');
@@ -40,6 +41,7 @@ Route::post('/api/cxc','RequisicionController@cxc')->middleware('islogged');
 Route::post('/api/listatus','ConceptoahorroController@listastatus')->middleware('islogged');
 Route::post('/api/pago','ConceptoahorroController@pagar')->middleware('islogged');
 Route::put('/api/pagar/{id}','PedidoController@pagar')->middleware('islogged');
+Route::get('/api/ppagados','PagoProveedorController@pagado')->middleware('islogged');;
 Route::put('/api/pagarto/{id}','PedidoController@pagartodo')->middleware('islogged');
 
 
@@ -57,3 +59,4 @@ Route::resource('/api/almaitem','AlmacenController');
 Route::resource('/api/ventas','PedidoController');
 Route::resource('/api/conceptos','ConceptoahorroController');
 Route::resource('/api/ahorros','AhorroController');
+Route::resource('/api/pagopro','PagoProveedorController');

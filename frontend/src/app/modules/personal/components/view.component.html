@@ -1,11 +1,14 @@
 <div class="principal">
     <h3>{{title}}</h3>
+    <!--=============================================================
+                         Cabecera de filtrado 
+    =============================================================-->
     <div class="row">
         <mat-form-field class="col-md-4 col-xs-12">
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="buscar">
         </mat-form-field>
         <mat-form-field class="col-md-3 col-xs-12">
-            <mat-select matInput [(ngModel)]="lider"  placeholder="Lider">
+            <mat-select matInput [(ngModel)]="lider" placeholder="Lider">
                 <mat-option *ngFor="let persona of personaList" [value]="persona.id">
                     {{persona.nombre+ ' ' +persona.apellidop+ ' '+ persona.apellidom}}
                 </mat-option>
@@ -13,10 +16,10 @@
         </mat-form-field>
         <mat-form-field class="col-md-3 col-xs-12">
             <mat-select matInput [(ngModel)]="puesto" placeholder="Puesto">
-                    <mat-option>None</mat-option>
-                    <mat-option *ngFor="let puesto of organi" [value]="puesto.id">
-                        {{ puesto.puesto }}
-                    </mat-option>
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let puesto of organi" [value]="puesto.id">
+                    {{ puesto.puesto }}
+                </mat-option>
             </mat-select>
         </mat-form-field>
         <div class="col-xs-12 col-md-1">
@@ -34,19 +37,22 @@
             </button>
         </div>
     </div>
+    <!--=============================================================
+                         Tabla de empleados
+    =============================================================-->
     <div class="row">
         <table mat-table [dataSource]="dataSource" matSort class="col-md-12 col-xs-12 mat-elevation-z8">
             <ng-container matColumnDef="nombre">
                 <th class="thm" mat-header-cell *matHeaderCellDef> Nombre</th>
                 <td style="padding-top:.7em;" mat-cell *matCellDef="let row">
-                    <h5>{{row.nombre}} {{row.apellidop}} {{row.apellidom}}</h5>
+                    <h5>{{row.nombre+' '+row.apellidop+' '+row.apellidom |uppercase}}</h5>
                     <p>{{row.oficina}}</p>
                 </td>
             </ng-container>
             <ng-container matColumnDef="oficina">
                 <th class="thm" mat-header-cell *matHeaderCellDef> Lider</th>
                 <td style="padding-top:.7em;" mat-cell *matCellDef="let row">
-                        {{row.puesto.puesto}}
+                    {{row.puesto.puesto}}
                 </td>
             </ng-container>
             <ng-container matColumnDef="Visualizar">

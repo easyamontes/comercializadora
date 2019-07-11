@@ -24,7 +24,7 @@ class CreateAhorroTable extends Migration
             $table->string('nombre')->nullable();
             $table->integer('montopagado')->nullable();
             $table->integer('limiteahorro')->nullable();
-            $tabla->string('status')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
