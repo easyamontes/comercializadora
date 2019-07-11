@@ -14,32 +14,34 @@ class ProveedorController extends Controller
     }
 
     //llama un listado de proveedores desde la base de datos
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $proveedor = Proveedor::all()->load('user');
         return response()->json(array(
             'code' => 200,
             'proveedores' => $proveedor,
             'status' => 'success'
-        ),200);
+        ), 200);
     }
-    
+
     //Guardando registro en la base de datos
-    public function store( Request $request ){
+    public function store(Request $request)
+    {
         //recogiendo variables que vienen del Call post
-        $json = $request->input('json',null);
+        $json = $request->input('json', null);
         $params = json_decode($json);
         $params_array = json_decode($json, true);
-        $user = $json = $request->input('userid',null);
+        $user = $json = $request->input('userid', null);
         $proveedor = new Proveedor();
         //validando datos de la peticion
-        $validate = \Validator::make($params_array,[
+        $validate = \Validator::make($params_array, [
             "razon_social" => 'required|unique:proveedor',
         ]);
 
         if ($validate->fails()) {
-            return response()->json($validate->errors(),400);
+            return response()->json($validate->errors(), 400);
         }
-        
+
         //asignando informacion al objeto proveedor
         $proveedor->user_id = $user;
         $proveedor->nombre = $params->nombre;
@@ -60,21 +62,22 @@ class ProveedorController extends Controller
             'code' => 200,
             'status' => 'success'
         );
-        return response()->json($data,200);
+        return response()->json($data, 200);
     }
 
-    public function update ($id, Request $request){
-        $json = $request->input('json',null);
+    public function update($id, Request $request)
+    {
+        $json = $request->input('json', null);
         $params = json_decode($json);
-        $params_array = json_decode($json, true); 
+        $params_array = json_decode($json, true);
         $proveedor = new Proveedor();
 
         //validando datos de la peticion
-        $validate = \Validator::make($params_array,[
-            "razon_social" => 'required|unique:proveedor,id,'.$params->id,
+        $validate = \Validator::make($params_array, [
+            "razon_social" => 'required|unique:proveedor,id,' . $params->id,
         ]);
         if ($validate->fails()) {
-            return response()->json($validate->errors(),400);
+            return response()->json($validate->errors(), 400);
         }
         //elimienado array
         unset($params_array['id']);
@@ -82,18 +85,19 @@ class ProveedorController extends Controller
         unset($params_array['created_at']);
         unset($params_array['user']);
         unset($params_array['contactos']);
-    
+
         //Actualizando el registro
-        $proveedor = Proveedor::where('id',$id)->update($params_array);
+        $proveedor = Proveedor::where('id', $id)->update($params_array);
         $data = array(
             'proveedor' => $params,
             'code' => 200,
             'status' => 'success'
         );
-        return response()->json($data,200);
+        return response()->json($data, 200);
     }
 
-    public function destroy($id, Request $request){
+    public function destroy($id, Request $request)
+    {
         $proveedor = Proveedor::find($id);
         $proveedor->delete();
         $data = array(
@@ -103,20 +107,20 @@ class ProveedorController extends Controller
         );
     }
 
-    public function show($id, Request $request){
+    public function show($id, Request $request)
+    {
         $proveedor = Proveedor::find($id);
-        if(is_object($proveedor)){
+        if (is_object($proveedor)) {
             $proveedor = Proveedor::find($id)->load('contactos');
             return response()->json(array(
                 'proveedor' => $proveedor,
                 'status' => 'success'
-            ),200);
-        }else{
+            ), 200);
+        } else {
             return response()->json(array(
                 'message' => 'No se encuentra el registro',
                 'status' => 'error'
-            ),400);
+            ), 400);
         }
     }
-
 }

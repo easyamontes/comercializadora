@@ -26,6 +26,7 @@ class CreateConceptoahorroTable extends Migration
             $table->integer('montoventa')->nullable();
             $table->integer('ahorrodia')->nullable();
             $table->string('status')->nullable();
+            $table->string('tipo')->nullable();
             $table->timestamps();
         });
     }

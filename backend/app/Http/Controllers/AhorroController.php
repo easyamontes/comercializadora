@@ -49,53 +49,7 @@ class AhorroController extends Controller
         return response()->json($data,200);
     }
 
-      /*======================================================================
-         FUNCION PARA TRAER TODOS LOS FONDOS DE AHORRRO
-    ====================================================================== */
-    public function listastatus(Request $request)
-    {
-     
-        $json = $request->input('json',null);
-        $params = json_decode ($json);
-        $per = $json = $request->input('per', null);
-        $socio = $params->socio;     
-        $inicio = $params->inicio;
-        $dateinicio = str_replace('/','-',$inicio);
-        $dateinicio = date('Y-m-d',strtotime($dateinicio));
-        $final = $params->final;
-        $datefinal = str_replace('/','-',$final);
-        $datefinal = date('Y-m-d',strtotime($datefinal));
-        if($socio == "" and $inicio != '' and $final != ''){
-            $pedido = Pedido::select('*')
-            ->where('user_id','=',$socio)
-            ->where( 'fechapedido','>=',$dateinicio)->where('fechapedido','<=',$datefinal)
-            ->where('tipo', '=', 'ENTRADA')
-            ->where('status', '=','SIN PAGAR')
-            ->orderby('nombre')
-            ->orderby('fechapedido')
-            ->get();
-        }else if 
-
-        ( $socio != "" and $inicio == "" and $final == "")
-        {
-            $ahorro = Ahorro::selectRaw('*')
-            ->where('status','=',$socio)
-            ->get();
-        }else if
-        ($socio != "" and $inicio != "" and $final != "")
-        {
-            $ahorro = Ahorro::select('*')
-            ->where('status','=',$socio)
-            ->where( 'fechapedido','>=',$dateinicio)
-            ->where('fechapedido','<=',$datefinal)
-            ->get()->load('user');
-        }
-        return response()->json(array(
-            'statusahorro' => $ahorro,
-            'status' => 'success'
-        ), 200);
-    }
-
+    
      public function show ($id,Request $request){
         $json = $request->input('json',null);
         $params = json_decode ($json);

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Helpers\JwtAuth;
 use App\Conceptoahorro;
 use App\Ahorro;
+use App\Pedido;
 
 
 class ConceptoahorroController extends Controller
@@ -24,16 +25,15 @@ class ConceptoahorroController extends Controller
         $params = json_decode($json);
         $params_array = json_decode($json, true);
         $user = $json = $request->input('userid',null);
-        $re = Ahorro::select('id')->where('status','=','SIN PAGAR')
-        ->where('personal_id','=',$user)->get();
         $concepto = new Conceptoahorro();
         $concepto->personal_id = $user;
         $concepto->nombre = $params->nombre;
         $concepto->fechadia = $params->fechapedido;
         $concepto->montoventa = $params->importe;
         $concepto->ahorrodia = $params->ahorro;
-        $concepto->id_ahorro = $re[0]['id'];
         $concepto->save();
+        Pedido::where('user_id','=',$user)
+        ->where('fechapedido','=',$params->fechapedido)->update(['status' => 'APLICADO']);
         $data = array(
             'concepto' => $concepto,
             'code' => 200,
@@ -41,4 +41,56 @@ class ConceptoahorroController extends Controller
         );
         return response()->json($data,200);
     }
+
+      /*======================================================================
+         FUNCION PARA TRAER TODOS LOS FONDOS DE AHORRRO
+    ====================================================================== */
+    public function listastatus(Request $request)
+    {
+     
+        $json = $request->input('json',null);
+        $params = json_decode ($json);
+        $per = $json = $request->input('per', null);
+        $socio = $params->socio;     
+            $ahorro = Conceptoahorro::select('*')
+            ->where('personal_id','=',$socio)
+            ->where('tipo', '=','I')
+            ->get();
+        $total = Conceptoahorro::selectRaw('SUM(ahorrodia) AS ahorrodia')
+        ->where('personal_id','=',$socio)
+        ->get();
+        return response()->json(array(
+            'statusahorro' => $ahorro,
+            'total' => $total,
+            'status' => 'success'
+        ), 200);
+    }
+
+
+    public function pagar (Request $request)
+    {
+        $json = $request->input('json',null);
+        $params = json_decode($json);
+        $params_array = json_decode($json, true);
+        $user = $json = $request->input('userid',null);
+        $fe = substr($params->fechapedido,0,10);
+        $ahorro = new Conceptoahorro();
+        $ahorro->personal_id = $params->personal_id;
+        $ahorro->fechadia = $fe;
+        $ahorro->montoventa = $params->ahorrodia;
+        $ahorro->ahorrodia = $params->ahorrodia;
+        $ahorro->tipo = $params->tipo;
+        $ahorro->save();
+        $total = Conceptoahorro::selectRaw('SUM(ahorrodia) AS ahorrodia')
+        ->where('personal_id','=',$params->personal_id)
+        ->get();
+        $data = array(
+            'total' => $total,
+            'code' => 200,
+            'status' => 'success'
+        );
+        return response()->json($data,200);
+    }
+
+    
 }

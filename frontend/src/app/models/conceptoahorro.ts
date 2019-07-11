@@ -5,6 +5,6 @@ export class Conceptoahorro{
         public fechadia:string,
         public montoventa:number,
         public ahorrodia:number,
-        public status:string    
+        public status:string,
     ){}
 }

@@ -10,6 +10,9 @@ export class Pedido{
         public semana:number,
         public dia:string,
         public año:string,
+        public ahorro:number,
+        public fechapago:string,
+        public status:string,
     ){}
 
 }//End Class

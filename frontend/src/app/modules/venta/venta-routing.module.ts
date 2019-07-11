@@ -12,7 +12,6 @@ import { ReporteDefaultComponent } from './components/reporte/reporte-default.co
 import { ReportePremioComponent } from './components/reporte/reporte-premio.component';
 import { ReportePiezaComponent } from './components/reporte/reporte-piezas.component';
 import { AhorroViewComponent } from './components/ahorro/ahorro-view.component';
-import { AhorroStoreComponent } from './components/ahorro/ahorro-store.component';
 import { AhorroStatusComponent } from './components/ahorro/ahorro-status.component';
 import { ahorroInicioComponent } from './components/ahorro/ahorro-inicio.component';
 
@@ -34,7 +33,6 @@ const ventaRoutes: Routes = [
                                                             {path:'premio',component:ReportePremioComponent},
                                                             {path:'piezas',component:ReportePiezaComponent},
                                                             {path:'ahorro',component:AhorroViewComponent},
-                                                            {path:'crear',component:AhorroStoreComponent},
                                                             {path:'lista',component:AhorroStatusComponent},
                                                             {path:'default',component:ahorroInicioComponent},
                                                           ]

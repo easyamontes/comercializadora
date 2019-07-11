@@ -6,6 +6,7 @@ import { GeneralCallService } from '../../../../services/generalCall.service';
 @Component({
     selector: 'inicio-default',
     templateUrl: './ahorro-inicio.component.html',
+    styleUrls: ['../default/default.component.css'],
 
     providers: [
         UserService,
