@@ -7,22 +7,9 @@
     </div>
     <fieldset>
         <mat-form-field class="col-md-3 col-xs-12">
-            <input matInput [matDatepicker]="picker1" placeholder="Fecha Inicio" #inicio="ngModel"
-                [(ngModel)]="busqueda.inicio">
-            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field class="col-md-3 col-xs-12">
-            <input matInput [matDatepicker]="picker2" placeholder="Fecha Final" #final="ngModel"
-                [(ngModel)]="busqueda.final">
-            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field class="col-md-3 col-xs-12">
-            <mat-select matInput [(ngModel)]="busqueda.socio" placeholder="Status" #socio="ngModel">
-                <mat-option>None</mat-option>
-                <mat-option value="SIN PAGAR">SIN PAGAR</mat-option>
-                <mat-option value="PAGADO">PAGADO</mat-option>
+            <mat-select matInput [(ngModel)]="busqueda.socio" placeholder="Socio Comercial" #socio="ngModel">
+                <mat-option>none</mat-option>
+                <mat-option *ngFor="let pedi of perso" [value]="pedi.id">{{pedi.nombre}}</mat-option>
             </mat-select>
         </mat-form-field>
         <button type="submit" class=" col-md-3 col-xs-12  botonbuscar " (click)="listaa()">Buscar</button>
@@ -33,24 +20,36 @@
             <thead class="tablareporte">
                 <tr>
                     <th>Nombre</th>
-                    <th>Fecha De Pago</th>
-                    <th>Limite De Ahorro</th>
-                    <th>Status</th>
-                    <th>Monto Pagado</th>
-                    <th>Desglose</th>
+                    <th>Fecha De Dia</th>
+                    <th>Monto venta</th>
+                    <th style="text-align: center">Ahorro</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="rahorro" *ngFor="let lis of listaahorro;let i = index">
                     <td>{{ lis.nombre }}</td>
-                    <td>{{ lis.fechapago }}</td>
-                    <td>{{ lis.limiteahorro }}</td>
-                    <td>{{ lis.status }}</td>                 
-                    <td>{{ lis.montopagado }}</td>    
-                    <td> <button type="submit" (click)="ingresaahorro(i)">seleccionar</button></td>
+                    <td>{{ lis.fechadia }}</td>
+                    <td>{{ lis.montoventa | currency }}</td>
+                    <td style="text-align: center">{{ lis.ahorrodia | currency }}</td>
+                </tr>
+                <tr *ngIf="listaahorro">
+                    <td>
+                        <h4>Ahorro Disponible: {{pe | currency }}</h4>
+                    </td>
+                    <td colspan="2">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label>Monto Pagar:</label>
+                                <input type="text"  name="axrname" [(ngModel)]="busqueda.inicio"
+                                    class="form-control mx-sm-5" placeholder="$">
+                            </div>
+                        </form>
+                    </td>
+                    <td>
+                        <button class="btn btn-secondary  btn-lg btn-block" type="submit" (click)="pagar()">Pagar</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
-
 </div>

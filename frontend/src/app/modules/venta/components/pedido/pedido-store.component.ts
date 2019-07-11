@@ -28,8 +28,6 @@ export class PedidoStoreComponent implements OnInit, DoCheck {
     public lisart: Array<any>;
     public perso: Array<any>;
 
-
-
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
@@ -42,7 +40,7 @@ export class PedidoStoreComponent implements OnInit, DoCheck {
         this.title = 'Nuevo Pedido';
         this.conceptoventa = [];
         this.token = this._UserService.getToken();
-        this.pedi = new Pedido(0, '', 0, 0, '', "SALIDA", '', 0, null,null);
+        this.pedi = new Pedido(0, '', 0, 0, '', "SALIDA", '', 0, null,null,null,null,null);
     }
     ngOnInit() {
         this.getListArticulo();

@@ -41,7 +41,7 @@ import { Pedido } from 'src/app/models/pedido';
          ){
             
             this.token=this._UserService.getToken();
-            this.pedi = new Pedido (0,'',0,0,'','','',0,null,null);
+            this.pedi = new Pedido (0,'',0,0,'','','',0,null,null,null,null,null);
             this.conceptoventa = [];
         
             this.title = 'Devolucion';

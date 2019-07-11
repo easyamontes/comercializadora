@@ -37,8 +37,10 @@ Route::post('/api/equipo','PersonalController@getEquipo')->middleware('islogged'
 Route::put('/api/act/{id}','AlmacenController@actualizar')->middleware('islogged');
 Route::get('/api/repo/{id}','AlmacenController@diario')->middleware('islogged');
 Route::post('/api/cxc','RequisicionController@cxc')->middleware('islogged');
-Route::post('/api/listatus','AhorroController@listastatus')->middleware('islogged');
+Route::post('/api/listatus','ConceptoahorroController@listastatus')->middleware('islogged');
+Route::post('/api/pago','ConceptoahorroController@pagar')->middleware('islogged');
 Route::put('/api/pagar/{id}','PedidoController@pagar')->middleware('islogged');
+Route::put('/api/pagarto/{id}','PedidoController@pagartodo')->middleware('islogged');
 
 
 //Rutas para el control de acciones en puestos

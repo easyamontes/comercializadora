@@ -115,9 +115,9 @@ class RequisicionController extends Controller
         $params_array = json_decode($json, true);
         $inicio = $params_array['inicio'];
         $query = Requisicion::query();
-        $query->where('pdestino_id', '=',$params_array['socio'])
+        $query->where('pdestino_id', '=', $params_array['socio'])
             ->where('statuspago', '=', 'PENDIENTE')
-            ->when($inicio, function ($q) use ($params_array){
+            ->when($inicio, function ($q) use ($params_array) {
                 return $q->whereBetween('fecha', [$params_array['inicio'], $params_array['final']]);
             });
         $requisicion = $query->get()

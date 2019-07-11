@@ -14,8 +14,7 @@ import { SocioComponent} from './components/socio_vendedor/socio.component';
 import { ReporteDefaultComponent} from './components/reporte/reporte-default.component';
 import { ReportePremioComponent} from './components/reporte/reporte-premio.component';
 import { ReportePiezaComponent} from './components/reporte/reporte-piezas.component';
-import { AhorroViewComponent } from './components/ahorro/ahorro-view.component';
-import { AhorroStoreComponent } from './components/ahorro/ahorro-store.component';
+import { AhorroViewComponent } from './components/ahorro/ahorro-view.component'
 import { AhorroStatusComponent } from './components/ahorro/ahorro-status.component';
 import { ahorroInicioComponent } from './components/ahorro/ahorro-inicio.component';
 
@@ -34,8 +33,7 @@ import { ahorroInicioComponent } from './components/ahorro/ahorro-inicio.compone
         ReporteDefaultComponent,
         ReportePremioComponent,
         ReportePiezaComponent,
-        AhorroViewComponent,
-        AhorroStoreComponent,
+        AhorroViewComponent,      
         AhorroStatusComponent,
         ahorroInicioComponent
       
@@ -57,8 +55,7 @@ import { ahorroInicioComponent } from './components/ahorro/ahorro-inicio.compone
          ReporteDefaultComponent,
          ReportePremioComponent,
          ReportePiezaComponent,
-         AhorroViewComponent,
-         AhorroStoreComponent,
+         AhorroViewComponent,  
          AhorroStatusComponent,
          ahorroInicioComponent
      
