@@ -22,8 +22,8 @@ class CreateAhorroTable extends Migration
             $table->integer('personal_id')->nullable();
             $table->date('fechapago')->nullable();
             $table->string('nombre')->nullable();
-            $table->integer('montopagado')->nullable();
-            $table->integer('limiteahorro')->nullable();
+            $table->decimal('montopagado',10,2)->nullable();
+            $table->decimal('limiteahorro',10,2)->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });

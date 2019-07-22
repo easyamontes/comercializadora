@@ -24,18 +24,18 @@ class CreateAlmacenTable extends Migration
             $table->unsignedInteger('proveedor_id')->nullable();
             $table->unsignedInteger('articulo_id')->nullable();
             $table->unsignedIntger('pedido_id')->nullable();
-            $table->int('folio')->nullable();
+            $table->integer('folio')->nullable();
             $table->string('tipo')->nullable();
             $table->string('codigo');
             $table->string('articulo');
             $table->string('marca');
             $table->string('modelo');
             $table->integer('cantidad');
-            $table->integer('costo')->nullable();
-            $table->integer('precio'); 
+            $table->decimal('costo',10,2)->nullable();
+            $table->decimal('precio',10,2)->nullable(); 
             $table->integer('devolucion');
             $table->integer('existencia')->nullable();
-            $table->integer('total');
+            $table->decimal('total',10,2)->nullable();
             $table->timestamps();
         });
 

@@ -14,6 +14,7 @@ import { ReportePiezaComponent } from './components/reporte/reporte-piezas.compo
 import { AhorroViewComponent } from './components/ahorro/ahorro-view.component';
 import { AhorroStatusComponent } from './components/ahorro/ahorro-status.component';
 import { ahorroInicioComponent } from './components/ahorro/ahorro-inicio.component';
+import { OverViewComponent } from './components/over/view.component';
 
 ;
 
@@ -35,6 +36,7 @@ const ventaRoutes: Routes = [
                                                             {path:'ahorro',component:AhorroViewComponent},
                                                             {path:'lista',component:AhorroStatusComponent},
                                                             {path:'default',component:ahorroInicioComponent},
+                                                            {path:'over',component:OverViewComponent}
                                                           ]
     }
   ]  

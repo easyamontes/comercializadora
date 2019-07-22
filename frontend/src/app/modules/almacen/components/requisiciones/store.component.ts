@@ -115,7 +115,6 @@ export class RequisicionStoreComponent implements OnInit {
             this.articulos.data[index].articulo = this.artilist.find(x => x.id == id).articulo;
             this.articulos.data[index].marca = this.artilist.find(x => x.id == id).marca;
             this.articulos.data[index].modelo = this.artilist.find(x => x.id == id).modelo;
-            this.articulos.data[index].costo = this.artilist.find(x => x.id == id).costo;
             if (this.params == 1) {
                 this.articulos.data[index].articulo_id = this.artilist.find(x => x.id == id).articulo_id;
                 this.articulos.data[index].proveedor_id = this.artilist.find(x => x.id == id).proveedor_id;

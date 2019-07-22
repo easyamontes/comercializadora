@@ -161,4 +161,5 @@ class PersonalController extends Controller
             'status' => 'success'
         ), 200);
     }
+
 }//End Class

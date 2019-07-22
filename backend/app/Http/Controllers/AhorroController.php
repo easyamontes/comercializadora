@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Helpers\JwtAuth;
 use App\Ahorro;
 
 class AhorroController extends Controller
@@ -14,7 +13,7 @@ class AhorroController extends Controller
     }
 
     
-      /*======================================================================
+    /*======================================================================
          FUNCION PARA ESCRIBIR REGISTRO EN LA TABLA
     ====================================================================== */
 

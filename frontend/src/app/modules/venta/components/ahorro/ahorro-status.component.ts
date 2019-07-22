@@ -3,9 +3,7 @@ import { GeneralCallService } from 'src/app/services/generalCall.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Busqueda } from 'src/app/models/busqueda';
-import { Ahorro } from 'src/app/models/ahorro';
 import { Conceptoahorro } from 'src/app/models/conceptoahorro';
-import { error } from '@angular/compiler/src/util';
 
 @Component({
     selector: 'ahorro-status',

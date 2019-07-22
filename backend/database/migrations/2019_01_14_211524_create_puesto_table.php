@@ -23,7 +23,6 @@ class CreatePuestoTable extends Migration
             $table->integer('nivel');
             $table->string('descripcion');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

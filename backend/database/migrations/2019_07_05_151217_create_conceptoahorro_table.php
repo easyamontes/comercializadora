@@ -23,10 +23,10 @@ class CreateConceptoahorroTable extends Migration
             $table->string('nombre')->nullable();
             $table->integer('personal_id')->nullable();
             $table->date('fechadia')->nullable();
-            $table->integer('montoventa')->nullable();
-            $table->integer('ahorrodia')->nullable();
-            $table->string('status')->nullable();
-            $table->string('tipo')->nullable();
+            $table->decimal('montoventa',10,2)->nullable();
+            $table->decimal('ahorrodia',10,2)->nullable();
+            $table->string('status')->nullable()->default('SIN PAGAR');
+            $table->string('tipo')->nullable()->default('I');
             $table->timestamps();
         });
     }

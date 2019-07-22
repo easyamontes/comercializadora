@@ -11,9 +11,21 @@
 |
 */
 
+
+/* en prod se usa esta
+
+Route::get('/', function () {
+    View::addExtension('html','php');
+    return View::make('index');
+
+});
+*/
+
+
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 //Rutas para el control de usuarios
 Route::post('/api/register','UserController@register');
@@ -43,6 +55,8 @@ Route::post('/api/pago','ConceptoahorroController@pagar')->middleware('islogged'
 Route::put('/api/pagar/{id}','PedidoController@pagar')->middleware('islogged');
 Route::get('/api/ppagados','PagoProveedorController@pagado')->middleware('islogged');;
 Route::put('/api/pagarto/{id}','PedidoController@pagartodo')->middleware('islogged');
+Route::post('/api/overg','OverController@setreporte')->middleware('islogged');
+Route::post('/api/eresul','OverController@setEstadoResultados')->middleware('islogged');
 
 
 //Rutas para el control de acciones en puestos

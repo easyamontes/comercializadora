@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { Busqueda } from 'src/app/models/busqueda';
 import { Pedido } from 'src/app/models/pedido';
 import { Conceptoahorro } from 'src/app/models/conceptoahorro';
-import { Ahorro } from 'src/app/models/ahorro';
 
 @Component({
     selector: 'ahorro-view',

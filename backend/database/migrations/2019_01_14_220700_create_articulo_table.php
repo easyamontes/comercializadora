@@ -24,8 +24,10 @@ class CreateArticuloTable extends Migration
             $table->string('modelo');
             $table->string('descripcion');
             $table->string('status');
+            $table->decimal('Level1',10,2)->nullable();
+            $table->decimal('Level2',10,2)->nullable();
+            $table->decimal('Level3',10,2)->nullable();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

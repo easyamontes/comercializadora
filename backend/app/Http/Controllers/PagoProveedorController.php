@@ -63,8 +63,10 @@ class PagoProveedorController extends Controller
         $json = $request->input('json', null);
         $params_array = json_decode($json, true);
         $user = $request->input('userid', null);
+        $per = $request->input('per', null);
         $pago = new PagoProveedor();
         $pago->user_id = $user;
+        $pago->personal_id = $per;
         $pago->proveedor_id = $params_array['proveedor_id'];
         $pago->factura = $params_array['factura'];
         $pago->fecha = $params_array['fecha'];
