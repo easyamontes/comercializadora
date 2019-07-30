@@ -1,0 +1,80 @@
+<div class="principal">
+    <h4 class="col-12 text-center">{{title}}</h4>
+    <!--=============================================================
+                             Cabecera de filtrado
+        =============================================================-->
+    <div class="row d-flex justify-content-center">
+        <mat-form-field class="col-6">
+            <mat-select matInput [(ngModel)]="busqueda.socio" placeholder="Socio">
+                <mat-option *ngFor="let persona of personaList" [value]="persona.id">
+                    {{persona.nombre+ ' ' +persona.apellidop + ' ' + persona.apellidom | uppercase}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+            <input matInput [(ngModel)]="busqueda.inicio" [matDatepicker]="pickerFechai" placeholder="Fecha Inicio">
+            <mat-datepicker-toggle matSuffix [for]="pickerFechai"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFechai></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+            <input matInput [(ngModel)]="busqueda.final" [matDatepicker]="pickerFechaf" placeholder="Fecha Final">
+            <mat-datepicker-toggle matSuffix [for]="pickerFechaf"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFechaf></mat-datepicker>
+        </mat-form-field>
+        <button type="submit" class=" col-2 botonbuscar" (click)="getEstadoResultados();"
+            [disabled]="!busqueda.socio">Buscar</button>
+    </div>
+    <!--=============================================================
+                         Tabla para el reporte
+    =============================================================-->
+    <div class="row d-flex justify-content-center">
+        <table class="table table-sm table-striped" style="height: auto">
+            <thead class="tablareporte">
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Venta</th>
+                    <th>Costo</th>
+                    <th>Total Venta</th>
+                    <th>Total Costo</th>
+                    <th>Utilidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="p" *ngFor="let item of repoResultado; let i = index">
+                    <td>{{ item.articulo }}</td>
+                    <td>{{ item.cantidad }}</td>
+                    <td>{{ item.costo |currency }}</td>
+                    <td>{{ item.precio |currency}}</td>
+                    <td>{{ item.ctotal |currency}}</td>
+                    <td>{{ item.vtotal |currency}}</td>
+                    <td>{{ item.utilidad |currency}}</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="text-align:right">
+                        <h5>Totales:</h5>
+                    </td>
+                    <td>{{totalCosto |currency}}</td>
+                    <td>{{totalVenta |currency}}</td>
+                    <td>{{totalUtitlidad |currency}}</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="text-align:right">
+                        <h5>Pago De servicios:</h5>
+                    </td>
+                    <td style="text-align:center">-</td>
+                    <td style="text-align:center">-</td>
+                    <td>{{totalCosto * -1 |currency}}</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="text-align:right">
+                        <h5>Resultado:</h5>
+                    </td>
+                    <td style="text-align:center">-</td>
+                    <td style="text-align:center">-</td>
+                    <td>{{(totalUtitlidad - totalGastos)*-1 |currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

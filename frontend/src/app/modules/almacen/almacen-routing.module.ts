@@ -11,6 +11,7 @@ import { RequisicionReciveComponent } from './components/requisiciones/recive.co
 import { DiarioViewComponent } from './components/reporteDiario/view.component';
 import { CobranzaViewComponent } from './components/cuentasPC/viewCobrar.component';
 import { PagoProveedoresViewComponent } from './components/pagoProveedores/view.component';
+import { ResultadosViewComponent } from './components/cuentasPC/viewResultados.component';
 
 const almacenRoutes: Routes =[
     {
@@ -25,7 +26,8 @@ const almacenRoutes: Routes =[
                                                             { path:'recepcion/:sure',component:RequisicionReciveComponent},
                                                             { path:'diario',component:DiarioViewComponent },
                                                             { path:'cx/:tip' ,component:CobranzaViewComponent},
-                                                            { path:'pp', component:PagoProveedoresViewComponent }
+                                                            { path:'pp', component:PagoProveedoresViewComponent },
+                                                            { path:'res', component:ResultadosViewComponent }
                                                          ]
     }
 ]

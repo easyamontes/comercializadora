@@ -25,9 +25,6 @@ class CreateContactoTable extends Migration
             $table->string('tipo');
             $table->string('numero');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('personal_id')->references('id')->on('personal');
-            $table->foreign('proveedor_id')->references('id')->on('proveedor');
         });
     }
 

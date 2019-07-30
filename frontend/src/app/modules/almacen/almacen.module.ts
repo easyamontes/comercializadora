@@ -15,6 +15,7 @@ import { DiarioViewComponent } from './components/reporteDiario/view.component';
 import { CobranzaViewComponent } from './components/cuentasPC/viewCobrar.component';
 import { PagoProveedoresViewComponent } from './components/pagoProveedores/view.component';
 import { FilterPipe } from './components/pipes/filter.pipe';
+import { ResultadosViewComponent } from './components/cuentasPC/viewResultados.component';
 
 
 
@@ -29,7 +30,8 @@ import { FilterPipe } from './components/pipes/filter.pipe';
         RequisicionReciveComponent,
         DiarioViewComponent,
         CobranzaViewComponent,
-        PagoProveedoresViewComponent
+        PagoProveedoresViewComponent,
+        ResultadosViewComponent
     ],
     imports: [
         AlmacenRoutingModule,
@@ -47,7 +49,8 @@ import { FilterPipe } from './components/pipes/filter.pipe';
         RequisicionReciveComponent,
         DiarioViewComponent,
         CobranzaViewComponent,
-        PagoProveedoresViewComponent
+        PagoProveedoresViewComponent,
+        ResultadosViewComponent
         ],
     providers: []
   })

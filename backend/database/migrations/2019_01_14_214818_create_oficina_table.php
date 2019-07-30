@@ -24,15 +24,13 @@ class CreateOficinaTable extends Migration
             $table->string('encargado');
             $table->string('descripcion');
             $table->string('calle');
-            $table->string('noint');
+            $table->string('noint')->nullable();
             $table->string('noext');
             $table->string('colonia');
             $table->string('estado');
             $table->string('ciudad');
             $table->string('cp');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('personal_id')->references('id')->on('personal');
         });
     }
 

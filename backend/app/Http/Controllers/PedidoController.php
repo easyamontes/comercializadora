@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Helpers\JwtAuth;
 use App\Pedido;
-use App\Almacen;
-use Hamcrest\Type\IsObject;
+
 
 class PedidoController extends Controller
 {
@@ -89,6 +87,7 @@ class PedidoController extends Controller
             'code' => 200
         );
     }
+
     /* =====================================================
        funcion para mostrar un solo registro
      ======================================================*/
@@ -304,7 +303,7 @@ class PedidoController extends Controller
           return response()->json($data, 200);
      } 
 
-        /*======================================================================
+    /*======================================================================
        LISTA PARA EL REPORTE DE PAGADO Y SIN PAGAR DEL FONDO DE AHORRO
     ====================================================================== */
     public function listastatus(Request $request)
@@ -347,6 +346,7 @@ class PedidoController extends Controller
             'status' => 'success'
         ), 200);
     }
+
     /*======================================================================
          FUNCION DE DIA DE LA SEMANA
     ====================================================================== */
@@ -378,4 +378,6 @@ class PedidoController extends Controller
         }
         return $texto;
     }
+
+
 }

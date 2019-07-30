@@ -6,7 +6,6 @@ import { Busqueda } from 'src/app/models/busqueda';
 import { Pedido } from 'src/app/models/pedido';
 import { Conceptoahorro } from 'src/app/models/conceptoahorro';
 
-
 @Component({
     selector: 'ahorro-view',
     templateUrl: './ahorro-view.component.html',

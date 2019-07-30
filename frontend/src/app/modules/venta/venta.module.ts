@@ -17,6 +17,7 @@ import { ReportePiezaComponent} from './components/reporte/reporte-piezas.compon
 import { AhorroViewComponent } from './components/ahorro/ahorro-view.component'
 import { AhorroStatusComponent } from './components/ahorro/ahorro-status.component';
 import { ahorroInicioComponent } from './components/ahorro/ahorro-inicio.component';
+import { OverViewComponent } from './components/over/view.component';
 
 
 
@@ -35,7 +36,8 @@ import { ahorroInicioComponent } from './components/ahorro/ahorro-inicio.compone
         ReportePiezaComponent,
         AhorroViewComponent,      
         AhorroStatusComponent,
-        ahorroInicioComponent
+        ahorroInicioComponent,
+        OverViewComponent
       
     ],
     imports: [
@@ -57,8 +59,9 @@ import { ahorroInicioComponent } from './components/ahorro/ahorro-inicio.compone
          ReportePiezaComponent,
          AhorroViewComponent,  
          AhorroStatusComponent,
-         ahorroInicioComponent
-     
+         ahorroInicioComponent,
+         OverViewComponent
+
         ],
     providers: []
   })

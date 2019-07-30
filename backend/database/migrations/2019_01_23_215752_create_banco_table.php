@@ -31,7 +31,6 @@ class CreateBancoTable extends Migration
             $table->string('ciudad');
             $table->string('pais');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

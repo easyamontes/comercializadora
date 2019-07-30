@@ -1,0 +1,168 @@
+<div class="principal">
+    <h4 class="col-12 text-center">{{title}}</h4>
+    <!--=============================================================
+                         Cabecera de filtrado
+    =============================================================-->
+    <div class="row d-flex justify-content-center">
+        <mat-form-field class="col-6">
+            <mat-select matInput [(ngModel)]="busqueda.socio" placeholder="Socio">
+                <mat-option value="Todos">Todos</mat-option>
+                <mat-option *ngFor="let persona of personaList" [value]="persona.id">
+                    {{persona.nombre+ ' ' +persona.apellidop + ' ' + persona.apellidom | uppercase}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+            <input matInput [(ngModel)]="busqueda.inicio" [matDatepicker]="pickerFechai" placeholder="Fecha Inicio">
+            <mat-datepicker-toggle matSuffix [for]="pickerFechai"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFechai></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+            <input matInput [(ngModel)]="busqueda.final" [matDatepicker]="pickerFechaf" placeholder="Fecha Final">
+            <mat-datepicker-toggle matSuffix [for]="pickerFechaf"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFechaf></mat-datepicker>
+        </mat-form-field>
+        <button type="submit" class=" col-2 botonbuscar" [disabled]="!busqueda.socio"
+            (click)="callOver();">Buscar</button>
+    </div>
+    <!--=============================================================
+                Acorredon par las tablas por nivel
+    =============================================================-->
+    <div class="row d-flex justify-content-center">
+        <div id="accordion" class="col-12">
+            <!--=============================================================
+                            Carta Para Motrar el nivel 1
+            =============================================================-->
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <div class="row">
+                        <h5 style="margin-top: 10px" class="col-9">
+                            Over De Nievel 1
+                        </h5>
+                        <h5 style="margin-top: 10px" class="col-2">
+                            Total:{{getTotal(1) | currency}}
+                        </h5>
+                        <button class="col-1 btn btn-primary" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                            <i class="fas fa-eye"></i> Ver
+                        </button>
+                    </div>
+                </div>
+                <!--=============================================================
+                               Tabla nivel 1
+                =============================================================-->
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead class="tablareporte">
+                                <tr>
+                                    <th>Articulo</th>
+                                    <th>Piezas</th>
+                                    <th>Over</th>
+                                    <th>Importe</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="p" *ngFor="let item of level1; let i = index">
+                                    <td>{{ item.articulo }}</td>
+                                    <td>{{ item.piezas }}</td>
+                                    <td>{{ item.over |currency}}</td>
+                                    <td>{{ +item.piezas * +item.over | currency}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!--=============================================================
+                            Carta Para Motrar el nivel 2
+            =============================================================-->
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <div class="row">
+                        <h5 style="margin-top: 10px" class="col-9">
+                            Over De Nievel 2
+                        </h5>
+                        <h5 style="margin-top: 10px" class="col-2">
+                            Total:{{getTotal(2) | currency}}
+                        </h5>
+                        <button class="col-1 btn btn-primary" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-eye"></i> Ver
+                        </button>
+                    </div>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                        <!--=============================================================
+                                                Tabla nivel 2
+                        =============================================================-->
+                        <table class="table table-striped">
+                            <thead class="tablareporte">
+                                <tr>
+                                    <th>Articulo</th>
+                                    <th>Piezas</th>
+                                    <th>Over</th>
+                                    <th>Importe</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="p" *ngFor="let item of level2; let i = index">
+                                    <td>{{ item.articulo }}</td>
+                                    <td>{{ item.piezas }}</td>
+                                    <td>{{ item.over |currency}}</td>
+                                    <td>{{ item.piezas * item.over |currency}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--=============================================================
+                            Carta Para Motrar el nivel 2
+            =============================================================-->
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <div class="row">
+                        <h5 style="margin-top: 10px" class="col-9">
+                            Over De Nievel 3
+                        </h5>
+                        <h5 style="margin-top: 10px" class="col-2">
+                            Total:{{getTotal(3) | currency}}
+                        </h5>
+                        <button class="col-1 btn btn-primary" data-toggle="collapse" data-target="#collapseThree"
+                            aria-expanded="true" aria-controls="collapseThree">
+                            <i class="fas fa-eye"></i> Ver
+                        </button>
+                    </div>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body">
+                        <!--=============================================================
+                                                Tabla nivel 2
+                        =============================================================-->
+                        <table class="table table-striped">
+                            <thead class="tablareporte">
+                                <tr>
+                                    <th>Articulo</th>
+                                    <th>Piezas</th>
+                                    <th>Over</th>
+                                    <th>Importe</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="p" *ngFor="let item of level3; let i = index">
+                                    <td>{{ item.articulo }}</td>
+                                    <td>{{ item.piezas }}</td>
+                                    <td>{{ item.over |currency}}</td>
+                                    <td>{{ item.piezas * item.over | currency}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

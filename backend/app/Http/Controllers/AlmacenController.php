@@ -137,6 +137,7 @@ class AlmacenController extends Controller
         $almacen->recepcion = $item['recepcion'];
         $almacen->cantidad = $item['cantidad'];
         $almacen->precio = $item['precio'];
+        $almacen->costo = $item['costo'];
         $almacen->devolucion = $item['devolucion'];
         $almacen->existencia = $item['existencia'];
         $almacen->total = $item['total'];
@@ -162,6 +163,7 @@ class AlmacenController extends Controller
                 $upalma = new Almacen();
                 $upalma = Almacen::where('id', $existe['id'])->update($existe);
                 $item['id_almacen'] = $existe['id'];
+                $item['costo'] = $existe['precio'];
                 return $item;
                 break;
             } else {
@@ -172,6 +174,7 @@ class AlmacenController extends Controller
                     $item['recepcion'] = $dif - $item['recepcion'];
                     $upalma = new Almacen();
                     $upalma = Almacen::where('id', $existe['id'])->update($existe);
+                    $item['costo'] = $existe['precio'];
                     saveRecod($item, $user);
                 }
             }
