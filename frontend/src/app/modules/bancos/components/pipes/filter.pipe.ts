@@ -10,10 +10,7 @@ export class FilterPipe implements PipeTransform {
     if(!searchText) return items;
 searchText = searchText.toLowerCase();
 let mames =  items.filter( it => {
-  return it.concepto.toLowerCase().includes(searchText);
-   /* ============
-      FALTA BUSQUEDA POR ARTICULO
-   ==============================*/ 
+  return it.nombre.toLowerCase().includes(searchText);
 });
 return mames;
    }

@@ -3,63 +3,40 @@
 
     <div class="row">
         <mat-form-field class="col-md-10 col-xs-12">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="buscar">
+            <input matInput [(ngModel)]="busqueda.socio" placeholder="buscar">
         </mat-form-field>
         <div class="col-xs-12 col-md-2">
             <button class="ventas col-md-12" color="primary" mat-flat-button [routerLink]="['../nuevo']">NUEVO</button>
         </div>
     </div>
-    <div class="row">
-        <table mat-table [dataSource]="dataSource" mat-Sort class="col-md-12 col-xs-12 mat-elevation-z8">
-            <!-- codigo Column -->
-            <ng-container matColumnDef="codigo">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Codigo </th>
-                <td mat-cell *matCellDef="let row"> {{row.codigo}} </td>
-            </ng-container>
-            <!-- nombre Column -->
-            <ng-container matColumnDef="nombre">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-                <td mat-cell *matCellDef="let row"> {{row.articulo}} </td>
-            </ng-container>
-
-            <!-- Marca Column -->
-            <ng-container matColumnDef="marca">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Marca </th>
-                <td mat-cell *matCellDef="let row"> {{row.marca}} </td>
-            </ng-container>
-
-            <!-- Modelo Column -->
-            <ng-container matColumnDef="modelo">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Modelo </th>
-                <td mat-cell *matCellDef="let row"> {{row.modelo}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="id">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Editar </th>
-                <td mat-cell *matCellDef="let row">
-                    <a class="botontaba" [routerLink]="['../edit',row.id]">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="eliminar">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
-                <td mat-cell *matCellDef="let row">
-                    <button class="botontaba" (click)="deleteRecord(row.id)">
-                        <span>
-                            <i class="fas fa-trash-alt"></i>
-                        </span>
-                    </button>
-                </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-            </tr>
+    <div class="reporte">
+        <table class="table table-striped table-hover">
+            <thead class="tablareporte">
+                <tr>
+                    <th>Codigo</th>
+                    <th>Nombre</th>
+                    <th>marca</th>
+                    <th>Modelo</th>
+                    <th class="cen">Editar</th>
+                    <th class="cen">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="articulo" *ngFor="let lis of articulos | filter: busqueda.socio; let id = index">
+                    <td>{{lis.codigo}}</td>
+                    <td>{{lis.articulo}}</td>
+                    <td>{{lis.marca}}</td>
+                    <td>{{lis.modelo}}</td>
+                    <td class="cen"> <a [routerLink]="['../edit',lis.id]">
+                            <i class="fas fa-edit botontaba"></i>
+                        </a> </td>
+                    <td class="cen"><button class="botontaba" (click)="deleteRecord(lis.id)">
+                            <span>
+                                <i class="fas fa-trash-alt"></i>
+                            </span>
+                        </button></td>
+                </tr>
+            </tbody>
         </table>
     </div>
-    <div class="row">
-        <mat-paginator [pageSizeOptions]="[25, 50]"></mat-paginator>
-    </div>
-
-
 </div>

@@ -9,6 +9,8 @@ import { PuestoViewComponent } from './components/puesto-view.component';
 import { PuestoEditComponent } from './components/puesto-edit.component';
 import { PuestoStoreComponent } from './components/puesto-store.component';
 import { PuestoMainComponent } from './components/puesto-main.component';
+import { FilterPipe } from './components/pipes/filter.pipe';
+
 
 
 @NgModule({
@@ -16,7 +18,8 @@ import { PuestoMainComponent } from './components/puesto-main.component';
         PuestoViewComponent,
         PuestoEditComponent,
         PuestoStoreComponent,
-        PuestoMainComponent
+        PuestoMainComponent,
+        FilterPipe
     ],
     imports: [
         CommonModule,

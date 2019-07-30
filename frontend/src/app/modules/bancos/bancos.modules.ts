@@ -10,13 +10,15 @@ import {BancosViewComponent} from './components/banco-view.component';
 import {BancoEditComponent} from './components/banco-edit.component';
 import {BancoStoreComponent} from './components/banco-store.component';
 import {BancosRoutingModule} from './bancos-routing.module';
+import { FilterPipe } from './components/pipes/filter.pipe';
 //declaracion modulos
 @NgModule({
      declarations :[
         BancosMainComponent,
         BancosViewComponent,
         BancoEditComponent,
-        BancoStoreComponent
+        BancoStoreComponent,
+        FilterPipe
      ],
     imports:[
         CommonModule,

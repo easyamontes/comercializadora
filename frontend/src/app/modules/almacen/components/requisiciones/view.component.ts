@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+
 //Servicios
 import { UserService } from './../../../../services/user.service';
 import { GeneralCallService } from '../../../../services/generalCall.service';
 //Modelos
 import { Requisicion } from './../../../../models/requisicion';
+import { Busqueda } from 'src/app/models/busqueda';
 
 @Component({
     selector: 'requi-view',
@@ -20,11 +21,8 @@ export class RequisicionViewComponent implements OnInit {
     public title: string;
     public status: string;
     public token: any;
-    public requisicion: MatTableDataSource<Requisicion>;
-    public displayedColumns: string[] = ['codigo', 'articulo', 'proveedor', 'cnt', 'tipo', 'recive'];
-    //Vistas heredadas
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
+    public requisicion: Array<Requisicion>;
+    public busqueda: Busqueda;
 
     constructor(
         private _UserService: UserService,
@@ -32,8 +30,8 @@ export class RequisicionViewComponent implements OnInit {
     ) {
         this.token = this._UserService.getToken();
         this.title = "Recepcion De Articulos";
+        this.busqueda = new Busqueda(null, null, null);
     }
-
 
     ngOnInit() {
         this.getRequi();
@@ -44,23 +42,15 @@ export class RequisicionViewComponent implements OnInit {
         this._GeneralCallService.getRecords(this.token, 'requisicion').subscribe(
             response => {
                 if (response.code == 200) {
-                    this.requisicion = new MatTableDataSource(response.requisicion);
+                    this.requisicion = response.requisicion;
                 } else {
                     let emitem: Array<Requisicion>
                     emitem = [];
-                    this.requisicion = new MatTableDataSource(emitem);
+                    this.requisicion = (emitem);
                 }
             }, error => {
                 console.log(<any>error);
             });
-    }
-
-
-    applyFilter(filterValue: string) {
-        this.requisicion.filter = filterValue.trim().toLowerCase();
-        if (this.requisicion.paginator) {
-            this.requisicion.paginator.firstPage();
-        }
     }
 
 }//end class

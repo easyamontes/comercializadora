@@ -58,5 +58,4 @@ Route::resource('/api/requisicion','RequisicionController');
 Route::resource('/api/almaitem','AlmacenController');
 Route::resource('/api/ventas','PedidoController');
 Route::resource('/api/conceptos','ConceptoahorroController');
-Route::resource('/api/ahorros','AhorroController');
 Route::resource('/api/pagopro','PagoProveedorController');

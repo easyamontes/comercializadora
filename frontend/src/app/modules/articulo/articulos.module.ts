@@ -9,6 +9,7 @@ import {ArticulosRoutingModule} from './articulos-routing.module';
 import {ArticuloViewComponent} from './components/view.component';
 import {ArticuloStoreComponent} from './components/store.component';
 import {ArticuloEditComponent} from './components/edit.component';
+import { FilterPipe } from './components/pipes/filter.pipe';
 
 
 //declaracion modulo
@@ -17,7 +18,8 @@ import {ArticuloEditComponent} from './components/edit.component';
         ArticulosMainComponent,
         ArticuloViewComponent,
         ArticuloStoreComponent,
-        ArticuloEditComponent
+        ArticuloEditComponent,
+        FilterPipe
     ],
     imports:[
         ArticulosRoutingModule,

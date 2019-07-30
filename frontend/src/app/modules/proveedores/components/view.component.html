@@ -3,45 +3,36 @@
     <!--Campo para el filtrado-->
     <div class="row">
         <mat-form-field class="col-md-10 col-xs-12">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="buscar">
+            <input matInput [(ngModel)]="busqueda.socio" placeholder="buscar">
         </mat-form-field>
         <div class="col-xs-12 col-md-2">
             <button class="ventas col-md-12" color="primary" mat-flat-button [routerLink]="['../nuevo']">NUEVO</button>
         </div>
     </div>
-    <div class="row">
-        <table mat-table [dataSource]="proveedores" mat-Sort class="col-md-12 col-xs-12 mat-elevation-z8">
-            <!--Declarando Columnas de la tabla-->
-            <ng-container matColumnDef="nombre">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-                <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
-            </ng-container>
-            <ng-container matColumnDef="razon_social">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Razon Social </th>
-                <td mat-cell *matCellDef="let row"> {{row.razon_social}} </td>
-            </ng-container>
-            <ng-container matColumnDef="id">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Editar </th>
-                <td mat-cell *matCellDef="let row">
-                    <a class="botontaba" [routerLink]="['../edit',row.id]">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="eliminar">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
-                <td mat-cell *matCellDef="let row">
-                    <button class="botontaba" (click)="deleteRecord(row.id)">
-                        <span>
-                            <i class="fas fa-trash-alt"></i>
-                        </span>
-                    </button>
-                </td>
-            </ng-container>
-            <!--Declarando el manejo de las etiquetas tr-->
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    <div class="reporte">
+        <table class="table table-striped table-hover">
+            <thead class="tablareporte">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Razon Social</th>
+                    <th class="cen">Editar</th>
+                    <th class="cen">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="proveedor" *ngFor="let lis of proveedores | filter: busqueda.socio; let id = index">
+                    <td>{{lis.nombre}}</td>
+                    <td>{{lis.razon_social}}</td>
+                    <td class="cen"> <a [routerLink]="['../edit',lis.id]">
+                            <i class="fas fa-edit botontaba"></i>
+                        </a> </td>
+                    <td class="cen"><button class="botontaba" (click)="deleteRecord(lis.id)">
+                            <span>
+                                <i class="fas fa-trash-alt"></i>
+                            </span>
+                        </button></td>
+                </tr>
+            </tbody>
         </table>
-
     </div>
 </div>
