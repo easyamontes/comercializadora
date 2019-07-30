@@ -44,7 +44,7 @@
                     <td>{{ lis.importe | currency }}</td>
                     <td>{{ lis.ahorro | currency}}</td>
                     <td> 
-                    <button *ngIf = "ind != i" type="submit" (click)= "ingresaahorro(i)"class="btn btn-secondary  btn-sm btn-block">Aplicar</button>
+                    <button *ngIf = "ind != i" type="submit" (click)= "ingresaahorro(i)"class="btn btn-secondary btn-sm btn-block">Aplicar</button>
                     <button *ngIf="ind == i" class="btn btn-success" type="button" disabled>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             Pagando...

@@ -1,60 +1,32 @@
 <div class="principal">
     <div class="row">
         <mat-form-field class="col-md-10 col-xs-12">
-         <input matInput
-                (keyup)="applyFilter($event.target.value)"
+         <input matInput [(ngModel)]="busqueda.socio"
                 placeholder="Buscar">
         </mat-form-field>
         <div class="col-md-2 col-xs-12">
             <button class="ventas col-md-12" color="primary" mat-flat-button [routerLink]="['../equinueva']">NUEVO</button>
         </div>
     </div>
-    <!--Comienza la tabla-->
-    <div class="row">
-        <table class="col-md-12 col-xs-12 mat-elevation-z8"
-               mat-table
-               [dataSource]="articulos"
-               mat-Sort
-        >
-        <ng-container matColumnDef="codigo">
-                <th class="thm"
-                    mat-header-cell
-                    *matHeaderCellDef
-                    mat-sort-header > Codigo </th>
-                <td mat-cell 
-                    *matCellDef="let row"> {{row.codigo}} </td>
-        </ng-container>
-        <ng-container matColumnDef="articulo">
-                <th class="thm"
-                    mat-header-cell
-                    *matHeaderCellDef
-                    mat-sort-header > Articulo </th>
-                <td mat-cell 
-                    *matCellDef="let row"> {{row.articulo}} </td>
-        </ng-container>
-        <ng-container matColumnDef="proveedor">
-            <th class="thm"
-                mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header > Proveedor </th>
-            <td mat-cell
-                *matCellDef="let row"> {{row.proveedor.nombre}} </td>
-        </ng-container>
-        <ng-container matColumnDef="existencia">
-                <th class="thm"
-                    mat-header-cell
-                    *matHeaderCellDef
-                    mat-sort-header > Existencia </th>
-                <td mat-cell 
-                    *matCellDef="let row"> {{row.totalExistencia}} </td>
-        </ng-container>
-        <tr mat-header-row 
-            *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row
-            *matRowDef="let row; columns: displayedColumns;">
-        </table>
-    </div>
-    <div class="row">
-            <mat-paginator [pageSizeOptions]="[25, 50]"></mat-paginator>
-    </div>
+    <div class="reporte">
+            <table class="table table-striped table-hover">
+                <thead class="tablareporte">
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Articulo</th>
+                        <th>Proveedor</th>
+                        <th>Existencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="articulo" *ngFor="let lis of articulos | filter: busqueda.socio; let id = index">
+                        <td>{{lis.codigo}}</td>
+                        <td>{{lis.articulo}}</td>
+                        <td>{{lis.proveedor.nombre}}</td>
+                        <td>{{lis.totalExistencia}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
 </div>

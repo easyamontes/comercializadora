@@ -1,5 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 //Utils
 import { PersonalUtil } from '../../../../services/util/personal.util';
@@ -30,12 +29,9 @@ export class RequisicionStoreComponent implements OnInit {
     public requi: Requisicion;
     public item: Array<Almacen>;
     public displayedColumns: string[];
-    public articulos: MatTableDataSource<Almacen>;
+    public articulos: Array<Almacen>;
     public provlist: Array<any>;
     public artilist: Array<any>;
-
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
 
     constructor(
         private _UserService: UserService,
@@ -53,6 +49,7 @@ export class RequisicionStoreComponent implements OnInit {
         this.identity = this._UserService.getIdentity();
         this.token = this._UserService.getToken();
         this.item = [];
+        this.articulos = [];
         if (this.params == 1) {
             this.setVenta(date);
         } else {
@@ -64,14 +61,12 @@ export class RequisicionStoreComponent implements OnInit {
         this.title = 'Nueva Compra';
         this.rurl = ["lproved", "lartic"];
         this.requi = new Requisicion(0, this.identity.sub, 0, 0, 0, "COMPRA", 'NUEVO', 0, date, null, null, null);
-        this.displayedColumns = ['codigo', 'nombre', 'cantidad', 'precio', 'total', 'actions'];
     }
 
     setVenta(date) {
         this.title = 'Nuevo Traspaso';
         this.rurl = ["here", "almaitem"];
         this.requi = new Requisicion(0, this.identity.sub, 0, 0, 0, "VENTA", 'NUEVO', 0, date, null, null, null);
-        this.displayedColumns = ['codigo', 'nombre', 'existencia', 'cantidad', 'precio', 'total', 'actions'];
     }
 
     ngOnInit() {
@@ -109,18 +104,19 @@ export class RequisicionStoreComponent implements OnInit {
     /**refresca la seleccion del articulo segun la seleccion*/
     setArticulo(id, index) {
         if (!id) {
-            this.articulos.data[index] = this.cleanKeys(this.articulos.data[index]);
+            this.articulos[index] = this.cleanKeys(this.articulos[index]);
         } else {
-            this.articulos.data[index].codigo = this.artilist.find(x => x.id == id).codigo;
-            this.articulos.data[index].articulo = this.artilist.find(x => x.id == id).articulo;
-            this.articulos.data[index].marca = this.artilist.find(x => x.id == id).marca;
-            this.articulos.data[index].modelo = this.artilist.find(x => x.id == id).modelo;
+            this.articulos[index].codigo = this.artilist.find(x => x.id == id).codigo;
+            this.articulos[index].articulo = this.artilist.find(x => x.id == id).articulo;
+            this.articulos[index].marca = this.artilist.find(x => x.id == id).marca;
+            this.articulos[index].modelo = this.artilist.find(x => x.id == id).modelo;
+            this.articulos[index].costo = this.artilist.find(x => x.id == id).costo;
             if (this.params == 1) {
-                this.articulos.data[index].articulo_id = this.artilist.find(x => x.id == id).articulo_id;
-                this.articulos.data[index].proveedor_id = this.artilist.find(x => x.id == id).proveedor_id;
-                this.articulos.data[index].costo = this.artilist.find(x => x.id == id).costo;
+                this.articulos[index].articulo_id = this.artilist.find(x => x.id == id).articulo_id;
+                this.articulos[index].proveedor_id = this.artilist.find(x => x.id == id).proveedor_id;
+                this.articulos[index].costo = this.artilist.find(x => x.id == id).costo;
             }
-            this.articulos.data[index].totalExistencia = this.artilist.find(x => x.id == id).totalExistencia;
+            this.articulos[index].totalExistencia = this.artilist.find(x => x.id == id).totalExistencia;
         }
     }
 
@@ -137,18 +133,14 @@ export class RequisicionStoreComponent implements OnInit {
     createArticulo() {
         if (this.requi.proveedor_id || this.requi.pdestino_id) {
             let nitem = new Almacen(null, null, null, null, this.requi.proveedor_id, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0, null, null, 0);
-            this.item.push(nitem);
-            this.articulos = new MatTableDataSource(this.item);
-            this.articulos.paginator = this.paginator;
-            this.articulos.sort = this.sort;
+            this.articulos.push(nitem);
             this.requi.importe = this.getTotalCost();
         }
     }
 
     /**Eliminando la fila creada */
     deleteArticulo(index) {
-        this.articulos.data.splice(index, 1);
-        this.articulos._updateChangeSubscription();
+        this.articulos.splice(index, 1);
     }
 
 
@@ -161,16 +153,16 @@ export class RequisicionStoreComponent implements OnInit {
             response => {
                 if (response.code == 200) {
                     this.requi = response.requisicion;
-                    for (var c = 0; c < this.articulos.data.length; c++) {
-                        this.articulos.data[c].total = this.articulos.data[c].cantidad * this.articulos.data[c].precio;
-                        this.articulos.data[c].folio = this.requi.folio;
-                        this.articulos.data[c].tipo = this.requi.tipo;
-                        this.articulos.data[c].requisicion_id = this.requi.id;
-                        this.articulos.data[c].userp_id = this.requi.pdestino_id;
-                        this.articulos.data[c].pendiente = this.articulos.data[c].cantidad;
-                        this.articulos.data[c].recepcion = this.articulos.data[c].cantidad;
+                    for (var c = 0; c < this.articulos.length; c++) {
+                        this.articulos[c].total = this.articulos[c].cantidad * this.articulos[c].precio;
+                        this.articulos[c].folio = this.requi.folio;
+                        this.articulos[c].tipo = this.requi.tipo;
+                        this.articulos[c].requisicion_id = this.requi.id;
+                        this.articulos[c].userp_id = this.requi.pdestino_id;
+                        this.articulos[c].pendiente = this.articulos[c].cantidad;
+                        this.articulos[c].recepcion = this.articulos[c].cantidad;
                     }
-                    this._GeneralCallService.storeRecord(this.token, 'almaitem', this.articulos.data).subscribe(
+                    this._GeneralCallService.storeRecord(this.token, 'almaitem', this.articulos).subscribe(
                         response => {
                             this._router.navigate(['almacen']);
                         }, error => {
@@ -187,9 +179,9 @@ export class RequisicionStoreComponent implements OnInit {
     }
 
     getTotalCost() {
-        let precio = this.articulos.data.map(c => c.precio).reduce((ant, act) => ant + act, 0);
-        let cantidad = this.articulos.data.map(c => c.cantidad).reduce((ant, act) => ant + act, 0);
-        return precio*cantidad;
+        let precio = this.articulos.map(c => c.precio).reduce((ant, act) => ant + act, 0);
+        let cantidad = this.articulos.map(c => c.cantidad).reduce((ant, act) => ant + act, 0);
+        return precio * cantidad;
     }
 
 }//End Class

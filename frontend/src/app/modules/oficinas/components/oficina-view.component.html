@@ -1,62 +1,47 @@
 <div class="principal">
     <h3>{{title}}</h3>
-
     <div class="row">
         <mat-form-field class="col-md-10 col-xs-12">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="buscar">
+            <input matInput [(ngModel)]="busqueda.socio" placeholder="buscar">
         </mat-form-field>
         <div class="col-xs-12 col-md-2">
             <button class="ventas col-md-12" color="primary" mat-flat-button [routerLink]="['../nuevo']">NUEVO</button>
         </div>
     </div>
-    <div class="row">
-        <table mat-table [dataSource]="dataSource" mat-Sort class="col-md-12 col-xs-12 mat-elevation-z8">
-            <!-- codigo Column -->
-            <ng-container matColumnDef="nombre">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Oficina </th>
-                <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
-            </ng-container>
-            <ng-container matColumnDef="encargado">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Encargado </th>
-                <td mat-cell *matCellDef="let row"> {{row.encargado}} </td>
-            </ng-container>
-            <ng-container matColumnDef="descripcion">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
-                <td mat-cell *matCellDef="let row"> {{row.descripcion}} </td>
-            </ng-container>
-            <ng-container matColumnDef="visualizar">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Visualizar </th>
-                <td mat-cell *matCellDef="let row">
-                    <a class="botontaba" [routerLink]="['../visual',row.id]">
-                        <i class="fas fa-eye"></i>
-                    </a>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="editar">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Editar </th>
-                <td mat-cell *matCellDef="let row">
-                    <a class="botontaba" [routerLink]="['../edit',row.id]">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="eliminar">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
-                <td mat-cell *matCellDef="let row">
-                    <button class="botontaba" (click)="delteteOficina(row.id)">
-                        <span>
-                            <i class="fas fa-trash-alt"></i>
-                        </span>
-                    </button>
-                </td>
-            </ng-container>
-            <!-- nombre Column -->
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-            </tr>
+    <div class="reporte">
+        <table class="table table-striped table-hover">
+            <thead class="tablareporte">
+                <tr>
+                    <th>Oficina</th>
+                    <th>Encargado</th>
+                    <th>Descripcion</th>
+                    <th class="cen">Visualizar</th>
+                    <th class="cen">Editar</th>
+                    <th class="cen">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr  class="oficina td" *ngFor="let lis of oficinas | filter: busqueda.socio; let id = index">
+                    <td>{{lis.nombre}}</td>
+                    <td>{{lis.encargado}}</td>
+                    <td *ngIf="lis.descripcion">{{lis.descripcion}}</td>
+                    <td *ngIf="!lis.descripcion">Sin descripcion...</td>
+                    <td class="cen"><a [routerLink]="['../visual',lis.id]">
+                            <i class="fas fa-eye botontaba" ></i>
+                        </a>
+                    </td>
+                    <td class="cen"> <a [routerLink]="['../edit',lis.id]">
+                            <i class="fas fa-edit botontaba"></i>
+                        </a>
+                    </td>
+                    <td class="cen"> <button class="botontaba" (click)="delteteOficina(lis.id)">
+                            <span>
+                                <i class="fas fa-trash-alt"></i>
+                            </span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
         </table>
-    </div>
-    <div class="row">
-        <mat-paginator [pageSizeOptions]="[25, 50]"></mat-paginator>
     </div>
 </div>

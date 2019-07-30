@@ -10,6 +10,7 @@ import {PremiosMainComponent} from './components/premio-main.component';
 import {PremiosViewComponent} from './components/premio-view.component';
 import {PremioEditComponent} from './components/premio-edit.component';
 import {PremioStoreComponent} from './components/premio-store.component';
+import { FilterPipe } from './components/pipes/filter.pipe';
 
  @NgModule({
 
@@ -17,7 +18,8 @@ import {PremioStoreComponent} from './components/premio-store.component';
         PremiosViewComponent,
         PremiosMainComponent,
         PremioStoreComponent,
-        PremioEditComponent
+        PremioEditComponent,
+        FilterPipe
          
      ],
      imports:[

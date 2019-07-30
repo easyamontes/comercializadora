@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Premio} from './../../../models/premio';
 import { UserService } from '../../../services/user.service';
 import {GeneralCallService} from '../../../services/generalCall.service';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-
+import { Busqueda } from 'src/app/models/busqueda';
 @Component({
 
     selector: 'premio-view',
     templateUrl: './premio-view.component.html',
+    styleUrls: ['./estilo.component.css'],
     providers:[
         UserService,
         GeneralCallService
@@ -19,18 +19,14 @@ export class PremiosViewComponent implements OnInit {
     public status: string;
     public token: any;
     public premios:Array<Premio>;
-    public displayedColumns: string[] = ['nombre','finicio','ffinal','editar','eliminar'];
-    public dataSource:MatTableDataSource<Premio>;
-
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
-
+    public busqueda: Busqueda;
     constructor(
          private _UserService: UserService,
          private _GeneralCallService:GeneralCallService
           ){
             this.title = "Premios";
             this.token = this._UserService.getToken();
+            this.busqueda = new Busqueda(null, null, null);
           }
 
           ngOnInit(){
@@ -41,23 +37,12 @@ export class PremiosViewComponent implements OnInit {
                 this._GeneralCallService.getRecords(this.token,'premios').subscribe(
                     response=>{
                         this.premios = response.premio;
-                        this.dataSource = new MatTableDataSource(response.premio);
-                        this.dataSource.paginator = this.paginator;
-                        this.dataSource.sort = this.sort;
                     },error=>{
                         console.log(<any>error);
                     }
                 );
             }
 
-            applyFilter(filterValue: string) {
-                this.dataSource.filter = filterValue.trim().toLowerCase();
-            
-                if (this.dataSource.paginator) {
-                  this.dataSource.paginator.firstPage();
-                }
-            }
-                
     deletePremio(id){
         if(confirm('Eliminar Registro')){
             this._GeneralCallService.delteRcord(this.token,'premios',id).subscribe(
@@ -67,7 +52,4 @@ export class PremiosViewComponent implements OnInit {
             );
         }
     }
-        
-
-
 }//end class PremioViewComponent

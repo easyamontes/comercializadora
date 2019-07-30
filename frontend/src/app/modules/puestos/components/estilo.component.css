@@ -1,0 +1,7 @@
+@media screen and (max-width: 600px)
+{
+  .articulo td:nth-of-type(1):before { content: "Puesto"; }
+  .articulo td:nth-of-type(2):before { content: "Descripcion"; }
+  .articulo td:nth-of-type(3):before { content: "Editar"; } 
+  .articulo td:nth-of-type(4):before { content: "Eliminar"; }
+}

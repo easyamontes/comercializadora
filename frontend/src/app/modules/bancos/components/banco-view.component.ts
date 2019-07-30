@@ -1,13 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Banco} from './../../../models/banco';
 import { UserService } from '../../../services/user.service';
 import {GeneralCallService} from '../../../services/generalCall.service';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import { Router } from '@angular/router';
+import { Busqueda} from 'src/app/models/busqueda';
 
 @Component({
     selector: 'banco-view',
     templateUrl:'./banco-view.component.html',
+    styleUrls:['./estilo.component.css'],
     providers:[
         UserService,
         GeneralCallService
@@ -19,11 +20,7 @@ export class BancosViewComponent implements OnInit{
          public status: string;
          public token: any;
          public bancos: Array<Banco>;
-         public displayedColumns: string[] = ['nombre','alias','cuenbanca','editar','eliminar'];
-         public dataSource: MatTableDataSource<Banco>;
-
-         @ViewChild(MatPaginator) paginator: MatPaginator;
-         @ViewChild(MatSort) sort: MatSort;
+         public busqueda:Busqueda;
 
    constructor(
        private _UserService: UserService,
@@ -32,32 +29,25 @@ export class BancosViewComponent implements OnInit{
    ){
     this.title = "Bancos";
     this.token = this._UserService.getToken();
+    this.busqueda = new Busqueda(null, null, null);
     }
 
     ngOnInit(){
         this.getBancos();
     }
-        //lamado del listado de bancos despues del token va como se declaro en wep.php
+        /*==============================================================================
+            LLAMADO DEL LISTADO DE BANCO
+        ===============================================================================*/
         getBancos(){
         this._GeneralCallService.getRecords(this.token,'bancos').subscribe(
             response =>{
                 this.bancos = response.bancos;
-                this.dataSource = new MatTableDataSource(response.bancos);
-                this.dataSource.paginator = this.paginator;
-                this.dataSource.sort = this.sort;
             },error=>{
                 console.log(<any>error);
             }
         );
     }
 
-    applyFilter(filterValue: string) {
-        this.dataSource.filter = filterValue.trim().toLowerCase();
-    
-        if (this.dataSource.paginator) {
-          this.dataSource.paginator.firstPage();
-        }
-    }
     delBanco(id){
         if(confirm('Seguro que desea eliminar este banco?')){
             this._GeneralCallService.delteRcord(this.token,'bancos',id).subscribe(
@@ -69,6 +59,5 @@ export class BancosViewComponent implements OnInit{
             )
         }
     }
-
 
 }// end class

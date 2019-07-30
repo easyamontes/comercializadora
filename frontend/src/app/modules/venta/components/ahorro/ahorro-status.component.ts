@@ -1,5 +1,6 @@
 import { UserService } from 'src/app/services/user.service';
 import { GeneralCallService } from 'src/app/services/generalCall.service';
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Busqueda } from 'src/app/models/busqueda';
@@ -27,6 +28,8 @@ export class AhorroStatusComponent {
     public listaahorro: Array<Conceptoahorro>;
     public nueviPago: any;
     public pe: any;
+    public aler: number;
+    public cero:number;
 
 
     constructor(
@@ -37,6 +40,8 @@ export class AhorroStatusComponent {
     ) {
         this.token = this._UserService.getToken();
         this.busqueda = new Busqueda(null, null, null);
+        this.aler = null;
+        this.cero = null;
 
     }
     ngOnInit() {
@@ -58,7 +63,9 @@ export class AhorroStatusComponent {
             }
         )
     }
-
+    /* =====================================================================================
+           BOTON MANDAR A PAGAR FONDO DE AHORRO
+    ======================================================================================== */
     pagar() {
         let fe = new Date();
         let hoy = fe.toString();
@@ -72,11 +79,15 @@ export class AhorroStatusComponent {
             ahr: ah,
         }
         if (+this.busqueda.inicio <= 0) {
-            alert('El Monto A Pagar Es 0');
+            this.aler = 1;
+            this.cero = null;
+            //alert('El Monto A Pagar Es: 0');
             return;
         }
         if (+this.busqueda.inicio > this.nueviPago.ahr) {
-            alert('El Monto A Pagar Es Mayor Al Fondo Ahorrado');
+            this.cero = 1;
+            this.aler = null;
+            //alert('El Monto A Pagar Es Mayor Al Fondo Ahorrado');
             return;
         }
         this._GeneralCallService.storeRecord(this.token, 'pago', this.nueviPago).subscribe(

@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Proveedor } from './../../../models/proveedores';
 import { Contacto } from './../../../models/contacto';
 import { UserService } from '../../../services/user.service';
 import {GeneralCallService} from '../../../services/generalCall.service';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { Busqueda} from 'src/app/models/busqueda';
+
 
 @Component({
     selector: 'proveedor-view',
@@ -18,12 +19,9 @@ export class ProveedorViewComponent implements OnInit{
     public title: string;
     public status: string;
     public token: any;
-    public displayedColumns: string[] = ['nombre', 'razon_social','id','eliminar'];
-    public proveedores: MatTableDataSource<Proveedor>;
+    public proveedores:Array<Proveedor>;
     public contactos: Array<Contacto>;
-
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
+    public busqueda:Busqueda;
 
     constructor(
         private _UserService: UserService,
@@ -31,6 +29,7 @@ export class ProveedorViewComponent implements OnInit{
     ){
         this.title='Proveedores';
         this.token = this._UserService.getToken();
+        this.busqueda = new Busqueda(null, null, null);
     }
 
     ngOnInit(){
@@ -40,21 +39,10 @@ export class ProveedorViewComponent implements OnInit{
     getProveedores(){
         this._GeneralCallService.getRecords(this.token,'proveedores').subscribe(
             response=>{
-                this.proveedores = new MatTableDataSource(response.proveedores);
-                this.proveedores.paginator = this.paginator;
-                this.proveedores.sort = this.sort;
+                this.proveedores = response.proveedores;
             },error=>{
             console.log(<any>error);
             });
-    }
-
-    //Funcion que aplica el filtro en la tabla de proveedores
-    applyFilter(filterValue: string) {
-        this.proveedores.filter = filterValue.trim().toLowerCase();
-    
-        if (this.proveedores.paginator) {
-          this.proveedores.paginator.firstPage();
-        }
     }
 
     deleteRecord(id){
@@ -66,6 +54,4 @@ export class ProveedorViewComponent implements OnInit{
             );
         }
     }
-
-
 }//End Class

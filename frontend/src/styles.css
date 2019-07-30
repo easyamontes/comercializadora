@@ -16,6 +16,9 @@
 {
   background-color:#4CAF50;
 }
+button{
+  -webkit-user-select: auto !important;
+}
 /*===============================================
   BOTONES DE ACCION DENTRO DE LA TABLA
  ===============================================*/
@@ -25,6 +28,7 @@
   color:  blue;
   background: none;
   border: none;
+  margin-top: -30px;
 }
 .botontaba:hover 
 {  
@@ -37,7 +41,7 @@
   font-style: normal;
  }
 /*===============================================
-   margen de la pantalla principal
+   MARGEN PRINCIPAL EN TODAS LAS PANTALLAS
  ===============================================*/
 .principal
 {
@@ -45,8 +49,15 @@
   margin-left: 1%;
   margin-top: 2%;
 }
+
+.cuadrotexto
+{
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid black;
+}
 /*===============================================
-   COLOR BARRA DE MENU
+   COLOR  PARA LA BARRA DE MENU
  ===============================================*/
 
 .navbar {
@@ -88,7 +99,7 @@
   height: 75%;
 }
 /*===============================================
-   Cabeceras de tabla de reportes
+   CABECERAS DE LAS TABLAS 
  ===============================================*/
 
  .tablareporte{
@@ -96,7 +107,7 @@
    color: white
  }
 /*===============================================
-   BOTONE DE BUSQUEDA DE REPORTES
+   BOTONE DE BUSQUEDA DE LAS TABLAS
  ===============================================*/
  .botonbuscar{
    background: DarkSlateGray;
@@ -171,6 +182,15 @@
   .rahorro td:nth-of-type(5):before { content: "Status"; }
   .rahorro td:nth-of-type(6):before { content: "Seleccionar"; }
 }
+
+  /*==========================================================================
+    CLASE PARA CENTRAR OBJETOS EN LAS TABLAS
+  ==========================================================================*/
+.cen
+{
+ text-align: center;
+}
+
 
   /*==========================================================================
     CSS PARA LOS MODAL

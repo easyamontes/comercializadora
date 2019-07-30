@@ -284,8 +284,6 @@ class PedidoController extends Controller
         return response()->json($data, 200);
     }
 
-
-    
     /*======================================================================
          FUNCION PARA PAGAR TOTAL
     ====================================================================== */

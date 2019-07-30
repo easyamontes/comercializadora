@@ -10,6 +10,7 @@ import {OficinaViewComponent} from './components/oficina-view.component';
 import {OficinaEditComponent} from './components/oficina-edit.component';
 import {OficinaStoreComponent} from './components/oficina-store.component';
 import {OficinaVisualComponent} from './components/oficina-visual.component';
+import { FilterPipe } from './components/pipes/filter.pipe';
 
 //declaracion modulo
 @NgModule({
@@ -19,6 +20,7 @@ declarations:[
   OficinaEditComponent,
   OficinaStoreComponent,
   OficinaVisualComponent,
+  FilterPipe
 ],
 imports:[
    CommonModule,

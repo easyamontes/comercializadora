@@ -1,5 +1,5 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
+import { Component,OnInit } from '@angular/core';
+import {  MatSnackBar } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 //Utils
 import { PersonalUtil } from '../../../../services/util/personal.util';
@@ -9,6 +9,7 @@ import { GeneralCallService } from '../../../../services/generalCall.service';
 //Modelos
 import { Requisicion } from '../../../../models/requisicion';
 import { Almacen } from './../../../../models/almacen';
+import { Busqueda } from 'src/app/models/busqueda';
 
 @Component({
     selector: 'recive-store',
@@ -28,26 +29,22 @@ export class RequisicionReciveComponent implements OnInit{
     public identity: any;
     public requi: Requisicion;
     public item: Array<Almacen>;
-    public displayedColumns: string[] =  ['codigo', 'nombre', 'precio', 'cantidad'];
-    public articulos: MatTableDataSource<Almacen>;
+    public articulos: Array<Almacen>;
     public proveedor: string = "";
     public persona: string = "";
-    public rateControl
-    //Vistas heredadas para la tabla
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
+    public busqueda: Busqueda;
+
 
     constructor(
         private _UserService: UserService,
         private _GeneralCallService: GeneralCallService,
         private _MatSnackBar: MatSnackBar,
-        private _ActivatedRoute: ActivatedRoute,
         private _router: Router,
         private _route: ActivatedRoute,
-        private _PersonalUtil: PersonalUtil
     ){
         this.identity = this._UserService.getIdentity();
         this.token = this._UserService.getToken();
+        this.busqueda = new Busqueda(null, null, null);
     }
 
     ngOnInit(){
@@ -66,7 +63,7 @@ export class RequisicionReciveComponent implements OnInit{
         this._GeneralCallService.getRecrod(this.token,'requisicion',id).subscribe(
             response=>{
                 this.requi = response.requisicion;
-                this.articulos = new MatTableDataSource(response.requisicion.articulos);
+                this.articulos = response.requisicion.articulos;
                 this.proveedor = response.requisicion.proveedor.nombre;
                 this.persona = response.requisicion.porigen.nombre;
             },error=>{
@@ -80,14 +77,14 @@ export class RequisicionReciveComponent implements OnInit{
     ==============================================================================*/
     onSubmit(){
         if(confirm('Terminar Recepcion Articulos')){
-            if(this.validaExistncia(this.articulos.data)){
+            if(this.validaExistncia(this.articulos)){
                 this.requi.status="RECIBIDO"
             }
             this._GeneralCallService.updateRecord(this.token,'requisicion',this.requi,this.requi.id).subscribe(
                 response=>{
                     if(response.code == 200){
                         this.SetExistencia();
-                        this._GeneralCallService.updateRecord(this.token,'almaitem',this.articulos.data,1).subscribe(
+                        this._GeneralCallService.updateRecord(this.token,'almaitem',this.articulos,1).subscribe(
                             response=>{
                                 this._router.navigate(['almacen/requisicions']);
                         },error=>{
@@ -107,10 +104,10 @@ export class RequisicionReciveComponent implements OnInit{
     }
 
     SetExistencia() {
-        for (var c = 0; c < this.articulos.data.length; c++){
-            this.articulos.data[c].existencia = this.articulos.data[c].existencia + this.articulos.data[c].recepcion;
-            this.articulos.data[c].pendiente = this.articulos.data[c].pendiente - this.articulos.data[c].recepcion;
-            this.articulos.data[c].recepcion = 0;
+        for (var c = 0; c < this.articulos.length; c++){
+            this.articulos[c].existencia = this.articulos[c].existencia + this.articulos[c].recepcion;
+            this.articulos[c].pendiente = this.articulos[c].pendiente - this.articulos[c].recepcion;
+            this.articulos[c].recepcion = 0;
         }
     }
     
@@ -125,8 +122,8 @@ export class RequisicionReciveComponent implements OnInit{
             }
         }
         return true;
+        
     }
-
     onCancel(){
         this._router.navigate(['almacen/requisicions']);
     }
@@ -135,11 +132,12 @@ export class RequisicionReciveComponent implements OnInit{
        Verifica que se ingrese un numero valido para la recepcion de articulos
     ==============================================================================*/
     checkMinMax(index){
-        let cantidad = this.articulos.data[index].pendiente;
-        let recepcion = this.articulos.data[index].recepcion;
+        let cantidad = +this.articulos[index].pendiente;
+        let recepcion = +this.articulos[index].recepcion;
         if(cantidad < recepcion || recepcion < 0 || !recepcion){
-            this.articulos.data[index].recepcion = 0;
-            this.articulos._updateChangeSubscription;
+            this.articulos[index].recepcion = 0;
+        } else {
+            this.articulos[index].recepcion = 500;
         }
     }
 }

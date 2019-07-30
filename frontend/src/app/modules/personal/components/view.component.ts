@@ -64,8 +64,6 @@ export class PersonalViewComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
         });
     }
-
-
     /*==============================================================
         FUNCION PARA INVOCAR LA LISTA DE PERSONAL
     ================================================================ */

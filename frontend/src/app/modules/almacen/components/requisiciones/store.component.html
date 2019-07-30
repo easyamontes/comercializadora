@@ -39,82 +39,48 @@
             </fieldset>
         </div>
     </div>
-    <!-- Creando tabla de Articulos -->
-    <div class="row" style="height: 53vh; overflow: auto;">
-        <table mat-table [dataSource]="articulos" mat-Sort class="col-12">
-            <ng-container matColumnDef="codigo">
-                <th mat-header-cell class="thm
-                           text-center" *matHeaderCellDef mat-sort-header> Codigo </th>
-                <td mat-cell *matCellDef="let row"> {{row.codigo}} </td>
-            </ng-container>
-            <ng-container matColumnDef="nombre">
-                <th mat-header-cell class="thm
-                           text-center
-                    " *matHeaderCellDef mat-sort-header> Articulo </th>
-                <td mat-cell *matCellDef="let row; let i = index">
-                    <mat-form-field>
-                        <mat-select #articulo="ngModel" [(ngModel)]="row.articulo_id"
-                            (ngModelChange)="setArticulo($event,i)">
-                            <mat-option>None</mat-option>
-                            <mat-option *ngFor="let artitem of artilist" [value]="artitem.id">{{artitem.articulo}}
-                                {{artitem.marca}} {{artitem.modelo}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="cantidad">
-                <th mat-header-cell class="thm
-                           text-center
-                    " *matHeaderCellDef mat-sort-header> Cantidad </th>
-                <td mat-cell *matCellDef="let row">
-                    <mat-form-field>
-                        <input matInput [(ngModel)]="row.cantidad" #factura="ngModel" type="number">
-                    </mat-form-field>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="existencia" *ngIf="params==1">
-                <th mat-header-cell class="thm
-                           text-center" *matHeaderCellDef mat-sort-header> Existencia </th>
-                <td mat-cell class="text-center" *matCellDef="let row">
-                    {{row.totalExistencia}}
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="precio">
-                <th mat-header-cell class="thm
-                           text-center" *matHeaderCellDef mat-sort-header> Precio </th>
-                <td mat-cell *matCellDef="let row">
-                    <mat-form-field>
-                        <input matInput [(ngModel)]="row.precio" #factura="ngModel" type="number">
-                    </mat-form-field>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="total">
-                <th mat-header-cell class="thm
-                           text-center
-                    " *matHeaderCellDef mat-sort-header> Total </th>
-                <td mat-cell *matCellDef="let row"> {{row.cantidad * row.precio  |currency}} </td>
-            </ng-container>
-            <ng-container matColumnDef="actions">
-                <th mat-header-cell class="thm
-                           text-center" *matHeaderCellDef mat-sort-header> Eliminar </th>
-                <td mat-cell class="justify-content-center" *matCellDef="let i = index">
-                    <button mat-icon-button (click)="deleteArticulo(i)" color="primary">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </td>
-            </ng-container>
-            <!--Definicion de tbalas-->
-            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></tr>
+    <div class="reporte">
+        <table class="table table-striped table-hover">
+            <thead class="tablareporte">
+                <tr>
+                    <th>Codigo</th>
+                    <th>Articulo</th>
+                    <th>Cantidad</th>
+                    <th *ngIf="params==1">Existencia</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let lis of articulos; let id = index">
+                    <td>{{lis.codigo}}</td>
+                    <td>
+                        <select class="cuadrotexto" #articulo="ngModel" [(ngModel)]="lis.articulo_id"
+                            (ngModelChange)="setArticulo($event,id)">
+                            <option *ngFor="let artitem of artilist" [value]="artitem.id">
+                                {{artitem.articulo +' '+artitem.marca +' '+artitem.modelo | uppercase}}  </option>
+                        </select>
+                    </td>
+                    <td>
+                        <input class="cuadrotexto" [(ngModel)]="lis.cantidad" #factura="ngModel" type="number">
+                    </td>
+                    <td *ngIf="params==1">{{lis.totalexistencia}}</td>
+                    <td>
+                        <input class="cuadrotexto" [(ngModel)]="lis.precio" #factura="ngModel" type="number">
+                    </td>
+                    <td>{{lis.cantidad * lis.precio  |currency}}</td>
+                    <td class="cen"> <button class="botontaba" (click)="deleteArticulo(i)" color="primary">
+                            <span> <i class="fas fa-trash-alt"></i></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
         </table>
-    </div>
-    <!-- Creando paginador  -->
-    <div class="row">
-        <mat-paginator [pageSizeOptions]="[10, 15, 20]"></mat-paginator>
     </div>
     <div class="row offset-1">
         <button mat-raised-button (click)="onSubmit();" class="btn btn-success
-                       col-md-2   
+                       col-md-2
                 ">Guardar</button>
         <button mat-raised-button (click)="onCancel()" class="btn btn-danger">Cancelar</button>
     </div>

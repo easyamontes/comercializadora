@@ -3,7 +3,7 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Almacen } from './../../../../models/almacen';
 import { UserService } from '../../../../services/user.service';
 import { GeneralCallService } from '../../../../services/generalCall.service';
-
+import { Busqueda} from 'src/app/models/busqueda';
 @Component({
     selector: 'existencia-view',
     templateUrl: './listview.component.html',
@@ -16,18 +16,16 @@ import { GeneralCallService } from '../../../../services/generalCall.service';
 export class ExistenciaViewComponent implements OnInit{
     public title: string;
     public token: any;
-    public displayedColumns: string[]=['codigo','articulo','proveedor','existencia'];
-    public articulos: MatTableDataSource<Almacen>;
+    public articulos: Array<Almacen>;
+    public busqueda:Busqueda;
     // interfaces para la paginacion de la tabla
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
-
     constructor(
         private _UserService:UserService,
         private _GeneralCallService:GeneralCallService
     ){
         this.title = "Existencia";
         this.token = this._UserService.getToken();
+        this.busqueda = new Busqueda(null, null, null);
     }
 
     ngOnInit(){
@@ -38,21 +36,11 @@ export class ExistenciaViewComponent implements OnInit{
     getExistencias(){
         this._GeneralCallService.getRecords(this.token,'almaitem').subscribe(
             response=>{
-                this.articulos = new MatTableDataSource(response.existencia);
-                this.articulos.paginator = this.paginator;
-                this.articulos.sort = this.sort;
+                this.articulos = response.existencia;
             },error=>{
                 console.log(<any>error);
             }
         )
     }
 
-
-    applyFilter(filterValue: string) {
-        this.articulos.filter = filterValue.trim().toLowerCase();
-    
-        if (this.articulos.paginator) {
-          this.articulos.paginator.firstPage();
-        }
-    }
 }//End Class

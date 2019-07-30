@@ -10,13 +10,16 @@ import {ProveedoresMainComponent} from './components/main.component';
 import {ProveedorViewComponent} from './components/view.component';
 import {ProveedorStoreComponent} from './components/store.component';
 import {ProveedorEditComponent} from './components/edit.component';
+import { FilterPipe } from './components/pipes/filter.pipe';
+
 
 @NgModule({
     declarations:[
         ProveedoresMainComponent,
         ProveedorViewComponent,
         ProveedorStoreComponent,
-        ProveedorEditComponent
+        ProveedorEditComponent,
+        FilterPipe
     ],
     imports:[
         ProveedoresRoutingModule,
