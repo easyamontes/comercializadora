@@ -24,7 +24,7 @@ class OverController extends Controller
         $lvl2= join(",", $params_array['level2']);
         $lvl3= join(",", $params_array['level3']);
 
-        if(count($lvl1)>0){
+        if(count($params_array['level1'])>0){
             $level1 =  DB::select(
                 '
                 select al.articulo_id, al.articulo, ar.level1 as over, sum(al.venta) as piezas 
@@ -39,7 +39,7 @@ class OverController extends Controller
             $level1 = null;
         }
 
-        if (count($lvl2)>0) {
+        if (count($params_array['level2'])>0) {
             $level2 =  DB::select(
                 '
                 select al.articulo_id, al.articulo, ar.level2 as over, sum(al.venta) as piezas 
@@ -54,7 +54,7 @@ class OverController extends Controller
             $level2 = null;
         }
 
-       if(count($lvl3)>0){
+       if(count($params_array['level3'])>0){
         $level3 =  DB::select(
             '
             select al.articulo_id, al.articulo, ar.level3 as over, sum(al.venta) as piezas 

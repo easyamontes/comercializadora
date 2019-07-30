@@ -46,7 +46,6 @@ export class CobranzaViewComponent implements OnInit {
                 CACAHNDO EL PARAMETRO ENVIADO POR URL
         ================================================================ */
         this._ActivatedRoute.queryParams.subscribe(params => {
-            console.log(params);
         })
         this._ActivatedRoute.params.subscribe(
             params => {

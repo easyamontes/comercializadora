@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 //servicios
 import { UserService } from './../../../../services/user.service';
 import { GeneralCallService } from '../../../../services/generalCall.service';
-//Modelos
-import { Almacen } from './../../../../models/almacen';
 
 @Component({
     selector: 'almacen-default',
