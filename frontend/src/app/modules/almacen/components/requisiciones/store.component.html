@@ -39,12 +39,12 @@
     <!--=============================================================
                          Tabala de recusrsos
     =============================================================-->
-    <div class="row d-flex justify-content-center">
+    <div class="reporte">
         <table class="table table-striped table-hover">
             <thead class="tablareporte">
                 <tr>
-                    <th>Codigo</th>
-                    <th>Articulo</th>
+                    <th style="width:10%">Codigo</th>
+                    <th style="width:20%">Articulo</th>
                     <th>Cantidad</th>
                     <th *ngIf="params==1">Existencia</th>
                     <th>Precio</th>
@@ -54,9 +54,9 @@
             </thead>
             <tbody>
                 <tr *ngFor="let lis of articulos; let id = index">
-                    <td>{{lis.codigo}}</td>
-                    <td>
-                        <select class=" cuadrotexto" #articulo="ngModel" [(ngModel)]="lis.articulo_id"
+                    <td style="width:10%">{{lis.codigo}}</td>
+                    <td style="width:20%">
+                        <select class="cuadrotexto" style="width:95%"  #articulo="ngModel" [(ngModel)]="lis.articulo_id"
                             (ngModelChange)="setArticulo($event,id)">
                             <option *ngFor="let artitem of artilist" [value]="artitem.id">
                                 {{artitem.articulo +' '+ artitem.marca +' '+ artitem.modelo | uppercase}} </option>
@@ -70,7 +70,7 @@
                         <input class="cuadrotexto" [(ngModel)]="lis.precio" #factura="ngModel" type="number">
                     </td>
                     <td>{{lis.cantidad * lis.precio  |currency}}</td>
-                    <td class="cen"> <button class="botontaba" (click)="deleteArticulo(id)" color="primary">
+                    <td> <button class="botontaba" (click)="deleteArticulo(id)">
                             <span> <i class="fas fa-trash-alt"></i></span>
                         </button>
                     </td>
