@@ -32,6 +32,7 @@ export class RequisicionStoreComponent implements OnInit {
     public articulos: Array<Almacen>;
     public provlist: Array<any>;
     public artilist: Array<any>;
+    public spin: boolean;
 
     constructor(
         private _UserService: UserService,
@@ -50,6 +51,7 @@ export class RequisicionStoreComponent implements OnInit {
         this.token = this._UserService.getToken();
         this.item = [];
         this.articulos = [];
+        this.spin = false;
         if (this.params == 1) {
             this.setVenta(date);
         } else {
@@ -57,12 +59,18 @@ export class RequisicionStoreComponent implements OnInit {
         }
     }
 
+    /*=================================================================
+        Inicia Los valores usados en la vista de Compra
+     ====================================================================*/
     setCompra(date) {
         this.title = 'Nueva Compra';
         this.rurl = ["lproved", "lartic"];
         this.requi = new Requisicion(0, this.identity.sub, 0, 0, 0, "COMPRA", 'NUEVO', 0, date, null, null, null);
     }
 
+    /*=================================================================
+        Inicia Los valores usados en la vista de Transpasos
+    ====================================================================*/
     setVenta(date) {
         this.title = 'Nuevo Traspaso';
         this.rurl = ["here", "almaitem"];
@@ -74,7 +82,9 @@ export class RequisicionStoreComponent implements OnInit {
         this.getListArticulo();
     }
 
-    /**invoca la de proveedores  */
+    /*=================================================================
+                    Invoca la de Proveedores
+    ====================================================================*/
     getListForSelect() {
         this._GeneralCallService.getRecords(this.token, this.rurl[0]).subscribe(
             response => {
@@ -110,7 +120,6 @@ export class RequisicionStoreComponent implements OnInit {
             this.articulos[index].articulo = this.artilist.find(x => x.id == id).articulo;
             this.articulos[index].marca = this.artilist.find(x => x.id == id).marca;
             this.articulos[index].modelo = this.artilist.find(x => x.id == id).modelo;
-            this.articulos[index].costo = this.artilist.find(x => x.id == id).costo;
             if (this.params == 1) {
                 this.articulos[index].articulo_id = this.artilist.find(x => x.id == id).articulo_id;
                 this.articulos[index].proveedor_id = this.artilist.find(x => x.id == id).proveedor_id;
@@ -132,7 +141,7 @@ export class RequisicionStoreComponent implements OnInit {
     /**crea una nueva fila en la tabla de Articulos */
     createArticulo() {
         if (this.requi.proveedor_id || this.requi.pdestino_id) {
-            let nitem = new Almacen(null, null, null, null, this.requi.proveedor_id, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0, null, null, 0);
+            let nitem = new Almacen(null, null, null, null, this.requi.proveedor_id,null,null,null,null,null,null,null,null,null,0,0,0,0,0,0,0,0,0);
             this.articulos.push(nitem);
             this.requi.importe = this.getTotalCost();
         }
@@ -145,6 +154,7 @@ export class RequisicionStoreComponent implements OnInit {
 
 
     onSubmit() {
+        this.spin=true;
         this.requi.importe = this.getTotalCost();
         if (this.requi.pdestino_id == 0) {
             this.requi.pdestino_id = this.identity.sub;
@@ -166,10 +176,12 @@ export class RequisicionStoreComponent implements OnInit {
                         response => {
                             this._router.navigate(['almacen']);
                         }, error => {
+                            this.spin=false;
                             console.log(<any>error);
                         });
                 }
             }, error => {
+                this.spin=false;
                 console.log(<any>error);
             });
     }

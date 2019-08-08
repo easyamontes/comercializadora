@@ -14,8 +14,8 @@ import { RequisicionReciveComponent } from './components/requisiciones/recive.co
 import { DiarioViewComponent } from './components/reporteDiario/view.component';
 import { CobranzaViewComponent } from './components/cuentasPC/viewCobrar.component';
 import { PagoProveedoresViewComponent } from './components/pagoProveedores/view.component';
-import { FilterPipe } from './components/pipes/filter.pipe';
 import { ResultadosViewComponent } from './components/cuentasPC/viewResultados.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 
 

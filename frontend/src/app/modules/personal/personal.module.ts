@@ -11,6 +11,7 @@ import { PersonalEditComponent } from './components/edit.component';
 import { PersonalStoreComponent } from './components/store.component';
 import { PersonalVisualComponent } from './components/visual.component';
 import { PersonalRegisterComponent } from './components/register.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 //declaracion del modulo
 @NgModule({
@@ -21,6 +22,7 @@ declarations: [
     PersonalStoreComponent,
     PersonalRegisterComponent,
     PersonalVisualComponent,
+    FilterPipe
 ],
 imports: [
     CommonModule,

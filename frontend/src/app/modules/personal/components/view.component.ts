@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 //Servicios
 import { UserService } from '../../../services/user.service';
 import { GeneralCallService } from '../../../services/generalCall.service';
@@ -28,15 +28,10 @@ export class PersonalViewComponent implements OnInit {
     public personal: Array<Personal>;
     public personaList: Array<Personal>;
     public selectList: Array<any>;
-    public displayedColumns: string[] = ['nombre', 'oficina', 'Visualizar', 'editar', 'eliminar', 'usuario'];
-    public dataSource: MatTableDataSource<Personal>;
     public organi: Array<any>
     public lider: string;
     public puesto: string;
-
-
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
+    public searsh: string;
 
     constructor(
         private _UserService: UserService,
@@ -64,6 +59,7 @@ export class PersonalViewComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
         });
     }
+
     /*==============================================================
         FUNCION PARA INVOCAR LA LISTA DE PERSONAL
     ================================================================ */
@@ -74,25 +70,11 @@ export class PersonalViewComponent implements OnInit {
                 this.personaList = this._PersonalUtil.getFamilia(response);
                 this.lider = response.personal.id;
                 this.personal.splice(0, 1);
-                this.dataSource = new MatTableDataSource(this.personal);
-                this.dataSource.paginator = this.paginator;
-                this.dataSource.sort = this.sort;
             }, error => {
                 console.log(<any>error);
             });
     }
 
-
-    /*==============================================================
-        FUNCION PARA QUE CONTROLA EL FILTRADO LIBRE 
-    ================================================================ */
-    applyFilter(filterValue: string) {
-        this.dataSource.filter = filterValue.trim().toLowerCase();
-
-        if (this.dataSource.paginator) {
-            this.dataSource.paginator.firstPage();
-        }
-    }
 
     /*==============================================================
         FUNCION PARA ELIMINAR EL REGISTRO DE UN EMPLEADO
@@ -136,11 +118,9 @@ export class PersonalViewComponent implements OnInit {
                 if (this.puesto) {
                     perso = perso.filter(x => x.puesto_id == this.puesto);
                 }
-                this.dataSource.data = perso;
-                this.dataSource._renderChangesSubscription;
+                this.personal = perso;
             }
         );
     }
 
-    
 }//End Class

@@ -1,45 +1,45 @@
 <div class="principal">
-    <!-- creando cabecera de la requisicion -->
-    <div class="row">
-        <div class="container-fluid
-                    d-flex
-                    justify-content-center
-                    flex-row">
-            <fieldset>
-                <legend>{{title}}</legend>
-                <!--Dibujando la baecera de informacion-->
-                <mat-form-field class="p-1">
-                    <input matInput [value]="fecha.value" [(ngModel)]="requi.fecha" [matDatepicker]="pickerFecha"
-                        #fecha="ngModel" placeholder="Fecha">
-                    <mat-datepicker-toggle matSuffix [for]="pickerFecha"></mat-datepicker-toggle>
-                    <mat-datepicker #pickerFecha></mat-datepicker>
-                </mat-form-field>
-                <mat-form-field *ngIf="params != 1" class="p-1">
-                    <mat-select #provee="ngModel" [(ngModel)]="requi.proveedor_id" placeholder="Proveedor">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let prov of provlist" [value]="prov.id">{{prov.nombre}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field *ngIf="params == 1" class="p-1">
-                    <mat-select #socio="ngModel" [(ngModel)]="requi.pdestino_id" placeholder="Socio">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let prov of provlist" [value]="prov.id">{{prov.nombre}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field class="p-1">
-                    <input matInput [(ngModel)]="requi.ffactura" [matDatepicker]="pickerFactura" #ffecha="ngModel"
-                        placeholder="Fecha">
-                    <mat-datepicker-toggle matSuffix [for]="pickerFactura"></mat-datepicker-toggle>
-                    <mat-datepicker #pickerFactura></mat-datepicker>
-                </mat-form-field>
-                <mat-form-field class="p-1">
-                    <input matInput [(ngModel)]="requi.factura" #factura="ngModel" placeholder="Factura">
-                </mat-form-field>
-                <button class="p-1" color="primary" mat-flat-button (click)="createArticulo();">NUEVO</button>
-            </fieldset>
+    <h4 class="col-12 text-center">{{title}}</h4>
+    <!--=============================================================
+                         Cabecera de filtrado
+    =============================================================-->
+    <div class="row d-flex justify-content-center">
+        <mat-form-field *ngIf="params != 1" class="col-4">
+            <mat-select #provee="ngModel" [(ngModel)]="requi.proveedor_id" placeholder="Proveedor">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let prov of provlist" [value]="prov.id">{{prov.nombre}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngIf="params == 1" class="col-4">
+            <mat-select #socio="ngModel" [(ngModel)]="requi.pdestino_id" placeholder="Socio">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let prov of provlist" [value]="prov.id">
+                    {{prov.nombre +' '+prov.apellidop + ' ' + prov.apellidom |uppercase}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+            <input matInput [value]="fecha.value" [(ngModel)]="requi.fecha" [matDatepicker]="pickerFecha"
+                #fecha="ngModel" placeholder="Fecha">
+            <mat-datepicker-toggle matSuffix [for]="pickerFecha"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFecha></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+            <input matInput [(ngModel)]="requi.ffactura" [matDatepicker]="pickerFactura" #ffecha="ngModel"
+                placeholder="Fecha">
+            <mat-datepicker-toggle matSuffix [for]="pickerFactura"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFactura></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+            <input matInput [(ngModel)]="requi.factura" #factura="ngModel" placeholder="Factura">
+        </mat-form-field>
+        <div class="col col-2">
+            <button class="btn btn-primary" (click)="createArticulo();">NUEVO</button>
         </div>
     </div>
-    <div class="reporte">
+    <!--=============================================================
+                         Tabala de recusrsos
+    =============================================================-->
+    <div class="row d-flex justify-content-center">
         <table class="table table-striped table-hover">
             <thead class="tablareporte">
                 <tr>
@@ -59,18 +59,18 @@
                         <select class="cuadrotexto" #articulo="ngModel" [(ngModel)]="lis.articulo_id"
                             (ngModelChange)="setArticulo($event,id)">
                             <option *ngFor="let artitem of artilist" [value]="artitem.id">
-                                {{artitem.articulo +' '+artitem.marca +' '+artitem.modelo | uppercase}}  </option>
+                                {{artitem.articulo +' '+ artitem.marca +' '+ artitem.modelo | uppercase}} </option>
                         </select>
                     </td>
                     <td>
                         <input class="cuadrotexto" [(ngModel)]="lis.cantidad" #factura="ngModel" type="number">
                     </td>
-                    <td *ngIf="params==1">{{lis.totalexistencia}}</td>
+                    <td *ngIf="params==1">{{lis.totalExistencia}}</td>
                     <td>
                         <input class="cuadrotexto" [(ngModel)]="lis.precio" #factura="ngModel" type="number">
                     </td>
                     <td>{{lis.cantidad * lis.precio  |currency}}</td>
-                    <td class="cen"> <button class="botontaba" (click)="deleteArticulo(i)" color="primary">
+                    <td class="cen"> <button class="botontaba" (click)="deleteArticulo(id)" color="primary">
                             <span> <i class="fas fa-trash-alt"></i></span>
                         </button>
                     </td>
@@ -78,10 +78,15 @@
             </tbody>
         </table>
     </div>
-    <div class="row offset-1">
-        <button mat-raised-button (click)="onSubmit();" class="btn btn-success
-                       col-md-2
-                ">Guardar</button>
-        <button mat-raised-button (click)="onCancel()" class="btn btn-danger">Cancelar</button>
+    <!--=============================================================
+                         Botonera de aceptacion
+    =============================================================-->
+    <div class="row d-flex justify-content-around">
+        <button *ngIf="spin == false" class="btn btn-success col-5" type="button" (click)="onSubmit();">Guardar</button>
+        <button *ngIf="spin == true" class="btn btn-success btn-sm btn-block col-5" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Guardando...
+        </button>
+        <button class="btn btn-danger col-5" type="button" (click)="onCancel();">Cancelar</button>
     </div>
-</div>
+</div> 

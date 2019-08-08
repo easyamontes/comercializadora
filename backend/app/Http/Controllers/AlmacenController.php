@@ -22,9 +22,8 @@ class AlmacenController extends Controller
         $user = $json = $request->input('userid', null);
         $per = $json = $request->input('per', null);
         $almacen = Almacen::selectRaw(' * ,SUM(existencia) as totalExistencia, AVG(precio) AS costo')
-            ->where('userp_id',$per)
-            //->groupBy('articulo_id', 'proveedor_id')
-            ->groupBy('articulo_id')
+            ->where([['userp_id',$per],['existencia','>',0]])
+            ->groupBy('articulo_id', 'proveedor_id')
             ->get()->load('proveedor');
         $data = array(
             'existencia' => $almacen,

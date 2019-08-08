@@ -1,6 +1,6 @@
 <div class="principal" *ngIf = "ofi != null">
                
-    <div class="alert alert-danger" *ngIf="status_oficina == 'success' && status_oficina"> Registro Guardado correctamente </div>
+    <div class="alert alert-danger"> Registro Guardado correctamente </div>
        
         <form *ngIf="ofi != null" #oficinaNew="ngForm" (ngSubmit)="onSubmit(oficinaNew)">
             <div class="container-fluid">

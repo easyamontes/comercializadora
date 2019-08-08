@@ -5,8 +5,8 @@
     =============================================================-->
     <div class="row">
         <mat-form-field class="col-md-4 col-xs-12">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="buscar">
-        </mat-form-field>
+            <input matInput [(ngModel)]="searsh" placeholder="buscar">
+        </mat-form-field> 
         <mat-form-field class="col-md-3 col-xs-12">
             <mat-select matInput [(ngModel)]="lider" placeholder="Lider">
                 <mat-option *ngFor="let persona of personaList" [value]="persona.id">
@@ -41,58 +41,45 @@
                          Tabla de empleados
     =============================================================-->
     <div class="row">
-        <table mat-table [dataSource]="dataSource" matSort class="col-md-12 col-xs-12 mat-elevation-z8">
-            <ng-container matColumnDef="nombre">
-                <th class="thm" mat-header-cell *matHeaderCellDef> Nombre</th>
-                <td style="padding-top:.7em;" mat-cell *matCellDef="let row">
-                    <h5>{{row.nombre+' '+row.apellidop+' '+row.apellidom |uppercase}}</h5>
-                    <p>{{row.oficina}}</p>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="oficina">
-                <th class="thm" mat-header-cell *matHeaderCellDef> Lider</th>
-                <td style="padding-top:.7em;" mat-cell *matCellDef="let row">
-                    {{row.puesto.puesto}}
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="Visualizar">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Visualizar </th>
-                <td mat-cell *matCellDef="let row">
-                    <a class="botontaba" [routerLink]="['../visual',row.id]">
-                        <i class="fas fa-eye"></i>
-                    </a>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="editar">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Editar </th>
-                <td mat-cell *matCellDef="let row">
-                    <a class="botontaba" [routerLink]="['../edit',row.id]">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="eliminar">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
-                <td mat-cell *matCellDef="let row">
-                    <button class="botontaba" (click)="deletePersona(row.id)">
-                        <span>
+        <table class="table table-striped table-hover table-sm">
+            <thead class="tablareporte">
+                <th>Nombre</th>
+                <th>Oficina</th>
+                <th>Ver</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+                <th>Usuario</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let persona of personal| filter: searsh">
+                    <td>
+                        <h5>{{persona.nombre +' '+persona.apellidop + ' ' + persona.apellidom | uppercase}}</h5>
+                        <p *ngIf="persona.oficina">{{persona.oficina}}</p>
+                    </td>
+                    <td>{{persona.puesto.puesto}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-info btn-block" [routerLink]="['../visual',persona.id]">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-info btn-block" [routerLink]="['../edit',persona.id]">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-info btn-block" (click)="deletePersona(persona.id)">
                             <i class="fas fa-trash-alt"></i>
-                        </span>
-                    </button>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="usuario">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Cuenta</th>
-                <td mat-cell *matCellDef="let row">
-                    <button class="botontaba" (click)="openDialog(row)" [disabled]="row.usuario != null">
-                        <span>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-info btn-block h-100" (click)="openDialog(persona)">
                             <i class="fas fa-user-plus"></i>
-                        </span>
-                    </button>
-                </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns ;sticky: true"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
+
 </div>
