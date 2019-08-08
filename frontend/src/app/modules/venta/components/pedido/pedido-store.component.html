@@ -10,10 +10,7 @@
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
-            <mat-form-field class="col-md-3 col-xs-12">
-                <input matInput [(ngModel)]="pedi.importe" #importe="ngModel" placeholder="Importe">
-            </mat-form-field>
-            <mat-form-field class="col-md-3 col-xs-12">
+            <mat-form-field class="col-md-5 col-xs-12">
                 <mat-select matInput [(ngModel)]="pedi.pdestino" #nombre="ngModel" (ngModelChange)="setPersonal($event)"
                     placeholder="Asignar">
                     <mat-option *ngFor="let  pedi of perso" [value]="pedi.id">{{pedi.nombre}}</mat-option>
@@ -23,89 +20,54 @@
          boton agregar articulo
         =============================================================-->
             <div class="col-xs-12 col-md-3">
-                <button class="ventas col-md-12" color="primary" mat-flat-button (click)="addConcepto()">NUEVO</button>
+                <button class="botonbuscar col-md-12" mat-flat-button (click)="addConcepto()">NUEVO</button>
             </div>
         </div>
     </div>
-
     <!--=============================================================
          Creando tabla 
     =============================================================-->
-    <div class="row">
-        <table class="col-md-12 col-xs-12 mat-elevation-z8" mat-table [dataSource]="pedidos" mat-Sort>
-            <ng-container matColumnDef="codigo">
-                <th mat-header-cell class="thm" *matHeaderCellDef mat-sort-header> Codigo </th>
-                <td mat-cell *matCellDef="let row"> {{row.codigo}} </td>
-            </ng-container>
-            <ng-container matColumnDef="existencia">
-                <th mat-header-cell class="thm" *matHeaderCellDef mat-sort-header> Existencia </th>
-                <td mat-cell *matCellDef="let row"> {{row.existencia}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="nombre">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Articulo </th>
-                <td mat-cell *matCellDef="let row; let i = index">
-                    <mat-form-field>
-                        <mat-select matInput [(ngModel)]="row.id_almacen" #articulo="ngModel"
-                            (ngModelChange)="setArticulo($event,i)">
-                            <mat-option *ngFor="let artitem of lisart" [value]="artitem.id">{{artitem.articulo}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="cantidad">
-                <th mat-header-cell class="thm" *matHeaderCellDef mat-sort-header> Cantidad
-                </th>
-                <td mat-cell *matCellDef="let row">
-                    <mat-form-field>
-                        <input matInput [(ngModel)]="row.cantidad" #factura="ngModel" type="number" min="1"
-                            max="{{row.existencia}}" pattern="^[0-9]+">
-                    </mat-form-field>
-
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="precio">
-                <th mat-header-cell class="thm" *matHeaderCellDef mat-sort-header> Precio
-                </th>
-                <td mat-cell *matCellDef="let row">
-                    <mat-form-field>
-                        <input matInput [(ngModel)]="row.precio" #factura="ngModel" type="number">
-                    </mat-form-field>
-
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="total">
-                <th mat-header-cell class="thm
-                           text-center
-                    " *matHeaderCellDef mat-sort-header> Total </th>
-                <td mat-cell *matCellDef="let row"> {{row.cantidad * row.precio  |currency}} </td>
-            </ng-container>
-            <ng-container matColumnDef="diferencia">
-                <th mat-header-cell class="thm" *matHeaderCellDef mat-sort-header> Dif. Existencia </th>
-                <td mat-cell *matCellDef="let row"> {{row.existencia - row.cantidad }} </td>
-            </ng-container>
-            <ng-container matColumnDef="eliminar">
-                <th class="thm" mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
-                <td mat-cell *matCellDef="let i = index">
-                    <button class="botontaba" (click)="deleteRecord(i)">
-                        <span>
-                            <i class="fas fa-trash-alt"></i>
-                        </span>
-                    </button>
-                </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    <div class="reporte">
+        <table class="table table-striped table-hover">
+            <thead class="tablareporte">
+                <tr>
+                    <th>Codigo</th>
+                    <th>Existencia</th>
+                    <th>Articulo</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                    <th>Dif. Existencia</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let lis of pedidos;let id = index">
+                    <td>{{lis.codigo}}</td>
+                    <td>{{lis.existencia}}</td>
+                    <td>
+                        <select class="cuadrotexto" [(ngModel)]="lis.id_almacen" #articulo="ngModel"
+                            (ngModelChange)="setArticulo($event,id)">
+                            <option *ngFor="let artitem of lisart" [value]="artitem.id">{{artitem.articulo}}</option>
+                        </select>
+                    </td>
+                    <td> <input class="cuadrotexto" [(ngModel)]="lis.cantidad" #factura="ngModel" type="number" min="1"
+                            max="{{lis.existencia}}" pattern="^[0-9]+">
+                    </td>
+                    <td> <input class="cuadrotexto" [(ngModel)]="lis.precio" #factura="ngModel" type="number"></td>
+                    <td>{{lis.cantidad * lis.precio  |currency}}</td>
+                    <td>{{lis.existencia - lis.cantidad }}</td>
+                    <td class="cen">
+                        <button class="botontaba" (click)="deleteRecord(i)" color="primary">
+                            <span> <i class="fas fa-trash-alt"></i></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
-    <div class="row">
-        <mat-paginator [pageSizeOptions]="[5, 10]"></mat-paginator>
-    </div>
-
     <div class="row form-group">
         <div class="col-md-3 col-xs-3">
-
             <a type="submit" class="btn btn-success col-md-12" style="margin: 1px" (click)="Guardar()">Guardar</a>
         </div>
         <div class="col-md-3 col-xs-3">

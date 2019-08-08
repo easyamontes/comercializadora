@@ -56,7 +56,7 @@
                 <tr *ngFor="let lis of articulos; let id = index">
                     <td>{{lis.codigo}}</td>
                     <td>
-                        <select class="cuadrotexto" #articulo="ngModel" [(ngModel)]="lis.articulo_id"
+                        <select class=" cuadrotexto" #articulo="ngModel" [(ngModel)]="lis.articulo_id"
                             (ngModelChange)="setArticulo($event,id)">
                             <option *ngFor="let artitem of artilist" [value]="artitem.id">
                                 {{artitem.articulo +' '+ artitem.marca +' '+ artitem.modelo | uppercase}} </option>

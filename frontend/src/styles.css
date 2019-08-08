@@ -1,21 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+ html, body { height: 100%; }
+ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /*===============================================
-  TITULOS DE LAS TABLAS DE LOS CATALOGOS
+   MARGEN PRINCIPAL EN TODAS LAS PANTALLAS
  ===============================================*/
-   .thm 
-   {
-     background:black;
-     color: #FFFFFF;
-     font-family: Arial, Helvetica, sans-serif;
-   }
-  /*===============================================
-    BOTON PRINCIPAL DE CADA PRESENTACION 
- ===============================================*/
-.botonpri
-{
-  background-color:#4CAF50;
-}
+ .principal
+ {
+   margin-right: 2%; 
+   margin-left: 1%;
+   margin-top: 2%;
+ }
 button{
   -webkit-user-select: auto !important;
 }
@@ -25,31 +21,16 @@ button{
 .botontaba 
 {
   font-size: 1.6em;
-  color:  blue;
+  color: rgb(0, 0, 255,0.7);
   background: none;
   border: none;
   margin-top: -30px;
+  outline: none;
 }
 .botontaba:hover 
 {  
- color: Dodgerblue;
+  color: rgb(0, 0, 255);
 }
-.botabl
-{
-  display:flex;
-  justify-content: left;
-  font-style: normal;
- }
-/*===============================================
-   MARGEN PRINCIPAL EN TODAS LAS PANTALLAS
- ===============================================*/
-.principal
-{
-  margin-right: 2%; 
-  margin-left: 1%;
-  margin-top: 2%;
-}
-
 .cuadrotexto
 {
   background: transparent;
@@ -57,65 +38,88 @@ button{
   border-bottom: 1px solid black;
 }
 /*===============================================
-   COLOR  PARA LA BARRA DE MENU
+   COLOR PARA LA BARRA DE MENU
  ===============================================*/
-
 .navbar {
   background: LightGrey;
   color: #fff;
   }
-  .loader 
-  {
-    border: 16px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 16px solid blue;
-    width: 120px;
-    height: 120px;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
-    animation: spin 2s linear infinite;
-  }
-  /* Safari */
-  @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-  }
-
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
-  html, body { height: 100%; }
-  body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-  .spacer{
-    flex:1 1 auto;
-}
-
-/*===========================================================================
- botones de venta
- ============================================================================*/
-.ventas {
-  height: 75%;
-}
 /*===============================================
-   CABECERAS DE LAS TABLAS 
+   CABECERAS DE LAS TABLAS TITULO Y COLOR DE RELLENO
  ===============================================*/
-
  .tablareporte{
-   background: darkcyan;
-   color: white
+   background:rgb(0, 139, 139,0.9);
+   color: white;
+   font-family: 'Hind Madurai', sans-serif;
  }
 /*===============================================
-   BOTONE DE BUSQUEDA DE LAS TABLAS
+   BOTONES DE BUSQUEDA Y DE CREAR NUEVO REGISTRO DE LAS TABLAS
  ===============================================*/
  .botonbuscar{
-   background: DarkSlateGray;
+   background:rgb(47, 79, 79,0.8);
    width:80px;
    height:50px;
    color: white;
+   border-radius: 6px;
    border:0px;
+   cursor: pointer; 
  }
+ .botonbuscar:hover
+ {
+  background:rgb(47, 79, 79);
+ }
+ .botonbuscar:focus
+ {
+   outline: none !important;
+ }
+   /*==========================================================================
+    CLASE PARA CENTRAR TEXTO O BOTONES EN LAS TABLAS
+  ==========================================================================*/
+.cen
+{
+ text-align: center;
+}
+
+tbody {
+  display:block;
+  max-height:59vh;
+  overflow-y:auto;
+}
+thead, tbody tr {
+  display:table;
+  width:100%;
+  table-layout:fixed;
+}
+
+::-webkit-scrollbar{
+  width: 12px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-track{
+  border-radius: 8px;
+  background-color: #CCCCCC;
+}
+::-webkit-scrollbar-thumb{
+  border-radius: 10px;
+  background-color:rgb(128, 128, 128,0.8);
+}
+  /*==========================================================================
+    CSS PARA LOS MODAL
+  ==========================================================================*/
+
+.modal-backdrop {
+  z-index: 1040 !important;
+}
+.modal-dialog {
+  margin: 2px auto;
+  z-index: 1100 !important;
+}
+.modal-backdrop {
+  /* bug fix - no overlay */    
+  display: none;    
+}
+
  /*===============================================
    LISTA REPORTE SOCIO CAMBACEO PARA TELEFONOS MOBILES
  ===============================================*/
@@ -123,7 +127,16 @@ button{
   .reporte .table, .reporte thead, .reporte tbody, .reporte th, .reporte td, .reporte tr {
     display: block;
   }
-
+    /* ======================================================
+     SCROLLBAR DE LA PARTE INFERIOR DE LAS TABLAS
+  =============================================================*/
+  ::-webkit-scrollbar{
+    width: 6px;
+  }
+  ::-webkit-scrollbar:horizontal{
+    display: none;
+  }
+  
   /* ======================================================
      AL INGRESAR EN MOBIL NO MUESTRE EL ENCABEZADO DE LA TABLA 
   =============================================================*/
@@ -141,7 +154,6 @@ button{
     border-bottom: 3px solid #eee;
     position: relative;
     text-align: right;
-
   }
 
   .reporte td:before {
@@ -155,7 +167,6 @@ button{
     padding-top: 10px;
     white-space: nowrap;
   }
-
   /*==========================================================================
     SIRVE PARA MOSTRAR EL TITULO EN CADA TD DE LA TABLA PIEZAS
   ==========================================================================*/
@@ -171,7 +182,6 @@ button{
   .rpre td:nth-of-type(2):before { content: "Socio"; }
   .rpre td:nth-of-type(3):before { content: "Premio"; }
   .rpre td:nth-of-type(4):before { content: "Dia"; }
-
     /*==========================================================================
     SIRVE PARA MOSTRAR EL TITULO EN CADA TD DE LA TABLA AHORRO
   ==========================================================================*/
@@ -181,29 +191,4 @@ button{
   .rahorro td:nth-of-type(4):before { content: "Importe"; }
   .rahorro td:nth-of-type(5):before { content: "Status"; }
   .rahorro td:nth-of-type(6):before { content: "Seleccionar"; }
-}
-
-  /*==========================================================================
-    CLASE PARA CENTRAR OBJETOS EN LAS TABLAS
-  ==========================================================================*/
-.cen
-{
- text-align: center;
-}
-
-
-  /*==========================================================================
-    CSS PARA LOS MODAL
-  ==========================================================================*/
-
-.modal-backdrop {
-  z-index: 1040 !important;
-}
-.modal-dialog {
-  margin: 2px auto;
-  z-index: 1100 !important;
-}
-.modal-backdrop {
-  /* bug fix - no overlay */    
-  display: none;    
 }

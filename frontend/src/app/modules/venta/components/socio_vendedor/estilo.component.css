@@ -1,0 +1,85 @@
+
+.contenedor {
+  margin: auto;
+}
+h4{
+  margin-top: 7px;
+  font-family: 'Hind Madurai', sans-serif;
+  color: black;
+}
+ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+ul li{
+    background-color:rgb(220, 220, 220,0.5);
+    width: 30%;
+    border-radius: 7px;
+    border: 1px solid #d1d1d1;
+    text-align: center;
+    margin-left:2.2%;
+    margin-top: 9px;
+}
+.botonventa 
+{
+  font-size: 1.6em;
+  color: rgb(0, 0, 255,0.6);
+  background: none;
+  border: none;
+  margin-top: -22px;
+  padding-right: 35px;
+  outline: none;
+}
+.botonventa:hover
+{
+  font-size: 1.6em;
+  color: rgb(0, 0, 255);
+  background: none;
+  border: none;
+  margin-top: -22px;
+  padding-right: 35px;
+  outline: none;
+}
+.carrito
+{
+  font-size: 2.4em;
+  color: rgb(220, 20, 60,0.7);
+  background: none;
+  border: none;
+  margin-left: 10%;
+  margin-top: 20px;
+  outline: none;
+}
+.carrito:hover
+{
+  color: rgb(220, 20, 60)
+}
+/*===============================================================
+CSS PANTALLAS MENORES A 600px
+=================================================================*/
+@media (max-width: 600px){
+  ul li{
+    width: 90%;
+    margin: auto;
+    margin-top: 7px;
+}
+  p
+  {
+    margin-top: -10px;
+  }
+  .numero
+  {
+  margin-top: -15px;
+  }
+   .botonventa 
+  {
+  font-size: 1.1em;
+  padding-right: 15px;
+  }
+  .carrito
+  {
+    font-size: 1.6em;
+    margin: auto;
+  }
+}
