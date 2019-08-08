@@ -1,63 +1,72 @@
-<div class="principal"> 
-
-        <form #bancoedit="ngForm" (ngSubmit)="onSubmit(bancoedit)" *ngIf="bancovar != null">
-                <div class="container-fluid">
-                        <div class="col-md-6 col-md-offset-3">
-                             <fieldset>
-                                <legend>{{title}}</legend>
-                                <div class="row">
-                                    <mat-form-field class="col-md-6 col-xs-12"> 
-                                        <input type="text"  matInput name="nombreban" #nombre="ngModel" [(ngModel)]="bancovar.nombre" placeholder="Nombre Banco" required>
-                                    </mat-form-field>
-                                    <mat-form-field class="col-md-6 col-xs-12"> 
-                                        <input type="text"  matInput name="alias" #alias="ngModel" [(ngModel)]="bancovar.alias" placeholder="Alias Banco" required>
-                                    </mat-form-field>
-                                </div>
-                                <div class="row">
-                                    <mat-form-field class="col-md-6 col-xs-12"> 
-                                        <input type="text"  matInput name="moneda" #moneda="ngModel" [(ngModel)]="bancovar.moneda" placeholder="Moneda" required>
-                                    </mat-form-field>
-                                    <mat-form-field class="col-md-3 col-xs-12"> 
-                                        <input type="text"  matInput name="cuentaban" #cuentabancaria="ngModel" [(ngModel)]="bancovar.cuentabancaria" placeholder="cuenta bancaria" required>
-                                    </mat-form-field>
-                                    <mat-form-field class="col-md-3 col-xs-12"> 
-                                        <input type="text"  matInput name="cuentacla" #cuentaclabe="ngModel" [(ngModel)]="bancovar.cuentaclabe" placeholder="cuenta clabe" required>
-                                    </mat-form-field>
-                                </div>
-                                <div class="row">
-                                    <mat-form-field class="col-md-6 col-xs-12"> 
-                                        <input type="text"  matInput name="swift" #swift="ngModel" [(ngModel)]="bancovar.swift" placeholder="swift" required>
-                                    </mat-form-field>
-                                    <mat-form-field class="col-md-3 col-xs-12"> 
-                                        <input type="text"  matInput name="sucursal" #sucursal="ngModel" [(ngModel)]="bancovar.sucursal" placeholder="sucursal" required>
-                                    </mat-form-field>
-                                    <mat-form-field class="col-md-3 col-xs-12"> 
-                                        <input type="text"  matInput name="numsuc" #numerosucursal="ngModel" [(ngModel)]="bancovar.numerosucursal" placeholder="numero sucursal" required>
-                                    </mat-form-field>
-                                </div>
-                                <div class="row">
-                                    <mat-form-field class="col-md-6 col-xs-12"> 
-                                        <input type="text"  matInput name="domicilio" #domicilio="ngModel" [(ngModel)]="bancovar.domicilio" placeholder="domicilio" required>
-                                    </mat-form-field>
-                                    <mat-form-field class="col-md-3 col-xs-12"> 
-                                        <input type="text"  matInput name="ciudad" #ciudad="ngModel" [(ngModel)]="bancovar.ciudad" placeholder="ciudad" required>
-                                    </mat-form-field>
-                                    <mat-form-field class="col-md-3 col-xs-12"> 
-                                        <input type="text"  matInput name="pais" #pais="ngModel" [(ngModel)]="bancovar.pais" placeholder="pais" required>
-                                    </mat-form-field>
-                                </div>
-                                <div class="row ">
-                                        <div class="col-md-3 col-xs-3">
-                                            <input type="submit" value="Guardar" class="btn btn-success col-md-12"  [disabled]="!bancoedit.form.valid">
-                                        </div>
-                                        <div class="col-md-3 col-xs-3">
-                                            <a type="submit" class="btn btn-danger col-md-12" (click)="CancelEdit()">Cancelar</a>
-                                        </div>
-                                    </div>
-                            </fieldset>
+<div class="principal">
+    <form #bancoedit="ngForm" (ngSubmit)="onSubmit(bancoedit)" *ngIf="bancovar != null">
+        <div class="container-fluid">
+            <div class="col-md-6 col-md-offset-3">
+                <fieldset>
+                    <legend>{{title}}</legend>
+                    <div class="row">
+                        <mat-form-field class="col-md-6 col-xs-12">
+                            <input type="text" matInput name="nombreban" #nombre="ngModel" [(ngModel)]="bancovar.nombre"
+                                placeholder="Nombre Banco" required>
+                        </mat-form-field>
+                        <mat-form-field class="col-md-6 col-xs-12">
+                            <input type="text" matInput name="alias" #alias="ngModel" [(ngModel)]="bancovar.alias"
+                                placeholder="Alias Banco" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field class="col-md-6 col-xs-12">
+                            <input type="text" matInput name="moneda" #moneda="ngModel" [(ngModel)]="bancovar.moneda"
+                                placeholder="Moneda" required>
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-xs-12">
+                            <input type="text" matInput name="cuentaban" #cuentabancaria="ngModel"
+                                [(ngModel)]="bancovar.cuentabancaria" placeholder="cuenta bancaria" required>
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-xs-12">
+                            <input type="text" matInput name="cuentacla" #cuentaclabe="ngModel"
+                                [(ngModel)]="bancovar.cuentaclabe" placeholder="cuenta clabe" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field class="col-md-6 col-xs-12">
+                            <input type="text" matInput name="swift" #swift="ngModel" [(ngModel)]="bancovar.swift"
+                                placeholder="swift" required>
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-xs-12">
+                            <input type="text" matInput name="sucursal" #sucursal="ngModel"
+                                [(ngModel)]="bancovar.sucursal" placeholder="sucursal" required>
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-xs-12">
+                            <input type="text" matInput name="numsuc" #numerosucursal="ngModel"
+                                [(ngModel)]="bancovar.numerosucursal" placeholder="numero sucursal" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field class="col-md-6 col-xs-12">
+                            <input type="text" matInput name="domicilio" #domicilio="ngModel"
+                                [(ngModel)]="bancovar.domicilio" placeholder="domicilio" required>
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-xs-12">
+                            <input type="text" matInput name="ciudad" #ciudad="ngModel" [(ngModel)]="bancovar.ciudad"
+                                placeholder="ciudad" required>
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-xs-12">
+                            <input type="text" matInput name="pais" #pais="ngModel" [(ngModel)]="bancovar.pais"
+                                placeholder="pais" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="row ">
+                        <div class="col-md-3 col-xs-3">
+                            <input type="submit" value="Guardar" class="btn btn-success col-md-12"
+                                [disabled]="!bancoedit.form.valid">
                         </div>
-
-                   
-                </div>
-        </form>
+                        <div class="col-md-3 col-xs-3">
+                            <a type="submit" class="btn btn-danger col-md-12" (click)="CancelEdit()">Cancelar</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </form>
 </div>

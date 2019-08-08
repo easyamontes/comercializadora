@@ -10,6 +10,7 @@ import { Almacen } from './../../../../models/almacen';
 @Component({
     selector: 'ven-view',
     templateUrl: './socio.component.html',
+    styleUrls:['./estilo.component.css'],
     providers: [
         UserService,
         GeneralCallService

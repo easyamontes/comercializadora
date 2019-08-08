@@ -18,6 +18,7 @@ import { AhorroViewComponent } from './components/ahorro/ahorro-view.component'
 import { AhorroStatusComponent } from './components/ahorro/ahorro-status.component';
 import { ahorroInicioComponent } from './components/ahorro/ahorro-inicio.component';
 import { OverViewComponent } from './components/over/view.component';
+import {FilterPipe} from './components/pipes/filter.pipe';
 
 
 
@@ -37,7 +38,8 @@ import { OverViewComponent } from './components/over/view.component';
         AhorroViewComponent,      
         AhorroStatusComponent,
         ahorroInicioComponent,
-        OverViewComponent
+        OverViewComponent,
+        FilterPipe
       
     ],
     imports: [

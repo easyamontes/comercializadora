@@ -21,16 +21,11 @@ export class PedidoStoreComponent implements OnInit, DoCheck {
     public title: string;
     public token: any;
     public pedi: Pedido;
-    public pedidos: MatTableDataSource<Almacen>;
+    public pedidos: Array<Almacen>;
     public conceptoventa: Array<Almacen>;
     public status: any;
-    public displayedColumns: string[] = ['codigo', 'existencia', 'nombre', 'cantidad', 'precio', 'total', 'diferencia', 'eliminar'];
     public lisart: Array<any>;
     public perso: Array<any>;
-
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
-
 
     constructor(
         private _UserService: UserService,
@@ -76,13 +71,13 @@ export class PedidoStoreComponent implements OnInit, DoCheck {
 
 
     setArticulo(id, index) {
-        this.pedidos.data[index].codigo = this.lisart.find(x => x.id == id).codigo;
-        this.pedidos.data[index].proveedor_id = this.lisart.find(x => x.id == id).proveedor_id;
-        this.pedidos.data[index].articulo_id = this.lisart.find(x => x.id == id).articulo_id;
-        this.pedidos.data[index].articulo = this.lisart.find(x => x.id == id).articulo;
-        this.pedidos.data[index].marca = this.lisart.find(x => x.id == id).marca;
-        this.pedidos.data[index].modelo = this.lisart.find(x => x.id == id).modelo;
-        this.pedidos.data[index].existencia = this.lisart.find(x => x.id == id).totalExistencia;
+        this.pedidos[index].codigo = this.lisart.find(x => x.id == id).codigo;
+        this.pedidos[index].proveedor_id = this.lisart.find(x => x.id == id).proveedor_id;
+        this.pedidos[index].articulo_id = this.lisart.find(x => x.id == id).articulo_id;
+        this.pedidos[index].articulo = this.lisart.find(x => x.id == id).articulo;
+        this.pedidos[index].marca = this.lisart.find(x => x.id == id).marca;
+        this.pedidos[index].modelo = this.lisart.find(x => x.id == id).modelo;
+        this.pedidos[index].existencia = this.lisart.find(x => x.id == id).totalExistencia;
     }
 
     setPersonal(id) {
@@ -96,9 +91,7 @@ export class PedidoStoreComponent implements OnInit, DoCheck {
     addConcepto() {
         let nuevoConcepto = new Almacen(0, 0, 0, 0, 0, 0, 0, null, "SALIDA", null, null, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         this.conceptoventa.push(nuevoConcepto);
-        this.pedidos = new MatTableDataSource(this.conceptoventa);
-        this.pedidos.paginator = this.paginator;
-        this.pedidos.sort = this.sort;
+        this.pedidos = this.conceptoventa;
 
     }
 
@@ -146,8 +139,7 @@ export class PedidoStoreComponent implements OnInit, DoCheck {
     ========================================================== */
 
     deleteRecord(index) {
-        this.pedidos.data.splice(index, 1);
-        this.pedidos._updateChangeSubscription();
+        this.pedidos.splice(index, 1);
     }
 
     /*========================================================

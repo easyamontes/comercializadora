@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router,ActivatedRoute} from '@angular/router';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { UserService } from '../../../../services/user.service';
 import {GeneralCallService} from '../../../../services/generalCall.service';
 import { Almacen } from './../../../../models/almacen';
@@ -23,14 +22,9 @@ import { Pedido } from 'src/app/models/pedido';
          public identity:any;
          public token:any;
          public pedi: Pedido;
-         public pedidos: MatTableDataSource<Almacen>;
+         public pedidos:Array<Almacen>;
          public conceptoventa: Array<Almacen>;
          public list:Array<any>;
-         public displayedColumns: string[] = ['codigo','nombre','diferencia','devolucion','ventas'];
-
-
-         @ViewChild(MatPaginator) paginator: MatPaginator;
-         @ViewChild(MatSort) sort: MatSort;
 
          constructor(
             private _UserService: UserService,
@@ -57,7 +51,6 @@ import { Pedido } from 'src/app/models/pedido';
             );
             this.getPremio();
             
-            
          }
 
   /*=======================================================================
@@ -71,7 +64,6 @@ import { Pedido } from 'src/app/models/pedido';
             )
         }
 
-
 /*=============================================================================
            LISTA DE PEDIDOS TABLA PEDIDOS
   =============================================================================== */   
@@ -81,7 +73,7 @@ import { Pedido } from 'src/app/models/pedido';
                 response=>{
                     if(response.status == 'success'){
                         this.pedi = response.pedido;
-                        this.pedidos = new MatTableDataSource(response.pedido.articulos);
+                        this.pedidos = (response.pedido.articulos);
 
                     }else{
                         this._router.navigate(['ventas']);
@@ -95,16 +87,15 @@ import { Pedido } from 'src/app/models/pedido';
            UPDATE DE TABLA PEDIDOS Y CREACION DE NUEVO REGISTRO PARA LOS CONCEPTOS
          =============================================================================== */   
          Guardar(){
-            this.pedi.tipo = "ENTRADA";
-           
+            this.pedi.tipo = "ENTRADA";           
              this._GeneralCallService.updateRecord(this.token,'ventas',this.pedi,this.pedi.id).subscribe(
                 response=>{
                     this.pedi = response.pedido;
                     console.log(this.pedi)
                    this.status = response.status;
                          if(this.status == 'success'){
-                             this.conceptoventa = this.pedidos.data;
-                            this._GeneralCallService.updateRecord(this.token,'act',this.pedidos.data,this.pedidos.data[0].pedido_id).subscribe(
+                             this.conceptoventa = this.pedidos;
+                            this._GeneralCallService.updateRecord(this.token,'act',this.pedidos,this.pedidos[0].pedido_id).subscribe(
                             )
                              this.conceptoventa.forEach(item=>{
                                 item.pedido_id = this.pedi.id;
@@ -141,11 +132,10 @@ import { Pedido } from 'src/app/models/pedido';
       }
 
       checkMinMax(index){
-        let cantidad = this.pedidos.data[index].existencia ;
-        let recepcion = this.pedidos.data[index].devolucion;
+        let cantidad = this.pedidos[index].existencia ;
+        let recepcion = this.pedidos[index].devolucion;
         if(cantidad < recepcion || recepcion < 0 || !recepcion){
-            this.pedidos.data[index].devolucion = 0;
-            this.pedidos._updateChangeSubscription;
+            this.pedidos[index].devolucion = 0;
         }
     }
          /*=============================================================================

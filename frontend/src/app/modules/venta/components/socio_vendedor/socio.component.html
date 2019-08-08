@@ -1,36 +1,33 @@
-    <div class="container-fluid">
-        <legend *ngIf="vent" >{{title}}</legend>
-        <div class="form-group">
-            <mat-list>
-                <mat-list-item *ngFor="let alma of vent; let i = index" >
-                    <mat-form-field class="col-md-3 col-3">
-                        <input type="text" matInput #ctipo="ngModel" [(ngModel)]="alma.articulo" placeholder="Articulo"
-                            readonly>
-                    </mat-form-field>
-                    <mat-form-field class="col-md-3 col-3">
-                        <input type="text"  matInput #ctipo="ngModel" [(ngModel)]="alma.existencia" placeholder="Disponible"
-                            readonly>
-                    </mat-form-field>
-                    <mat-form-field class="col-md-3 col-2">
-                        <input type="text"  matInput #ctipo="ngModel" [(ngModel)]="alma.venta" placeholder="Venta"
-                            readonly>
-                    </mat-form-field>
-                    <button class="botontaba col-md-1 col-2" (click) ="aumentar(i,'suma');">
-                        <span>
-                            <i class="fas fa-plus"  value="aumentar"></i>
-                        </span>
-                    </button>
-                    <button class="botontaba col-md-1" (click) ="aumentar(i,'resta');">
-                        <span>
-                            <i class="fas fa-minus"></i>
-                        </span>
-                    </button>
-                </mat-list-item>
-                <button class="botontaba col-md-1" (click) ="Guardar()" *ngIf="vent">
+<div class="container-fluid">
+    <div class="=contenedor">
+        <ul>
+            <div class="row">
+                <li *ngFor="let alma of vent; let i = index">
+                    <h4>{{alma.articulo}}</h4>
+                    <p><span>Existencia: </span>{{alma.existencia - alma.venta}}</p>
+                    <div class="numero">
+                        <button class="botonventa col-md-1 col-2" (click)="aumentar(i,'suma');">
+                            <span>
+                                <i class="fas fa-plus" value="aumentar"></i>
+                            </span>
+                        </button>
+                        <span *ngIf="alma.venta">{{alma.venta}}</span>
+                        <span *ngIf="!alma.venta">0</span>
+                        <button class="botonventa col-md-1 col-2" (click)="aumentar(i,'resta');">
+                            <span>
+                                <i class="fas fa-minus"></i>
+                            </span>
+                        </button>
+                    </div>
+                </li>
+            </div>
+            <div class="row">
+                <button class="carrito col-md-1" (click)="Guardar()" *ngIf="vent">
                     <span>
                         <i class="fas fa-shopping-cart"></i>
                     </span>
                 </button>
-            </mat-list>
-        </div>
+            </div>
+        </ul>
     </div>
+</div>

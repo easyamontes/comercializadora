@@ -16,9 +16,6 @@ import { AhorroStatusComponent } from './components/ahorro/ahorro-status.compone
 import { ahorroInicioComponent } from './components/ahorro/ahorro-inicio.component';
 import { OverViewComponent } from './components/over/view.component';
 
-;
-
-
 
 const ventaRoutes: Routes = [
     {
