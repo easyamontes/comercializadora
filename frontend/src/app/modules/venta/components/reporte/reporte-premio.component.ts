@@ -63,7 +63,6 @@ export class ReportePremioComponent implements OnInit {
                 this.busqueda.inicio = null;
                 this.busqueda.final = null;
                 this.busqueda.socio = null;
-                console.log('lispremio')
             }
         )
 

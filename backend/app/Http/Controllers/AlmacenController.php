@@ -149,30 +149,44 @@ class AlmacenController extends Controller
     function surteRecord($item, $user,$per)
     {
         $qrty = Almacen::where('articulo_id', '=', $item['articulo_id'])
-            ->where('userp_id', '=', $per)
+            ->where([['userp_id', '=', $per],['existencia','>',0]])
             ->get();
         $exist = json_decode($qrty, true);
         $dif = 0;
         foreach ($exist as $existe) {
             if ($existe['existencia'] >= $item['recepcion']) {
-                $dif =  $existe['existencia'] - $item['recepcion'];
+                $dif = $existe['existencia'] - $item['recepcion'];
                 $existe['existencia'] = $dif;
-                $upalma = new Almacen();
-                $upalma = Almacen::where('id', $existe['id'])->update($existe);
+                if($item['tipo'] == "VENTA"){
+                    $item['existencia'] = 0;
+                }else{
+                    $item['existencia'] = $item['recepcion'];
+                }
+                $item['cantidad'] = $item['recepcion'];
+                $item['pendiente'] = $item['recepcion'];
                 $item['id_almacen'] = $existe['id'];
                 $item['costo'] = $existe['precio'];
+                Almacen::where('id', $existe['id'])->update($existe);
                 return $item;
                 break;
             } else {
-                $dif =  $existe['existencia'] - $item['recepcion'];
-                if ($dif >= 0) {
-                    $existe['existencia'] = $dif;
+                $dif = $item['recepcion'] - $existe['existencia'];
+                if ($dif > 0) {
+                    $ext = $existe['existencia'];
+                    $existe['existencia'] = 0;
+                    if($item['tipo'] == "VENTA"){
+                        $item['existencia'] = 0;
+                    }else{
+                        $item['existencia'] = $ext;
+                    }
                     $item['id_almacen'] = $existe['id'];
-                    $item['recepcion'] = $dif - $item['recepcion'];
-                    $upalma = new Almacen();
-                    $upalma = Almacen::where('id', $existe['id'])->update($existe);
+                    $item['recepcion'] = $ext;
+                    $item['cantidad']  = $ext;
+                    $item['pendiente'] = $ext;
                     $item['costo'] = $existe['precio'];
-                    saveRecod($item, $user);
+                    Almacen::where('id', $existe['id'])->update($existe);
+                    $this->saveRecod($item, $user);
+                    $item['recepcion'] = $dif;
                 }
             }
         }

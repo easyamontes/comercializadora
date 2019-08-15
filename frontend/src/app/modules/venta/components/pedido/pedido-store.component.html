@@ -13,10 +13,10 @@
             <mat-form-field class="col-md-5 col-xs-12">
                 <mat-select matInput [(ngModel)]="pedi.pdestino" #nombre="ngModel" (ngModelChange)="setPersonal($event)"
                     placeholder="Asignar">
-                    <mat-option *ngFor="let  pedi of perso" [value]="pedi.id">{{pedi.nombre}}</mat-option>
+                    <mat-option *ngFor="let  pedi of perso" [value]="pedi.id">{{pedi.nombre +' '+ pedi.apellidop +' '+pedi.apellidom | uppercase }}</mat-option>
                 </mat-select>
             </mat-form-field>
-            <!--=============================================================
+        <!--=============================================================
          boton agregar articulo
         =============================================================-->
             <div class="col-xs-12 col-md-3">
@@ -28,37 +28,40 @@
          Creando tabla 
     =============================================================-->
     <div class="reporte">
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover table-responsive">
             <thead class="tablareporte">
                 <tr>
-                    <th>Codigo</th>
-                    <th>Existencia</th>
-                    <th>Articulo</th>
-                    <th>Cantidad</th>
-                    <th>Precio</th>
-                    <th>Total</th>
-                    <th>Dif. Existencia</th>
+                    <th style="width:10%">Codigo</th>
+                    <th style="width:10%">Existencia</th>
+                    <th style="width:20%">Articulo</th>
+                    <th style="width:10%">Cantidad</th>
+                    <th style="width:10%">Precio</th>
+                    <th style="width:20%">Total</th>
+                    <th style="width:10%">Dif.</th>
                     <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let lis of pedidos;let id = index">
-                    <td>{{lis.codigo}}</td>
-                    <td>{{lis.existencia}}</td>
-                    <td>
-                        <select class="cuadrotexto" [(ngModel)]="lis.id_almacen" #articulo="ngModel"
+                    <td style="width: 10%">{{lis.codigo}}</td>
+                    <td style="width: 10%">{{lis.existencia}}</td>
+                    <td style="width: 20%">
+                        <select style="width: 95%" class="cuadrotexto" [(ngModel)]="lis.id_almacen" #articulo="ngModel"
                             (ngModelChange)="setArticulo($event,id)">
                             <option *ngFor="let artitem of lisart" [value]="artitem.id">{{artitem.articulo}}</option>
                         </select>
                     </td>
-                    <td> <input class="cuadrotexto" [(ngModel)]="lis.cantidad" #factura="ngModel" type="number" min="1"
+                    <td style="width: 10%"> 
+                        <input style="width: 95%" class="cuadrotexto" [(ngModel)]="lis.cantidad" #factura="ngModel" type="number" min="1"
                             max="{{lis.existencia}}" pattern="^[0-9]+">
                     </td>
-                    <td> <input class="cuadrotexto" [(ngModel)]="lis.precio" #factura="ngModel" type="number"></td>
-                    <td>{{lis.cantidad * lis.precio  |currency}}</td>
-                    <td>{{lis.existencia - lis.cantidad }}</td>
+                    <td style="width: 10%"> 
+                        <input style="width: 95%" class="cuadrotexto" [(ngModel)]="lis.precio" #factura="ngModel" type="number">
+                    </td>
+                    <td style="width: 20%">{{lis.cantidad * lis.precio  |currency}}</td>
+                    <td style="width: 10%">{{lis.existencia - lis.cantidad }}</td>
                     <td class="cen">
-                        <button class="botontaba" (click)="deleteRecord(i)" color="primary">
+                        <button class="botontaba" (click)="deleteRecord(id)" color="primary">
                             <span> <i class="fas fa-trash-alt"></i></span>
                         </button>
                     </td>

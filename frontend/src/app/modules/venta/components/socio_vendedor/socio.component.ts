@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatListItem, MatListModule } from '@angular/material';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 //Servicios
 import { UserService } from './../../../../services/user.service';
@@ -43,7 +42,6 @@ export class SocioComponent implements OnInit {
         this._GeneralCallService.getRecords(this.token, 'liscambaceo').subscribe(
             response => {
                 this.vent = response.almacen[0].articulos;
-                console.log('liscambaceo');
             }
         )
     }

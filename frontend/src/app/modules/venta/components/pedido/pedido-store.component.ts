@@ -1,10 +1,11 @@
-import { Component, OnInit, DoCheck, ViewChild } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
+import { PersonalUtil } from '../../../../services/util/personal.util';
 import { Router } from '@angular/router';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { UserService } from '../../../../services/user.service';
 import { GeneralCallService } from '../../../../services/generalCall.service';
 import { Almacen } from './../../../../models/almacen';
 import { Pedido } from 'src/app/models/pedido';
+import { Personal } from 'src/app/models/personal';
 
 
 @Component({
@@ -13,7 +14,8 @@ import { Pedido } from 'src/app/models/pedido';
 
     providers: [
         UserService,
-        GeneralCallService
+        GeneralCallService,
+        PersonalUtil
     ]
 })
 
@@ -22,31 +24,34 @@ export class PedidoStoreComponent implements OnInit, DoCheck {
     public token: any;
     public pedi: Pedido;
     public pedidos: Array<Almacen>;
-    public conceptoventa: Array<Almacen>;
     public status: any;
     public lisart: Array<any>;
-    public perso: Array<any>;
+    public perso: Array<Personal>;
 
     constructor(
         private _UserService: UserService,
         private _GeneralCallService: GeneralCallService,
-        private _router: Router
+        private _router: Router,
+        private _PersonalUtil: PersonalUtil,
     ) {
         this.title = 'Nuevo Pedido';
-        this.conceptoventa = [];
+        this.pedidos = [];
         this.token = this._UserService.getToken();
         this.pedi = new Pedido(0, '', 0, 0, '', "SALIDA", '', 0, null,null,null,null,null);
     }
+
     ngOnInit() {
         this.getListArticulo();
         this.getListPersonal();
     }//end ngOnInit
+
     ngDoCheck() {
         if (this.pedi) {
             this.pedi.importe = this.getTotalCost();
         }
 
     }
+
     /*==========================================================
       GENERAR LISTA DE ARTICULOS
      =============================================================*/
@@ -57,14 +62,15 @@ export class PedidoStoreComponent implements OnInit, DoCheck {
             }
         );
     }
+
     /*==========================================================
       GENERAR LISTA DEL PERSONAL
      =============================================================*/
-
     getListPersonal() {
-        this._GeneralCallService.getRecords(this.token, 'personal').subscribe(
+        this._GeneralCallService.getRecords(this.token, 'here').subscribe(
             response => {
-                this.perso = response.personal;
+                this.perso = this._PersonalUtil.getFamilia(response);
+                this.perso.splice(0,1);
             }
         );
     }
@@ -90,25 +96,19 @@ export class PedidoStoreComponent implements OnInit, DoCheck {
    ================================================================= */
     addConcepto() {
         let nuevoConcepto = new Almacen(0, 0, 0, 0, 0, 0, 0, null, "SALIDA", null, null, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        this.conceptoventa.push(nuevoConcepto);
-        this.pedidos = this.conceptoventa;
-
+        this.pedidos.push(nuevoConcepto);
     }
 
     /*=========================================================
        BOTON GUARDAR
     ============================================================ */
-
     Guardar() {
-        console.log(this.token);
         this._GeneralCallService.storeRecord(this.token, 'ventas', this.pedi).subscribe(
             response => {
                 this.pedi = response.pedido;
                 if (response.code == 200) {
-
-                    this.conceptoventa.forEach(item => {
+                    this.pedidos.forEach(item => {
                         item.pedido_id = this.pedi.id;
-                        item.cantidad = item.cantidad;
                         item.existencia = item.cantidad;
                         item.recepcion = item.cantidad;
                         item.userp_id = this.pedi.pdestino;
@@ -117,8 +117,7 @@ export class PedidoStoreComponent implements OnInit, DoCheck {
                     /*==============================================================
                        GUARDAR CONCEPTOS INGRESADOS DENTRO DEL BOTON GUARDAR
                     ================================================================ */
-
-                    this._GeneralCallService.storeRecord(this.token, 'almaitem', this.conceptoventa).subscribe(
+                    this._GeneralCallService.storeRecord(this.token, 'almaitem',this.pedidos).subscribe(
                         response => {
                             console.log(response);
 
@@ -134,6 +133,7 @@ export class PedidoStoreComponent implements OnInit, DoCheck {
                 console.log(<any>error);
             });
     }
+
     /*========================================================
     ELIMINAR REGISTRO DE CONCEPTOS
     ========================================================== */
@@ -145,19 +145,18 @@ export class PedidoStoreComponent implements OnInit, DoCheck {
     /*========================================================
     CANCELAR TODO EL REGISTRO CON LOS ARTICULOS
     ==========================================================*/
-
     CancelEdit() {
         this.pedi = null;
         this._router.navigate(['./ventas/welcome']);
     }
 
     getTotalCost() {
-        return this.conceptoventa.map(c => c.total).reduce((ant, act) => ant + act, 0);
+        return this.pedidos.map(c => c.total).reduce((ant, act) => ant + act, 0);
     }
 
 
     validaExistncia(index) {
-        this.conceptoventa[index].total = this.conceptoventa[index].cantidad * this.conceptoventa[index].precio;
+        this.pedidos[index].total = this.pedidos[index].cantidad * this.pedidos[index].precio;
     }
-}
 
+}

@@ -91,7 +91,6 @@ import { Pedido } from 'src/app/models/pedido';
              this._GeneralCallService.updateRecord(this.token,'ventas',this.pedi,this.pedi.id).subscribe(
                 response=>{
                     this.pedi = response.pedido;
-                    console.log(this.pedi)
                    this.status = response.status;
                          if(this.status == 'success'){
                              this.conceptoventa = this.pedidos;
@@ -117,8 +116,6 @@ import { Pedido } from 'src/app/models/pedido';
 
                       this._GeneralCallService.storeRecord(this.token,'almaitem',this.conceptoventa).subscribe(
                           response =>{  
-                              console.log (this.conceptoventa);
-          
                    },error=>{
                              console.log(<any>error);
                            });

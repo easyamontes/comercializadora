@@ -41,7 +41,6 @@ export class PremioStoreComponent implements OnInit {
     }
 
       onSubmit(form){
-        console.log(this.token);
          this._GeneralCallService.storeRecord(this.token,'premios',this.premi).subscribe(
             response=>{
                 this.premi = response.premio;

@@ -19,7 +19,7 @@ class PedidoController extends Controller
      ======================================================*/
     public function index(Request $request)
     {
-        $user = $request->input('userid', null);
+        $user = $request->input('per', null);
         $pedido = Pedido::where('tipo', '=', 'SALIDA')
             ->where('user_id', '=', $user)
             ->get()->load('user');

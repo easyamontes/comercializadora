@@ -59,8 +59,7 @@ export class PersonalRegisterComponent implements OnInit{
                     this.closeDialog();
                 }
             },error=>{
-                let reserror = <any>error;
-                console.log(reserror);
+                console.log(<any>error);
             });
     }
 

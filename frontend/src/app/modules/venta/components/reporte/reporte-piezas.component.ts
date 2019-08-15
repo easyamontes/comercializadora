@@ -54,7 +54,6 @@ export class ReportePiezaComponent implements OnInit {
                 this.busqueda.socio = null;
                 this.busqueda.final = null;
                 this.busqueda.inicio = null;
-                console.log('listapieza')
             }
         )
 

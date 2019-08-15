@@ -33,6 +33,7 @@ export class RequisicionStoreComponent implements OnInit {
     public provlist: Array<any>;
     public artilist: Array<any>;
     public spin: boolean;
+    public sid: number;
 
     constructor(
         private _UserService: UserService,
@@ -73,6 +74,7 @@ export class RequisicionStoreComponent implements OnInit {
     ====================================================================*/
     setVenta(date) {
         this.title = 'Nuevo Traspaso';
+        this.sid = 0;
         this.rurl = ["here", "almaitem"];
         this.requi = new Requisicion(0, this.identity.sub, 0, 0, 0, "VENTA", 'NUEVO', 0, date, null, null, null);
     }
@@ -81,10 +83,10 @@ export class RequisicionStoreComponent implements OnInit {
         this.getListForSelect();
         this.getListArticulo();
     }
-
     /*=================================================================
                     Invoca la de Proveedores
     ====================================================================*/
+
     getListForSelect() {
         this._GeneralCallService.getRecords(this.token, this.rurl[0]).subscribe(
             response => {
@@ -121,7 +123,7 @@ export class RequisicionStoreComponent implements OnInit {
             this.articulos[index].marca = this.artilist.find(x => x.id == id).marca;
             this.articulos[index].modelo = this.artilist.find(x => x.id == id).modelo;
             if (this.params == 1) {
-                this.articulos[index].articulo_id = this.artilist.find(x => x.id == id).articulo_id;
+                this.sid = this.artilist.find(x => x.id == id).articulo_id;
                 this.articulos[index].proveedor_id = this.artilist.find(x => x.id == id).proveedor_id;
                 this.articulos[index].costo = this.artilist.find(x => x.id == id).costo;
             }
@@ -164,6 +166,7 @@ export class RequisicionStoreComponent implements OnInit {
                 if (response.code == 200) {
                     this.requi = response.requisicion;
                     for (var c = 0; c < this.articulos.length; c++) {
+                        this.articulos[c].articulo_id = this.sid;
                         this.articulos[c].total = this.articulos[c].cantidad * this.articulos[c].precio;
                         this.articulos[c].folio = this.requi.folio;
                         this.articulos[c].tipo = this.requi.tipo;
@@ -171,6 +174,8 @@ export class RequisicionStoreComponent implements OnInit {
                         this.articulos[c].userp_id = this.requi.pdestino_id;
                         this.articulos[c].pendiente = this.articulos[c].cantidad;
                         this.articulos[c].recepcion = this.articulos[c].cantidad;
+                        if (this.params == 1) {
+                        }
                     }
                     this._GeneralCallService.storeRecord(this.token, 'almaitem', this.articulos).subscribe(
                         response => {

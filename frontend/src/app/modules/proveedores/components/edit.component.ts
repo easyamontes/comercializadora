@@ -61,8 +61,6 @@ export class ProveedorEditComponent implements OnInit{
     addContacto(){
         let nuevoContacto = new Contacto(0,0,this.proveedor.id,'','',null);
         this.contactos.push(nuevoContacto);
-        console.log(this.contactos);
-        
     }
 
     /**Funcionpara eliminar el contacto */
@@ -80,9 +78,7 @@ export class ProveedorEditComponent implements OnInit{
                 if(this.status == 'success'){
                     // Mandando los contactos a guardar
                     this._GeneralCallService.storeRecord(this.token,'contactos',this.contactos).subscribe(
-                        response =>{
-                            console.log(<any>response);
-                        },error=>{
+                        error=>{
                             console.log(<any>error);
                         });
                     this._router.navigate(['proveedores']);

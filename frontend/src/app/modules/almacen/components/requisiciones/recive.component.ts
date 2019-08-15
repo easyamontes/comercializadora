@@ -88,14 +88,14 @@ export class RequisicionReciveComponent implements OnInit{
                             response=>{
                                 this._router.navigate(['almacen/requisicions']);
                         },error=>{
-                            console.log("Error en almacen" + <any>error);
+                            console.log(<any>error);
                             this._MatSnackBar.open('Error en almacen','ok',{
                                 duration: 2000
                             });
                         });
                     }
             },error=>{
-                console.log("Error en la requisicion" + <any>error);
+                console.log(<any>error);
                 this._MatSnackBar.open('Error en la requisicion','ok',{
                     duration: 2000
                 });
