@@ -47,7 +47,17 @@ export class GeneralCallService{
                                     .set('Authorization', token);
         return this._http.put(this.url+page+'/'+id ,params ,{headers:headers});
     }
-      //funcion para eliminar un registro
+     
+    /**Funcion para editar Barios Registros*/
+    updateArrayRecord(token,page:string, elemento:Array<any>, id): Observable<any>{
+        let json = JSON.stringify(elemento);
+        let params = "json=" + json;
+        let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+                                    .set('Authorization', token);
+        return this._http.put(this.url+page+'/'+id ,params ,{headers:headers});
+    }
+    
+    //funcion para eliminar un registro
     delteRcord(token,page:string,id): Observable<any>{
         let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
                                     .set('Authorization', token);

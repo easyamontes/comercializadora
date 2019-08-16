@@ -32,6 +32,7 @@
                 <tr>
                     <th>Codigo</th>
                     <th>Articulo</th>
+                    <th>Precio</th>
                     <th>Pendiente</th>
                     <th>Recepcion</th>
                 </tr>
@@ -40,6 +41,7 @@
                 <tr *ngFor="let lis of articulos | filter: busqueda.socio; let id = index">
                     <td>{{lis.codigo}}</td>
                     <td>{{lis.articulo}}</td>
+                    <td>{{lis.precio |currency}}</td>
                     <td>{{lis.pendiente}}</td>
                     <td>
                         <input class="cuadrotexto" style="margin-top: -8px" (change)="checkMinMax(id)"

@@ -118,17 +118,17 @@ export class RequisicionStoreComponent implements OnInit {
         if (!id) {
             this.articulos[index] = this.cleanKeys(this.articulos[index]);
         } else {
-            this.articulos[index].codigo = this.artilist.find(x => x.id == id).codigo;
-            this.articulos[index].articulo = this.artilist.find(x => x.id == id).articulo;
-            this.articulos[index].marca = this.artilist.find(x => x.id == id).marca;
-            this.articulos[index].modelo = this.artilist.find(x => x.id == id).modelo;
-            if (this.params == 1) {
-                this.sid = this.artilist.find(x => x.id == id).articulo_id;
-                this.articulos[index].proveedor_id = this.artilist.find(x => x.id == id).proveedor_id;
-                this.articulos[index].costo = this.artilist.find(x => x.id == id).costo;
+            this.articulos[index].codigo = this.artilist.find(x => x.id == id || x.articulo_id == id).codigo;
+            this.articulos[index].articulo = this.artilist.find(x => x.id == id || x.articulo_id == id).articulo;
+            this.articulos[index].marca = this.artilist.find(x => x.id == id || x.articulo_id == id).marca;
+            this.articulos[index].modelo = this.artilist.find(x => x.id == id || x.articulo_id == id).modelo;
+            this.articulos[index].totalExistencia = this.artilist.find(x => x.id == id || x.articulo_id == id).totalExistencia;
+            if (this.params == 1) {;
+                this.articulos[index].proveedor_id = this.artilist.find(x => x.id == id || x.articulo_id == id).proveedor_id;
+                this.articulos[index].costo = this.artilist.find(x => x.id == id || x.articulo_id == id).costo;
             }
-            this.articulos[index].totalExistencia = this.artilist.find(x => x.id == id).totalExistencia;
         }
+        console.log(this.articulos);
     }
 
     cleanKeys(Obj: Almacen): Almacen {
@@ -166,7 +166,6 @@ export class RequisicionStoreComponent implements OnInit {
                 if (response.code == 200) {
                     this.requi = response.requisicion;
                     for (var c = 0; c < this.articulos.length; c++) {
-                        this.articulos[c].articulo_id = this.sid;
                         this.articulos[c].total = this.articulos[c].cantidad * this.articulos[c].precio;
                         this.articulos[c].folio = this.requi.folio;
                         this.articulos[c].tipo = this.requi.tipo;
@@ -174,7 +173,8 @@ export class RequisicionStoreComponent implements OnInit {
                         this.articulos[c].userp_id = this.requi.pdestino_id;
                         this.articulos[c].pendiente = this.articulos[c].cantidad;
                         this.articulos[c].recepcion = this.articulos[c].cantidad;
-                        if (this.params == 1) {
+                        if (!this.params) {
+                            this.articulos[c].costo = this.articulos[c].precio;
                         }
                     }
                     this._GeneralCallService.storeRecord(this.token, 'almaitem', this.articulos).subscribe(
