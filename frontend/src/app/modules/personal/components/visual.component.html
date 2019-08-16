@@ -95,7 +95,7 @@
                                 placeholder="C.P." readonly>
                         </mat-form-field>
                     </div>
-                    <div class="row form-group">
+                    <div class="row">
                         <mat-form-field class="col-md-10 col-xs-12">
                             <input type="text" matInput name="oficina" #oficina="ngModel" [(ngModel)]="persona.oficina"
                                 placeholder="oficina" readonly>
@@ -103,9 +103,9 @@
                     </div>
                 </fieldset>
             </div>
-            <div class="row ">
+            <div class="row">
                 <div class="col-md-6 col-xs-3">
-                    <a type="submit" class="btn btn-danger col-md-12" (click)="CancelEdit()">Regresar</a>
+                    <a type="submit" class="btn btn-danger col-md-12"  (click)="CancelEdit()">Regresar</a>
                 </div>
             </div>
         </div>
