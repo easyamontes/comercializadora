@@ -21,7 +21,7 @@ class AlmacenController extends Controller
     {
         $per = $json = $request->input('per', null);
         $almacen = Almacen::selectRaw(' * ,SUM(existencia) as totalExistencia, AVG(precio) AS costo')
-            ->where('userp_id',$per)
+            ->where([['userp_id', '=', $per],['existencia','>',0]])
             ->groupBy('articulo_id')
             ->get()->load('proveedor');
         $data = array(
@@ -45,6 +45,7 @@ class AlmacenController extends Controller
             $tipo = $item['tipo'];
             if( $tipo != "COMPRA" && $tipo != "ENTRADA"){
                 $item = $this->surteRecord($item,$user,$per);
+                //return $this->surteRecord($item,$user,$per);
             }
             $almacen = $this->saveRecod($item, $user);
         }
@@ -63,15 +64,12 @@ class AlmacenController extends Controller
     function update(Request $request){
         $json = $request->input('json', null);
         $params_array = json_decode($json, true);
-        $user = $json = $request->input('userid', null);
         foreach ($params_array as $item) {
             unset($item['totalExistencia']);
             unset($item['user']);
-            $upalma = new Almacen();
-            $upalma = Almacen::where('id', $item['id'])->update($item);
+            Almacen::where('id', $item['id'])->update($item);
         }
         return response()->json(array(
-            'almacen' => $upalma,
             'code'=> 200,
             'status' => 'success'
         ), 200);

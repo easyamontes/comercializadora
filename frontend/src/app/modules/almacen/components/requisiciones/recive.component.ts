@@ -28,7 +28,6 @@ export class RequisicionReciveComponent implements OnInit{
     public token: any;
     public identity: any;
     public requi: Requisicion;
-    public item: Array<Almacen>;
     public articulos: Array<Almacen>;
     public proveedor: string = "";
     public persona: string = "";
@@ -84,7 +83,7 @@ export class RequisicionReciveComponent implements OnInit{
                 response=>{
                     if(response.code == 200){
                         this.SetExistencia();
-                        this._GeneralCallService.updateRecord(this.token,'almaitem',this.articulos,1).subscribe(
+                        this._GeneralCallService.updateArrayRecord(this.token,'almaitem',this.articulos,1).subscribe(
                             response=>{
                                 this._router.navigate(['almacen/requisicions']);
                         },error=>{
