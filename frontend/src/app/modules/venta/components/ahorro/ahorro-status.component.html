@@ -12,6 +12,12 @@
                 <mat-option *ngFor="let pedi of perso" [value]="pedi.id">{{pedi.nombre}}</mat-option>
             </mat-select>
         </mat-form-field>
+        <mat-form-field class="col-md-3 col-xs-12">
+                <mat-select matInput [(ngModel)]="busqueda.final" placeholder="Ver">
+                        <mat-option value="SIN PAGAR">SIN PAGAR</mat-option>
+                        <mat-option value="PAGADO">PAGADO</mat-option>
+                </mat-select>
+            </mat-form-field>
         <button type="submit" class=" col-md-3 col-xs-12  botonbuscar " (click)="listaa()">Buscar</button>
         <div *ngIf="aler" class="col-md-6 col-xs-12 ">
             <div class="alert alert-danger alert-dismissible">
@@ -47,16 +53,16 @@
                     <td>{{ lis.montoventa | currency }}</td>
                     <td style="text-align: center">{{ lis.ahorrodia | currency }}</td>
                 </tr>
-                <tr *ngIf="listaahorro">
+                <tr *ngIf="listaahorro && busqueda.final == 'SIN PAGAR'">
                     <td>
                         <h4>Ahorro Disponible: {{pe | currency }}</h4>
                     </td>
                     <td colspan="2">
                         <form class="form-inline">
                             <div class="form-group">
-                                <label>Monto Pagar:</label>
+                                <label>Monto Pagar:  $</label>
                                 <input type="text" name="axrname" [(ngModel)]="busqueda.inicio"
-                                    class="form-control mx-sm-5" placeholder="$">
+                                    class="form-control mx-sm-5">
                             </div>
                         </form>
                     </td>
