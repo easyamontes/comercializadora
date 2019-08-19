@@ -84,7 +84,7 @@ export class AhorroViewComponent {
 
     ingresaahorro(i) {
         this.ind = i;
-        this._GeneralCallService.storeRecord(this.token, 'conceptos', this.lisahorro[i]).subscribe(
+        this._GeneralCallService.storeRecord(this.token,'conceptos', this.lisahorro[i]).subscribe(
             response => {
                 if (response.code == 200) {
                     this.lisahorro.splice(i, 1);

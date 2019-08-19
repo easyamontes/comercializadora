@@ -28,6 +28,7 @@ export class AhorroStatusComponent {
     public listaahorro: Array<Conceptoahorro>;
     public nueviPago: any;
     public pe: any;
+    public nom: any;
     public aler: number;
     public cero:number;
 
@@ -39,9 +40,10 @@ export class AhorroStatusComponent {
 
     ) {
         this.token = this._UserService.getToken();
-        this.busqueda = new Busqueda(null, null, null);
+        this.busqueda = new Busqueda(null, 'SIN PAGAR', null);
         this.aler = null;
         this.cero = null;
+     
 
     }
     ngOnInit() {
@@ -55,28 +57,40 @@ export class AhorroStatusComponent {
             }
         );
     }
+    /*==============================================================
+            FUNCION PARA GESTIONAR EL CAMBIO DE REPORTE
+    ================================================================ */
+
+    /* ==============================================
+       LISTA PARA EL FONDO DE AHORRO SIN PAGAR
+    ==================================================*/
     listaa() {
         this._GeneralCallService.storeRecord(this.token, 'listatus', this.busqueda).subscribe(
             response => {
                 this.listaahorro = response.statusahorro;
                 this.pe = response.total[0].ahorrodia;
+                this.nom = response.statusahorro[0].nombre;
             }
         )
     }
+
     /* =====================================================================================
            BOTON MANDAR A PAGAR FONDO DE AHORRO
     ======================================================================================== */
     pagar() {
         let fe = new Date();
-        let hoy = fe.toString();
+        let hoy = fe.toISOString();
         let tot = +this.busqueda.inicio * -1;
         let ah = this.pe;
+        let nombre = this.nom;
         this.nueviPago = {
             personal_id: this.busqueda.socio,
             fechapedido: hoy,
             ahorrodia: tot,
             tipo: 'S',
             ahr: ah,
+            no:nombre,
+            status:'PAGADO',
         }
         if (+this.busqueda.inicio <= 0) {
             this.aler = 1;
@@ -94,6 +108,7 @@ export class AhorroStatusComponent {
             response => {
                 //this.listaahorro = response.concepto;
                 this.busqueda.inicio = null;
+                this.busqueda.final = null;
                 this.pe = response.total[0].ahorrodia;
             }
         )

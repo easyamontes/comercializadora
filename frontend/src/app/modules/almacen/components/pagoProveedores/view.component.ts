@@ -133,7 +133,7 @@ export class PagoProveedoresViewComponent implements OnInit {
     ================================================================ */
     onSubmit() {
         this.closeModal();
-        this.factura.total = this.factura.importe - this.factura.iva;
+        this.factura.total = +this.factura.importe + +this.factura.iva;
         this._GeneralCallService.storeRecord(this.token, 'pagopro', this.factura).subscribe(
             response => {
                 let nitem = response.factura;

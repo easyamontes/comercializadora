@@ -38,7 +38,7 @@
             </thead>
             <tbody>
                 <tr class="rahorro" *ngFor="let lis of lisahorro;let i = index">
-                    <td>{{ lis.nombre }}</td>
+                    <td>{{ lis.user.name }}</td>
                     <td>{{ lis.fechapedido }}</td>
                     <td>{{ lis.dia }}</td>
                     <td>{{ lis.importe | currency }}</td>

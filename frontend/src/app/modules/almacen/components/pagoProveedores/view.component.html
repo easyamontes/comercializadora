@@ -31,7 +31,7 @@
     </div>
 
     <!--=============================================================
-                         Tabla para ver las facturas
+                        TABLA DE CUENTAS POR COBRAR
     =============================================================-->
     <div class="row d-flex justify-content-center">
         <table class="table table-striped">
@@ -85,7 +85,7 @@
 </div>
 
 <!--=============================================================
-                         Tabla de Por Cobrar
+                         MODAL DE CUENTAS POR PAGAR
 =============================================================-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -126,7 +126,7 @@
                     <mat-form-field class="col-3">
                         <input matInput [(ngModel)]="factura.iva" placeholder="Iva">
                     </mat-form-field>
-                    <h4>{{factura.importe - factura.iva| currency}}</h4>
+                    <h4>{{ +factura.importe + +factura.iva | currency}}</h4>
                 </div>
             </div>
             <div class="modal-footer">

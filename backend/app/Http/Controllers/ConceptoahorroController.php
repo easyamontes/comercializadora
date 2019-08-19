@@ -27,7 +27,7 @@ class ConceptoahorroController extends Controller
         $user = $json = $request->input('userid',null);
         $concepto = new Conceptoahorro();
         $concepto->personal_id = $user;
-        $concepto->nombre = $params->nombre;
+        $concepto->nombre = $params->user->name;
         $concepto->fechadia = $params->fechapedido;
         $concepto->montoventa = $params->importe;
         $concepto->ahorrodia = $params->ahorro;
@@ -51,10 +51,11 @@ class ConceptoahorroController extends Controller
         $json = $request->input('json',null);
         $params = json_decode ($json);
         $per = $json = $request->input('per', null);
-        $socio = $params->socio;     
+        $socio = $params->socio;
+        $tipo = $params->final;  
             $ahorro = Conceptoahorro::select('*')
             ->where('personal_id','=',$socio)
-            ->where('tipo', '=','I')
+            ->where('status', '=',$tipo)
             ->get();
         $total = Conceptoahorro::selectRaw('SUM(ahorrodia) AS ahorrodia')
         ->where('personal_id','=',$socio)
@@ -77,9 +78,11 @@ class ConceptoahorroController extends Controller
         $ahorro = new Conceptoahorro();
         $ahorro->personal_id = $params->personal_id;
         $ahorro->fechadia = $fe;
+        $ahorro->nombre = $params->no;
         $ahorro->montoventa = $params->ahorrodia;
         $ahorro->ahorrodia = $params->ahorrodia;
         $ahorro->tipo = $params->tipo;
+        $ahorro->status = $params->status;
         $ahorro->save();
         $total = Conceptoahorro::selectRaw('SUM(ahorrodia) AS ahorrodia')
         ->where('personal_id','=',$params->personal_id)

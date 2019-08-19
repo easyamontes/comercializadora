@@ -1,16 +1,13 @@
 <div class="principal">
     <!-- creando cabecera de la requisicion -->
     <div class="container-fluid">
+            <legend> {{title}}</legend>
         <div class="row">
             <fieldset>
-                <legend> {{title}}</legend>
                 <!--Dibujando la baecera de informacion-->
                 <mat-form-field class="col-md-3 col-xs-12">
                     <input matInput [(ngModel)]="pedi.fechapedido" #fechapedido="ngModel" placeholder="Fecha Pedido"
                         readonly>
-                </mat-form-field>
-                <mat-form-field class="col-md-3 col-xs-12">
-                    <input matInput [(ngModel)]="pedi.importe" #importe="ngModel" placeholder="Importe" readonly>
                 </mat-form-field>
                 <mat-form-field class="col-md-3 col-xs-12">
                     <input matInput [(ngModel)]="pedi.nombre" #nombre="ngModel" placeholder="Nombre" readonly>
@@ -18,8 +15,7 @@
                 <mat-form-field class="col-md-3 col-xs-12">
                     <input matInput [(ngModel)]="pedi.tipo" #tipo="ngModel" placeholder="Tipo" readonly>
                 </mat-form-field>
-                <mat-form-field class="col-md-6 col-xs-12">
-
+                <mat-form-field class="col-md-3 col-xs-12">
                     <mat-select name="premio" #premio="ngModel" [(ngModel)]="pedi.premio" placeholder="Premio">
                         <mat-option>none</mat-option>
                         <mat-option *ngFor="let item of list" [value]="item.nombre">
@@ -35,27 +31,31 @@
         <table class="table table-striped table-hover">
             <thead class="tablareporte">
                 <tr>
-                  <th>Codigo</th>
-                  <th>Articulo</th>
-                  <th>Cant. Entregada</th>
-                  <th>Devolucion</th>
-                  <th>Cant. Ventas</th>
+                    <th style="width: 10%">Codigo</th>
+                    <th style="width: 15%">Articulo</th>
+                    <th style="width: 10%">Precio</th>
+                    <th style="width: 15%">Cant. Entregada</th>
+                    <th style="width: 10%">Devolucion</th>
+                    <th style="width: 10%">Cant. Ventas</th>
+                    <th style="width: 10%">Total Venta</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let lis of pedidos;let id = index">
-                   <td>{{lis.codigo}}</td>
-                   <td>{{lis.articulo}}</td>
-                   <td>{{lis.existencia}}</td>
-                   <td> <input class="cuadrotexto" (change)="checkMinMax(id);" [(ngModel)]="lis.devolucion" #factura="ngModel" type="number"></td>
-                   <td>{{lis.venta}}</td>
+                    <td style="width: 10%">{{lis.codigo}}</td>
+                    <td style="width: 15%">{{lis.articulo}}</td>
+                    <td style="width: 10%">{{lis.precio | currency}}</td>
+                    <td style="width: 15%">{{lis.existencia}}</td>
+                    <td style="width: 10%"> <input style="width: 95%" class="cuadrotexto" (change)="checkMinMax(id);" [(ngModel)]="lis.devolucion"
+                            #factura="ngModel" type="number"></td>
+                    <td style="width: 10%">{{lis.venta}}</td>
+                    <td style="width: 10%">{{(lis.existencia - lis.devolucion) * lis.precio | currency}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
     <div class="row form-group">
         <div class="col-md-3 col-xs-3">
-
             <a type="submit" class="btn btn-success col-md-12" style="margin: 1px" (click)="Guardar()">Guardar</a>
         </div>
         <div class="col-md-3 col-xs-3">

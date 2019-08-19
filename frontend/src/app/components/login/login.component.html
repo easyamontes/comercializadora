@@ -1,18 +1,19 @@
 <div class="container-fluid">
    <div class="contenedor">
 			  <div *ngIf="token == null">
-			<h1 class="titulo"> Iniciar Sesión</h1>
+			<img src="../../../assets/easyload.png">
+               <hr>
            <form class="formulario" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
 			         <!--Campo email-->
 					<div class="form-group">
 							<i class ="icono izquierda fa fa-envelope"></i>
-							<input type="text" class="usuario" name="email" #email="ngModel" [(ngModel)]="user.email"  placeholder="Email" required>
+							<input type="text" name="email" #email="ngModel" [(ngModel)]="user.email"  placeholder="Email" required>
 							<span *ngIf="!email.valid && email.touched"></span>
 				   </div>
 					      <!--Campo pass-->
 					<div class="form-group">
 					     <i class = "icono izquierda fa fa-lock"></i>
-							<input type="password" class="usuario" name="password" #password="ngModel" [(ngModel)]="user.password"  required placeholder="Contraseña" >	
+							<input type="password"  name="password" #password="ngModel" [(ngModel)]="user.password"  required placeholder="Contraseña" >	
 							<span *ngIf="!password.valid && password.touched"></span>
 					</div>  
 					 <div class="alerta" *ngIf="status=='error'">
@@ -20,9 +21,7 @@
 						</div>
 					   <br>
 						<div class="botones">
-							<div class="separar">
-								<button  class="boton" type="submit" value="Login"  [disabled]="!loginForm.form.valid">login</button>
-							</div> 
+							<button  class="boton" type="submit" value="Login"  [disabled]="!loginForm.form.valid">login</button>
 					  </div>
 			   </form>
          </div>

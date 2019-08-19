@@ -38,3 +38,13 @@
   .titleUser{
     align-content: center;
   }
+  .botonmenu{
+    background: none; 
+    border: none; 
+    color: black;
+    margin-right: .5vh; 
+    outline: none
+  }
+  .botonmenu:hover{
+  color:rgb(0, 0, 0,.5);
+  }
