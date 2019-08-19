@@ -128,7 +128,6 @@ export class RequisicionStoreComponent implements OnInit {
                 this.articulos[index].costo = this.artilist.find(x => x.id == id || x.articulo_id == id).costo;
             }
         }
-        console.log(this.articulos);
     }
 
     cleanKeys(Obj: Almacen): Almacen {
