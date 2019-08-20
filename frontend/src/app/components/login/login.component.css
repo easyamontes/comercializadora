@@ -8,7 +8,8 @@
   background: #F1E4E4;
   font-family: 'Raleway', sans-serif;
   border-radius: 10px;
-  box-shadow: 10px 10px 14px rgb(42, 41, 41,0.35);
+  box-shadow: 10px 10px 15px rgb(42, 41, 41,0.34);
+  
 }
 img{
   display: flex;
@@ -19,7 +20,7 @@ img{
   align-content: center;
 }
 hr {
-  width: 42%;
+  width: 35%;
   border: 1px solid rgb(42, 41, 41,0.1);  
 }
 .formulario .form-group {
@@ -42,7 +43,7 @@ hr {
   padding-top:5px;
   font-size: 125%;
   color:black;
-  padding-right: 5px;
+  padding-right: 7px;
 }
 .alerta{
   color: red;
@@ -75,8 +76,8 @@ hr {
   background: rgb(100, 93,112,.50);
   color: black;
   cursor: pointer;
-
 }
+
 @media(max-width: 600px){
   .contenedor {
     max-width: 250px;
