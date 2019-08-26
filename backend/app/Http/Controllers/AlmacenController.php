@@ -137,6 +137,7 @@ class AlmacenController extends Controller
         $almacen->existencia = $item['existencia'];
         $almacen->total = $item['total'];
         $almacen->pendiente = $item['pendiente'];
+        $almacen->paquete = $item['paquete'];
         $almacen->save();
         return $almacen;
     }

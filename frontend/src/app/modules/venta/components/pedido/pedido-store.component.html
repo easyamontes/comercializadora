@@ -36,8 +36,9 @@
                     <th style="width:20%">Articulo</th>
                     <th style="width:10%">Cantidad</th>
                     <th style="width:10%">Precio</th>
-                    <th style="width:20%">Total</th>
+                    <th style="width:10%">Total</th>
                     <th style="width:10%">Dif.</th>
+                    <th style="width:10%">Paquete</th>
                     <th>Eliminar</th>
                 </tr>
             </thead>
@@ -58,8 +59,11 @@
                     <td style="width: 10%"> 
                         <input style="width: 95%" class="cuadrotexto" [(ngModel)]="lis.precio" #factura="ngModel" type="number">
                     </td>
-                    <td style="width: 20%">{{lis.cantidad * lis.precio  |currency}}</td>
+                    <td style="width: 10%">{{lis.cantidad * lis.precio  |currency}}</td>
                     <td style="width: 10%">{{lis.existencia - lis.cantidad }}</td>
+                    <td style="width: 10%"> 
+                        <input style="width: 95%" class="cuadrotexto" [(ngModel)]="lis.paquete" #factura="ngModel" type="number" min="1">
+                    </td>
                     <td class="cen">
                         <button class="botontaba" (click)="deleteRecord(id)" color="primary">
                             <span> <i class="fas fa-trash-alt"></i></span>

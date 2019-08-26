@@ -1,4 +1,3 @@
-
 .contenedor {
   margin: auto;
 }
@@ -6,6 +5,9 @@ h4{
   margin-top: 7px;
   font-family: 'Hind Madurai', sans-serif;
   color: black;
+}
+.paquete {
+  padding-top: -7px;
 }
 ul {
     list-style: none;
