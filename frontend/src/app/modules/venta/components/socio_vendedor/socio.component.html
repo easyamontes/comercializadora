@@ -4,6 +4,7 @@
             <div class="row">
                 <li *ngFor="let alma of vent; let i = index">
                     <h4>{{alma.articulo}}</h4>
+                    <p class="paquete"><span>Paquete:</span>{{alma.paquete}}</p>
                     <p><span>Existencia: </span>{{alma.existencia - alma.venta}}</p>
                     <div class="numero">
                         <button class="botonventa col-md-1 col-2" (click)="aumentar(i,'suma');">

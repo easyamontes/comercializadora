@@ -142,7 +142,7 @@ export class RequisicionStoreComponent implements OnInit {
     /**crea una nueva fila en la tabla de Articulos */
     createArticulo() {
         if (this.requi.proveedor_id || this.requi.pdestino_id) {
-            let nitem = new Almacen(null, null, null, null, this.requi.proveedor_id,null,null,null,null,null,null,null,null,null,0,0,0,0,0,0,0,0,0);
+            let nitem = new Almacen(null, null, null, null, this.requi.proveedor_id,null,null,null,null,null,null,null,null,null,0,0,0,0,0,0,0,0,0,null);
             this.articulos.push(nitem);
             this.requi.importe = this.getTotalCost();
         }

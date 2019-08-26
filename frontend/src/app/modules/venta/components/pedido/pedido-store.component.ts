@@ -95,7 +95,7 @@ export class PedidoStoreComponent implements OnInit, DoCheck {
           AGREGAR CONCEPTO POR CONCEPTO
    ================================================================= */
     addConcepto() {
-        let nuevoConcepto = new Almacen(0, 0, 0, 0, 0, 0, 0, null, "SALIDA", null, null, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        let nuevoConcepto = new Almacen(0, 0, 0, 0, 0, 0, 0, null, "SALIDA", null, null, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,1);
         this.pedidos.push(nuevoConcepto);
     }
 
