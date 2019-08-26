@@ -197,14 +197,14 @@ class AlmacenController extends Controller
     
     public function pieza(Request $request)
     {
-        
         $json = $request->input('json',null);
         $params = json_decode ($json);
         $per = $json = $request->input('per', null);
         $socio = $params->socio;
-        $pieza = Almacen::selectRaw('articulo,modelo, SUM(venta) AS venta, SUM(total) AS total, AVG(PRECIO) AS precio')
-            ->where('user_id','=',$per)->where('userp_id','=',$socio)->where('tipo','=', 'SALIDA')
-            ->groupby( 'userp_id','articulo_id')
+        $pieza = Almacen::selectRaw('articulo, modelo, SUM(venta) as venta, SUM(total) as total, precio')
+            ->where('userp_id','=',$socio)
+            ->where('tipo','=','SALIDA')
+            ->groupby( 'userp_id','articulo_id','precio')
             ->get()->load('user');
         return response()->json(array(
             'piezaall' => $pieza,
@@ -228,7 +228,7 @@ class AlmacenController extends Controller
             $precio = $devolucion * $item['precio'];
             $tot = $tot + $precio;
             if($ca < 1 ){
-                $actualizar = Almacen::where('id', $item['id'])->update(['venta'=> $item['cantidad'] ]);
+                $actualizar = Almacen::where('id', $item['id'])->update(['venta'=> $item['cantidad'],'total'=>$precio]);
             }else{
                 $actualizar = Almacen::where('id', $item['id'])->update(['venta'=>$devolucion,'total'=>$precio]);
             }

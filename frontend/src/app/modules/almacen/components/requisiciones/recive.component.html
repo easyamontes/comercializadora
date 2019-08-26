@@ -43,10 +43,7 @@
                     <td>{{lis.articulo}}</td>
                     <td>{{lis.precio |currency}}</td>
                     <td>{{lis.pendiente}}</td>
-                    <td>
-                        <input class="cuadrotexto" style="margin-top: -8px" (change)="checkMinMax(id)"
-                            [(ngModel)]="lis.recepcion" #recepcion="ngModel" type="number">
-                    </td>
+                    <td>{{lis.recepcion}}</td>
                 </tr>
             </tbody>
         </table>

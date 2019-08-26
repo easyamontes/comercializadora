@@ -17,7 +17,7 @@
         </mat-form-field>
         <mat-form-field class="col-md-3 col-xs-12">
             <mat-select matInput [(ngModel)]="busqueda.socio" placeholder="Socio Comercial" #socio="ngModel">
-                <mat-option *ngFor="let pedi of perso" [value]="pedi.id">{{pedi.nombre}}</mat-option>
+                <mat-option *ngFor="let pedi of perso" [value]="pedi.id">{{pedi.nombre +' '+ pedi.apellidop +' '+ pedi.apellidom | uppercase}}</mat-option>
             </mat-select>
         </mat-form-field>
         <button type="submit" class=" col-md-3 col-xs-12  botonbuscar " (click)="listapieza()">Buscar</button>

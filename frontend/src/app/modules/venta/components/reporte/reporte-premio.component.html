@@ -16,15 +16,14 @@
             <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="col-md-3 col-xs-12">
-            <mat-select matInput [(ngModel)]="busqueda.socio" placeholder="Socio Comercial" #socio="ngModel"
-                (ngModelChange)="setPersonal($event)">
-                <mat-option *ngFor="let  pedi of perso" [value]="pedi.id">{{pedi.nombre}}</mat-option>
+            <mat-select matInput [(ngModel)]="busqueda.socio" placeholder="Socio Comercial" #socio="ngModel">
+                <mat-option *ngFor="let  pedi of perso" [value]="pedi.id">{{pedi.nombre +' '+ pedi.apellidop +' '+ pedi.apellidom | uppercase}}</mat-option>
             </mat-select>
         </mat-form-field>
         <button type="submit" class=" col-md-3 col-xs-12  botonbuscar " (click)="listapremio()">Buscar</button>
     </fieldset>
     <br>
-    <div class="reporte" >
+    <div class="reporte">
         <table class="table table-striped">
             <thead class="tablareporte">
                 <tr>

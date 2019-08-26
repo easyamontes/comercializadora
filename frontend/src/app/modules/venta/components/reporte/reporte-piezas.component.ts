@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 //servicios
 import { UserService } from './../../../../services/user.service';
 import { GeneralCallService } from '../../../../services/generalCall.service';
+import { PersonalUtil } from './../../../../services/util/personal.util';
+//Modelos
 import { Almacen } from 'src/app/models/almacen';
 import { Busqueda } from '../../../../models/busqueda';
 
@@ -26,6 +28,7 @@ export class ReportePiezaComponent implements OnInit {
     constructor (
         private _UserService: UserService,
         private _GeneralCallService: GeneralCallService,
+        private _PersonalUtil: PersonalUtil,
         private _router: Router
     ){
         this.token = this._UserService.getToken();
@@ -36,13 +39,14 @@ export class ReportePiezaComponent implements OnInit {
     ngOnInit(){
         this.getListPersonal();
     }
+
      /*==========================================================
       GENERAR LISTA DEL PERSONAL
      =============================================================*/
     getListPersonal() {
-        this._GeneralCallService.getRecords(this.token,'personal').subscribe(
+        this._GeneralCallService.getRecords(this.token,'here').subscribe(
             response => {
-                this.perso = response.personal;
+                this.perso = this._PersonalUtil.getFamilia(response);
             }
         );
     }

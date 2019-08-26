@@ -10,7 +10,7 @@ import { GeneralCallService } from '../../../../services/generalCall.service';
    styleUrls: ['./reporte.component.css'],
    providers: [
        UserService,
-       GeneralCallService,
+       GeneralCallService
    ]
 })
 

@@ -153,7 +153,6 @@ class PedidoController extends Controller
     ====================================================================== */
     public function premio(Request $request)
     {
-
         $json = $request->input('json', null);
         $params = json_decode($json);
         $per = $json = $request->input('per', null);
@@ -202,9 +201,7 @@ class PedidoController extends Controller
     {
 
         $json = $request->input('json', null);
-        $params = json_decode($json);
-        $per = $json = $request->input('per', null);
-    
+        $params = json_decode($json);    
         if( isset($params->socio) ){
             $socio = $params->socio;
         }else {
@@ -234,7 +231,8 @@ class PedidoController extends Controller
                 ->groupBy('user_id')
                 ->groupBy('fechapedido')
                 ->orderby('user_id')
-                ->get()->load('user');
+                ->get()
+                ->load('user');
         } else if ($socio != null and $inicio == null and $final == null) {
             $pedido = Pedido::selectRaw('*,SUM(importe) AS importe , SUM(ahorro) AS ahorro')
                 ->where('user_id', '=', $socio)
@@ -243,7 +241,8 @@ class PedidoController extends Controller
                 ->groupBy('user_id')
                 ->groupBy('fechapedido')
                 ->orderby('fechapedido')
-                ->get()->load('user');
+                ->get()
+                ->load('user');
         } else if ($socio != null and $inicio != null and $final != null) {
             $pedido = Pedido::select('*')
                 ->where('user_id', '=', $socio)->where('fechapedido', '>=', $dateinicio)->where('fechapedido', '<=', $datefinal)
@@ -252,7 +251,8 @@ class PedidoController extends Controller
                 ->groupBy('user_id')
                 ->groupBy('fechapedido')
                 ->orderby('fechapedido')
-                ->get()->load('user');
+                ->get()
+                ->load('user');
         }
         return response()->json(array(
             'ahorroall' => $pedido,

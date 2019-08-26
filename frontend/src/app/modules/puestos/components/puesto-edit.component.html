@@ -1,8 +1,4 @@
 <div class="principal">
-    <div class="alert alert-danger" *ngIf="status_puesto != 'success' && status_puesto"> {{status_puesto.error.nivel}}
-    </div>
-    <div class="alert alert-danger" *ngIf="status_puesto == 'success' && status_puesto"> Registro Guardado correctamente
-    </div>
     <form *ngIf="puestoe != null" #puestoNew="ngForm" (ngSubmit)="onSubmit(puestoNew)">
         <div class="container">
             <fieldset>

@@ -12,7 +12,7 @@
 */
 
 
-/* en prod se usa esta
+/* en prod se usa esta funcion
 
 Route::get('/', function () {
     View::addExtension('html','php');

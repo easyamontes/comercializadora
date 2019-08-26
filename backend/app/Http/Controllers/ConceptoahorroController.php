@@ -24,15 +24,14 @@ class ConceptoahorroController extends Controller
         $json = $request->input('json',null);
         $params = json_decode($json);
         $params_array = json_decode($json, true);
-        $user = $json = $request->input('userid',null);
         $concepto = new Conceptoahorro();
-        $concepto->personal_id = $user;
+        $concepto->personal_id = $params->user_id;
         $concepto->nombre = $params->user->name;
         $concepto->fechadia = $params->fechapedido;
         $concepto->montoventa = $params->importe;
         $concepto->ahorrodia = $params->ahorro;
         $concepto->save();
-        Pedido::where('user_id','=',$user)
+        Pedido::where('id','=',$params_array['id'])
         ->where('fechapedido','=',$params->fechapedido)->update(['status' => 'APLICADO']);
         $data = array(
             'concepto' => $concepto,

@@ -1,18 +1,18 @@
+import { Component} from '@angular/core';
+import { Router } from '@angular/router';
+import { PersonalUtil } from '../../../../services/util/personal.util';
 import { UserService } from 'src/app/services/user.service';
 import { GeneralCallService } from 'src/app/services/generalCall.service';
-
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { Busqueda } from 'src/app/models/busqueda';
 import { Conceptoahorro } from 'src/app/models/conceptoahorro';
 
 @Component({
     selector: 'ahorro-status',
     templateUrl: './ahorro-status.component.html',
-
     providers: [
         UserService,
-        GeneralCallService
+        GeneralCallService,
+        PersonalUtil
     ]
 })
 
@@ -34,6 +34,7 @@ export class AhorroStatusComponent {
 
 
     constructor(
+        private _PersonalUtil:PersonalUtil,
         private _UserService: UserService,
         private _GeneralCallService: GeneralCallService,
         private _router: Router
@@ -51,9 +52,9 @@ export class AhorroStatusComponent {
     }
 
     getListPersonal() {
-        this._GeneralCallService.getRecords(this.token, 'personal').subscribe(
+        this._GeneralCallService.getRecords(this.token, 'here').subscribe(
             response => {
-                this.perso = response.personal;
+                this.perso = this._PersonalUtil.getFamilia(response);
             }
         );
     }

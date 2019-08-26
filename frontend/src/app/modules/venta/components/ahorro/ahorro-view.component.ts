@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Busqueda } from 'src/app/models/busqueda';
 import { Pedido } from 'src/app/models/pedido';
+import { PersonalUtil } from '../../../../services/util/personal.util';
 import { Conceptoahorro } from 'src/app/models/conceptoahorro';
 
 @Component({
@@ -12,7 +13,8 @@ import { Conceptoahorro } from 'src/app/models/conceptoahorro';
 
     providers: [
         UserService,
-        GeneralCallService
+        GeneralCallService,
+        PersonalUtil
     ]
 })
 
@@ -31,7 +33,7 @@ export class AhorroViewComponent {
 
 
     constructor(
-
+        private _PersonalUtil: PersonalUtil,
         private _UserService: UserService,
         private _GeneralCallService: GeneralCallService,
         private _router: Router
@@ -58,9 +60,9 @@ export class AhorroViewComponent {
           GENERAR LISTA DEL PERSONAL
     =============================================================*/
     getListPersonal() {
-        this._GeneralCallService.getRecords(this.token, 'personal').subscribe(
+        this._GeneralCallService.getRecords(this.token, 'here').subscribe(
             response => {
-                this.perso = response.personal;
+                this.perso = this._PersonalUtil.getFamilia(response);
             }
         );
     }

@@ -88,7 +88,6 @@ export class PedidoStoreComponent implements OnInit, DoCheck {
 
     setPersonal(id) {
         this.pedi.nombre = this.perso.find(x => x.id == id).nombre;
-
     }
 
     /*=============================================================
