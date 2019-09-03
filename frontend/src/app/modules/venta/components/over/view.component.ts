@@ -1,8 +1,9 @@
 import { Component, OnInit, } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-//Utils
-import { PersonalUtil } from '../../../../services/util/personal.util';
+import { DateAdapter, MAT_DATE_FORMATS } from "@angular/material";
 //servicios
+import { PersonalUtil } from '../../../../services/util/personal.util';
+import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../services/util/dateAdapter';
 import { UserService } from './../../../../services/user.service';
 import { GeneralCallService } from '../../../../services/generalCall.service';
 //Modelos
@@ -15,7 +16,13 @@ import { Busqueda } from 'src/app/models/busqueda';
     providers: [
         UserService,
         GeneralCallService,
-        PersonalUtil
+        PersonalUtil,
+        {
+            provide: DateAdapter, useClass: AppDateAdapter
+        },
+        {
+            provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS
+        }
     ]
 })
 
@@ -105,13 +112,10 @@ export class OverViewComponent implements OnInit {
         switch (which) {
             case 1:
                 return this.level1.map(c => c.piezas).reduce((ant, act) => +ant + +act, 0) * 1.50;
-                break;
             case 2:
                 return this.level2.map(c => c.piezas).reduce((ant, act) => +ant + +act, 0) * .50;
-                break;
             case 3:
                 return this.level3.map(c => c.piezas).reduce((ant, act) => +ant + +act, 0) * .50;
-                break;
             default:
                 break;
         }

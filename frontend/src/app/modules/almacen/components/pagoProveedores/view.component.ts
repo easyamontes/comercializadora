@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
+import { NativeDateAdapter, DateAdapter, MAT_DATE_FORMATS } from "@angular/material";
 //Utils
 import { PersonalUtil } from '../../../../services/util/personal.util';
 //Servicios
 import { UserService } from '../../../../services/user.service';
 import { GeneralCallService } from '../../../../services/generalCall.service';
+import { AppDateAdapter,APP_DATE_FORMATS } from '../../../../services/util/dateAdapter';
 //Modelos
 import { PagoProveedor } from 'src/app/models/pagoproveedor';
 import { Busqueda } from 'src/app/models/busqueda';
@@ -15,7 +17,13 @@ import { Busqueda } from 'src/app/models/busqueda';
     templateUrl: './view.component.html',
     providers: [
         UserService,
-        GeneralCallService
+        GeneralCallService,
+        {
+            provide: DateAdapter, useClass: AppDateAdapter
+        },
+        {
+            provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS
+        }
     ]
 })
 

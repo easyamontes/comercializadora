@@ -5,30 +5,30 @@ import { UserService } from './../../../../services/user.service';
 import { GeneralCallService } from '../../../../services/generalCall.service';
 
 @Component({
-   selector: 'pedido-default',
-   templateUrl: './default.component.html',
-   styleUrls: ['./default.component.css'],
-   providers: [
-       UserService,
-       GeneralCallService,
-   ]
+    selector: 'pedido-default',
+    templateUrl: './default.component.html',
+    styleUrls: ['./default.component.css'],
+    providers: [
+        UserService,
+        GeneralCallService,
+    ]
 })
 
 
 export class PedidoDefaultComponent implements OnInit {
-    public title:string;
-    public token:any;
+    public title: string;
+    public token: any;
 
-    constructor (
+    constructor(
         private _UserService: UserService,
         private _GeneralCallService: GeneralCallService,
         private _router: Router
-    ){
+    ) {
         this.token = this._UserService.getToken();
     }
 
-    ngOnInit(){
-        
+    ngOnInit() {
+
     }
 
 }

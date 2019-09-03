@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NativeDateAdapter, DateAdapter, MAT_DATE_FORMATS } from "@angular/material";
+//Servicios
 import { UserService } from '../../../../services/user.service';
 import { GeneralCallService } from '../../../../services/generalCall.service';
+import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../services/util/dateAdapter';
+//Modelos
 import { Almacen } from './../../../../models/almacen';
 import { Pedido } from 'src/app/models/pedido';
 
@@ -13,7 +17,12 @@ import { Pedido } from 'src/app/models/pedido';
     providers: [
         UserService,
         GeneralCallService,
-
+        {
+            provide: DateAdapter, useClass: AppDateAdapter
+        },
+        {
+            provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS
+        }
     ]
 })
 

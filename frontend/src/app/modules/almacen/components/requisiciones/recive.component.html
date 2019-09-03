@@ -9,7 +9,7 @@
                 <legend>{{title}}</legend>
                 <!--Dibujando la baecera de informacion-->
                 <mat-form-field class="p-1">
-                    <input matInput [(ngModel)]="requi.fecha" #fecha="ngModel" readonly>
+                    <input matInput [(ngModel)]="requi.fecha" #fecha="ngModel" [matDatepicker] readonly>
                 </mat-form-field>
                 <mat-form-field *ngIf="requi.tipo == 'COMPRA'" class="p-1">
                     <input matInput #provee="ngModel" [(ngModel)]="proveedor" placeholder="Proveedor" readonly>
@@ -18,10 +18,10 @@
                     <input matInput #socio="ngModel" [(ngModel)]="persona" placeholder="Socio" readonly>
                 </mat-form-field>
                 <mat-form-field class="p-1">
-                    <input matInput [(ngModel)]="requi.ffactura" #ffecha="ngModel" placeholder="Fecha">
+                    <input matInput [(ngModel)]="requi.fecha" #ffecha="ngModel" placeholder="Fecha" [matDatepicker] readonly>
                 </mat-form-field>
                 <mat-form-field class="p-1">
-                    <input matInput [(ngModel)]="requi.factura" #factura="ngModel" placeholder="Factura">
+                    <input matInput [(ngModel)]="requi.factura" #factura="ngModel" placeholder="Factura" readonly>
                 </mat-form-field>
             </fieldset>
         </div>

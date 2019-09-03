@@ -1,8 +1,12 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
-import { PersonalUtil } from '../../../../services/util/personal.util';
+import { NativeDateAdapter, DateAdapter, MAT_DATE_FORMATS } from "@angular/material";
 import { Router } from '@angular/router';
+//Servicios
+import { PersonalUtil } from '../../../../services/util/personal.util';
 import { UserService } from '../../../../services/user.service';
 import { GeneralCallService } from '../../../../services/generalCall.service';
+import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../services/util/dateAdapter';
+//Modelos
 import { Almacen } from './../../../../models/almacen';
 import { Pedido } from 'src/app/models/pedido';
 import { Personal } from 'src/app/models/personal';
@@ -15,7 +19,13 @@ import { Personal } from 'src/app/models/personal';
     providers: [
         UserService,
         GeneralCallService,
-        PersonalUtil
+        PersonalUtil,
+        {
+            provide: DateAdapter, useClass: AppDateAdapter
+        },
+        {
+            provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS
+        }
     ]
 })
 

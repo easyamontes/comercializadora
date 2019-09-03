@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Pedido;
 
@@ -308,7 +307,6 @@ class PedidoController extends Controller
     ====================================================================== */
     public function listastatus(Request $request)
     {
-
         $json = $request->input('json', null);
         $params = json_decode($json);
         $per = $json = $request->input('per', null);

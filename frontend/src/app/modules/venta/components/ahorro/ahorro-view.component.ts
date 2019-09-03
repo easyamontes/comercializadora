@@ -1,4 +1,6 @@
 import { UserService } from 'src/app/services/user.service';
+import { NativeDateAdapter, DateAdapter, MAT_DATE_FORMATS } from "@angular/material";
+import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../services/util/dateAdapter';
 import { GeneralCallService } from 'src/app/services/generalCall.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -14,7 +16,13 @@ import { Conceptoahorro } from 'src/app/models/conceptoahorro';
     providers: [
         UserService,
         GeneralCallService,
-        PersonalUtil
+        PersonalUtil,
+        {
+            provide: DateAdapter, useClass: AppDateAdapter
+        },
+        {
+            provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS
+        }
     ]
 })
 

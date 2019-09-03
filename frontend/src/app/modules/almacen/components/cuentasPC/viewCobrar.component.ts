@@ -1,10 +1,12 @@
 import { Component, OnInit, } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 //Utils
 import { PersonalUtil } from '../../../../services/util/personal.util';
+import { NativeDateAdapter, DateAdapter, MAT_DATE_FORMATS } from "@angular/material";
 //servicios
 import { UserService } from './../../../../services/user.service';
 import { GeneralCallService } from '../../../../services/generalCall.service';
+import { AppDateAdapter,APP_DATE_FORMATS } from '../../../../services/util/dateAdapter';
 //Modelos
 import { Busqueda } from 'src/app/models/busqueda';
 
@@ -14,7 +16,13 @@ import { Busqueda } from 'src/app/models/busqueda';
     providers: [
         UserService,
         GeneralCallService,
-        PersonalUtil
+        PersonalUtil,
+        {
+            provide: DateAdapter, useClass: AppDateAdapter
+        },
+        {
+            provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS
+        }
     ]
 })
 

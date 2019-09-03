@@ -1,8 +1,9 @@
 import { Component,OnInit } from '@angular/core';
-import {  MatSnackBar } from '@angular/material';
+import {  MatSnackBar, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 //Utils
 import { PersonalUtil } from '../../../../services/util/personal.util';
+import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../services/util/dateAdapter';
 //servicios
 import { UserService } from './../../../../services/user.service';
 import { GeneralCallService } from '../../../../services/generalCall.service';
@@ -17,7 +18,13 @@ import { Busqueda } from 'src/app/models/busqueda';
     providers: [
         UserService,
         GeneralCallService,
-        PersonalUtil
+        PersonalUtil,
+        {
+            provide: DateAdapter, useClass: AppDateAdapter
+        },
+        {
+            provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS
+        }
     ]
 })
 
