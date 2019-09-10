@@ -1,0 +1,77 @@
+<div class="principal">
+    <h4 class="col-12 text-center">{{title}}</h4>
+    <!--=============================================================
+                         Cabecera de filtrado
+    =============================================================-->
+    <div class="row d-flex justify-content-center">
+
+        <mat-form-field class="col-4">
+            <mat-select #socio="ngModel" [(ngModel)]="requi.porigen_id"  (ngModelChange)="setEliminar()" placeholder="Socio Origen">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let persona of perso" [value]="persona.id">
+                    {{persona.nombre +' '+persona.apellidop |uppercase}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-4">
+                <mat-select #socio="ngModel" [(ngModel)]="requi.pdestino_id" placeholder="Socio Destino">
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let requi of perso" [value]="requi.id">
+                        {{requi.nombre +' '+requi.apellidop |uppercase}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        <div class="col col-2">
+            <button class="btn btn-primary" (click)="createArticulo();">NUEVO</button>
+        </div>
+    </div>
+    <!--=============================================================
+                         Tabala de recusrsos
+    =============================================================-->
+    <div class="reporte">
+        <table class="table table-striped table-hover">
+            <thead class="tablareporte">
+                <tr>
+                    <th style="width:10%">Codigo</th>
+                    <th style="width:20%">Articulo</th>
+                    <th style="width:10%">Existencia</th>
+                    <th style="width:10%">Cantidad</th>
+                    <th style="width:20%">Total</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let lis of articulos; let id = index">
+                    <td style="width:10%">{{lis.codigo}}</td>
+                    <td style="width:20%">
+                        <select class="cuadrotexto" style="width:95%" #articulo="ngModel" [(ngModel)]="lis.id"
+                            (ngModelChange)="setArticulo($event,id)">
+                            <option *ngFor="let list of item"
+                                [value]="list.id">
+                                {{list.articulo +' '+ list.marca +' '+ list.modelo | uppercase}} </option>
+                        </select>
+                    </td>
+                    <td style="width:10%">{{lis.existencia}}</td>
+                    <td style="width:10%">
+                        <input style="width:95%" class="cuadrotexto" [(ngModel)]="lis.cantidad" #factura="ngModel"
+                            type="number">
+                    </td>
+                    <td style="width:20%">{{lis.cantidad * lis.precio  |currency}}</td>
+                    <td> <button class="botontaba" (click)="deleteArticulo(id)">
+                            <span> <i class="fas fa-trash-alt"></i></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--=============================================================
+                  BOTONES DE GUARDAR
+    =============================================================-->
+    <div class="row d-flex justify-content-around">
+        <button *ngIf="spin == false" class="btn btn-success col-5" type="button" (click)="onSubmit();">Guardar</button>
+        <button *ngIf="spin == true" class="btn btn-success btn-sm btn-block col-5" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Guardando...
+        </button>
+        <button class="btn btn-danger col-5" type="button" (click)="onCancel();">Cancelar</button>
+    </div>
+</div>

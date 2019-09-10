@@ -13,7 +13,7 @@
             <mat-form-field class="col-md-5 col-xs-12">
                 <mat-select matInput [(ngModel)]="pedi.pdestino" #nombre="ngModel" (ngModelChange)="setPersonal($event)"
                     placeholder="Asignar">
-                    <mat-option *ngFor="let  pedi of perso" [value]="pedi.id">{{pedi.nombre +' '+ pedi.apellidop +' '+pedi.apellidom | uppercase }}</mat-option>
+                    <mat-option *ngFor="let pedi of perso" [value]="pedi.id">{{pedi.nombre +' '+ pedi.apellidop +' '+pedi.apellidom | uppercase }}</mat-option>
                 </mat-select>
             </mat-form-field>
         <!--=============================================================

@@ -46,7 +46,7 @@ export class ReportePremioComponent implements OnInit {
     ){
         this.token = this._UserService.getToken();
         this.title = 'Reporte Premio';
-        this.busqueda = new Busqueda (null,null,null);
+        this.busqueda = new Busqueda (null,null,null,null);
         
     }
 

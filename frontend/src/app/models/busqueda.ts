@@ -3,6 +3,7 @@ export class Busqueda{
         public inicio:string,
         public final:string,
         public socio:any,
+        public mul:any,
     ){}
 
 }//End Class

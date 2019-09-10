@@ -50,7 +50,7 @@ export class RequisicionReciveComponent implements OnInit{
     ){
         this.identity = this._UserService.getIdentity();
         this.token = this._UserService.getToken();
-        this.busqueda = new Busqueda(null, null, null);
+        this.busqueda = new Busqueda(null, null, null,null);
     }
 
     ngOnInit(){

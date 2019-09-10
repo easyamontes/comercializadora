@@ -132,4 +132,19 @@ class RequisicionController extends Controller
         );
         return response()->json($data, 200);
     }
+
+     public function listapendiente (Request $request)
+     {
+        $per = $json = $request->input('per', null);
+        $requisicion = Requisicion::where('porigen_id', '=', $per)
+            ->where('status', '=', 'NUEVO')
+            ->get()
+            ->load('pdestino');
+        return response()->json(array(
+            'pendiente' => $requisicion,
+            'status' => 'success',
+            'code' => 200
+        ), 200);
+     }
+    
 } //End class

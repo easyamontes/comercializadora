@@ -43,7 +43,7 @@ export class OverViewComponent implements OnInit {
         private _ActivatedRoute: ActivatedRoute
     ) {
         this.title = 'Overs'
-        this.busqueda = new Busqueda(null, null, null);
+        this.busqueda = new Busqueda(null, null, null, null);
         this.token = this._UserService.getToken();
     }
 

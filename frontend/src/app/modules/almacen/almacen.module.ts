@@ -15,9 +15,10 @@ import { DiarioViewComponent } from './components/reporteDiario/view.component';
 import { CobranzaViewComponent } from './components/cuentasPC/viewCobrar.component';
 import { PagoProveedoresViewComponent } from './components/pagoProveedores/view.component';
 import { ResultadosViewComponent } from './components/cuentasPC/viewResultados.component';
+import { RequisicionPendienteComponent} from './components/requisiciones/pendiente.component';
+import { RequisicionTraspasoComponent} from './components/requisiciones/traspaso.component';
+
 import { FilterPipe } from './pipes/filter.pipe';
-
-
 
 @NgModule({
     declarations: [
@@ -31,7 +32,9 @@ import { FilterPipe } from './pipes/filter.pipe';
         DiarioViewComponent,
         CobranzaViewComponent,
         PagoProveedoresViewComponent,
-        ResultadosViewComponent
+        ResultadosViewComponent,
+        RequisicionPendienteComponent,
+        RequisicionTraspasoComponent,
     ],
     imports: [
         AlmacenRoutingModule,
@@ -50,7 +53,9 @@ import { FilterPipe } from './pipes/filter.pipe';
         DiarioViewComponent,
         CobranzaViewComponent,
         PagoProveedoresViewComponent,
-        ResultadosViewComponent
+        ResultadosViewComponent,
+        RequisicionPendienteComponent,
+        RequisicionTraspasoComponent
         ],
     providers: []
   })

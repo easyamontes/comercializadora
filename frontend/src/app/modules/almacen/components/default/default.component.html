@@ -1,12 +1,12 @@
-<div class="principal" style="height: 100%">
-    <h3>{{title}}</h3>
+<div class="principal">
+    <h3 class="titulopendiente">{{title}}</h3>
     <br>
     <!--=============================================
             Linea para el boton de existencia
     ============================================== -->
-    <div class="row h-25">
+    <div class="botondefault">
         <div class="col col-12">
-            <button class="btn btn-lg btn-secondary col-12 h-75" [routerLink]="['../list']">
+            <button class="btn btn-lg btn-secondary col-12" [routerLink]="['../list']">
                 <i class="fas fa-clipboard-list"></i> Existencias
             </button>
         </div>
@@ -14,15 +14,15 @@
     <!--=============================================
             Linea para el botones de Compra Y recepcion
     ============================================== -->
-    <div class="row h-25">
-        <div class="col col-12 col-md-6">
-            <button class="btn btn-lg btn-success col-12 h-75" [routerLink]="['../equinueva']">
+    <div class="botondefault">
+        <div class="col-12 col-md-6 defaultsub">
+            <button class="btn btn-lg btn-success col-12" [routerLink]="['../equinueva']">
                 <i class="fas fa-cart-plus"></i> Nueva Compra
             </button>
         </div>
-        <div class="col col-12 col-md-6">
-            <button class="btn btn-lg btn-info col-12 h-75" [routerLink]="['../requisicions']">
-                <i class="fas fa-tasks"></i> Recepciones 
+        <div class="col-12 col-md-6">
+            <button class="btn btn-lg btn-info col-12" [routerLink]="['../requisicions']">
+                <i class="fas fa-tasks"></i> Recepciones
                 <span *ngIf="nalma > 0" class="badge badge-light">{{nalma}}</span>
             </button>
         </div>
@@ -30,15 +30,30 @@
     <!--==================================================
         Linea para el botones de Envio Y Reporte Diario
     ====================================================== -->
-    <div class="row h-25">
-        <div class="col col-12 col-md-6">
-            <button class="btn btn-lg btn-success col-12 h-75" [routerLink]="['../equinueva/1']">
+    <div class="botondefault">
+        <div class="col col-12 col-md-6 defaultsub">
+            <button class="btn btn-lg btn-success col-12" [routerLink]="['../equinueva/1']">
                 <i class="fas fa-people-carry"></i> Nuevo Envio
             </button>
         </div>
         <div class="col col-12 col-md-6">
-            <button class="btn btn-lg btn-info col-12 h-75" [routerLink]="['../diario']">
+            <button class="btn btn-lg btn-info col-12" [routerLink]="['../diario']">
                 <i class="fas fa-address-book"></i> Diario
+            </button>
+        </div>
+    </div>
+    <!--==================================================
+        Linea para el botones de Traspaso de Almacen Y Producto sin Recibir
+    ====================================================== -->
+    <div class="botondefault">
+        <div class="col col-12 col-md-6 defaultsub">
+            <button class="btn btn-lg btn-success col-12" [routerLink]="['../traspaso']">
+                <i class="fas fa-exchange-alt"></i> Traspaso
+            </button>
+        </div>
+        <div class="col col-12 col-md-6">
+            <button class="btn btn-lg btn-info col-12" [routerLink]="['../pendiente']">
+                <i class="fas fa-truck-loading"></i> Producto sin Recibir
             </button>
         </div>
     </div>

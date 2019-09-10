@@ -29,7 +29,7 @@ export class PuestoViewComponent implements OnInit{
     ){
         this.title = 'Organización';
         this.token = this._UserService.getToken();
-        this.busqueda = new Busqueda(null, null, null);
+        this.busqueda = new Busqueda(null, null, null,null);
     }
 
     ngOnInit(){

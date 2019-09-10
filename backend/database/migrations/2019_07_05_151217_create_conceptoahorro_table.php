@@ -19,8 +19,8 @@ class CreateConceptoahorroTable extends Migration
             $table->collation = 'utf8_unicode_ci';
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->integer('id_ahorro')->nullable();
             $table->string('nombre')->nullable();
+            $table->string('concepto')->nullable();
             $table->integer('personal_id')->nullable();
             $table->date('fechadia')->nullable();
             $table->decimal('montoventa',10,2)->nullable();

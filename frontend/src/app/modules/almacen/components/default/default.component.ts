@@ -7,6 +7,7 @@ import { GeneralCallService } from '../../../../services/generalCall.service';
 @Component({
     selector: 'almacen-default',
     templateUrl:'./default.component.html',
+    styleUrls:['./estilo.css'],
     providers:[
         UserService,
         GeneralCallService
@@ -26,7 +27,6 @@ export class AlmacenDefaultComponent implements OnInit{
         this.token = this._UserService.getToken();
         this.title = "Control de Almacen";
     }
-
 
     ngOnInit(){
         this.getCompras();

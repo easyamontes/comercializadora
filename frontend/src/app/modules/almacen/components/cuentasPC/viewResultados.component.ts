@@ -48,7 +48,7 @@ export class ResultadosViewComponent implements OnInit {
         this.token = this._UserService.getToken();
         this.identity = this._UserService.getIdentity();
         this.title = 'Estado de Resultados';
-        this.busqueda = new Busqueda(null, null, null);
+        this.busqueda = new Busqueda(null, null, null,null);
     }
 
     ngOnInit() {

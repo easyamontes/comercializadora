@@ -48,7 +48,7 @@ export class CobranzaViewComponent implements OnInit {
         ================================================================ */
         this.token = this._UserService.getToken();
         this.identity = this._UserService.getIdentity();
-        this.busqueda = { inicio: "", final: "", socio: "" };
+        this.busqueda = { inicio: "", final: "", socio: "",mul:"" };
         this.ind = null;
         /*==============================================================
                 CACAHNDO EL PARAMETRO ENVIADO POR URL

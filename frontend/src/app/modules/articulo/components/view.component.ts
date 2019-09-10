@@ -28,7 +28,7 @@ export class ArticuloViewComponent implements OnInit{
     ){
         this.title = "Articulos";
         this.token = this._UserService.getToken();
-        this.busqueda = new Busqueda(null, null, null);
+        this.busqueda = new Busqueda(null, null, null,null);
     }
 
     ngOnInit(){

@@ -1,0 +1,28 @@
+<div class="principal">
+    <h3>{{title}}</h3>
+    <div class="row">
+        <mat-form-field class="col-12">
+            <input matInput [(ngModel)]="busqueda.socio" placeholder="buscar">
+        </mat-form-field>
+    </div>
+    <div class="reporte">
+            <table class="table table-striped table-hover">
+                <thead class="tablareporte">
+                    <tr>
+                        <th>Folio</th>
+                        <th>Fecha</th>
+                        <th>Nombre</th>
+                        <th>Importe</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="articulo" *ngFor="let lis of pendie | filter: busqueda.socio; let id = index">
+                        <td>{{lis.folio}}</td>
+                        <td>{{lis.fecha | date:'dd/MM/yyyy'}}</td>
+                        <td>{{lis.pdestino.nombre}}</td>
+                        <td>{{lis.importe |currency}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+</div>

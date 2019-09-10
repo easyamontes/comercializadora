@@ -12,7 +12,8 @@ import { DiarioViewComponent } from './components/reporteDiario/view.component';
 import { CobranzaViewComponent } from './components/cuentasPC/viewCobrar.component';
 import { PagoProveedoresViewComponent } from './components/pagoProveedores/view.component';
 import { ResultadosViewComponent } from './components/cuentasPC/viewResultados.component';
-
+import {RequisicionPendienteComponent } from './components/requisiciones/pendiente.component';
+import {RequisicionTraspasoComponent } from './components/requisiciones/traspaso.component';
 const almacenRoutes: Routes =[
     {
         path:'almacen', component:AlmacenMainComponent, canActivateChild:[IsLoggedGuard],
@@ -27,7 +28,11 @@ const almacenRoutes: Routes =[
                                                             { path:'diario',component:DiarioViewComponent },
                                                             { path:'cx/:tip' ,component:CobranzaViewComponent},
                                                             { path:'pp', component:PagoProveedoresViewComponent },
-                                                            { path:'res', component:ResultadosViewComponent }
+                                                            { path:'res', component:ResultadosViewComponent },
+                                                            { path:'pendiente', component:RequisicionPendienteComponent },
+                                                            { path:'traspaso', component:RequisicionTraspasoComponent },
+                                                            
+                                                            
                                                          ]
     }
 ]

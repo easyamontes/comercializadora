@@ -8,6 +8,7 @@ import { Busqueda } from 'src/app/models/busqueda';
 import { Pedido } from 'src/app/models/pedido';
 import { PersonalUtil } from '../../../../services/util/personal.util';
 import { Conceptoahorro } from 'src/app/models/conceptoahorro';
+import { Alert } from 'selenium-webdriver';
 
 @Component({
     selector: 'ahorro-view',
@@ -36,7 +37,7 @@ export class AhorroViewComponent {
     public perso: Array<any>;
     public title: string;
     public busqueda: Busqueda;
-    public lisahorro: Array<Pedido>;
+    public lisahorro: Array<any>;
     public ind: number;
 
 
@@ -48,8 +49,8 @@ export class AhorroViewComponent {
     ) {
         this.token = this._UserService.getToken();
         this.title = "AHORRO DIARIO";
-        this.busqueda = new Busqueda(null, null, null);
-        this.concep = new Conceptoahorro(0, null, null, 0, 0, null);
+        this.busqueda = new Busqueda(null, null, null,null);
+        this.concep = new Conceptoahorro(0, null,null, null, 0, 0, null);
     }
 
     ngOnInit() {
@@ -107,6 +108,23 @@ export class AhorroViewComponent {
         )
 
     }
+
+
+    /* ========================================================
+        BOTON PARA PAGAR MULTA
+    ===========================================================*/
+        pagarmulta(i){
+          this._GeneralCallService.storeRecord(this.token,'multasahorro',this.lisahorro[i]).subscribe(       
+            response => {
+                if (response.code == 200) {
+                    this.lisahorro[i].pagomulta = null;
+                    alert('se a realizado el pago de multa con exito');
+                }
+            }, error => {
+                console.log(<any>error);
+            }
+          )
+        }
 
     /*==========================================================
       BOTON SIRVE PARA PAGAR

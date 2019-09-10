@@ -41,7 +41,7 @@ export class ReportePiezaComponent implements OnInit {
     ) {
         this.token = this._UserService.getToken();
         this.title = 'Reporte Piezas';
-        this.busqueda = new Busqueda(null, null, null);
+        this.busqueda = new Busqueda(null, null, null,null);
     }
 
     ngOnInit() {

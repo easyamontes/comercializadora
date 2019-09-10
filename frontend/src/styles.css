@@ -82,7 +82,7 @@ button{
 
 tbody {
   display:block;
-  max-height:59vh;
+  max-height:55.5vh;
   overflow-y:auto;
 }
 thead, tbody tr {
@@ -103,6 +103,21 @@ thead, tbody tr {
 ::-webkit-scrollbar-thumb{
   border-radius: 10px;
   background-color:rgb(128, 128, 128,0.8);
+}
+  /*==========================================================================
+    botones de la parte inferior de las tablas ahorro
+  ==========================================================================*/
+.footertabla{
+  display: flex;
+  margin: auto;
+  align-items: center;
+  align-content: center;
+}
+.footerinput{
+   padding-left: 30px;
+}
+.footertabla button {
+    width: 100px;
 }
   /*==========================================================================
     CSS PARA LOS MODAL

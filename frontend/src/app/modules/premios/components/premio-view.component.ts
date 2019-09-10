@@ -26,7 +26,7 @@ export class PremiosViewComponent implements OnInit {
           ){
             this.title = "Premios";
             this.token = this._UserService.getToken();
-            this.busqueda = new Busqueda(null, null, null);
+            this.busqueda = new Busqueda(null, null, null,null);
           }
 
           ngOnInit(){

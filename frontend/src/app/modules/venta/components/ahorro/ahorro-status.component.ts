@@ -41,7 +41,7 @@ export class AhorroStatusComponent {
 
     ) {
         this.token = this._UserService.getToken();
-        this.busqueda = new Busqueda(null, 'SIN PAGAR', null);
+        this.busqueda = new Busqueda(null, 'SIN PAGAR', null, null);
         this.aler = null;
         this.cero = null;
      
@@ -58,9 +58,7 @@ export class AhorroStatusComponent {
             }
         );
     }
-    /*==============================================================
-            FUNCION PARA GESTIONAR EL CAMBIO DE REPORTE
-    ================================================================ */
+
 
     /* ==============================================
        LISTA PARA EL FONDO DE AHORRO SIN PAGAR
@@ -91,6 +89,7 @@ export class AhorroStatusComponent {
             tipo: 'S',
             ahr: ah,
             no:nombre,
+            concepto:'PAGO',
             status:'PAGADO',
         }
         if (+this.busqueda.inicio <= 0) {

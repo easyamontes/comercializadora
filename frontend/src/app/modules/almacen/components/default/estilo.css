@@ -1,0 +1,28 @@
+.titulopendiente {
+  font-size: 50px;
+  text-align: center
+}
+.botondefault{
+    margin: auto;
+    display: flex;
+    width: 90%;
+    margin-bottom: 2%;
+}
+.botondefault button {
+  height:90px;
+}
+
+@media (max-width:700px){
+   .titulopendiente{
+     font-size: 35px;
+   }
+   .botondefault{
+    display: inherit;
+   }
+   .defaultsub{
+     margin-bottom: 2%;
+   }
+   .botondefault button{
+     height:90%;
+   }
+}

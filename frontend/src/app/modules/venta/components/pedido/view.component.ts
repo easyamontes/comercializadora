@@ -28,7 +28,7 @@ export class PedidoViewComponent implements OnInit {
       ){
         this.token = this._UserService.getToken();
         this.title = "Devoluciones";
-        this.busqueda = new Busqueda(null, null, null);
+        this.busqueda = new Busqueda(null, null, null,null);
       }
 
     ngOnInit() {

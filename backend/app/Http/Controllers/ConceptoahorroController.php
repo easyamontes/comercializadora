@@ -30,11 +30,37 @@ class ConceptoahorroController extends Controller
         $concepto->fechadia = $params->fechapedido;
         $concepto->montoventa = $params->importe;
         $concepto->ahorrodia = $params->ahorro;
+        $concepto->concepto = 'AHORRO';
         $concepto->save();
         Pedido::where('id','=',$params_array['id'])
         ->where('fechapedido','=',$params->fechapedido)->update(['status' => 'APLICADO']);
         $data = array(
             'concepto' => $concepto,
+            'code' => 200,
+            'status' => 'success'
+        );
+        return response()->json($data,200);
+    }
+       /*======================================================================
+         FUNCION PARA PAGAR MULTAS EN AHORRO
+    ====================================================================== */
+
+    public function pagarmulta (Request $request){
+        $json = $request->input('json',null);
+        $params = json_decode($json);
+        $params_array = json_decode($json, true);
+        $concepto = new Conceptoahorro();
+        $concepto->personal_id = $params->user_id;
+        $concepto->nombre = $params->user->name;
+        $concepto->fechadia = $params->fechapedido;
+        $concepto->montoventa = $params->importe;
+        $concepto->ahorrodia = $params->pagomulta * -1;
+        $concepto->tipo = 'S';
+        $concepto->concepto = 'MULTA';
+        $concepto->status = 'PAGADO';
+        $concepto->save();
+        $data = array(
+            'multa' => $concepto,
             'code' => 200,
             'status' => 'success'
         );
@@ -66,7 +92,6 @@ class ConceptoahorroController extends Controller
         ), 200);
     }
 
-
     public function pagar (Request $request)
     {
         $json = $request->input('json',null);
@@ -82,6 +107,7 @@ class ConceptoahorroController extends Controller
         $ahorro->ahorrodia = $params->ahorrodia;
         $ahorro->tipo = $params->tipo;
         $ahorro->status = $params->status;
+        $ahorro->concepto = $params->concepto;
         $ahorro->save();
         $total = Conceptoahorro::selectRaw('SUM(ahorrodia) AS ahorrodia')
         ->where('personal_id','=',$params->personal_id)

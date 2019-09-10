@@ -52,12 +52,14 @@ Route::get('/api/repo/{id}','AlmacenController@diario')->middleware('islogged');
 Route::post('/api/cxc','RequisicionController@cxc')->middleware('islogged');
 Route::post('/api/listatus','ConceptoahorroController@listastatus')->middleware('islogged');
 Route::post('/api/pago','ConceptoahorroController@pagar')->middleware('islogged');
+Route::post('/api/multasahorro','ConceptoahorroController@pagarmulta')->middleware('islogged');
 Route::put('/api/pagar/{id}','PedidoController@pagar')->middleware('islogged');
 Route::get('/api/ppagados','PagoProveedorController@pagado')->middleware('islogged');;
 Route::put('/api/pagarto/{id}','PedidoController@pagartodo')->middleware('islogged');
 Route::post('/api/overg','OverController@setreporte')->middleware('islogged');
 Route::post('/api/eresul','OverController@setEstadoResultados')->middleware('islogged');
-
+Route::get('/api/pendiente','RequisicionController@listapendiente')->middleware('islogged');
+Route::get('/api/traspaso/{id}','AlmacenController@traspaso')->middleware('islogged');
 
 //Rutas para el control de acciones en puestos
 Route::resource('/api/puestos','PuestoController');

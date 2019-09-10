@@ -21,6 +21,10 @@ class Requisicion extends Model
     public function porigen(){
         return $this->belongsto('App\Personal','porigen_id');
     }
+    
+    public function pdestino(){
+        return $this->belongsto('App\Personal','pdestino_id');
+    }
 
     public function proveedor(){
         return $this->belongsto('App\Proveedor','proveedor_id');

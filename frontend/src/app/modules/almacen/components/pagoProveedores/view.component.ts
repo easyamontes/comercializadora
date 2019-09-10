@@ -48,7 +48,7 @@ export class PagoProveedoresViewComponent implements OnInit {
         this.ind = null;
         this.token = this._UserService.getToken();
         this.factura = new PagoProveedor(null, null, null, null, null, null, null, null, null, null);
-        this.busqueda = new Busqueda(null, null, null);
+        this.busqueda = new Busqueda(null, null, null,null);
     }
 
     ngOnInit() {

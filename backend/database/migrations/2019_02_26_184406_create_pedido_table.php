@@ -30,6 +30,7 @@ class CreatePedidoTable extends Migration
             $table->string('año');
             $table->integer('porcentaje');
             $table->integer('ahorro');
+            $table->integer('pagomulta');
             $table->string('status');
             $table->date('fechapago');
             $table->timestamps();

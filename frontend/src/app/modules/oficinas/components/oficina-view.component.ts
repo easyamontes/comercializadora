@@ -34,7 +34,7 @@ export class OficinaViewComponent implements OnInit {
   ) {
     this.title = 'Oficinas';
     this.token = this._UserService.getToken();
-    this.busqueda = new Busqueda(null, null, null);
+    this.busqueda = new Busqueda(null, null, null,null);
   }
 
   ngOnInit() {

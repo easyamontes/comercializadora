@@ -21,7 +21,7 @@ class AlmacenController extends Controller
     {
         $per = $json = $request->input('per', null);
         $almacen = Almacen::selectRaw(' * ,SUM(existencia) as totalExistencia, AVG(precio) AS costo')
-            ->where([['userp_id', '=', $per],['existencia','>',0]])
+            ->where([['userp_id', '=', $per], ['existencia', '>', 0]])
             ->groupBy('articulo_id')
             ->get()->load('proveedor');
         $data = array(
@@ -39,12 +39,17 @@ class AlmacenController extends Controller
     {
         $json = $request->input('json', null);
         $params_array = json_decode($json, true);
+        $params = json_decode($json);
         $user = $json = $request->input('userid', null);
-        $per = $json = $request->input('per', null);
+        if (isset($params[0]->userorigen)) {
+            $per = $params[0]->userorigen;
+        } else {
+            $per = $json = $request->input('per', null);
+        }
         foreach ($params_array as $item) {
             $tipo = $item['tipo'];
-            if( $tipo != "COMPRA" && $tipo != "ENTRADA"){
-                $item = $this->surteRecord($item,$user,$per);
+            if ($tipo != "COMPRA" && $tipo != "ENTRADA") {
+                $item = $this->surteRecord($item, $user, $per);
                 //return $this->surteRecord($item,$user,$per);
             }
             $almacen = $this->saveRecod($item, $user);
@@ -58,10 +63,11 @@ class AlmacenController extends Controller
         return response()->json($data, 200);
     }
 
-     /*==============================================================================
+    /*==============================================================================
         Funcion para Actualizar los registros del almacen
     ==============================================================================*/
-    function update(Request $request){
+    function update(Request $request)
+    {
         $json = $request->input('json', null);
         $params_array = json_decode($json, true);
         foreach ($params_array as $item) {
@@ -70,11 +76,29 @@ class AlmacenController extends Controller
             Almacen::where('id', $item['id'])->update($item);
         }
         return response()->json(array(
-            'code'=> 200,
+            'code' => 200,
             'status' => 'success'
         ), 200);
     }
- 
+
+    /*==============================================================================
+        Funcion para traer los articulos del origen seleccionado
+    ==============================================================================*/
+
+    public function traspaso($id, Request $request)
+    {
+        $alma = Almacen::selectRaw(' * ,SUM(existencia) as totalExistencia, AVG(precio) AS costo')
+            ->where([['userp_id', '=', $id], ['existencia', '>', 0]])
+            ->groupBy('articulo_id')
+            ->get();
+        $data = array(
+            'existencia' => $alma,
+            'code' => 200,
+            'satus' => 'success'
+        );
+        return response()->json($data, 200);
+    }
+
     /*==============================================================================
         lista para dar hojas de salida
     ==============================================================================*/
@@ -84,7 +108,7 @@ class AlmacenController extends Controller
         $per = $json = $request->input('per', null);
         $almacen = Almacen::selectRaw(' * ,SUM(existencia) AS totalExistencia ')
             ->where('userp_id', '=', $per)
-            ->groupBy('articulo_id','proveedor_id')
+            ->groupBy('articulo_id', 'proveedor_id')
             ->get()->load('user');
         return response()->json(array(
             'almacen' => $almacen,
@@ -145,10 +169,10 @@ class AlmacenController extends Controller
     /*==============================================================================
         Funcion para surtir una Existencia 
     ==============================================================================*/
-    function surteRecord($item, $user,$per)
+    function surteRecord($item, $user, $per)
     {
         $qrty = Almacen::where('articulo_id', '=', $item['articulo_id'])
-            ->where([['userp_id', '=', $per],['existencia','>',0]])
+            ->where([['userp_id', '=', $per], ['existencia', '>', 0]])
             ->get();
         $exist = json_decode($qrty, true);
         $dif = 0;
@@ -156,9 +180,9 @@ class AlmacenController extends Controller
             if ($existe['existencia'] >= $item['recepcion']) {
                 $dif = $existe['existencia'] - $item['recepcion'];
                 $existe['existencia'] = $dif;
-                if($item['tipo'] == "VENTA"){
+                if ($item['tipo'] == "VENTA") {
                     $item['existencia'] = 0;
-                }else{
+                } else {
                     $item['existencia'] = $item['recepcion'];
                 }
                 $item['cantidad'] = $item['recepcion'];
@@ -173,9 +197,9 @@ class AlmacenController extends Controller
                 if ($dif > 0) {
                     $ext = $existe['existencia'];
                     $existe['existencia'] = 0;
-                    if($item['tipo'] == "VENTA"){
+                    if ($item['tipo'] == "VENTA") {
                         $item['existencia'] = 0;
-                    }else{
+                    } else {
                         $item['existencia'] = $ext;
                     }
                     $item['id_almacen'] = $existe['id'];
@@ -195,66 +219,70 @@ class AlmacenController extends Controller
     /*======================================================================
         REPORTE POR PIEZAS VENDIDAD POR EL SOCIO COMERCIAL
     ====================================================================== */
-    
+
     public function pieza(Request $request)
     {
-        $json = $request->input('json',null);
-        $params = json_decode ($json);
+        $json = $request->input('json', null);
+        $params = json_decode($json);
         $per = $json = $request->input('per', null);
         $socio = $params->socio;
         $pieza = Almacen::selectRaw('articulo, modelo, SUM(venta) as venta, SUM(total) as total, precio')
-            ->where('userp_id','=',$socio)
-            ->where('tipo','=','SALIDA')
-            ->groupby( 'userp_id','articulo_id','precio')
+            ->where('userp_id', '=', $socio)
+            ->where('tipo', '=', 'SALIDA')
+            ->groupby('userp_id', 'articulo_id', 'precio')
             ->get()->load('user');
         return response()->json(array(
             'piezaall' => $pieza,
             'status' => 'success'
         ), 200);
-    } 
+    }
 
     /*======================================================================
          FUNCION PARA ACTUALIZAR EL CAMPO VENTA
     ====================================================================== */
-    
-    public function actualizar (Request $request, $id){
-        $json = $request->input('json',null);
+
+    public function actualizar(Request $request, $id)
+    {
+        $json = $request->input('json', null);
         $params = json_decode($json);
         $params_array = json_decode($json, true);
         $tot = 0;
-         foreach ($params_array as $item){
+        foreach ($params_array as $item) {
             $actualizar = new Almacen();
             $ca = $item['devolucion'];
-            $devolucion = $item['existencia']- $item ['devolucion'];
+            $devolucion = $item['existencia'] - $item['devolucion'];
             $precio = $devolucion * $item['precio'];
             $tot = $tot + $precio;
-            if($ca < 1 ){
-                $actualizar = Almacen::where('id', $item['id'])->update(['venta'=> $item['cantidad'],'total'=>$precio]);
-            }else{
-                $actualizar = Almacen::where('id', $item['id'])->update(['venta'=>$devolucion,'total'=>$precio]);
+            if ($ca < 1) {
+                $actualizar = Almacen::where('id', $item['id'])->update(['venta' => $item['cantidad'], 'total' => $precio]);
+            } else {
+                $actualizar = Almacen::where('id', $item['id'])->update(['venta' => $devolucion, 'total' => $precio]);
             }
-         }
+        }
         $aho = $tot * 0.05;
-        Pedido::where('id','=',$id)->update(['importe' =>  $tot, 'ahorro' =>  $aho]);
+        Pedido::where('id', '=', $id)->update(['importe' =>  $tot, 'ahorro' =>  $aho]);
         return response()->json(array(
             'actua' => $actualizar,
             'status' => 'success'
-        ),200);
+        ), 200);
     }
 
 
     /*======================================================================
          FUNCION PARA CREAR EL REPORTE DE DIARIO
     ====================================================================== */
-     public function diario(Request $request,$id){
-        $existe = DB::select('select id, proveedor_id, articulo_id, articulo, sum(existencia) as existencia, sum(total) as total from almacen where userp_id = ? and existencia > 0 GROUP BY proveedor_id, articulo_id',[$id]);
-        $compra = DB::select('select al.id, al.proveedor_id, al.articulo_id, al.articulo, al.modelo, sum(al.total) as total from almacen al INNER JOIN requisicion rq where rq.pdestino_id = ? and rq.tipo = ? GROUP BY proveedor_id, articulo_id',[$id,'COMPRA']);
-        $venta =  DB::select('select al.id, al.proveedor_id, al.articulo_id, al.articulo, al.modelo, sum(al.total) as total from almacen al INNER JOIN requisicion rq where rq.pdestino_id = ? and rq.tipo = ? GROUP BY proveedor_id, articulo_id',[$id,'VENTA']);
+    public function diario(Request $request, $id)
+    {
+        $existe = DB::select('select id, proveedor_id, articulo_id, articulo, sum(existencia) as existencia, sum(total) as total from almacen where userp_id = ? and existencia > 0 GROUP BY proveedor_id, articulo_id', [$id]);
+        $compra = DB::select('select al.id, al.proveedor_id, al.articulo_id, al.articulo, al.modelo, sum(al.total) as total from almacen al INNER JOIN requisicion rq where rq.pdestino_id = ? and rq.tipo = ? GROUP BY proveedor_id, articulo_id', [$id, 'COMPRA']);
+        $venta =  DB::select('select al.id, al.proveedor_id, al.articulo_id, al.articulo, al.modelo, sum(al.total) as total from almacen al INNER JOIN requisicion rq where rq.pdestino_id = ? and rq.tipo = ? GROUP BY proveedor_id, articulo_id', [$id, 'VENTA']);
         return response()->json(
             array(
-            'existencia' => $existe,
-            'compra' => $compra,
-            'venta'  => $venta
-        ),200);
-     }
-    }//End Class 
+                'existencia' => $existe,
+                'compra' => $compra,
+                'venta'  => $venta
+            ),
+            200
+        );
+    }
+}//End Class 
