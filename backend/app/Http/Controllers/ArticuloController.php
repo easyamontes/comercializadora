@@ -77,6 +77,7 @@ class ArticuloController extends Controller
             'status' => 'success',
             'code' => 200
         );
+        return response()->json($data,200);
     }
 
     /**Mostrar un registro */

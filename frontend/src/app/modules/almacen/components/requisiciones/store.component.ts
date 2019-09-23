@@ -74,7 +74,7 @@ export class RequisicionStoreComponent implements OnInit {
     setCompra(date) {
         this.title = 'Nueva Compra';
         this.rurl = ["lproved", "lartic"];
-        this.requi = new Requisicion(0, this.identity.sub, 0, 0, 0, "COMPRA", 'NUEVO', 0, date, null, null, null);
+        this.requi = new Requisicion(0, this.identity.sub, 0, 0, 0, "COMPRA", 'NUEVO', 0,0, date, null, null, null);
     }
 
     /*=================================================================
@@ -84,7 +84,7 @@ export class RequisicionStoreComponent implements OnInit {
         this.title = 'Nuevo Traspaso';
         this.sid = 0;
         this.rurl = ["here", "almaitem"];
-        this.requi = new Requisicion(0, this.identity.sub, 0, 0, 0, "VENTA", 'NUEVO', 0, date, null, null, null);
+        this.requi = new Requisicion(0, this.identity.sub, 0, 0, 0, "VENTA", 'NUEVO', 0,0, date, null, null, null);
     }
 
     ngOnInit() {
@@ -165,6 +165,7 @@ export class RequisicionStoreComponent implements OnInit {
     onSubmit() {
         this.spin=true;
         this.requi.importe = this.getTotalCost();
+        this.requi.xpagar = this.requi.importe;
         if (this.requi.pdestino_id == 0) {
             this.requi.pdestino_id = this.identity.sub;
         }

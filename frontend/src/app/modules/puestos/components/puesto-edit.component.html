@@ -11,17 +11,14 @@
                 </div>
                 <div class="row form-group">
                     <mat-form-field class="col-md-6">
-                        <mat-select name="nivel" #nivel="ngModel" [(ngModel)]="puestoe.nivel" placeholder="Nivel"
+                        <input type="text" matInput name="nivel" #nivel="ngModel" [(ngModel)]="puestoe.nivel" placeholder="Nivel"
                             required>
-                            <mat-option value="1">1</mat-option>
-                            <mat-option value="2">2</mat-option>
-                        </mat-select>
                     </mat-form-field>
                 </div>
                 <div class="row form-group">
                     <mat-form-field class="col-md-6">
                         <textarea type="text" matInput name="descripcion" #descripcion="ngModel"
-                            [(ngModel)]="puestoe.descripcion" placeholder="Descripcion" required></textarea>
+                            [(ngModel)]="puestoe.descripcion" placeholder="Descripcion"></textarea>
                     </mat-form-field>
                 </div>
             </fieldset>

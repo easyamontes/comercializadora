@@ -41,6 +41,9 @@ export class PuestoViewComponent implements OnInit{
         this._GeneralCallService.getRecords(this.token,'puestos').subscribe(
             response =>{
                 this.puestos = response.puestos;
+                this.puestos = this.puestos.sort(function(a, b) {
+                    return +a.nivel - +b.nivel
+                });
             },error =>{
                 console.log(<any>error);
             });
@@ -57,8 +60,4 @@ export class PuestoViewComponent implements OnInit{
             )
         }
     }
-
-
-
-
 }//END Class

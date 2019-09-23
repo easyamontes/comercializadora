@@ -26,7 +26,8 @@ class CreateRequisicionTable extends Migration
             $table->integer('folio');
             $table->string('tipo');
             $table->string('status');
-            $table->integer('importe');
+            $table->decimal('importe',10,2);
+            $table->decimal('xpagar',10,2);
             $table->date('fecha');
             $table->string('factura');
             $table->date('ffactura');

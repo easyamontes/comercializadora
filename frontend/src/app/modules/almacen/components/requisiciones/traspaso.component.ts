@@ -53,7 +53,7 @@ export class RequisicionTraspasoComponent implements OnInit {
         let date: string = fe.toISOString();
         this.identity = this._UserService.getIdentity();
         this.token = this._UserService.getToken();
-        this.requi = new Requisicion(0, null, 0, 0, 0, 'TRASPASO', 'NUEVO', 0,date, null, null, null);
+        this.requi = new Requisicion(0, null, 0, 0, 0, 'TRASPASO', 'NUEVO', 0,0,date, null, null, null);
         this.articulos = [];
         this.spin = false;
     }
@@ -136,6 +136,7 @@ export class RequisicionTraspasoComponent implements OnInit {
     onSubmit() {
         this.spin=true;
         this.requi.importe = this.getTotalCost();
+        this.requi.xpagar = this.requi.importe;
         if (this.requi.pdestino_id == 0) {
             this.requi.pdestino_id = this.identity.sub;
         }
@@ -169,8 +170,8 @@ export class RequisicionTraspasoComponent implements OnInit {
     }
 
     getTotalCost() {
-        let precio = this.articulos.map(c => c.precio).reduce((ant, act) => ant + act, 0);
-        let cantidad = this.articulos.map(c => c.cantidad).reduce((ant, act) => ant + act, 0);
+        let precio = this.articulos.map(c => c.precio).reduce((ant, act) => +ant + +act, 0);
+        let cantidad = this.articulos.map(c => c.cantidad).reduce((ant, act) => +ant + +act, 0);
         return precio * cantidad;
     }
 

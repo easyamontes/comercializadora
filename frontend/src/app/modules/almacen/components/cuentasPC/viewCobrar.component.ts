@@ -1,14 +1,16 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 //Utils
 import { PersonalUtil } from '../../../../services/util/personal.util';
-import { NativeDateAdapter, DateAdapter, MAT_DATE_FORMATS } from "@angular/material";
+import { DateAdapter, MAT_DATE_FORMATS } from "@angular/material";
 //servicios
 import { UserService } from './../../../../services/user.service';
 import { GeneralCallService } from '../../../../services/generalCall.service';
-import { AppDateAdapter,APP_DATE_FORMATS } from '../../../../services/util/dateAdapter';
+import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../services/util/dateAdapter';
 //Modelos
 import { Busqueda } from 'src/app/models/busqueda';
+import { Deposito } from '../../../../models/deposito';
+import { Banco } from '../../../../models/banco';
 
 @Component({
     selector: 'cobrar-view',
@@ -27,15 +29,20 @@ import { Busqueda } from 'src/app/models/busqueda';
 })
 
 export class CobranzaViewComponent implements OnInit {
+    @ViewChild('closeBtn') closeBtn: ElementRef;
     public title: string;
     public token: any;
     public identity: any;
     public busqueda: Busqueda;
-    public personaList: Array<any>
-    public repoRequi: Array<any>
-    public repoArti: Array<any>
+    public personaList: Array<any>;
+    public repoRequi: Array<any>;
+    public repoArti: Array<any>;
+    public pPagar:number;
     public ind: number;
     public params: string;
+    public deposito: Deposito;
+    public listBanco: Array<Banco>;
+    public listDeposito: Array<Deposito>;
 
     constructor(
         private _UserService: UserService,
@@ -48,7 +55,8 @@ export class CobranzaViewComponent implements OnInit {
         ================================================================ */
         this.token = this._UserService.getToken();
         this.identity = this._UserService.getIdentity();
-        this.busqueda = { inicio: "", final: "", socio: "",mul:"" };
+        this.busqueda = { inicio: "", final: "", socio: "", mul: "" };
+        this.deposito = new Deposito(null, null, null, null, null, null, null, null, null, null, null, null);
         this.ind = null;
         /*==============================================================
                 CACAHNDO EL PARAMETRO ENVIADO POR URL
@@ -62,11 +70,13 @@ export class CobranzaViewComponent implements OnInit {
                     case 'c':
                         this.title = "Cobrar";
                         this.repoRequi = null;
+                        this.getEquipo();
                         break;
                     case 'p':
                         this.title = "Pagar";
                         this.busqueda.socio = this.identity.per;
                         this.requiCall();
+                        this.getBancos();
                     default:
                         break;
                 }
@@ -74,14 +84,20 @@ export class CobranzaViewComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getEquipo();
+    }
+
+    /*==============================================================
+                CIERRA EL MODAL CUANDO TERMINA SU FUNCION
+    ================================================================ */
+    private closeModal(): void {
+        this.closeBtn.nativeElement.click();
     }
 
     /*==============================================================
             FUNCION PARA CONTAR EL TOTAL DE LOS CONCEPTOS
     ================================================================ */
     getTotal() {
-        return this.repoRequi.map(c => c.importe).reduce((ant, act) => +ant + +act, 0);
+        return this.repoRequi.map(c => c.xpagar).reduce((ant, act) => +ant + +act, 0);
     }
 
     /*==============================================================
@@ -128,21 +144,100 @@ export class CobranzaViewComponent implements OnInit {
     }
 
     /*==============================================================
-            DAR POR PAGADA LA REQUISICION
+                Invocando la lista de bancos
     ================================================================ */
-    setPagado(item: any, index: number) {
-        this.ind = index;
-        item.statuspago = 'PAGADO';
-        this._GeneralCallService.updateRecord(this.token, 'requisicion', item, item.id).subscribe(
+    getBancos() {
+        this._GeneralCallService.getRecords(this.token, 'bancos').subscribe(
             response => {
-                if (response.code == 200) {
-                    this.repoRequi.splice(index, 1);
-                    this.ind = null;
-                }
+                this.listBanco = response.bancos;
+                console.log(this.listBanco);
             }, error => {
                 console.log(<any>error);
-                this.ind = null;
             }
         );
     }
+
+    /*==============================================================
+                Guardando el nuevo registro
+    ================================================================ */
+    onSubmit() {
+        this.closeModal();
+        if (confirm('Los datos introducidos son correctos?')) {
+            this._GeneralCallService.storeRecord(this.token, 'deposito', this.deposito).subscribe(
+                response => {
+                    this.cleanKeys(this.deposito)
+                    this.requiCall();
+                }, error => {
+                    console.log(<any>error);
+                });
+        }
+    }
+
+    /*==============================================================
+                Invocando la lista de depositos
+    ================================================================ */
+    getDeposito(id) {
+        this._GeneralCallService.getRecrod(this.token, 'deposito', id).subscribe(
+            response => {
+                this.listDeposito = response.depositos;
+            }, error => {
+                console.log(<any>error);
+            });
+    }
+
+    /*==============================================================
+                Invocando la lista de depositos
+    ================================================================ */
+    destroiDeposito(id){
+        this._GeneralCallService.delteRcord(this.token,'deposito',id).subscribe(
+            response =>{
+                if(response.code == 400){
+                    alert(response.message);
+                }else{
+                    this.listDeposito = response.depositos;
+                }
+            },error=>{
+                console.log(<any>error);
+            });
+    }
+
+
+    /*==============================================================
+                Cancelando la escritura del deposito
+    ================================================================ */
+    onCancel() {
+        this.closeModal();
+        this.cleanKeys(this.deposito);
+    }
+
+    cleanKeys(Obj: any): any {
+        Object.entries(Obj).forEach(([key, value]) => {
+            Obj[key] = null;
+        });
+        return Obj;
+    }
+
+    onUpdate(id,item:Deposito){
+        this._GeneralCallService.updateRecord(this.token,'deposito',item,id).subscribe(
+            response=>{
+                if(response.code == 400){
+                    alert(response.message);
+                }else{
+                    this.getDeposito(item.requisicion_id);
+                    this.getRequisicionCobrar();
+                }
+            },error=>{
+                console.log(<any>error);
+            }
+        )
+    }
+
+    checkMinMax(){
+        let cantidad = this.pPagar;
+        let recepcion = + this.deposito.importe;
+        if(cantidad < recepcion || recepcion < 0 || !recepcion){
+            this.deposito.importe = null;
+        }
+    }
+
 }

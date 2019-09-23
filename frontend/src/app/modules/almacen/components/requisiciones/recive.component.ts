@@ -130,6 +130,7 @@ export class RequisicionReciveComponent implements OnInit{
         return true;
         
     }
+    
     onCancel(){
         this._router.navigate(['almacen/requisicions']);
     }

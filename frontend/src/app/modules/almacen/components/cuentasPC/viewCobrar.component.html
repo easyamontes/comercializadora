@@ -36,8 +36,8 @@
                     <th>Fecha</th>
                     <th>Proveedor</th>
                     <th>Importe</th>
-                    <th style="text-align: center">Ver</th>
-                    <th style="text-align: center">Pagar</th>
+                    <th style="text-align: center">Articulos</th>
+                    <th style="text-align: center">Depositos</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,32 +47,34 @@
                     <td *ngIf="item.proveedor">{{ item.proveedor.nombre }}</td>
                     <td *ngIf="item.porigen && !item.proveedor">{{ item.porigen.nombre }}</td>
                     <td>{{ item.importe |currency}}</td>
-                    <td> <button type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal"
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal"
                             data-target="#exampleModal" (click)="repoArti = item.articulos">
                             <i class="fas fa-eye"></i> Ver
                         </button>
                     </td>
-                    <td>
-                        <button *ngIf="ind != i" class="btn btn-success btn-sm btn-block" (click)="setPagado(item,i)">
-                            <i class="fas fa-dollar-sign"></i> Pagar
-                        </button>
-                        <button *ngIf="ind == i" class="btn btn-success btn-sm btn-block" type="button" disabled>
-                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            Pagando...
+                    <td *ngIf="params === 'c'">
+                        <button class="btn btn-success btn-sm btn-block" data-toggle="modal"
+                            data-target="#listDepositoModal" data-backdrop="static" (click)="getDeposito(item.id)">
+                            <i class="fas fa-eye"></i> Depositos
                         </button>
                     </td>
-                </tr>
-                <tr *ngIf="repoRequi">
-                    <td></td>
-                    <td colspan="3"></td>
-                    <td></td>
-                    <td>
-                        <h4>Total: {{ getTotal() | currency }}</h4>
+                    <td *ngIf="params === 'p'">
+                        <button class="btn btn-success btn-sm btn-block" data-toggle="modal"
+                            data-target="#depositoModal" data-backdrop="static"
+                            (click)="this.deposito.requisicion_id = item.id; this.pPagar = item.xpagar">
+                            <i class="fas fa-dollar-sign"></i> Depositar
+                        </button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+    <div *ngIf="repoRequi" class="row d-flex justify-content-end">
+        <h4>Total: {{ getTotal() | currency }}</h4>
+    </div>
+
 </div>
 
 <!--=============================================================
@@ -80,7 +82,7 @@
 =============================================================-->
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+    aria-hidden="true" *ngIf="repoArti">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -105,6 +107,119 @@
                             <td>{{ item.cantidad }}</td>
                             <td>{{ item.precio |currency}}</td>
                             <td>{{ item.total |currency}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--=============================================================
+                Modal para Crear un nuevo anticipo
+=============================================================-->
+<div class="modal fade" id="depositoModal" tabindex="-1" role="dialog" aria-labelledby="depositoModalLabel"
+    aria-hidden="true" *ngIf="params === 'p'">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="depositoModalLabel"> Nuevo Deposito  -  Saldo: {{pPagar |currency}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeBtn>
+                </button>
+            </div>
+            <form #newDeposito="ngForm" (ngSubmit)="onSubmit()">
+                <div class="modal-body">
+                    <mat-form-field class="col-12">
+                        <mat-select matInput [(ngModel)]="deposito.banco_id" name="banco" #banco="ngModel"
+                            placeholder="Banco" required>
+                            <mat-option *ngFor="let banco of listBanco" [value]="banco.id">
+                                {{banco.nombre   | uppercase}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="col-4">
+                        <input matInput [(ngModel)]="deposito.ftransferencia" name="ftransferencia"
+                            #ftransferencia="ngModel" [matDatepicker]="pickerTransfer" placeholder="Fecha" required>
+                        <mat-datepicker-toggle matSuffix [for]="pickerTransfer"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerTransfer></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field class="col-8">
+                        <input matInput [(ngModel)]="deposito.transferencia" name="transferencia"
+                            #transferencia="ngModel" placeholder="Transferencia" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-4">
+                        <input matInput [(ngModel)]="deposito.fventa" name="fventa" #fventa="ngModel"
+                            [matDatepicker]="pickerVenta" placeholder="Fecha Venta" required>
+                        <mat-datepicker-toggle matSuffix [for]="pickerVenta"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerVenta></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field class="col-8">
+                        <input matInput [(ngModel)]="deposito.importe" name="importe" #importe="ngModel"
+                            placeholder="Importe" (change)="checkMinMax()" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-12">
+                        <textarea matInput [(ngModel)]="deposito.comentarios" name="comentarios" #comentarios="ngModel"
+                            placeholder="Comentarios"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" [disabled]="!newDeposito.form.valid">Guardar</button>
+                    <button type="button" class="btn btn-danger" (click)="onCancel()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--=============================================================
+            Tabla para ver los depositos y aplicarlos
+=============================================================-->
+
+<div class="modal fade bd-example-modal-lg" id="listDepositoModal" tabindex="-1" role="dialog"
+    aria-labelledby="listDepositoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="listDepositoModalLabel">Depositos Aplicados</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead class="tablareporte">
+                        <tr>
+                            <th>Transferencia</th>
+                            <th>Banco</th>
+                            <th>Fecha</th>
+                            <th>Dia Venta</th>
+                            <th>Importe</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let deposito of listDeposito; let i = index">
+                            <td>{{ deposito.transferencia }}</td>
+                            <td>{{ deposito.banco.cuentabancaria }}</td>
+                            <td>{{ deposito.ftransferencia| date: 'dd/MM/yyyy' }}</td>
+                            <td>{{ deposito.fventa | date: 'dd/MM/yyyy' }}</td>
+                            <td>
+                                <input  style="width:85%"class="cuadrotexto" [(ngModel)]="deposito.importe" #importe="ngModel"
+                                    type="number" [readOnly]="deposito.status == 'APROBADO'">
+                            </td>
+                            <td>
+                                <div class="btn-group-sm d-flex justify-content-center" role="group" aria-label="Acciones" *ngIf="deposito.status == 'PENDIENTE'">
+                                    <button type="button" class="btn btn-success" (click)="onUpdate(deposito.id,deposito)">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger" (click)="destroiDeposito(deposito.id)">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                                <div *ngIf="deposito.status == 'APROBADO'">
+                                    {{deposito.status}}
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

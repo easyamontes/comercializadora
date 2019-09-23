@@ -56,6 +56,7 @@ class RequisicionController extends Controller
         $requisicion->tipo = $params->tipo;
         $requisicion->status = $params->status;
         $requisicion->importe = $params->importe;
+        $requisicion->xpagar = $params->importe;
         $requisicion->fecha = $fecha;
         $requisicion->factura = $params->factura;
         $requisicion->ffactura =  $ffactura;
@@ -98,6 +99,7 @@ class RequisicionController extends Controller
         unset($params_array['proveedor']);
         unset($params_array['porigen']);
         unset($params_array['articulos']);
+        $params_array['xpagar'] = $params_array['importe'];
         $requisicion = Requisicion::where('id', $id)->update($params_array);
         $data = array(
             'requisicion' => $requisicion,

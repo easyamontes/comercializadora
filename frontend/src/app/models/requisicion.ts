@@ -8,6 +8,7 @@ export class Requisicion{
         public tipo:string,
         public status:string,
         public importe:number,
+        public xpagar:number, 
         public fecha:string,
         public factura:string,
         public ffactura:string,
