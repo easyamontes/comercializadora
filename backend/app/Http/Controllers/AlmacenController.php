@@ -226,16 +226,35 @@ class AlmacenController extends Controller
         $params = json_decode($json);
         $per = $json = $request->input('per', null);
         $socio = $params->socio;
-        $pieza = Almacen::selectRaw('articulo, modelo, SUM(venta) as venta, SUM(total) as total, precio')
+        $pieza = Almacen::selectRaw('userp_id, articulo, modelo, SUM(venta) as venta, SUM(total) as total, precio')
             ->where('userp_id', '=', $socio)
             ->where('tipo', '=', 'SALIDA')
             ->groupby('userp_id', 'articulo_id', 'precio')
-            ->get()->load('user');
+            ->get()->load('personal');
         return response()->json(array(
             'piezaall' => $pieza,
             'status' => 'success'
         ), 200);
     }
+
+    /*======================================================================
+        REPORTE POR PIEZAS GENERAL QUE SE DIO DE ALTA
+    ====================================================================== */
+    public function inRepoPieza(Request $request){
+        $now = date("Y-m-d");
+        $user = $request->input('userid', null);
+        $pieza = Almacen::selectRaw('userp_id, articulo, modelo, SUM(venta) as venta, SUM(total) as total, precio')
+            ->where('user_id', '=', $user)
+            ->where('tipo', '=', 'SALIDA')
+            ->whereRaw('Date(created_at) = ?', $now)
+            ->groupby('userp_id', 'articulo_id', 'precio')
+            ->get()->load('personal');
+        return response()->json(array(
+            'piezaall' => $pieza,
+            'status' => 'success'
+        ), 200);
+    }
+
 
     /*======================================================================
          FUNCION PARA ACTUALIZAR EL CAMPO VENTA
@@ -274,8 +293,8 @@ class AlmacenController extends Controller
     public function diario(Request $request, $id)
     {
         $existe = DB::select('select id, proveedor_id, articulo_id, articulo, sum(existencia) as existencia, sum(total) as total from almacen where userp_id = ? and existencia > 0 GROUP BY proveedor_id, articulo_id', [$id]);
-        $compra = DB::select('select al.id, al.proveedor_id, al.articulo_id, al.articulo, al.modelo, sum(al.total) as total from almacen al INNER JOIN requisicion rq where rq.pdestino_id = ? and rq.tipo = ? GROUP BY proveedor_id, articulo_id', [$id, 'COMPRA']);
-        $venta =  DB::select('select al.id, al.proveedor_id, al.articulo_id, al.articulo, al.modelo, sum(al.total) as total from almacen al INNER JOIN requisicion rq where rq.pdestino_id = ? and rq.tipo = ? GROUP BY proveedor_id, articulo_id', [$id, 'VENTA']);
+        $compra = DB::select('select al.id, al.proveedor_id, al.articulo_id, al.articulo, al.modelo, sum(al.total) as total from almacen al INNER JOIN requisicion rq on rq.id = al.requisicion_id where rq.porigen_id = ? and rq.tipo = ? GROUP BY proveedor_id, articulo_id', [$id, 'VENTA']);
+        $venta =  DB::select('select al.id, al.proveedor_id, al.articulo_id, al.articulo, al.modelo, sum(al.total) as total, sum(al.venta) as venta from almacen al INNER JOIN pedido pd on pd.id = al.pedido_id where pd.user_id = ? and pd.tipo = ? GROUP BY proveedor_id, articulo_id', [$id, 'ENTRADA']);
         return response()->json(
             array(
                 'existencia' => $existe,

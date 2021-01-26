@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Requisicion;
 
@@ -111,6 +110,7 @@ class RequisicionController extends Controller
     /* =====================================================
        lista de requisiciones sin pagar
      ======================================================*/
+
     public function cxc(Request $request)
     {
         $json = $request->input('json', null);
@@ -120,7 +120,7 @@ class RequisicionController extends Controller
         $query->where('pdestino_id', '=', $params_array['socio'])
             ->where('statuspago', '=', 'PENDIENTE')
             ->when($inicio, function ($q) use ($params_array) {
-                return $q->whereBetween('fecha', [$params_array['inicio'], $params_array['final']]);
+                return $q->where([['fecha','>=',$params_array['inicio']],['fecha','<=',$params_array['final']]]);
             });
         $requisicion = $query->get()
             ->load('articulos')

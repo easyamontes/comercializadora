@@ -60,6 +60,7 @@ Route::post('/api/overg','OverController@setreporte')->middleware('islogged');
 Route::post('/api/eresul','OverController@setEstadoResultados')->middleware('islogged');
 Route::get('/api/pendiente','RequisicionController@listapendiente')->middleware('islogged');
 Route::get('/api/traspaso/{id}','AlmacenController@traspaso')->middleware('islogged');
+Route::get('/api/inRepoPieza','AlmacenController@inRepoPieza')->middleware('islogged');
 
 //Rutas para el control de acciones en puestos
 Route::resource('/api/puestos','PuestoController');

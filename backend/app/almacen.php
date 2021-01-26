@@ -14,6 +14,10 @@ class Almacen extends Model
         return $this->belongsto('App\User','user_id');
     }
 
+    public function personal(){
+        return $this->belongsto('App\Personal','userp_id');
+    }
+
     public function requisicion(){
         return $this->belongsto('App\Requisicion','requisicion_id');
     }
